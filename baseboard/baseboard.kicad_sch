@@ -10924,16 +10924,6 @@
 		)
 		(uuid "0458e6b0-e133-4d7f-b87f-eb0bba33f8a8")
 	)
-	(label "WIPER"
-		(at 230.505 60.325 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "04fad0b4-31a2-4d2f-8458-7f32ebbea7b0")
-	)
 	(label "Pmod3_5"
 		(at 137.16 67.31 180)
 		(effects
@@ -11053,6 +11043,16 @@
 			(justify left bottom)
 		)
 		(uuid "1202047e-3437-46cb-a39e-d1142eb39f54")
+	)
+	(label "F2"
+		(at 230.505 60.325 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "13c9591e-8085-4efb-a165-ad9021edb748")
 	)
 	(label "A0"
 		(at 212.725 60.325 180)
