@@ -1,4 +1,4 @@
-25681256034870255
+25691427767307493
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -67866,11 +67866,11 @@ Yellow 5381 Series LED
 2
 Library
 PY32E407V1xT_START
-Through hole straight pin header, 2x25, 2.54mm pitch, double rows
-Through hole pin header THT 2x25 2.54mm double row
+
+
 0
-50
-50
+100
+100
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -102647,339 +102647,381 @@ Varistor VF
 0
 2
 2
-samacsys
-08FESTVKN
-08FE-ST-VK-N-2
-Connector
+kicad8
+2SC3325YLF
+2-3F1A_FFW
+Transistor BJT NPN
 0
-8
-8
-samacsys
+3
+3
+kicad8
 26FEBTVKN
 26FE-BT-VK-N-1
 Connector
 0
 26
 26
-samacsys
-A295CTRPB1
-A295-CTRPB-1-1
-Connector
+kicad8
+AQM0802AFLWGBW
+AQM0802A-FLW-GBW-4
+Display
 0
-4
-4
-samacsys
-AZ1084CD50TRG1
-TO252_1
-Integrated Circuit
-0
-3
-3
-samacsys
-B2BXHAMLFSN
-B2B-XH-AM(LF)(SN)-1
-Connector
-0
-2
-2
-samacsys
-B3BXHALFSN
-B3B-XH-A(LF)(SN)-2
-Connector
-0
-3
-3
-samacsys
+11
+11
+kicad8
 BGA6C50P2X3_100X150X68
 1.5MM X 1 6BALL WLCSP
 Switch
 0
 6
 6
-samacsys
-CSD25501F3T
-YJN0003A_2024
-MOSFET (P-Channel)
-0
-3
-3
-samacsys
-DF40C-60DP-0.4V_51_
-DF40C-60DP-0.4V(51)
-Connector
-0
-64
-64
-samacsys
-DF40C60DP04V58
-DF40C-60DP-0.4V(58)-3
-Connector
-0
-64
-64
-samacsys
+kicad8
 DIOAD1910W86L670D310
 DO-15
 Schottky Diode
 0
 2
 2
-samacsys
+kicad8
 DIP254P762X533-8
 DIP254P762X533-8
 Integrated Circuit
 0
 8
 8
-samacsys
+kicad8
 DIP762W56P254L880H425Q8N
 DIP8
 Integrated Circuit
 0
 8
 8
-samacsys
-DIP762W56P254L1930H533Q14N
-14-Lead PDIP (01-3002 03)
-Integrated Circuit
-0
-14
-14
-samacsys
+kicad8
 DIP794W56P254L946H432Q8N
 8-Lead Plastic Dual In-line (P)  E300 mil (PDIP)
 Integrated Circuit
 0
 8
 8
-samacsys
-MFR300
-MF-R300-2
-Fuse
-0
-2
-2
-samacsys
+kicad8
 MJ-8435
 MJ-8435
 Connector
 0
 4
 4
-samacsys
-NCS3
-NCS3
-Undefined or Miscellaneous
-0
-6
-6
-samacsys
+kicad8
 NE555DR
 D (R-PDSO-G8)
 Integrated Circuit
 0
 8
 8
-samacsys
-NJM7805SDL1TE1
-TO-252-3-L1_2022
-Integrated Circuit
+kicad8
+PICO
+PICO
+Connector
 0
-3
-3
-samacsys
-PEC3824C2AAU
-SOT-23_2024-2
-Diode ESD (Bi-directional)
-0
-3
-3
-samacsys
+53
+53
+kicad8
 RK09712200HA
 RK09712200HA-2
 Variable Resistor
 0
 6
 6
-samacsys
-RN1402LF
-2-3F1A_FF
-Transistor BJT NPN
-0
-3
-3
-samacsys
+kicad8
 SDCW32162222TF
 SDCW3216-2-222TF
 Inductor
 0
 4
 4
-samacsys
+kicad8
 SFW15R1STE1LF
 SFW15R-1STE1LF-4
 Connector
 0
 17
 17
-samacsys
-SHDR5W64P0X250_1X5_1490X575X700P
-B5B-XH-A (LF)(SN)
+kicad8
+SHDR2W64P0X250_1X2_740X575X700P
+B2B-XH-A(LF)(SN)
 Connector
 0
-5
-5
-samacsys
+2
+2
+kicad8
 SM24CANB02HTG
 SOT23-3_2023
 TVS Diode (Bi-directional)
 0
 3
 3
-samacsys
+kicad8
 SOIC127P600X175-8N
-23A640-I/SN
+8 Lead SOIC
 Integrated Circuit
 0
 8
 8
-samacsys
+kicad8
 SOIC127P1033X265-20N
 20-Lead Plastic Small Outline (SO) - Wide, 7.50 mm Body [SOIC]_2024
 Integrated Circuit
 0
 20
 20
-samacsys
-SON40P120X120X60-7N-D
-TDFN_MT
-Power Supply
-0
-7
-7
-samacsys
-SON65P200X200X90-7N-D
-6-Lead 2 mm x 2 mm DFN
-Integrated Circuit
-0
-7
-7
-samacsys
+kicad8
 SON65P300X300X100-9N-D
 DRB0008B
 Integrated Circuit
 0
 9
 9
-samacsys
-SOT95P260X156-3N
-TO-236MOD
-Transistor
-0
-3
-3
-samacsys
-SOT95P275X130-3N
-SOT-23-3-1
-Integrated Circuit
-0
-3
-3
-samacsys
-SOT95P280X100-3N
-tsot-3l
-Integrated Circuit
-0
-3
-3
-samacsys
+kicad8
 SOT95P280X110-6N
 TPS22995HQDDCRQ1*
 Integrated Circuit
 0
 6
 6
-samacsys
-SOT96P237X111-3N
-SOT-23 (TO-236) CASE 318-08
-Diode
-0
-3
-3
-samacsys
-SOT127P706X180-6N
-DCQ (R-PDSO-G6)
-Power Supply
-0
-6
-6
-samacsys
-SSM3J375FLXHF
-2-3F1S
-Transistor BJT NPN
-0
-3
-3
-samacsys
+kicad8
 TCV470M9A8026
 TCV-470M-9A-8026-2
 Inductor
 0
 2
 2
-samacsys
-TK7S10N1ZLXHQ
-2-7M1A
-MOSFET (N-Channel)
-0
-3
-3
-samacsys
-TO-252-3-L1
-TO-252-3-L1
-Integrated Circuit
-0
-3
-3
-samacsys
-TO254P570X1700X1780-3P
-3-SIP Module
-Power Supply
-0
-3
-3
-samacsys
-TO545P500X1560X2410-3P
-MT100 (TO3P )
-MOSFET (N-Channel)
-0
-3
-3
-samacsys
+kicad8
 TVBP06B043CWB
 TVBP06-B043CW-B-2
 Switch
 0
 2
 2
-samacsys
+kicad8
 TVGP01G73BB
 TVGP01-G73BB-2
 Switch
 0
 4
 4
-samacsys
-WSLP39211L000FEA
-WSLP39211L000FEA-1
-Resistor
-0
-2
-2
-samacsys
+kicad8
 YDS205
 YDS-205-1
 Integrated Circuit
 0
 6
 6
+kicad8-2
+DIP762W55P254L2286H480Q18N_with_solderjumper
+DIP18-300-2.54-001
+Integrated Circuit
+0
+34
+18
+kicad8-2
+DIP762W60P254L1975H445Q16N_solderjumper
+DIP16-P-300-2.54A
+Transistor
+0
+30
+16
+kicad8-2
+EP204-150G1R1B1-CA
+
+
+0
+6
+6
+kicad8-2
+OSL60362-LR-with-allpin
+7-Segment Display, LTS67x0, http://optoelectronics.liteon.com/upload/download/DS30-2001-355/S6760jd.pdf
+7Segment LED LTS6760 LTS6780
+0
+14
+14
+kicad8-2
+PSP1000_Joystick
+Through hole angled pin header, 1x04, 2.54mm pitch, 6mm pin length, single row
+Through hole angled pin header THT 1x04 2.54mm single row
+0
+4
+4
+kicad8-2
+Pmod
+Through hole angled pin header, 2x06, 2.54mm pitch, 6mm pin length, double rows
+Through hole angled pin header THT 2x06 2.54mm double row
+0
+12
+12
+kicad8-2
+Pmod_socket
+Through hole angled socket strip, 2x06, 2.54mm pitch, 8.51mm socket length, double cols (from Kicad 4.0.7), script generated
+Through hole angled socket strip THT 2x06 2.54mm double row
+0
+12
+12
+kicad8-2
+Potentiometer
+Through hole angled pin header, 2x08, 2.54mm pitch, 6mm pin length, double rows
+Through hole angled pin header THT 2x08 2.54mm double row
+0
+3
+3
+kicad8-2
+RX62N
+Through hole straight pin header, 2x40, 2.54mm pitch, double rows
+Through hole pin header THT 2x40 2.54mm double row
+0
+120
+40
+kicad8-2
+RX62N_Board
+Through hole straight socket strip, 2x20, 2.54mm pitch, double cols (from Kicad 4.0.7), script generated
+Through hole socket strip THT 2x20 2.54mm double row
+0
+120
+120
+kicad8-2
+TFT_320QVT
+Through hole straight pin header, 2x20, 2.54mm pitch, double rows
+Through hole pin header THT 2x20 2.54mm double row
+0
+40
+40
+kicad8-2
+Tang Nano 9K
+
+
+0
+48
+48
+kicad8-2
+kamo20
+
+
+0
+0
+0
+kicad8-2
+logo_kamo_ss
+
+
+0
+0
+0
+kicad9_samacsys
+A295CTRPB1
+A295-CTRPB-1-1
+Connector
+0
+4
+4
+kicad9_samacsys
+NE555DR
+D (R-PDSO-G8)
+Integrated Circuit
+0
+8
+8
+kicad9_samacsys
+NJM7805SDL1TE1
+TO-252-3-L1_2022
+Integrated Circuit
+0
+3
+3
+kicad9_samacsys
+PEC3824C2AAU
+SOT-23_2024-2
+Diode ESD (Bi-directional)
+0
+3
+3
+kicad9_samacsys
+QFN50P400X400X100-25N-D
+24-Lead Very Thin Plastic Quad Flat, No Lead Package (U3B) - 4x4 mm Body [VQFN]
+Integrated Circuit
+0
+25
+25
+kicad9_samacsys
+RK09D117000B
+RK09D117000B-1
+Variable Resistor
+0
+5
+5
+kicad9_samacsys
+RN1402LF
+2-3F1A_FF
+Transistor BJT NPN
+0
+3
+3
+kicad9_samacsys
+SDCW32162222TF
+SDCW3216-2-222TF
+Inductor
+0
+4
+4
+kicad9_samacsys
+SM24CANB02HTG
+SOT23-3_2023
+TVS Diode (Bi-directional)
+0
+3
+3
+kicad9_samacsys
+SOIC127P600X175-8N
+ATA6561-GAQW-N
+Integrated Circuit
+0
+8
+8
+kicad9_samacsys
+SOP127P600X175-8N
+SOP127P600X175-8N
+Undefined or Miscellaneous
+0
+8
+8
+kicad9_samacsys
+SOT95P275X130-3N
+SOT-23-3-1
+Integrated Circuit
+0
+3
+3
+kicad9_samacsys
+SOT95P280X100-3N
+tsot-3l
+Integrated Circuit
+0
+3
+3
+kicad9_samacsys
+TK7S10N1ZLXHQ
+2-7M1A
+MOSFET (N-Channel)
+0
+3
+3
+kicad9_samacsys
+TO-252-3-L1
+TO-252-3-L1
+Integrated Circuit
+0
+3
+3
+kicad9_samacsys
+WSLP39211L000FEA
+WSLP39211L000FEA-1
+Resistor
+0
+2
+2
