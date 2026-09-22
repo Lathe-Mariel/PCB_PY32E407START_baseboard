@@ -736,6 +736,10 @@
         [
           "starved_thermal|87174319|102876679|f4fe4545-5a46-4c49-b433-876066f9d7fe|04ff63e5-46f4-42c6-acb9-cedd1859b6b3|F.Cu",
           ""
+        ],
+        [
+          "unconnected_items|85852000|117348000|fe2d2348-bc5a-4616-9274-1f8ea7f4efb2|f654b5e8-4e1e-440e-89fa-1615d68508cd",
+          ""
         ]
       ],
       "meta": {
@@ -1171,7 +1175,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "output/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
