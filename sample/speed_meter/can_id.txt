@@ -1,0 +1,7 @@
+parameter ID_ENGINE_REV = 11'h3D9,          // エンジン回転数送信時のID
+parameter ID_CAR_SPEED  = 11'h3E9           // 車速送信時のID
+
+
+
+ENGINE_REV | {8'd0, 8'b00000000, engine_rev, 2'd0, 24'd0, 8'b11111111}
+CAR_SPEED) | {vehicle_speed, 7'd0, 48'd0}
