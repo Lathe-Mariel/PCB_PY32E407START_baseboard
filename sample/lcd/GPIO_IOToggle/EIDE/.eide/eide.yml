@@ -1,0 +1,116 @@
+version: "4.1"
+name: Project
+type: ARM
+deviceName: PY32E407xE
+packDir: null
+srcDirs: []
+virtualFolder:
+  name: <virtual_root>
+  files: []
+  folders:
+    - name: Common
+      files:
+        - path: ../Src/system_py32e407.c
+        - path: startup_py32e407xx.s
+      folders: []
+    - name: Doc
+      files:
+        - path: ../readme.txt
+      folders: []
+    - name: PY32E407_HAL_Driver
+      files:
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_gpio.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_uart.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_cortex.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_dma.c
+      folders: []
+    - name: User
+      files:
+        - path: ../Src/main.c
+        - path: ../Src/py32e407_hal_msp.c
+        - path: ../Src/py32e407_it.c
+      folders: []
+    - name: BSP
+      files:
+        - path: ../../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c
+      folders: []
+dependenceList: []
+outDir: .
+miscInfo:
+  uid: 36bcf0031e18a3008bbdaa90a96a7987
+targets:
+  Project:
+    cppPreprocessAttrs:
+      defineList:
+        - USE_HAL_DRIVER
+        - PY32E407xE
+      incList:
+        - ../../../../../../Drivers/BSP/PY32E407xx_Start_Kit
+        - ../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include
+        - ../../../../../../Drivers/CMSIS/Include
+        - ../../../../../../Drivers/PY32E407_HAL_Driver/Inc
+        - ../Inc
+      libList: []
+    excludeList: []
+    settings:
+      debugger: cortex-debug
+    toolchain: GCC
+    toolchainConfigMap:
+      GCC:
+        archExtensions: ""
+        cpuType: Cortex-M4
+        floatingPointHardware: single
+        options:
+          version: 5
+          afterBuildTasks: []
+          asm-compiler: {}
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            language-c: c11
+            language-cpp: c++11
+            one-elf-section-per-data: true
+            one-elf-section-per-function: true
+            optimization: level-debug
+            warnings: all-warnings
+          global:
+            $float-abi-type: hard
+            misc-control: --specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16
+            output-debug-info: enable
+          linker:
+            $toolName: auto
+            LIB_FLAGS: -lm
+            output-format: elf
+            remove-unused-input-sections: true
+        scatterFilePath: py32e407xe.ld
+        storageLayout:
+          RAM: []
+          ROM: []
+        useCustomScatterFile: true
+    uploadConfigMap:
+      JLink:
+        baseAddr: ""
+        bin: ""
+        cpuInfo:
+          cpuName: PY32E407xE
+          vendor: Puya
+        otherCmds: ""
+        proType: 1
+        speed: 1000
+      OpenOCD:
+        baseAddr: "0x08000000"
+        bin: ""
+        interface: stlink
+        target: stm32f1x
+      pyOCD:
+        baseAddr: "0x08000000"
+        bin: ""
+        config: .eide/project.pyocd.yaml
+        otherCmds: '"--pack=${env:PYSDEPATH}\packs\PY32E4xx_DFP.pack"'
+        speed: 1M
+        targetName: PY32E407xE
+    uploader: pyOCD

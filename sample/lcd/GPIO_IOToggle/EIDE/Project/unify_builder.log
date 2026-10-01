@@ -1,0 +1,311 @@
+[2026-09-30 13:53:18]	[info] incremental build: 15 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\BSP\PY32E407xx_Start_Kit\py32e407xx_Start_Kit.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_cortex.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_dma.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_gpio.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr_ex.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc_ex.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_uart.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\py32e407_hal_msp.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\py32e407_it.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\system_py32e407.c': object (.o) file not exist
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\EIDE\startup_py32e407xx.s': object (.o) file not exist
+
+[2026-09-30 13:53:22]	[done]
+	build successfully !
+
+[2026-09-30 21:52:42]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-09-30 21:52:42]	[done]
+	build successfully !
+
+[2026-09-30 21:55:11]	[done]
+	build successfully !
+
+[2026-09-30 21:56:40]	[done]
+	build successfully !
+
+[2026-10-01 12:22:18]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-01 12:22:19]	[done]
+	build successfully !
+
+[2026-10-02 00:45:28]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 00:45:30]	[done]
+	build successfully !
+
+[2026-10-02 01:05:04]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 01:05:04]	compilation failed at : "c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c", exit code: 1
+command: 
+  "c:\Program Files (x86)\PuyaSDE\tool\bin\arm-none-eabi-gcc.exe" -c -xc -std=c11 -I../../../../../../Drivers/BSP/PY32E407xx_Start_Kit -I../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include -I../../../../../../Drivers/CMSIS/Include -I../../../../../../Drivers/PY32E407_HAL_Driver/Inc -I../Inc -D"USE_HAL_DRIVER" -D"PY32E407xE" -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Og -Wall -g -ffunction-sections -fdata-sections -funsigned-char --specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16 -o ./Project/.obj/__/Src/main.o -MMD ./../Src/main.c
+   at unify_builder.Program.Main(String[] args_)
+---
+./../Src/main.c: In function 'LCD_GpioInit':
+./../Src/main.c:78:3: error: 'GPIO' undeclared (first use in this function); did you mean 'GPIOD'?
+   78 |   GPIO=InitStruct.Pin = GPIO_PIN_3;
+      |   ^~~~
+      |   GPIOD
+./../Src/main.c:78:3: note: each undeclared identifier is reported only once for each function it appears in
+./../Src/main.c:78:8: error: 'InitStruct' undeclared (first use in this function); did you mean 'GPIO_InitStruct'?
+   78 |   GPIO=InitStruct.Pin = GPIO_PIN_3;
+      |        ^~~~~~~~~~
+      |        GPIO_InitStruct
+
+[2026-10-02 01:05:34]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 01:05:35]	[done]
+	build successfully !
+
+[2026-10-02 01:06:20]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 01:06:21]	[done]
+	build successfully !
+
+[2026-10-02 01:07:46]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 01:07:46]	[done]
+	build successfully !
+
+[2026-10-02 01:13:08]	[done]
+	build successfully !
+
+[2026-10-02 01:18:45]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 01:18:46]	[done]
+	build successfully !
+
+[2026-10-02 01:20:27]	[done]
+	build successfully !
+
+[2026-10-02 01:22:46]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 01:22:47]	[done]
+	build successfully !
+
+[2026-10-02 01:27:52]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 01:27:53]	[done]
+	build successfully !
+
+[2026-10-02 01:33:23]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 01:33:24]	[done]
+	build successfully !
+
+[2026-10-02 01:35:46]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 01:35:46]	[done]
+	build successfully !
+
+[2026-10-02 02:05:04]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 02:05:04]	[done]
+	build successfully !
+
+[2026-10-02 02:28:28]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 02:28:29]	[done]
+	build successfully !
+
+[2026-10-02 02:42:55]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 02:42:55]	[done]
+	build successfully !
+
+[2026-10-02 03:05:08]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:05:09]	[done]
+	build successfully !
+
+[2026-10-02 03:18:14]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:18:15]	[done]
+	build successfully !
+
+[2026-10-02 03:20:10]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:20:11]	[done]
+	build successfully !
+
+[2026-10-02 03:25:22]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:25:22]	[done]
+	build successfully !
+
+[2026-10-02 03:27:14]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:27:15]	[done]
+	build successfully !
+
+[2026-10-02 03:33:38]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:33:39]	[done]
+	build successfully !
+
+[2026-10-02 03:35:29]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:35:29]	[done]
+	build successfully !
+
+[2026-10-02 03:38:48]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:38:48]	[done]
+	build successfully !
+
+[2026-10-02 03:49:30]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:49:31]	[done]
+	build successfully !
+
+[2026-10-02 03:53:14]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 03:53:14]	[done]
+	build successfully !
+
+[2026-10-02 04:05:41]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 04:05:42]	[done]
+	build successfully !
+
+[2026-10-02 04:07:57]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 04:07:58]	compilation failed at : "c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c", exit code: 1
+command: 
+  "c:\Program Files (x86)\PuyaSDE\tool\bin\arm-none-eabi-gcc.exe" -c -xc -std=c11 -I../../../../../../Drivers/BSP/PY32E407xx_Start_Kit -I../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include -I../../../../../../Drivers/CMSIS/Include -I../../../../../../Drivers/PY32E407_HAL_Driver/Inc -I../Inc -D"USE_HAL_DRIVER" -D"PY32E407xE" -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Og -Wall -g -ffunction-sections -fdata-sections -funsigned-char --specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16 -o ./Project/.obj/__/Src/main.o -MMD ./../Src/main.c
+   at unify_builder.Program.Main(String[] args_)
+---
+./../Src/main.c: In function 'LCD_WriteByte':
+./../Src/main.c:50:38: error: '\U0000ff14U' undeclared (first use in this function)
+   50 | #define LCD_PIXEL_BIT_DELAY_LOOPS   (ÅEîU)   /* throttle so SCK stays within ILI9341 spec */
+      |                                      ^~~
+./../Src/main.c:286:40: note: in expansion of macro 'LCD_PIXEL_BIT_DELAY_LOOPS'
+  286 |     for (volatile uint32_t i = 0U; i < LCD_PIXEL_BIT_DELAY_LOOPS; ++i)
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~~
+./../Src/main.c:50:38: note: each undeclared identifier is reported only once for each function it appears in
+   50 | #define LCD_PIXEL_BIT_DELAY_LOOPS   (ÅEîU)   /* throttle so SCK stays within ILI9341 spec */
+      |                                      ^~~
+./../Src/main.c:286:40: note: in expansion of macro 'LCD_PIXEL_BIT_DELAY_LOOPS'
+  286 |     for (volatile uint32_t i = 0U; i < LCD_PIXEL_BIT_DELAY_LOOPS; ++i)
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~~
+
+[2026-10-02 04:08:07]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 04:08:08]	[done]
+	build successfully !
+
+[2026-10-02 04:08:41]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 04:08:42]	[done]
+	build successfully !
+
+[2026-10-02 04:09:10]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 04:09:10]	[done]
+	build successfully !
+
+[2026-10-02 04:09:30]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\user\Downloads\PY32E407_Firmware-master\PY32E407_Firmware-master\Projects\PY32E407-STK\Example\GPIO\GPIO_IOToggle\Src\main.c': source file has been changed.
+
+[2026-10-02 04:09:31]	[done]
+	build successfully !
+

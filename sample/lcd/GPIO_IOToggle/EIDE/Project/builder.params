@@ -1,0 +1,105 @@
+{
+    "name": "Project",
+    "target": "Project",
+    "toolchain": "GCC",
+    "toolchainLocation": "c:\\Program Files (x86)\\PuyaSDE\\tool",
+    "toolchainCfgFile": "c:\\Users\\user\\.vscode\\extensions\\cl.eide-3.27.2\\res\\data\\models/arm.gcc.model.json",
+    "buildMode": "fast|multhread",
+    "showRepathOnLog": true,
+    "threadNum": 12,
+    "rootDir": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE",
+    "dumpPath": "Project",
+    "outDir": "Project",
+    "incDirs": [
+        "../../../../../../Drivers/BSP/PY32E407xx_Start_Kit",
+        "../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include",
+        "../../../../../../Drivers/CMSIS/Include",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Inc",
+        "../Inc"
+    ],
+    "libDirs": [],
+    "defines": [
+        "USE_HAL_DRIVER",
+        "PY32E407xE"
+    ],
+    "sourceList": [
+        "../../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal.c",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_cortex.c",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_dma.c",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_gpio.c",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc.c",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c",
+        "../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_uart.c",
+        "../Src/main.c",
+        "../Src/py32e407_hal_msp.c",
+        "../Src/py32e407_it.c",
+        "../Src/system_py32e407.c",
+        "startup_py32e407xx.s"
+    ],
+    "alwaysInBuildSources": [],
+    "sourceParams": {},
+    "options": {
+        "version": 5,
+        "afterBuildTasks": [],
+        "asm-compiler": {},
+        "beforeBuildTasks": [],
+        "c/cpp-compiler": {
+            "language-c": "c11",
+            "language-cpp": "c++11",
+            "one-elf-section-per-data": true,
+            "one-elf-section-per-function": true,
+            "optimization": "level-debug",
+            "warnings": "all-warnings"
+        },
+        "global": {
+            "$float-abi-type": "hard",
+            "misc-control": "--specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16",
+            "output-debug-info": "enable",
+            "toolPrefix": "arm-none-eabi-",
+            "arm-thumb-mode": "thumb",
+            "microcontroller-cpu": "cortex-m4-sp",
+            "microcontroller-fpu": "cortex-m4-sp",
+            "microcontroller-float": "cortex-m4-sp",
+            "$arch-extensions": "",
+            "$clang-arch-extensions": "",
+            "$armlink-arch-extensions": ""
+        },
+        "linker": {
+            "$toolName": "gcc",
+            "LIB_FLAGS": "-lm",
+            "output-format": "elf",
+            "remove-unused-input-sections": true,
+            "link-scatter": [
+                "c:/Users/user/Downloads/PY32E407_Firmware-master/PY32E407_Firmware-master/Projects/PY32E407-STK/Example/GPIO/GPIO_IOToggle/EIDE/py32e407xe.ld"
+            ]
+        }
+    },
+    "env": {
+        "workspaceFolder": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE",
+        "workspaceFolderBasename": "EIDE",
+        "OutDir": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE\\.\\Project",
+        "OutDirRoot": ".",
+        "OutDirBase": ".\\Project",
+        "ProjectName": "Project",
+        "ConfigName": "Project",
+        "ProjectRoot": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE",
+        "ExecutableName": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE\\.\\Project\\Project",
+        "ChipPackDir": "",
+        "ChipName": "PY32E407xE",
+        "SYS_Platform": "win32",
+        "SYS_DirSep": "\\",
+        "SYS_DirSeparator": "\\",
+        "SYS_PathSep": ";",
+        "SYS_PathSeparator": ";",
+        "SYS_EOL": "\r\n",
+        "EIDE_BUILDER_DIR": "c:\\Users\\user\\.vscode\\extensions\\cl.eide-3.27.2\\res\\tools\\win32\\unify_builder",
+        "EIDE_BINARIES_VER": "12.1.1",
+        "EIDE_MSYS": "C:\\Users\\user\\.eide\\bin\\builder\\msys\\bin",
+        "EIDE_PY3_CMD": "C:\\Users\\user\\.eide\\bin\\python36\\python3.exe",
+        "ToolchainRoot": "c:\\Program Files (x86)\\PuyaSDE\\tool"
+    },
+    "sysPaths": []
+}

@@ -1,0 +1,637 @@
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"system_py32e407.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.SystemInit,"ax",%progbits
+  20              		.align	1
+  21              		.global	SystemInit
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	SystemInit:
+  27              	.LFB136:
+  28              		.file 1 "../Src/system_py32e407.c"
+   1:../Src/system_py32e407.c **** /**
+   2:../Src/system_py32e407.c ****   ******************************************************************************
+   3:../Src/system_py32e407.c ****   * @file    system_py32e407.c
+   4:../Src/system_py32e407.c ****   * @author  MCU Application Team
+   5:../Src/system_py32e407.c ****   * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer System Source File
+   6:../Src/system_py32e407.c ****   ******************************************************************************
+   7:../Src/system_py32e407.c ****   * @attention
+   8:../Src/system_py32e407.c ****   *
+   9:../Src/system_py32e407.c ****   * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  10:../Src/system_py32e407.c ****   * All rights reserved.</center></h2>
+  11:../Src/system_py32e407.c ****   *
+  12:../Src/system_py32e407.c ****   * This software component is licensed by Puya under BSD 3-Clause license,
+  13:../Src/system_py32e407.c ****   * the "License"; You may not use this file except in compliance with the
+  14:../Src/system_py32e407.c ****   * License. You may obtain a copy of the License at:
+  15:../Src/system_py32e407.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  16:../Src/system_py32e407.c ****   *
+  17:../Src/system_py32e407.c ****   ******************************************************************************
+  18:../Src/system_py32e407.c ****   * @attention
+  19:../Src/system_py32e407.c ****   *
+  20:../Src/system_py32e407.c ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  21:../Src/system_py32e407.c ****   * All rights reserved.</center></h2>
+  22:../Src/system_py32e407.c ****   *
+  23:../Src/system_py32e407.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  24:../Src/system_py32e407.c ****   * the "License"; You may not use this file except in compliance with the
+  25:../Src/system_py32e407.c ****   * License. You may obtain a copy of the License at:
+  26:../Src/system_py32e407.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  27:../Src/system_py32e407.c ****   *
+  28:../Src/system_py32e407.c ****   ******************************************************************************
+  29:../Src/system_py32e407.c ****   */
+  30:../Src/system_py32e407.c **** 
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 2
+
+
+  31:../Src/system_py32e407.c **** /** @addtogroup CMSIS
+  32:../Src/system_py32e407.c ****   * @{
+  33:../Src/system_py32e407.c ****   */
+  34:../Src/system_py32e407.c **** 
+  35:../Src/system_py32e407.c **** /** @addtogroup py32e407_system
+  36:../Src/system_py32e407.c ****   * @{
+  37:../Src/system_py32e407.c ****   */  
+  38:../Src/system_py32e407.c ****   
+  39:../Src/system_py32e407.c **** /** @addtogroup py32e407_System_Private_Includes
+  40:../Src/system_py32e407.c ****   * @{
+  41:../Src/system_py32e407.c ****   */
+  42:../Src/system_py32e407.c **** 
+  43:../Src/system_py32e407.c **** #include "py32e4xx.h"
+  44:../Src/system_py32e407.c **** 
+  45:../Src/system_py32e407.c **** #if !defined  (HSE_VALUE) 
+  46:../Src/system_py32e407.c ****   #define HSE_VALUE    ((uint32_t)24000000) /*!< Default value of the External oscillator in Hz */
+  47:../Src/system_py32e407.c **** #endif /* HSE_VALUE */
+  48:../Src/system_py32e407.c **** 
+  49:../Src/system_py32e407.c **** #if !defined  (HSI_VALUE)
+  50:../Src/system_py32e407.c ****   #define HSI_VALUE    ((uint32_t)16000000) /*!< Value of the Internal oscillator in Hz*/
+  51:../Src/system_py32e407.c **** #endif /* HSI_VALUE */
+  52:../Src/system_py32e407.c **** 
+  53:../Src/system_py32e407.c **** /**
+  54:../Src/system_py32e407.c ****   * @}
+  55:../Src/system_py32e407.c ****   */
+  56:../Src/system_py32e407.c **** 
+  57:../Src/system_py32e407.c **** /*!< Uncomment the following line if you need to relocate your vector Table in
+  58:../Src/system_py32e407.c ****      Internal SRAM. */
+  59:../Src/system_py32e407.c **** /* #define VECT_TAB_SRAM */
+  60:../Src/system_py32e407.c **** #define VECT_TAB_OFFSET  0x00 /*!< Vector Table base offset field. 
+  61:../Src/system_py32e407.c ****                                    This value must be a multiple of 0x200. */
+  62:../Src/system_py32e407.c **** /******************************************************************************/
+  63:../Src/system_py32e407.c **** 
+  64:../Src/system_py32e407.c **** 
+  65:../Src/system_py32e407.c **** /** @addtogroup PY32E407_System_Private_Variables
+  66:../Src/system_py32e407.c ****   * @{
+  67:../Src/system_py32e407.c ****   */
+  68:../Src/system_py32e407.c ****   /* This variable is updated in three ways:
+  69:../Src/system_py32e407.c ****       1) by calling CMSIS function SystemCoreClockUpdate()
+  70:../Src/system_py32e407.c ****       2) by calling HAL API function HAL_RCC_GetHCLKFreq()
+  71:../Src/system_py32e407.c ****       3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency 
+  72:../Src/system_py32e407.c ****          Note: If you use this function to configure the system clock; then there
+  73:../Src/system_py32e407.c ****                is no need to call the 2 first functions listed above, since SystemCoreClock
+  74:../Src/system_py32e407.c ****                variable is updated automatically.
+  75:../Src/system_py32e407.c ****   */
+  76:../Src/system_py32e407.c **** uint32_t SystemCoreClock = HSI_VALUE;
+  77:../Src/system_py32e407.c **** const uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+  78:../Src/system_py32e407.c **** const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
+  79:../Src/system_py32e407.c **** /**
+  80:../Src/system_py32e407.c ****   * @}
+  81:../Src/system_py32e407.c ****   */
+  82:../Src/system_py32e407.c **** 
+  83:../Src/system_py32e407.c **** /** @addtogroup PY32E407_System_Private_Functions
+  84:../Src/system_py32e407.c ****   * @{
+  85:../Src/system_py32e407.c ****   */
+  86:../Src/system_py32e407.c **** 
+  87:../Src/system_py32e407.c **** /**
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 3
+
+
+  88:../Src/system_py32e407.c ****   * @brief  Setup the microcontroller system
+  89:../Src/system_py32e407.c ****   *         Initialize the FPU setting, vector table location and External memory 
+  90:../Src/system_py32e407.c ****   *         configuration.
+  91:../Src/system_py32e407.c ****   * @param  None
+  92:../Src/system_py32e407.c ****   * @retval None
+  93:../Src/system_py32e407.c ****   */
+  94:../Src/system_py32e407.c **** void SystemInit(void)
+  95:../Src/system_py32e407.c **** {
+  29              		.loc 1 95 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  96:../Src/system_py32e407.c ****   RCC->AHB2ENR |= RCC_AHB2ENR_IOPFEN;
+  34              		.loc 1 96 3 view .LVU1
+  35              		.loc 1 96 16 is_stmt 0 view .LVU2
+  36 0000 1C4A     		ldr	r2, .L5
+  37 0002 D36C     		ldr	r3, [r2, #76]
+  38 0004 43F08003 		orr	r3, r3, #128
+  39 0008 D364     		str	r3, [r2, #76]
+  40              	.L3:
+  97:../Src/system_py32e407.c ****   while(1)
+  41              		.loc 1 97 3 is_stmt 1 view .LVU3
+  98:../Src/system_py32e407.c ****   {
+  99:../Src/system_py32e407.c ****     if (((FLASH->OPTR2 & FLASH_OPTR2_NRST_MODE) == FLASH_OPTR2_NRST_MODE_1) || 
+  42              		.loc 1 99 5 view .LVU4
+  43              		.loc 1 99 16 is_stmt 0 view .LVU5
+  44 000a 1B4B     		ldr	r3, .L5+4
+  45 000c 5B6A     		ldr	r3, [r3, #36]
+  46              		.loc 1 99 24 view .LVU6
+  47 000e 03F4C063 		and	r3, r3, #1536
+  48              		.loc 1 99 8 view .LVU7
+  49 0012 B3F5806F 		cmp	r3, #1024
+  50 0016 0BD0     		beq	.L2
+ 100:../Src/system_py32e407.c ****         (((FLASH->OPTR2 & FLASH_OPTR2_NRST_MODE) != FLASH_OPTR2_NRST_MODE_1) && ((GPIOF->IDR & GPIO
+  51              		.loc 1 100 17 discriminator 1 view .LVU8
+  52 0018 174B     		ldr	r3, .L5+4
+  53 001a 5B6A     		ldr	r3, [r3, #36]
+  54              		.loc 1 100 25 discriminator 1 view .LVU9
+  55 001c 03F4C063 		and	r3, r3, #1536
+  99:../Src/system_py32e407.c ****         (((FLASH->OPTR2 & FLASH_OPTR2_NRST_MODE) != FLASH_OPTR2_NRST_MODE_1) && ((GPIOF->IDR & GPIO
+  56              		.loc 1 99 77 discriminator 1 view .LVU10
+  57 0020 B3F5806F 		cmp	r3, #1024
+  58 0024 F1D0     		beq	.L3
+  59              		.loc 1 100 88 view .LVU11
+  60 0026 154B     		ldr	r3, .L5+8
+  61 0028 1B69     		ldr	r3, [r3, #16]
+  62              		.loc 1 100 78 view .LVU12
+  63 002a 13F0200F 		tst	r3, #32
+  64 002e ECD0     		beq	.L3
+  65              	.L2:
+ 101:../Src/system_py32e407.c ****     {
+ 102:../Src/system_py32e407.c ****       break;
+ 103:../Src/system_py32e407.c ****     } 
+ 104:../Src/system_py32e407.c ****   }
+ 105:../Src/system_py32e407.c ****   RCC->AHB2ENR &= ~RCC_AHB2ENR_IOPFEN;
+  66              		.loc 1 105 3 is_stmt 1 view .LVU13
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 4
+
+
+  67              		.loc 1 105 16 is_stmt 0 view .LVU14
+  68 0030 104B     		ldr	r3, .L5
+  69 0032 DA6C     		ldr	r2, [r3, #76]
+  70 0034 22F08002 		bic	r2, r2, #128
+  71 0038 DA64     		str	r2, [r3, #76]
+ 106:../Src/system_py32e407.c **** 
+ 107:../Src/system_py32e407.c ****   /* Enable PWR clock */
+ 108:../Src/system_py32e407.c ****   SET_BIT(RCC->APB1ENR1, RCC_APB1ENR1_PWREN);
+  72              		.loc 1 108 3 is_stmt 1 view .LVU15
+  73 003a 9A6D     		ldr	r2, [r3, #88]
+  74 003c 42F08052 		orr	r2, r2, #268435456
+  75 0040 9A65     		str	r2, [r3, #88]
+ 109:../Src/system_py32e407.c ****   /* Reset PWR_CR1_VOS */
+ 110:../Src/system_py32e407.c ****   CLEAR_BIT(PWR->CR1, PWR_CR1_VOS);
+  76              		.loc 1 110 3 view .LVU16
+  77 0042 0F4A     		ldr	r2, .L5+12
+  78 0044 1168     		ldr	r1, [r2]
+  79 0046 21F4C061 		bic	r1, r1, #1536
+  80 004a 1160     		str	r1, [r2]
+ 111:../Src/system_py32e407.c ****   /* Reset PWR_CR1_SRAM_RETV */
+ 112:../Src/system_py32e407.c ****   CLEAR_BIT(PWR->CR1, PWR_CR1_SRAM_RETV);
+  81              		.loc 1 112 3 view .LVU17
+  82 004c 1168     		ldr	r1, [r2]
+  83 004e 21F4C051 		bic	r1, r1, #6144
+  84 0052 1160     		str	r1, [r2]
+ 113:../Src/system_py32e407.c ****   /* Disable PWR clock */
+ 114:../Src/system_py32e407.c ****   CLEAR_BIT(RCC->APB1ENR1, RCC_APB1ENR1_PWREN);
+  85              		.loc 1 114 3 view .LVU18
+  86 0054 9A6D     		ldr	r2, [r3, #88]
+  87 0056 22F08052 		bic	r2, r2, #268435456
+  88 005a 9A65     		str	r2, [r3, #88]
+ 115:../Src/system_py32e407.c ****   
+ 116:../Src/system_py32e407.c **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+ 117:../Src/system_py32e407.c ****   SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
+  89              		.loc 1 117 3 view .LVU19
+  90              		.loc 1 117 14 is_stmt 0 view .LVU20
+  91 005c 094B     		ldr	r3, .L5+16
+  92 005e D3F88820 		ldr	r2, [r3, #136]
+  93 0062 42F47002 		orr	r2, r2, #15728640
+  94 0066 C3F88820 		str	r2, [r3, #136]
+ 118:../Src/system_py32e407.c **** #endif
+ 119:../Src/system_py32e407.c **** 
+ 120:../Src/system_py32e407.c ****   /* Configure the Vector Table location add offset address ------------------*/
+ 121:../Src/system_py32e407.c **** #ifdef VECT_TAB_SRAM
+ 122:../Src/system_py32e407.c ****   SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
+ 123:../Src/system_py32e407.c **** #else
+ 124:../Src/system_py32e407.c ****   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
+  95              		.loc 1 124 3 is_stmt 1 view .LVU21
+  96              		.loc 1 124 13 is_stmt 0 view .LVU22
+  97 006a 4FF00062 		mov	r2, #134217728
+  98 006e 9A60     		str	r2, [r3, #8]
+ 125:../Src/system_py32e407.c **** #endif
+ 126:../Src/system_py32e407.c **** }
+  99              		.loc 1 126 1 view .LVU23
+ 100 0070 7047     		bx	lr
+ 101              	.L6:
+ 102 0072 00BF     		.align	2
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 5
+
+
+ 103              	.L5:
+ 104 0074 00100240 		.word	1073876992
+ 105 0078 00200240 		.word	1073881088
+ 106 007c 00140048 		.word	1207964672
+ 107 0080 00700040 		.word	1073770496
+ 108 0084 00ED00E0 		.word	-536810240
+ 109              		.cfi_endproc
+ 110              	.LFE136:
+ 112              		.section	.text.SystemCoreClockUpdate,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	SystemCoreClockUpdate
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	SystemCoreClockUpdate:
+ 120              	.LFB137:
+ 127:../Src/system_py32e407.c **** 
+ 128:../Src/system_py32e407.c **** /**
+ 129:../Src/system_py32e407.c ****    * @brief  Update SystemCoreClock variable according to Clock Register Values.
+ 130:../Src/system_py32e407.c ****   *         The SystemCoreClock variable contains the core clock (HCLK), it can
+ 131:../Src/system_py32e407.c ****   *         be used by the user application to setup the SysTick timer or configure
+ 132:../Src/system_py32e407.c ****   *         other parameters.
+ 133:../Src/system_py32e407.c ****   *           
+ 134:../Src/system_py32e407.c ****   * @note   Each time the core clock (HCLK) changes, this function must be called
+ 135:../Src/system_py32e407.c ****   *         to update SystemCoreClock variable value. Otherwise, any configuration
+ 136:../Src/system_py32e407.c ****   *         based on this variable will be incorrect.         
+ 137:../Src/system_py32e407.c ****   *     
+ 138:../Src/system_py32e407.c ****   * @note   - The system frequency computed by this function is not the real 
+ 139:../Src/system_py32e407.c ****   *           frequency in the chip. It is calculated based on the predefined 
+ 140:../Src/system_py32e407.c ****   *           constant and the selected clock source:
+ 141:../Src/system_py32e407.c ****   *             
+ 142:../Src/system_py32e407.c ****   *           - If SYSCLK source is HSI, SystemCoreClock will contain the HSI_VALUE(*)
+ 143:../Src/system_py32e407.c ****   *                                              
+ 144:../Src/system_py32e407.c ****   *           - If SYSCLK source is HSE, SystemCoreClock will contain the HSE_VALUE(**)
+ 145:../Src/system_py32e407.c ****   *                          
+ 146:../Src/system_py32e407.c ****   *           - If SYSCLK source is PLL, SystemCoreClock will contain the HSE_VALUE(**) 
+ 147:../Src/system_py32e407.c ****   *             or HSI_VALUE(*) multiplied/divided by the PLL factors.
+ 148:../Src/system_py32e407.c ****   *         
+ 149:../Src/system_py32e407.c ****   *         (*) HSI_VALUE is a constant defined in py32e407_hal_conf.h file (default value
+ 150:../Src/system_py32e407.c ****   *             16 MHz) but the real value may vary depending on the variations
+ 151:../Src/system_py32e407.c ****   *             in voltage and temperature.   
+ 152:../Src/system_py32e407.c ****   *    
+ 153:../Src/system_py32e407.c ****   *         (**) HSE_VALUE is a constant defined in py32e407_hal_conf.h file (its value
+ 154:../Src/system_py32e407.c ****   *              depends on the application requirements), user has to ensure that HSE_VALUE
+ 155:../Src/system_py32e407.c ****   *              is same as the real frequency of the crystal used. Otherwise, this function
+ 156:../Src/system_py32e407.c ****   *              may have wrong result.
+ 157:../Src/system_py32e407.c ****   *                
+ 158:../Src/system_py32e407.c ****   *         - The result of this function could be not correct when using fractional
+ 159:../Src/system_py32e407.c ****   *           value for HSE crystal.
+ 160:../Src/system_py32e407.c ****   *     
+ 161:../Src/system_py32e407.c ****   * @param  None
+ 162:../Src/system_py32e407.c ****   * @retval None
+ 163:../Src/system_py32e407.c ****   */
+ 164:../Src/system_py32e407.c **** void SystemCoreClockUpdate(void)
+ 165:../Src/system_py32e407.c **** {
+ 121              		.loc 1 165 1 is_stmt 1 view -0
+ 122              		.cfi_startproc
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 6
+
+
+ 123              		@ args = 0, pretend = 0, frame = 8
+ 124              		@ frame_needed = 0, uses_anonymous_args = 0
+ 125              		@ link register save eliminated.
+ 126 0000 82B0     		sub	sp, sp, #8
+ 127              	.LCFI0:
+ 128              		.cfi_def_cfa_offset 8
+ 166:../Src/system_py32e407.c ****   const uint8_t aDivFactorTable[4] = {1, 2, 4, 8};
+ 129              		.loc 1 166 3 view .LVU25
+ 130              		.loc 1 166 17 is_stmt 0 view .LVU26
+ 131 0002 2E4B     		ldr	r3, .L16
+ 132 0004 0193     		str	r3, [sp, #4]
+ 167:../Src/system_py32e407.c ****   
+ 168:../Src/system_py32e407.c ****   uint32_t tmpreg = 0U,tmppllreg=0, pllxtprediv = 0U, pllclk = 0U, pllmul = 0U, pllprediv = 0U, pll
+ 133              		.loc 1 168 3 is_stmt 1 view .LVU27
+ 134              	.LVL0:
+ 169:../Src/system_py32e407.c ****   uint32_t tmp = 0;
+ 135              		.loc 1 169 3 view .LVU28
+ 170:../Src/system_py32e407.c ****   
+ 171:../Src/system_py32e407.c ****   tmpreg = RCC->CFGR;
+ 136              		.loc 1 171 3 view .LVU29
+ 137              		.loc 1 171 10 is_stmt 0 view .LVU30
+ 138 0006 2E4A     		ldr	r2, .L16+4
+ 139 0008 5368     		ldr	r3, [r2, #4]
+ 140              	.LVL1:
+ 172:../Src/system_py32e407.c ****   tmppllreg = RCC->CFGR3;
+ 141              		.loc 1 172 3 is_stmt 1 view .LVU31
+ 142              		.loc 1 172 13 is_stmt 0 view .LVU32
+ 143 000a D2F88020 		ldr	r2, [r2, #128]
+ 144              	.LVL2:
+ 173:../Src/system_py32e407.c ****   /* Get SYSCLK source -------------------------------------------------------*/
+ 174:../Src/system_py32e407.c ****   switch (tmpreg & RCC_CFGR_SWS)
+ 145              		.loc 1 174 3 is_stmt 1 view .LVU33
+ 146              		.loc 1 174 18 is_stmt 0 view .LVU34
+ 147 000e 03F00C03 		and	r3, r3, #12
+ 148              	.LVL3:
+ 149              		.loc 1 174 3 view .LVU35
+ 150 0012 042B     		cmp	r3, #4
+ 151 0014 12D0     		beq	.L8
+ 152 0016 082B     		cmp	r3, #8
+ 153 0018 14D0     		beq	.L9
+ 154 001a 5BB1     		cbz	r3, .L15
+ 155              	.LVL4:
+ 156              	.L10:
+ 175:../Src/system_py32e407.c ****   {
+ 176:../Src/system_py32e407.c ****     case 0x00:  /* HSI used as system clock source */
+ 177:../Src/system_py32e407.c ****     {
+ 178:../Src/system_py32e407.c ****       SystemCoreClock = HSI_VALUE;
+ 179:../Src/system_py32e407.c ****       break;
+ 180:../Src/system_py32e407.c ****     }
+ 181:../Src/system_py32e407.c ****     
+ 182:../Src/system_py32e407.c ****     case 0x04:  /* HSE used as system clock */
+ 183:../Src/system_py32e407.c ****     {
+ 184:../Src/system_py32e407.c ****       SystemCoreClock = HSE_VALUE;
+ 185:../Src/system_py32e407.c ****       break;
+ 186:../Src/system_py32e407.c ****     }
+ 187:../Src/system_py32e407.c ****     
+ 188:../Src/system_py32e407.c ****     case 0x08:  /* PLL used as system clock */
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 7
+
+
+ 189:../Src/system_py32e407.c ****     {
+ 190:../Src/system_py32e407.c ****       pllprediv = aDivFactorTable[(uint32_t)(RCC->CFGR3 & RCC_CFGR3_PLLPREDIV) >> RCC_CFGR3_PLLPRED
+ 191:../Src/system_py32e407.c ****       pllpostdiv = aDivFactorTable[(uint32_t)(RCC->CFGR3 & RCC_CFGR3_PLLPOSTDIV) >> RCC_CFGR3_PLLPO
+ 192:../Src/system_py32e407.c ****       pllmul = (READ_BIT(RCC->CFGR3, RCC_CFGR3_PLLFBDIV) >> RCC_CFGR3_PLLFBDIV_Pos) + 2U;
+ 193:../Src/system_py32e407.c ****       if (((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE) || \
+ 194:../Src/system_py32e407.c ****           ((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE_DIV2))
+ 195:../Src/system_py32e407.c ****       {
+ 196:../Src/system_py32e407.c ****         pllxtprediv = aDivFactorTable[(uint32_t)(RCC->CFGR3 & RCC_CFGR3_PLLXTPRE) >> RCC_CFGR3_PLLX
+ 197:../Src/system_py32e407.c ****         /* HSE used as PLL clock source : PLLCLK = (HSE / PLLXTPREDIV) / PLLPREDIV * PLLMUL / PLLLP
+ 198:../Src/system_py32e407.c ****         pllclk = (uint32_t)((HSE_VALUE / pllxtprediv) / pllprediv * pllmul / pllpostdiv);
+ 199:../Src/system_py32e407.c ****       }
+ 200:../Src/system_py32e407.c ****       else
+ 201:../Src/system_py32e407.c ****       {
+ 202:../Src/system_py32e407.c ****         /* HSI used as PLL clock source : PLLCLK = HSI/2 / PLLPREDIV * PLLMUL / PLLLPOSTDIV */
+ 203:../Src/system_py32e407.c ****         pllclk = (uint32_t)((HSI_VALUE >> 1) / pllprediv * pllmul / pllpostdiv);
+ 204:../Src/system_py32e407.c ****       }
+ 205:../Src/system_py32e407.c ****       SystemCoreClock = pllclk;
+ 206:../Src/system_py32e407.c ****       break;
+ 207:../Src/system_py32e407.c ****     }
+ 208:../Src/system_py32e407.c ****     
+ 209:../Src/system_py32e407.c ****     default:
+ 210:../Src/system_py32e407.c ****     {      
+ 211:../Src/system_py32e407.c ****       break;
+ 212:../Src/system_py32e407.c ****     } 
+ 213:../Src/system_py32e407.c ****   }
+ 214:../Src/system_py32e407.c **** 
+ 215:../Src/system_py32e407.c ****     /* Get HCLK prescaler */
+ 216:../Src/system_py32e407.c ****     tmp = AHBPrescTable[((RCC->CFGR & RCC_CFGR_HPRE) >> RCC_CFGR_HPRE_Pos)];
+ 157              		.loc 1 216 5 is_stmt 1 view .LVU36
+ 158              		.loc 1 216 30 is_stmt 0 view .LVU37
+ 159 001c 284B     		ldr	r3, .L16+4
+ 160 001e 5B68     		ldr	r3, [r3, #4]
+ 161              		.loc 1 216 54 view .LVU38
+ 162 0020 C3F30313 		ubfx	r3, r3, #4, #4
+ 163              		.loc 1 216 24 view .LVU39
+ 164 0024 274A     		ldr	r2, .L16+8
+ 165 0026 D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+ 166              	.LVL5:
+ 217:../Src/system_py32e407.c ****     SystemCoreClock >>= tmp;
+ 167              		.loc 1 217 5 is_stmt 1 view .LVU40
+ 168              		.loc 1 217 21 is_stmt 0 view .LVU41
+ 169 0028 274A     		ldr	r2, .L16+12
+ 170 002a 1368     		ldr	r3, [r2]
+ 171 002c CB40     		lsrs	r3, r3, r1
+ 172 002e 1360     		str	r3, [r2]
+ 218:../Src/system_py32e407.c **** }
+ 173              		.loc 1 218 1 view .LVU42
+ 174 0030 02B0     		add	sp, sp, #8
+ 175              	.LCFI1:
+ 176              		.cfi_remember_state
+ 177              		.cfi_def_cfa_offset 0
+ 178              		@ sp needed
+ 179 0032 7047     		bx	lr
+ 180              	.LVL6:
+ 181              	.L15:
+ 182              	.LCFI2:
+ 183              		.cfi_restore_state
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 8
+
+
+ 178:../Src/system_py32e407.c ****       break;
+ 184              		.loc 1 178 7 is_stmt 1 view .LVU43
+ 178:../Src/system_py32e407.c ****       break;
+ 185              		.loc 1 178 23 is_stmt 0 view .LVU44
+ 186 0034 244B     		ldr	r3, .L16+12
+ 187 0036 254A     		ldr	r2, .L16+16
+ 188              	.LVL7:
+ 178:../Src/system_py32e407.c ****       break;
+ 189              		.loc 1 178 23 view .LVU45
+ 190 0038 1A60     		str	r2, [r3]
+ 179:../Src/system_py32e407.c ****     }
+ 191              		.loc 1 179 7 is_stmt 1 view .LVU46
+ 192 003a EFE7     		b	.L10
+ 193              	.LVL8:
+ 194              	.L8:
+ 184:../Src/system_py32e407.c ****       break;
+ 195              		.loc 1 184 7 view .LVU47
+ 184:../Src/system_py32e407.c ****       break;
+ 196              		.loc 1 184 23 is_stmt 0 view .LVU48
+ 197 003c 224B     		ldr	r3, .L16+12
+ 198 003e 244A     		ldr	r2, .L16+20
+ 199              	.LVL9:
+ 184:../Src/system_py32e407.c ****       break;
+ 200              		.loc 1 184 23 view .LVU49
+ 201 0040 1A60     		str	r2, [r3]
+ 185:../Src/system_py32e407.c ****     }
+ 202              		.loc 1 185 7 is_stmt 1 view .LVU50
+ 203 0042 EBE7     		b	.L10
+ 204              	.LVL10:
+ 205              	.L9:
+ 190:../Src/system_py32e407.c ****       pllpostdiv = aDivFactorTable[(uint32_t)(RCC->CFGR3 & RCC_CFGR3_PLLPOSTDIV) >> RCC_CFGR3_PLLPO
+ 206              		.loc 1 190 7 view .LVU51
+ 190:../Src/system_py32e407.c ****       pllpostdiv = aDivFactorTable[(uint32_t)(RCC->CFGR3 & RCC_CFGR3_PLLPOSTDIV) >> RCC_CFGR3_PLLPO
+ 207              		.loc 1 190 49 is_stmt 0 view .LVU52
+ 208 0044 1E49     		ldr	r1, .L16+4
+ 209 0046 D1F88030 		ldr	r3, [r1, #128]
+ 190:../Src/system_py32e407.c ****       pllpostdiv = aDivFactorTable[(uint32_t)(RCC->CFGR3 & RCC_CFGR3_PLLPOSTDIV) >> RCC_CFGR3_PLLPO
+ 210              		.loc 1 190 80 view .LVU53
+ 211 004a C3F38103 		ubfx	r3, r3, #2, #2
+ 190:../Src/system_py32e407.c ****       pllpostdiv = aDivFactorTable[(uint32_t)(RCC->CFGR3 & RCC_CFGR3_PLLPOSTDIV) >> RCC_CFGR3_PLLPO
+ 212              		.loc 1 190 34 view .LVU54
+ 213 004e 0833     		adds	r3, r3, #8
+ 214 0050 6B44     		add	r3, sp, r3
+ 215 0052 13F804CC 		ldrb	ip, [r3, #-4]	@ zero_extendqisi2
+ 216              	.LVL11:
+ 191:../Src/system_py32e407.c ****       pllmul = (READ_BIT(RCC->CFGR3, RCC_CFGR3_PLLFBDIV) >> RCC_CFGR3_PLLFBDIV_Pos) + 2U;
+ 217              		.loc 1 191 7 is_stmt 1 view .LVU55
+ 191:../Src/system_py32e407.c ****       pllmul = (READ_BIT(RCC->CFGR3, RCC_CFGR3_PLLFBDIV) >> RCC_CFGR3_PLLFBDIV_Pos) + 2U;
+ 218              		.loc 1 191 50 is_stmt 0 view .LVU56
+ 219 0056 D1F88030 		ldr	r3, [r1, #128]
+ 191:../Src/system_py32e407.c ****       pllmul = (READ_BIT(RCC->CFGR3, RCC_CFGR3_PLLFBDIV) >> RCC_CFGR3_PLLFBDIV_Pos) + 2U;
+ 220              		.loc 1 191 82 view .LVU57
+ 221 005a C3F30113 		ubfx	r3, r3, #4, #2
+ 191:../Src/system_py32e407.c ****       pllmul = (READ_BIT(RCC->CFGR3, RCC_CFGR3_PLLFBDIV) >> RCC_CFGR3_PLLFBDIV_Pos) + 2U;
+ 222              		.loc 1 191 35 view .LVU58
+ 223 005e 0833     		adds	r3, r3, #8
+ 224 0060 6B44     		add	r3, sp, r3
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 9
+
+
+ 225 0062 13F8040C 		ldrb	r0, [r3, #-4]	@ zero_extendqisi2
+ 226              	.LVL12:
+ 192:../Src/system_py32e407.c ****       if (((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE) || \
+ 227              		.loc 1 192 7 is_stmt 1 view .LVU59
+ 192:../Src/system_py32e407.c ****       if (((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE) || \
+ 228              		.loc 1 192 17 is_stmt 0 view .LVU60
+ 229 0066 D1F88010 		ldr	r1, [r1, #128]
+ 192:../Src/system_py32e407.c ****       if (((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE) || \
+ 230              		.loc 1 192 58 view .LVU61
+ 231 006a C1F30721 		ubfx	r1, r1, #8, #8
+ 192:../Src/system_py32e407.c ****       if (((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE) || \
+ 232              		.loc 1 192 14 view .LVU62
+ 233 006e 0231     		adds	r1, r1, #2
+ 234              	.LVL13:
+ 193:../Src/system_py32e407.c ****           ((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE_DIV2))
+ 235              		.loc 1 193 7 is_stmt 1 view .LVU63
+ 193:../Src/system_py32e407.c ****           ((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE_DIV2))
+ 236              		.loc 1 193 23 is_stmt 0 view .LVU64
+ 237 0070 02F00302 		and	r2, r2, #3
+ 238              	.LVL14:
+ 193:../Src/system_py32e407.c ****           ((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE_DIV2))
+ 239              		.loc 1 193 10 view .LVU65
+ 240 0074 012A     		cmp	r2, #1
+ 241 0076 09D0     		beq	.L11
+ 193:../Src/system_py32e407.c ****           ((tmppllreg & (RCC_CFGR3_PLLSRC | RCC_CFGR3_PLLXTPRE)) == RCC_PLLSOURCE_HSE_DIV2))
+ 242              		.loc 1 193 88 discriminator 1 view .LVU66
+ 243 0078 032A     		cmp	r2, #3
+ 244 007a 07D0     		beq	.L11
+ 203:../Src/system_py32e407.c ****       }
+ 245              		.loc 1 203 9 is_stmt 1 view .LVU67
+ 203:../Src/system_py32e407.c ****       }
+ 246              		.loc 1 203 46 is_stmt 0 view .LVU68
+ 247 007c 154B     		ldr	r3, .L16+24
+ 248 007e B3FBFCF3 		udiv	r3, r3, ip
+ 203:../Src/system_py32e407.c ****       }
+ 249              		.loc 1 203 58 view .LVU69
+ 250 0082 01FB03F3 		mul	r3, r1, r3
+ 203:../Src/system_py32e407.c ****       }
+ 251              		.loc 1 203 16 view .LVU70
+ 252 0086 B3FBF0F3 		udiv	r3, r3, r0
+ 253              	.LVL15:
+ 203:../Src/system_py32e407.c ****       }
+ 254              		.loc 1 203 16 view .LVU71
+ 255 008a 13E0     		b	.L13
+ 256              	.LVL16:
+ 257              	.L11:
+ 196:../Src/system_py32e407.c ****         /* HSE used as PLL clock source : PLLCLK = (HSE / PLLXTPREDIV) / PLLPREDIV * PLLMUL / PLLLP
+ 258              		.loc 1 196 9 is_stmt 1 view .LVU72
+ 196:../Src/system_py32e407.c ****         /* HSE used as PLL clock source : PLLCLK = (HSE / PLLXTPREDIV) / PLLPREDIV * PLLMUL / PLLLP
+ 259              		.loc 1 196 53 is_stmt 0 view .LVU73
+ 260 008c 0C4B     		ldr	r3, .L16+4
+ 261 008e D3F88020 		ldr	r2, [r3, #128]
+ 196:../Src/system_py32e407.c ****         /* HSE used as PLL clock source : PLLCLK = (HSE / PLLXTPREDIV) / PLLPREDIV * PLLMUL / PLLLP
+ 262              		.loc 1 196 83 view .LVU74
+ 263 0092 C2F34002 		ubfx	r2, r2, #1, #1
+ 196:../Src/system_py32e407.c ****         /* HSE used as PLL clock source : PLLCLK = (HSE / PLLXTPREDIV) / PLLPREDIV * PLLMUL / PLLLP
+ 264              		.loc 1 196 38 view .LVU75
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 10
+
+
+ 265 0096 02F10803 		add	r3, r2, #8
+ 266 009a 0DEB0302 		add	r2, sp, r3
+ 267 009e 12F8042C 		ldrb	r2, [r2, #-4]	@ zero_extendqisi2
+ 268              	.LVL17:
+ 198:../Src/system_py32e407.c ****       }
+ 269              		.loc 1 198 9 is_stmt 1 view .LVU76
+ 198:../Src/system_py32e407.c ****       }
+ 270              		.loc 1 198 40 is_stmt 0 view .LVU77
+ 271 00a2 0B4B     		ldr	r3, .L16+20
+ 272 00a4 B3FBF2F3 		udiv	r3, r3, r2
+ 198:../Src/system_py32e407.c ****       }
+ 273              		.loc 1 198 55 view .LVU78
+ 274 00a8 B3FBFCF3 		udiv	r3, r3, ip
+ 198:../Src/system_py32e407.c ****       }
+ 275              		.loc 1 198 67 view .LVU79
+ 276 00ac 01FB03F3 		mul	r3, r1, r3
+ 198:../Src/system_py32e407.c ****       }
+ 277              		.loc 1 198 16 view .LVU80
+ 278 00b0 B3FBF0F3 		udiv	r3, r3, r0
+ 279              	.LVL18:
+ 280              	.L13:
+ 205:../Src/system_py32e407.c ****       break;
+ 281              		.loc 1 205 7 is_stmt 1 view .LVU81
+ 205:../Src/system_py32e407.c ****       break;
+ 282              		.loc 1 205 23 is_stmt 0 view .LVU82
+ 283 00b4 044A     		ldr	r2, .L16+12
+ 284 00b6 1360     		str	r3, [r2]
+ 206:../Src/system_py32e407.c ****     }
+ 285              		.loc 1 206 7 is_stmt 1 view .LVU83
+ 286 00b8 B0E7     		b	.L10
+ 287              	.L17:
+ 288 00ba 00BF     		.align	2
+ 289              	.L16:
+ 290 00bc 01020408 		.word	134480385
+ 291 00c0 00100240 		.word	1073876992
+ 292 00c4 00000000 		.word	.LANCHOR1
+ 293 00c8 00000000 		.word	.LANCHOR0
+ 294 00cc 0024F400 		.word	16000000
+ 295 00d0 00366E01 		.word	24000000
+ 296 00d4 00127A00 		.word	8000000
+ 297              		.cfi_endproc
+ 298              	.LFE137:
+ 300              		.global	APBPrescTable
+ 301              		.global	AHBPrescTable
+ 302              		.global	SystemCoreClock
+ 303              		.section	.data.SystemCoreClock,"aw"
+ 304              		.align	2
+ 305              		.set	.LANCHOR0,. + 0
+ 308              	SystemCoreClock:
+ 309 0000 0024F400 		.word	16000000
+ 310              		.section	.rodata.AHBPrescTable,"a"
+ 311              		.align	2
+ 312              		.set	.LANCHOR1,. + 0
+ 315              	AHBPrescTable:
+ 316 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000\001\002\003\004\006"
+ 316      00000000 
+ 316      01020304 
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 11
+
+
+ 316      06
+ 317 000d 070809   		.ascii	"\007\010\011"
+ 318              		.section	.rodata.APBPrescTable,"a"
+ 319              		.align	2
+ 322              	APBPrescTable:
+ 323 0000 00000000 		.ascii	"\000\000\000\000\001\002\003\004"
+ 323      01020304 
+ 324              		.text
+ 325              	.Letext0:
+ 326              		.file 2 "c:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 327              		.file 3 "c:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 328              		.file 4 "../../../../../../Drivers/CMSIS/Include/core_cm4.h"
+ 329              		.file 5 "../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include/system_py32e4xx.h"
+ 330              		.file 6 "../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include/py32e407xE.h"
+ 331              		.file 7 "../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include/py32e4xx.h"
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc5H8rsj.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_py32e407.c
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:20     .text.SystemInit:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:26     .text.SystemInit:00000000 SystemInit
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:104    .text.SystemInit:00000074 $d
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:113    .text.SystemCoreClockUpdate:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:119    .text.SystemCoreClockUpdate:00000000 SystemCoreClockUpdate
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:290    .text.SystemCoreClockUpdate:000000bc $d
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:322    .rodata.APBPrescTable:00000000 APBPrescTable
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:315    .rodata.AHBPrescTable:00000000 AHBPrescTable
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:308    .data.SystemCoreClock:00000000 SystemCoreClock
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:304    .data.SystemCoreClock:00000000 $d
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:311    .rodata.AHBPrescTable:00000000 $d
+C:\Users\user\AppData\Local\Temp\cc5H8rsj.s:319    .rodata.APBPrescTable:00000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,6 @@
+tool: GCC
+fileName: 'Project.map'
+elfName: 'Project.elf'
+compilerName: 'GNU Arm Embedded Toolchain 10.3-2021.10'
+compilerFullName: 'arm-none-eabi-gcc.exe (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)'
+compilerPath: 'c:\Program Files (x86)\PuyaSDE\tool\bin\arm-none-eabi-gcc.exe'
