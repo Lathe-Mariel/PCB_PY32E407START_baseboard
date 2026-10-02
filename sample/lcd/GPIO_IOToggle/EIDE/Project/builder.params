@@ -2,12 +2,12 @@
     "name": "Project",
     "target": "Project",
     "toolchain": "GCC",
-    "toolchainLocation": "c:\\Program Files (x86)\\PuyaSDE\\tool",
-    "toolchainCfgFile": "c:\\Users\\user\\.vscode\\extensions\\cl.eide-3.27.2\\res\\data\\models/arm.gcc.model.json",
+    "toolchainLocation": "C:\\Program Files (x86)\\PuyaSDE\\tool",
+    "toolchainCfgFile": "c:\\Users\\nagai\\.vscode\\extensions\\cl.eide-3.27.2\\res\\data\\models/arm.gcc.model.json",
     "buildMode": "fast|multhread",
     "showRepathOnLog": true,
     "threadNum": 12,
-    "rootDir": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE",
+    "rootDir": "c:\\Git\\PCB_PY32E407START_baseboard\\sample\\lcd\\GPIO_IOToggle\\EIDE",
     "dumpPath": "Project",
     "outDir": "Project",
     "incDirs": [
@@ -73,20 +73,20 @@
             "output-format": "elf",
             "remove-unused-input-sections": true,
             "link-scatter": [
-                "c:/Users/user/Downloads/PY32E407_Firmware-master/PY32E407_Firmware-master/Projects/PY32E407-STK/Example/GPIO/GPIO_IOToggle/EIDE/py32e407xe.ld"
+                "c:/Git/PCB_PY32E407START_baseboard/sample/lcd/GPIO_IOToggle/EIDE/py32e407xe.ld"
             ]
         }
     },
     "env": {
-        "workspaceFolder": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE",
+        "workspaceFolder": "c:\\Git\\PCB_PY32E407START_baseboard\\sample\\lcd\\GPIO_IOToggle\\EIDE",
         "workspaceFolderBasename": "EIDE",
-        "OutDir": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE\\.\\Project",
+        "OutDir": "c:\\Git\\PCB_PY32E407START_baseboard\\sample\\lcd\\GPIO_IOToggle\\EIDE\\.\\Project",
         "OutDirRoot": ".",
         "OutDirBase": ".\\Project",
         "ProjectName": "Project",
         "ConfigName": "Project",
-        "ProjectRoot": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE",
-        "ExecutableName": "c:\\Users\\user\\Downloads\\PY32E407_Firmware-master\\PY32E407_Firmware-master\\Projects\\PY32E407-STK\\Example\\GPIO\\GPIO_IOToggle\\EIDE\\.\\Project\\Project",
+        "ProjectRoot": "c:\\Git\\PCB_PY32E407START_baseboard\\sample\\lcd\\GPIO_IOToggle\\EIDE",
+        "ExecutableName": "c:\\Git\\PCB_PY32E407START_baseboard\\sample\\lcd\\GPIO_IOToggle\\EIDE\\.\\Project\\Project",
         "ChipPackDir": "",
         "ChipName": "PY32E407xE",
         "SYS_Platform": "win32",
@@ -95,11 +95,11 @@
         "SYS_PathSep": ";",
         "SYS_PathSeparator": ";",
         "SYS_EOL": "\r\n",
-        "EIDE_BUILDER_DIR": "c:\\Users\\user\\.vscode\\extensions\\cl.eide-3.27.2\\res\\tools\\win32\\unify_builder",
+        "EIDE_BUILDER_DIR": "c:\\Users\\nagai\\.vscode\\extensions\\cl.eide-3.27.2\\res\\tools\\win32\\unify_builder",
         "EIDE_BINARIES_VER": "12.1.1",
-        "EIDE_MSYS": "C:\\Users\\user\\.eide\\bin\\builder\\msys\\bin",
-        "EIDE_PY3_CMD": "C:\\Users\\user\\.eide\\bin\\python36\\python3.exe",
-        "ToolchainRoot": "c:\\Program Files (x86)\\PuyaSDE\\tool"
+        "EIDE_MSYS": "C:\\Users\\nagai\\.eide\\bin\\builder\\msys\\bin",
+        "EIDE_PY3_CMD": "C:\\Users\\nagai\\.eide\\bin\\python36\\python3.exe",
+        "ToolchainRoot": "C:\\Program Files (x86)\\PuyaSDE\\tool"
     },
     "sysPaths": []
 }
