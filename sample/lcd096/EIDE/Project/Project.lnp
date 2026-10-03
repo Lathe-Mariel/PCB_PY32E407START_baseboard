@@ -1,0 +1,18 @@
+-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T h:/git/PCB_PY32E407START_baseboard/sample/lcd096/EIDE/py32e407xe.ld -Wl,--gc-sections -Wl,--print-memory-usage --specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16
+-Wl,-Map=./Project/Project.map
+-o ./Project/Project.elf ./Project/.obj/__/__/__/__/__/Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.o
+./Project/.obj/__/__/__/__/__/Drivers/PY32E407_HAL_Driver/Src/py32e407_hal.o
+./Project/.obj/__/__/__/__/__/Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_cortex.o
+./Project/.obj/__/__/__/__/__/Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_dma.o
+./Project/.obj/__/__/__/__/__/Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_gpio.o
+./Project/.obj/__/__/__/__/__/Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.o
+./Project/.obj/__/__/__/__/__/Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.o
+./Project/.obj/__/__/__/__/__/Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc.o
+./Project/.obj/__/__/__/__/__/Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.o
+./Project/.obj/__/__/__/__/__/Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_uart.o
+./Project/.obj/__/Src/lcd096.o
+./Project/.obj/__/Src/main.o
+./Project/.obj/__/Src/py32e407_hal_msp.o
+./Project/.obj/__/Src/py32e407_it.o
+./Project/.obj/__/Src/system_py32e407.o
+./Project/.obj/startup_py32e407xx.o -lm

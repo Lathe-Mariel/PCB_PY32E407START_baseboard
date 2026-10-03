@@ -1,0 +1,1151 @@
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"py32e407_hal_pwr_ex.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.HAL_PWREx_SetWakeupFlashDelay,"ax",%progbits
+  20              		.align	1
+  21              		.global	HAL_PWREx_SetWakeupFlashDelay
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	HAL_PWREx_SetWakeupFlashDelay:
+  27              	.LVL0:
+  28              	.LFB136:
+  29              		.file 1 "../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c"
+   1:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+   2:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   ******************************************************************************
+   3:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @file    py32e407_hal_pwr_ex.c
+   4:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @author  MCU Application Team
+   5:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief   Extended PWR HAL module driver.
+   6:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *          This file provides firmware functions to manage the following 
+   7:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *          functionalities of PWR extension peripheral:           
+   8:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *           + Peripheral Extended features functions
+   9:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *         
+  10:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   ******************************************************************************
+  11:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @attention
+  12:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *
+  13:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  14:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * All rights reserved.</center></h2>
+  15:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *
+  16:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * This software component is licensed by Puya under BSD 3-Clause license,
+  17:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * the "License"; You may not use this file except in compliance with the
+  18:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * License. You may obtain a copy of the License at:
+  19:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  20:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *
+  21:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   ******************************************************************************
+  22:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @attention
+  23:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *
+  24:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  25:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * All rights reserved.</center></h2>
+  26:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *
+  27:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  28:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * the "License"; You may not use this file except in compliance with the
+  29:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * License. You may obtain a copy of the License at:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 2
+
+
+  30:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  31:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *
+  32:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   ******************************************************************************
+  33:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  34:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  35:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /* Includes ------------------------------------------------------------------*/
+  36:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** #include "py32e4xx_hal.h"
+  37:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  38:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /** @addtogroup PY32E407_HAL_Driver
+  39:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @{
+  40:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  41:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  42:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /** @defgroup PWREx PWREx
+  43:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief PWR HAL module driver
+  44:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @{
+  45:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  46:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  47:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** #ifdef HAL_PWR_MODULE_ENABLED
+  48:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  49:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /* Private typedef -----------------------------------------------------------*/
+  50:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /* Private define ------------------------------------------------------------*/
+  51:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  52:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /** @defgroup PWR_Extended_Private_Defines PWR Extended Private Defines
+  53:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @{
+  54:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  55:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  56:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /** @defgroup PWREx_PVM_Mode_Mask PWR PVM Mode Mask
+  57:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @{
+  58:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  59:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** #define PVM_MODE_IT               0x00010000U    /*!< Mask for interruption yielded by PVM threshol
+  60:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** #define PVM_MODE_EVT              0x00020000U    /*!< Mask for event yielded by PVM threshold cross
+  61:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** #define PVM_RISING_EDGE           0x00000001U    /*!< Mask for rising edge set as PVM trigger      
+  62:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** #define PVM_FALLING_EDGE          0x00000002U    /*!< Mask for falling edge set as PVM trigger     
+  63:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+  64:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @}
+  65:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  66:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  67:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /** @defgroup PWREx_TimeOut_Value PWR Extended Flag Setting Time Out Value
+  68:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @{
+  69:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  70:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** #define PWR_FLAG_SETTING_DELAY_US                      50UL   /*!< Time out value for MR_RDY and VO
+  71:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+  72:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @}
+  73:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  74:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  75:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+  76:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @}
+  77:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  78:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  79:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  80:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  81:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /* Private macro -------------------------------------------------------------*/
+  82:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /* Private variables ---------------------------------------------------------*/
+  83:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /* Private function prototypes -----------------------------------------------*/
+  84:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /* Exported functions --------------------------------------------------------*/
+  85:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  86:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /** @defgroup PWREx_Exported_Functions PWR Extended Exported Functions
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 3
+
+
+  87:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @{
+  88:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+  89:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  90:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /** @defgroup PWREx_Exported_Functions_Group1 Extended Peripheral Control functions
+  91:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *  @brief   Extended Peripheral Control functions
+  92:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *
+  93:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** @verbatim
+  94:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****  ===============================================================================
+  95:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****               ##### Extended Peripheral Initialization and de-initialization functions #####
+  96:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****  ===============================================================================
+  97:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     [..]
+  98:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+  99:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** @endverbatim
+ 100:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @{
+ 101:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 102:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 103:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Config wakeup from stop mode, enable flash delay time.
+ 104:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @param  DelayTime: Specifies the delay time before FLASH control
+ 105:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *          This parameter can be one of the following values:
+ 106:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_FLASH_DELAY_3US: Wake up from the STOP mode, Delay 3us enable flas
+ 107:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_FLASH_DELAY_5US: Wake up from the STOP mode, Delay 5us enable flas
+ 108:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_FLASH_DELAY_2US: Wake up from the STOP mode, Delay 2us enable flas
+ 109:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_FLASH_DELAY_0US: Wake up from the STOP mode, Enable flash immediat
+ 110:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 111:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 112:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_SetWakeupFlashDelay(uint32_t DelayTime)
+ 113:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+  30              		.loc 1 113 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+ 114:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   MODIFY_REG(PWR->CR1, PWR_CR1_FLS_WUPT, DelayTime);
+  35              		.loc 1 114 3 view .LVU1
+  36 0000 034A     		ldr	r2, .L2
+  37 0002 1368     		ldr	r3, [r2]
+  38 0004 23F4C023 		bic	r3, r3, #393216
+  39 0008 0343     		orrs	r3, r3, r0
+  40 000a 1360     		str	r3, [r2]
+ 115:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+  41              		.loc 1 115 1 is_stmt 0 view .LVU2
+  42 000c 7047     		bx	lr
+  43              	.L3:
+  44 000e 00BF     		.align	2
+  45              	.L2:
+  46 0010 00700040 		.word	1073770496
+  47              		.cfi_endproc
+  48              	.LFE136:
+  50              		.section	.text.HAL_PWREx_GetWakeupFlashDelay,"ax",%progbits
+  51              		.align	1
+  52              		.global	HAL_PWREx_GetWakeupFlashDelay
+  53              		.syntax unified
+  54              		.thumb
+  55              		.thumb_func
+  57              	HAL_PWREx_GetWakeupFlashDelay:
+  58              	.LFB137:
+ 116:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 4
+
+
+ 117:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 118:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Get wakeup from stop mode, enable flash delay time.
+ 119:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval Config Flash wakeup delay time.
+ 120:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_FLASH_DELAY_3US: Wake up from the STOP mode, Delay 3us enable flas
+ 121:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_FLASH_DELAY_5US: Wake up from the STOP mode, Delay 5us enable flas
+ 122:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_FLASH_DELAY_2US: Wake up from the STOP mode, Delay 2us enable flas
+ 123:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_FLASH_DELAY_0US: Wake up from the STOP mode, Enable flash immediat
+ 124:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 125:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** uint32_t HAL_PWREx_GetWakeupFlashDelay(void)
+ 126:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+  59              		.loc 1 126 1 is_stmt 1 view -0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+ 127:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   return (PWR->CR1 & PWR_CR1_FLS_WUPT);
+  64              		.loc 1 127 3 view .LVU4
+  65              		.loc 1 127 14 is_stmt 0 view .LVU5
+  66 0000 024B     		ldr	r3, .L5
+  67 0002 1868     		ldr	r0, [r3]
+ 128:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+  68              		.loc 1 128 1 view .LVU6
+  69 0004 00F4C020 		and	r0, r0, #393216
+  70 0008 7047     		bx	lr
+  71              	.L6:
+  72 000a 00BF     		.align	2
+  73              	.L5:
+  74 000c 00700040 		.word	1073770496
+  75              		.cfi_endproc
+  76              	.LFE137:
+  78              		.section	.text.HAL_PWREx_SetWakeupMrReadyDelay,"ax",%progbits
+  79              		.align	1
+  80              		.global	HAL_PWREx_SetWakeupMrReadyDelay
+  81              		.syntax unified
+  82              		.thumb
+  83              		.thumb_func
+  85              	HAL_PWREx_SetWakeupMrReadyDelay:
+  86              	.LVL1:
+  87              	.LFB138:
+ 129:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 130:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 131:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Config wakeup from STANDBY mode MR Ready delay time.
+ 132:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @param  DelayTime: Specifies the delay time afte MR Ready.
+ 133:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *          This parameter can be one of the following values:
+ 134:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_MRREADY_DELAY_3US:   Wake up from the STANDY mode, MR Ready Delay 
+ 135:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_MRREADY_DELAY_5US:  Wake up from the STANDY mode, MR Ready Delay 5
+ 136:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_MRREADY_DELAY_10US:  Wake up from the STANDY mode, MR Ready Delay 
+ 137:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_MRREADY_DELAY_20US:  Wake up from the STANDY mode, MR Ready Delay 
+ 138:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 139:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 140:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_SetWakeupMrReadyDelay(uint32_t DelayTime)
+ 141:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+  88              		.loc 1 141 1 is_stmt 1 view -0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 5
+
+
+ 142:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   MODIFY_REG(PWR->CR1, PWR_CR1_STDBY_MRRDY_WAIT, DelayTime);
+  93              		.loc 1 142 3 view .LVU8
+  94 0000 034A     		ldr	r2, .L8
+  95 0002 1368     		ldr	r3, [r2]
+  96 0004 23F4C013 		bic	r3, r3, #1572864
+  97 0008 0343     		orrs	r3, r3, r0
+  98 000a 1360     		str	r3, [r2]
+ 143:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+  99              		.loc 1 143 1 is_stmt 0 view .LVU9
+ 100 000c 7047     		bx	lr
+ 101              	.L9:
+ 102 000e 00BF     		.align	2
+ 103              	.L8:
+ 104 0010 00700040 		.word	1073770496
+ 105              		.cfi_endproc
+ 106              	.LFE138:
+ 108              		.section	.text.HAL_PWREx_GetWakeupMrReadyDelay,"ax",%progbits
+ 109              		.align	1
+ 110              		.global	HAL_PWREx_GetWakeupMrReadyDelay
+ 111              		.syntax unified
+ 112              		.thumb
+ 113              		.thumb_func
+ 115              	HAL_PWREx_GetWakeupMrReadyDelay:
+ 116              	.LFB139:
+ 144:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 145:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 146:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Get wakeup from STANDBY mode MR Ready delay time.
+ 147:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval Get STANDBY wakeup MR Ready delay time.
+ 148:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_MRREADY_DELAY_3US:   Wake up from the STANDY mode, MR Ready Delay 
+ 149:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_MRREADY_DELAY_5US:  Wake up from the STANDY mode, MR Ready Delay 5
+ 150:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_MRREADY_DELAY_10US:  Wake up from the STANDY mode, MR Ready Delay 
+ 151:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            - @arg PWR_WAKEUP_MRREADY_DELAY_20US:  Wake up from the STANDY mode, MR Ready Delay 
+ 152:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 153:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** uint32_t HAL_PWREx_GetWakeupMrReadyDelay(void)
+ 154:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 117              		.loc 1 154 1 is_stmt 1 view -0
+ 118              		.cfi_startproc
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121              		@ link register save eliminated.
+ 155:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   return (PWR->CR1 & PWR_CR1_STDBY_MRRDY_WAIT);
+ 122              		.loc 1 155 3 view .LVU11
+ 123              		.loc 1 155 14 is_stmt 0 view .LVU12
+ 124 0000 024B     		ldr	r3, .L11
+ 125 0002 1868     		ldr	r0, [r3]
+ 156:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 126              		.loc 1 156 1 view .LVU13
+ 127 0004 00F4C010 		and	r0, r0, #1572864
+ 128 0008 7047     		bx	lr
+ 129              	.L12:
+ 130 000a 00BF     		.align	2
+ 131              	.L11:
+ 132 000c 00700040 		.word	1073770496
+ 133              		.cfi_endproc
+ 134              	.LFE139:
+ 136              		.section	.text.HAL_PWREx_DisableHSIWakeupWait,"ax",%progbits
+ 137              		.align	1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 6
+
+
+ 138              		.global	HAL_PWREx_DisableHSIWakeupWait
+ 139              		.syntax unified
+ 140              		.thumb
+ 141              		.thumb_func
+ 143              	HAL_PWREx_DisableHSIWakeupWait:
+ 144              	.LFB140:
+ 157:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 158:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 159:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief When wakeup from stop mode,HSI and Main Regulator start at the same time.
+ 160:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 161:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 162:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_DisableHSIWakeupWait(void)
+ 163:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 145              		.loc 1 163 1 is_stmt 1 view -0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149              		@ link register save eliminated.
+ 164:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   SET_BIT(PWR->CR1, PWR_CR1_HSION_CTRL);
+ 150              		.loc 1 164 3 view .LVU15
+ 151 0000 024A     		ldr	r2, .L14
+ 152 0002 1368     		ldr	r3, [r2]
+ 153 0004 43F48033 		orr	r3, r3, #65536
+ 154 0008 1360     		str	r3, [r2]
+ 165:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 155              		.loc 1 165 1 is_stmt 0 view .LVU16
+ 156 000a 7047     		bx	lr
+ 157              	.L15:
+ 158              		.align	2
+ 159              	.L14:
+ 160 000c 00700040 		.word	1073770496
+ 161              		.cfi_endproc
+ 162              	.LFE140:
+ 164              		.section	.text.HAL_PWREx_EnableHSIWakeupWait,"ax",%progbits
+ 165              		.align	1
+ 166              		.global	HAL_PWREx_EnableHSIWakeupWait
+ 167              		.syntax unified
+ 168              		.thumb
+ 169              		.thumb_func
+ 171              	HAL_PWREx_EnableHSIWakeupWait:
+ 172              	.LFB141:
+ 166:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 167:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 168:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief When wakeup from stop mode,HSI enable After Main Regulator stable.
+ 169:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 170:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 171:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_EnableHSIWakeupWait(void)
+ 172:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 173              		.loc 1 172 1 is_stmt 1 view -0
+ 174              		.cfi_startproc
+ 175              		@ args = 0, pretend = 0, frame = 0
+ 176              		@ frame_needed = 0, uses_anonymous_args = 0
+ 177              		@ link register save eliminated.
+ 173:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   CLEAR_BIT(PWR->CR1, PWR_CR1_HSION_CTRL);
+ 178              		.loc 1 173 3 view .LVU18
+ 179 0000 024A     		ldr	r2, .L17
+ 180 0002 1368     		ldr	r3, [r2]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 7
+
+
+ 181 0004 23F48033 		bic	r3, r3, #65536
+ 182 0008 1360     		str	r3, [r2]
+ 174:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 183              		.loc 1 174 1 is_stmt 0 view .LVU19
+ 184 000a 7047     		bx	lr
+ 185              	.L18:
+ 186              		.align	2
+ 187              	.L17:
+ 188 000c 00700040 		.word	1073770496
+ 189              		.cfi_endproc
+ 190              	.LFE141:
+ 192              		.section	.text.HAL_PWREx_ControlVoltageScaling,"ax",%progbits
+ 193              		.align	1
+ 194              		.global	HAL_PWREx_ControlVoltageScaling
+ 195              		.syntax unified
+ 196              		.thumb
+ 197              		.thumb_func
+ 199              	HAL_PWREx_ControlVoltageScaling:
+ 200              	.LVL2:
+ 201              	.LFB142:
+ 175:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 176:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 177:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Configures the main internal regulator output voltage.
+ 178:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @param  VoltageScaling specifies the regulator output voltage to achieve
+ 179:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *         a tradeoff between performance and power consumption.
+ 180:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *          This parameter can be one of the following values:
+ 181:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_REGULATOR_VOLTAGE_HIGH       : Regulator High voltage mode
+ 182:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_REGULATOR_VOLTAGE_MEDIUM     : Regulator Medium voltage mode
+ 183:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_REGULATOR_VOLTAGE_MEDIUM_LOW : Regulator Mddium low voltage mode
+ 184:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_REGULATOR_VOLTAGE_LOW        : Regulator Low voltage mode
+ 185:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 186:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 187:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_ControlVoltageScaling(uint32_t VoltageScaling)
+ 188:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {  
+ 202              		.loc 1 188 1 is_stmt 1 view -0
+ 203              		.cfi_startproc
+ 204              		@ args = 0, pretend = 0, frame = 8
+ 205              		@ frame_needed = 0, uses_anonymous_args = 0
+ 206              		@ link register save eliminated.
+ 207              		.loc 1 188 1 is_stmt 0 view .LVU21
+ 208 0000 82B0     		sub	sp, sp, #8
+ 209              	.LCFI0:
+ 210              		.cfi_def_cfa_offset 8
+ 189:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   assert_param(IS_PWR_VOLTAGE_SCALING_RANGE(VoltageScaling));
+ 211              		.loc 1 189 3 is_stmt 1 view .LVU22
+ 190:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   
+ 191:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Set Range */
+ 192:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   __HAL_PWR_VOLTAGESCALING_CONFIG(VoltageScaling);
+ 212              		.loc 1 192 3 view .LVU23
+ 213              	.LBB2:
+ 214              		.loc 1 192 3 view .LVU24
+ 215              		.loc 1 192 3 view .LVU25
+ 216 0002 064A     		ldr	r2, .L21
+ 217 0004 1368     		ldr	r3, [r2]
+ 218 0006 23F4C063 		bic	r3, r3, #1536
+ 219 000a 0343     		orrs	r3, r3, r0
+ 220 000c 1360     		str	r3, [r2]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 8
+
+
+ 221              		.loc 1 192 3 view .LVU26
+ 222 000e 1368     		ldr	r3, [r2]
+ 223 0010 03F4C063 		and	r3, r3, #1536
+ 224 0014 0193     		str	r3, [sp, #4]
+ 225              		.loc 1 192 3 view .LVU27
+ 226 0016 019B     		ldr	r3, [sp, #4]
+ 227              	.LBE2:
+ 228              		.loc 1 192 3 view .LVU28
+ 193:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 229              		.loc 1 193 1 is_stmt 0 view .LVU29
+ 230 0018 02B0     		add	sp, sp, #8
+ 231              	.LCFI1:
+ 232              		.cfi_def_cfa_offset 0
+ 233              		@ sp needed
+ 234 001a 7047     		bx	lr
+ 235              	.L22:
+ 236              		.align	2
+ 237              	.L21:
+ 238 001c 00700040 		.word	1073770496
+ 239              		.cfi_endproc
+ 240              	.LFE142:
+ 242              		.section	.text.HAL_PWREx_GetVoltageRange,"ax",%progbits
+ 243              		.align	1
+ 244              		.global	HAL_PWREx_GetVoltageRange
+ 245              		.syntax unified
+ 246              		.thumb
+ 247              		.thumb_func
+ 249              	HAL_PWREx_GetVoltageRange:
+ 250              	.LFB143:
+ 194:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 195:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 196:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Return Voltage Scaling Range.
+ 197:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval The configured scale for the regulator voltage(VOS bit field).
+ 198:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *         The returned value can be one of the following:
+ 199:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_REGULATOR_VOLTAGE_HIGH       : Regulator High voltage mode
+ 200:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_REGULATOR_VOLTAGE_MEDIUM     : Regulator Medium voltage mode
+ 201:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_REGULATOR_VOLTAGE_MEDIUM_LOW : Regulator Mddium low voltage mode
+ 202:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_REGULATOR_VOLTAGE_LOW        : Regulator Low voltage mode
+ 203:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */  
+ 204:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** uint32_t HAL_PWREx_GetVoltageRange(void)
+ 205:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 251              		.loc 1 205 1 is_stmt 1 view -0
+ 252              		.cfi_startproc
+ 253              		@ args = 0, pretend = 0, frame = 0
+ 254              		@ frame_needed = 0, uses_anonymous_args = 0
+ 255              		@ link register save eliminated.
+ 206:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   return (PWR->CR1 & PWR_CR1_VOS);
+ 256              		.loc 1 206 3 view .LVU31
+ 257              		.loc 1 206 14 is_stmt 0 view .LVU32
+ 258 0000 024B     		ldr	r3, .L24
+ 259 0002 1868     		ldr	r0, [r3]
+ 207:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 260              		.loc 1 207 1 view .LVU33
+ 261 0004 00F4C060 		and	r0, r0, #1536
+ 262 0008 7047     		bx	lr
+ 263              	.L25:
+ 264 000a 00BF     		.align	2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 9
+
+
+ 265              	.L24:
+ 266 000c 00700040 		.word	1073770496
+ 267              		.cfi_endproc
+ 268              	.LFE143:
+ 270              		.section	.text.HAL_PWREx_ControlSRAM2VoltageScaling,"ax",%progbits
+ 271              		.align	1
+ 272              		.global	HAL_PWREx_ControlSRAM2VoltageScaling
+ 273              		.syntax unified
+ 274              		.thumb
+ 275              		.thumb_func
+ 277              	HAL_PWREx_ControlSRAM2VoltageScaling:
+ 278              	.LVL3:
+ 279              	.LFB144:
+ 208:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 209:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 210:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Configures the backup output voltage.
+ 211:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @param  VoltageScaling specifies the backup voltage.
+ 212:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *          This parameter can be one of the following values:
+ 213:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_SRAM2_VOLTAGE_HIGH       : SRAM2 High voltage mode,
+ 214:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_SRAM2_VOLTAGE_MEDIUM     : SRAM2 Medium voltage mode,
+ 215:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_SRAM2_VOLTAGE_MEDIUM_LOW : SRAM2 Mddium low voltage mode,
+ 216:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_SRAM2_VOLTAGE_LOW        : SRAM2 Low voltage mode,
+ 217:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 218:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 219:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_ControlSRAM2VoltageScaling(uint32_t VoltageScaling)
+ 220:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {  
+ 280              		.loc 1 220 1 is_stmt 1 view -0
+ 281              		.cfi_startproc
+ 282              		@ args = 0, pretend = 0, frame = 8
+ 283              		@ frame_needed = 0, uses_anonymous_args = 0
+ 284              		@ link register save eliminated.
+ 285              		.loc 1 220 1 is_stmt 0 view .LVU35
+ 286 0000 82B0     		sub	sp, sp, #8
+ 287              	.LCFI2:
+ 288              		.cfi_def_cfa_offset 8
+ 221:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   assert_param(IS_PWR_SRAM2VOLTAGE_SCALING_RANGE(VoltageScaling));
+ 289              		.loc 1 221 3 is_stmt 1 view .LVU36
+ 222:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   
+ 223:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Set Range */
+ 224:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   __HAL_PWR_SRAM2VOLTAGESCALING_CONFIG(VoltageScaling);  
+ 290              		.loc 1 224 3 view .LVU37
+ 291              	.LBB3:
+ 292              		.loc 1 224 3 view .LVU38
+ 293 0002 0023     		movs	r3, #0
+ 294 0004 0193     		str	r3, [sp, #4]
+ 295              		.loc 1 224 3 view .LVU39
+ 296 0006 064A     		ldr	r2, .L28
+ 297 0008 1368     		ldr	r3, [r2]
+ 298 000a 23F4C053 		bic	r3, r3, #6144
+ 299 000e 0343     		orrs	r3, r3, r0
+ 300 0010 1360     		str	r3, [r2]
+ 301              		.loc 1 224 3 view .LVU40
+ 302 0012 1368     		ldr	r3, [r2]
+ 303 0014 03F4C053 		and	r3, r3, #6144
+ 304 0018 0193     		str	r3, [sp, #4]
+ 305              		.loc 1 224 3 view .LVU41
+ 306 001a 019B     		ldr	r3, [sp, #4]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 10
+
+
+ 307              	.LBE3:
+ 308              		.loc 1 224 3 view .LVU42
+ 225:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 309              		.loc 1 225 1 is_stmt 0 view .LVU43
+ 310 001c 02B0     		add	sp, sp, #8
+ 311              	.LCFI3:
+ 312              		.cfi_def_cfa_offset 0
+ 313              		@ sp needed
+ 314 001e 7047     		bx	lr
+ 315              	.L29:
+ 316              		.align	2
+ 317              	.L28:
+ 318 0020 00700040 		.word	1073770496
+ 319              		.cfi_endproc
+ 320              	.LFE144:
+ 322              		.section	.text.HAL_PWREx_GetSRAM2VoltageRange,"ax",%progbits
+ 323              		.align	1
+ 324              		.global	HAL_PWREx_GetSRAM2VoltageRange
+ 325              		.syntax unified
+ 326              		.thumb
+ 327              		.thumb_func
+ 329              	HAL_PWREx_GetSRAM2VoltageRange:
+ 330              	.LFB145:
+ 226:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 227:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 228:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Return Backup Voltage Scaling Range.
+ 229:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval The configured scale for the Backup voltage.
+ 230:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *         The returned value can be one of the following:
+ 231:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_SRAM2_VOLTAGE_HIGH       : SRAM2 High voltage mode,
+ 232:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_SRAM2_VOLTAGE_MEDIUM     : SRAM2 Medium voltage mode,
+ 233:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_SRAM2_VOLTAGE_MEDIUM_LOW : SRAM2 Mddium low voltage mode,
+ 234:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg PWR_SRAM2_VOLTAGE_LOW        : SRAM2 Low voltage mode,
+ 235:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */  
+ 236:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** uint32_t HAL_PWREx_GetSRAM2VoltageRange(void)
+ 237:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 331              		.loc 1 237 1 is_stmt 1 view -0
+ 332              		.cfi_startproc
+ 333              		@ args = 0, pretend = 0, frame = 0
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335              		@ link register save eliminated.
+ 238:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   return (PWR->CR1 & PWR_CR1_SRAM_RETV);
+ 336              		.loc 1 238 3 view .LVU45
+ 337              		.loc 1 238 14 is_stmt 0 view .LVU46
+ 338 0000 024B     		ldr	r3, .L31
+ 339 0002 1868     		ldr	r0, [r3]
+ 239:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 340              		.loc 1 239 1 view .LVU47
+ 341 0004 00F4C050 		and	r0, r0, #6144
+ 342 0008 7047     		bx	lr
+ 343              	.L32:
+ 344 000a 00BF     		.align	2
+ 345              	.L31:
+ 346 000c 00700040 		.word	1073770496
+ 347              		.cfi_endproc
+ 348              	.LFE145:
+ 350              		.section	.text.HAL_PWREx_EnableSRAM2ContentRetention,"ax",%progbits
+ 351              		.align	1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 11
+
+
+ 352              		.global	HAL_PWREx_EnableSRAM2ContentRetention
+ 353              		.syntax unified
+ 354              		.thumb
+ 355              		.thumb_func
+ 357              	HAL_PWREx_EnableSRAM2ContentRetention:
+ 358              	.LFB146:
+ 240:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 241:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 242:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Enable SRAM2 content retention in Standby mode.
+ 243:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  When RRS bit is set, SRAM2 is powered by the low-power regulator in
+ 244:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *         Standby mode and its content is kept.
+ 245:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 246:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 247:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_EnableSRAM2ContentRetention(void)
+ 248:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 359              		.loc 1 248 1 is_stmt 1 view -0
+ 360              		.cfi_startproc
+ 361              		@ args = 0, pretend = 0, frame = 0
+ 362              		@ frame_needed = 0, uses_anonymous_args = 0
+ 363              		@ link register save eliminated.
+ 249:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   SET_BIT(PWR->CR3, PWR_CR3_RRS);
+ 364              		.loc 1 249 3 view .LVU49
+ 365 0000 024A     		ldr	r2, .L34
+ 366 0002 9368     		ldr	r3, [r2, #8]
+ 367 0004 43F48073 		orr	r3, r3, #256
+ 368 0008 9360     		str	r3, [r2, #8]
+ 250:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 369              		.loc 1 250 1 is_stmt 0 view .LVU50
+ 370 000a 7047     		bx	lr
+ 371              	.L35:
+ 372              		.align	2
+ 373              	.L34:
+ 374 000c 00700040 		.word	1073770496
+ 375              		.cfi_endproc
+ 376              	.LFE146:
+ 378              		.section	.text.HAL_PWREx_DisableSRAM2ContentRetention,"ax",%progbits
+ 379              		.align	1
+ 380              		.global	HAL_PWREx_DisableSRAM2ContentRetention
+ 381              		.syntax unified
+ 382              		.thumb
+ 383              		.thumb_func
+ 385              	HAL_PWREx_DisableSRAM2ContentRetention:
+ 386              	.LFB147:
+ 251:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 252:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 253:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Disable SRAM2 content retention in Standby mode.
+ 254:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  When RRS bit is reset, SRAM2 is powered off in Standby mode
+ 255:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        and its content is lost.
+ 256:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 257:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 258:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_DisableSRAM2ContentRetention(void)
+ 259:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 387              		.loc 1 259 1 is_stmt 1 view -0
+ 388              		.cfi_startproc
+ 389              		@ args = 0, pretend = 0, frame = 0
+ 390              		@ frame_needed = 0, uses_anonymous_args = 0
+ 391              		@ link register save eliminated.
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 12
+
+
+ 260:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   CLEAR_BIT(PWR->CR3, PWR_CR3_RRS);
+ 392              		.loc 1 260 3 view .LVU52
+ 393 0000 024A     		ldr	r2, .L37
+ 394 0002 9368     		ldr	r3, [r2, #8]
+ 395 0004 23F48073 		bic	r3, r3, #256
+ 396 0008 9360     		str	r3, [r2, #8]
+ 261:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 397              		.loc 1 261 1 is_stmt 0 view .LVU53
+ 398 000a 7047     		bx	lr
+ 399              	.L38:
+ 400              		.align	2
+ 401              	.L37:
+ 402 000c 00700040 		.word	1073770496
+ 403              		.cfi_endproc
+ 404              	.LFE147:
+ 406              		.section	.text.HAL_PWREx_EnableLowPowerRunMode,"ax",%progbits
+ 407              		.align	1
+ 408              		.global	HAL_PWREx_EnableLowPowerRunMode
+ 409              		.syntax unified
+ 410              		.thumb
+ 411              		.thumb_func
+ 413              	HAL_PWREx_EnableLowPowerRunMode:
+ 414              	.LFB148:
+ 262:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 263:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 264:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Enter Low-power Run mode
+ 265:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  In Low-power Run mode, all I/O pins keep the same state as in Run mode.
+ 266:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  the clock frequency must be reduced below 2 MHz.
+ 267:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        The clock frequency must be appropriately reduced before calling 
+ 268:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        the HAL_PWREx_EnableLowPowerRunMode() API.
+ 269:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 270:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 271:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_EnableLowPowerRunMode(void)
+ 272:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 415              		.loc 1 272 1 is_stmt 1 view -0
+ 416              		.cfi_startproc
+ 417              		@ args = 0, pretend = 0, frame = 0
+ 418              		@ frame_needed = 0, uses_anonymous_args = 0
+ 419              		@ link register save eliminated.
+ 273:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Set Regulator parameter */
+ 274:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   SET_BIT(PWR->CR1, PWR_CR1_LPR);
+ 420              		.loc 1 274 3 view .LVU55
+ 421 0000 024A     		ldr	r2, .L40
+ 422 0002 1368     		ldr	r3, [r2]
+ 423 0004 43F48043 		orr	r3, r3, #16384
+ 424 0008 1360     		str	r3, [r2]
+ 275:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 425              		.loc 1 275 1 is_stmt 0 view .LVU56
+ 426 000a 7047     		bx	lr
+ 427              	.L41:
+ 428              		.align	2
+ 429              	.L40:
+ 430 000c 00700040 		.word	1073770496
+ 431              		.cfi_endproc
+ 432              	.LFE148:
+ 434              		.section	.text.HAL_PWREx_DisableLowPowerRunMode,"ax",%progbits
+ 435              		.align	1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 13
+
+
+ 436              		.global	HAL_PWREx_DisableLowPowerRunMode
+ 437              		.syntax unified
+ 438              		.thumb
+ 439              		.thumb_func
+ 441              	HAL_PWREx_DisableLowPowerRunMode:
+ 442              	.LFB149:
+ 276:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 277:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 278:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Exit Low-power Run mode.
+ 279:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  Before HAL_PWREx_DisableLowPowerRunMode() completion, the function checks that
+ 280:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        MR_RDY has been properly set (otherwise, HAL_PWREx_DisableLowPowerRunMode
+ 281:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        returns HAL_TIMEOUT status). The system clock frequency can then be
+ 282:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        increased above 2 MHz.
+ 283:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval HAL Status
+ 284:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 285:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** HAL_StatusTypeDef HAL_PWREx_DisableLowPowerRunMode(void)
+ 286:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 443              		.loc 1 286 1 is_stmt 1 view -0
+ 444              		.cfi_startproc
+ 445              		@ args = 0, pretend = 0, frame = 0
+ 446              		@ frame_needed = 0, uses_anonymous_args = 0
+ 447              		@ link register save eliminated.
+ 287:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   uint32_t wait_loop_index;
+ 448              		.loc 1 287 3 view .LVU58
+ 288:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 289:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Clear LPR bit */
+ 290:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   CLEAR_BIT(PWR->CR1, PWR_CR1_LPR);
+ 449              		.loc 1 290 3 view .LVU59
+ 450 0000 124A     		ldr	r2, .L48
+ 451 0002 1368     		ldr	r3, [r2]
+ 452 0004 23F48043 		bic	r3, r3, #16384
+ 453 0008 1360     		str	r3, [r2]
+ 291:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 292:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Wait until MR_RDY is set */
+ 293:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   wait_loop_index = (PWR_FLAG_SETTING_DELAY_US * (SystemCoreClock / 1000000U));
+ 454              		.loc 1 293 3 view .LVU60
+ 455              		.loc 1 293 67 is_stmt 0 view .LVU61
+ 456 000a 114B     		ldr	r3, .L48+4
+ 457 000c 1B68     		ldr	r3, [r3]
+ 458 000e 02F14672 		add	r2, r2, #51904512
+ 459 0012 02F55B32 		add	r2, r2, #224256
+ 460 0016 02F28322 		addw	r2, r2, #643
+ 461 001a A2FB0323 		umull	r2, r3, r2, r3
+ 462 001e 9B0C     		lsrs	r3, r3, #18
+ 463              		.loc 1 293 19 view .LVU62
+ 464 0020 3222     		movs	r2, #50
+ 465 0022 02FB03F3 		mul	r3, r2, r3
+ 466              	.LVL4:
+ 294:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   while ((HAL_IS_BIT_SET(PWR->SR, PWR_SR_MR_RDY) == 0U) && (wait_loop_index != 0U))
+ 467              		.loc 1 294 3 is_stmt 1 view .LVU63
+ 468              		.loc 1 294 9 is_stmt 0 view .LVU64
+ 469 0026 00E0     		b	.L43
+ 470              	.L45:
+ 295:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   {
+ 296:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     wait_loop_index--;
+ 471              		.loc 1 296 5 is_stmt 1 view .LVU65
+ 472              		.loc 1 296 20 is_stmt 0 view .LVU66
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 14
+
+
+ 473 0028 013B     		subs	r3, r3, #1
+ 474              	.LVL5:
+ 475              	.L43:
+ 294:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   while ((HAL_IS_BIT_SET(PWR->SR, PWR_SR_MR_RDY) == 0U) && (wait_loop_index != 0U))
+ 476              		.loc 1 294 9 is_stmt 1 view .LVU67
+ 294:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   while ((HAL_IS_BIT_SET(PWR->SR, PWR_SR_MR_RDY) == 0U) && (wait_loop_index != 0U))
+ 477              		.loc 1 294 11 is_stmt 0 view .LVU68
+ 478 002a 084A     		ldr	r2, .L48
+ 479 002c 1269     		ldr	r2, [r2, #16]
+ 294:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   while ((HAL_IS_BIT_SET(PWR->SR, PWR_SR_MR_RDY) == 0U) && (wait_loop_index != 0U))
+ 480              		.loc 1 294 9 view .LVU69
+ 481 002e 12F4007F 		tst	r2, #512
+ 482 0032 01D1     		bne	.L44
+ 294:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   while ((HAL_IS_BIT_SET(PWR->SR, PWR_SR_MR_RDY) == 0U) && (wait_loop_index != 0U))
+ 483              		.loc 1 294 57 discriminator 1 view .LVU70
+ 484 0034 002B     		cmp	r3, #0
+ 485 0036 F7D1     		bne	.L45
+ 486              	.L44:
+ 297:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   }
+ 298:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   if (HAL_IS_BIT_SET(PWR->SR, PWR_SR_MR_RDY) == 0U)
+ 487              		.loc 1 298 3 is_stmt 1 view .LVU71
+ 488              		.loc 1 298 7 is_stmt 0 view .LVU72
+ 489 0038 044B     		ldr	r3, .L48
+ 490              	.LVL6:
+ 491              		.loc 1 298 7 view .LVU73
+ 492 003a 1B69     		ldr	r3, [r3, #16]
+ 493              		.loc 1 298 6 view .LVU74
+ 494 003c 13F4007F 		tst	r3, #512
+ 495 0040 01D0     		beq	.L47
+ 299:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   {
+ 300:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     return HAL_TIMEOUT;
+ 301:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   }
+ 302:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 303:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   return HAL_OK;
+ 496              		.loc 1 303 10 view .LVU75
+ 497 0042 0020     		movs	r0, #0
+ 498 0044 7047     		bx	lr
+ 499              	.L47:
+ 300:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   }
+ 500              		.loc 1 300 12 view .LVU76
+ 501 0046 0320     		movs	r0, #3
+ 304:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 502              		.loc 1 304 1 view .LVU77
+ 503 0048 7047     		bx	lr
+ 504              	.L49:
+ 505 004a 00BF     		.align	2
+ 506              	.L48:
+ 507 004c 00700040 		.word	1073770496
+ 508 0050 00000000 		.word	SystemCoreClock
+ 509              		.cfi_endproc
+ 510              	.LFE149:
+ 512              		.section	.text.HAL_PWREx_EnterSTOP0Mode,"ax",%progbits
+ 513              		.align	1
+ 514              		.global	HAL_PWREx_EnterSTOP0Mode
+ 515              		.syntax unified
+ 516              		.thumb
+ 517              		.thumb_func
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 15
+
+
+ 519              	HAL_PWREx_EnterSTOP0Mode:
+ 520              	.LVL7:
+ 521              	.LFB150:
+ 305:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 306:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 307:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Enter Stop 0 mode.
+ 308:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  In Stop 0 mode, main and low voltage regulators are ON.
+ 309:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  In Stop 0 mode, all I/O pins keep the same state as in Run mode.
+ 310:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  All clocks in the VCORE domain are stopped; the PLL, the HSI
+ 311:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        and the HSE oscillators are disabled. Some peripherals with the wakeup capability
+ 312:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        (I2Cx, LPUART) can switch on the HSI to receive a frame, and switch off the HSI
+ 313:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        after receiving the frame if it is not a wakeup frame. In this case, the HSI clock is pr
+ 314:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        only to the peripheral requesting it.
+ 315:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        SRAM1, SRAM2 and register contents are preserved.
+ 316:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        The BOR is available.
+ 317:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  When exiting Stop 0 mode by issuing an interrupt or a wakeup event,
+ 318:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *         the HSI RC oscillator is selected as system clock.
+ 319:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  By keeping the internal regulator ON during Stop 0 mode, the consumption
+ 320:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *         is higher although the startup time is reduced.
+ 321:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @param STOPEntry  specifies if Stop mode in entered with WFI or WFE instruction.
+ 322:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *          This parameter can be one of the following values:
+ 323:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg @ref PWR_STOPENTRY_WFI  Enter Stop mode with WFI instruction
+ 324:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg @ref PWR_STOPENTRY_WFE  Enter Stop mode with WFE instruction
+ 325:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 326:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 327:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_EnterSTOP0Mode(uint8_t STOPEntry)
+ 328:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 522              		.loc 1 328 1 is_stmt 1 view -0
+ 523              		.cfi_startproc
+ 524              		@ args = 0, pretend = 0, frame = 0
+ 525              		@ frame_needed = 0, uses_anonymous_args = 0
+ 526              		@ link register save eliminated.
+ 329:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Check the parameters */
+ 330:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   assert_param(IS_PWR_STOP_ENTRY(STOPEntry));
+ 527              		.loc 1 330 3 view .LVU79
+ 331:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 332:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Stop 0 mode with Main Regulator */
+ 333:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   MODIFY_REG(PWR->CR1, PWR_CR1_LPMS, PWR_CR1_LPMS_STOP0);
+ 528              		.loc 1 333 3 view .LVU80
+ 529 0000 0B4A     		ldr	r2, .L54
+ 530 0002 1368     		ldr	r3, [r2]
+ 531 0004 23F00303 		bic	r3, r3, #3
+ 532 0008 1360     		str	r3, [r2]
+ 334:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 335:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Set SLEEPDEEP bit of Cortex System Control Register */
+ 336:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   SET_BIT(SCB->SCR, ((uint32_t)SCB_SCR_SLEEPDEEP_Msk));
+ 533              		.loc 1 336 3 view .LVU81
+ 534 000a 0A4A     		ldr	r2, .L54+4
+ 535 000c 1369     		ldr	r3, [r2, #16]
+ 536 000e 43F00403 		orr	r3, r3, #4
+ 537 0012 1361     		str	r3, [r2, #16]
+ 337:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 338:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Select Stop mode entry --------------------------------------------------*/
+ 339:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   if(STOPEntry == PWR_STOPENTRY_WFI)
+ 538              		.loc 1 339 3 view .LVU82
+ 539              		.loc 1 339 5 is_stmt 0 view .LVU83
+ 540 0014 0128     		cmp	r0, #1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 16
+
+
+ 541 0016 08D0     		beq	.L53
+ 340:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   {
+ 341:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     /* Request Wait For Interrupt */
+ 342:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     __WFI();
+ 343:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   }
+ 344:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   else
+ 345:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   {
+ 346:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     /* Request Wait For Event */
+ 347:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     __SEV();
+ 542              		.loc 1 347 5 is_stmt 1 view .LVU84
+ 543              		.syntax unified
+ 544              	@ 347 "../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c" 1
+ 545 0018 40BF     		sev
+ 546              	@ 0 "" 2
+ 348:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     __WFE();
+ 547              		.loc 1 348 5 view .LVU85
+ 548              	@ 348 "../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c" 1
+ 549 001a 20BF     		wfe
+ 550              	@ 0 "" 2
+ 349:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     __WFE();
+ 551              		.loc 1 349 5 view .LVU86
+ 552              	@ 349 "../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c" 1
+ 553 001c 20BF     		wfe
+ 554              	@ 0 "" 2
+ 555              		.thumb
+ 556              		.syntax unified
+ 557              	.L52:
+ 350:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   }
+ 351:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 352:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Reset SLEEPDEEP bit of Cortex System Control Register */
+ 353:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   CLEAR_BIT(SCB->SCR, ((uint32_t)SCB_SCR_SLEEPDEEP_Msk));
+ 558              		.loc 1 353 3 view .LVU87
+ 559 001e 054A     		ldr	r2, .L54+4
+ 560 0020 1369     		ldr	r3, [r2, #16]
+ 561 0022 23F00403 		bic	r3, r3, #4
+ 562 0026 1361     		str	r3, [r2, #16]
+ 354:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 563              		.loc 1 354 1 is_stmt 0 view .LVU88
+ 564 0028 7047     		bx	lr
+ 565              	.L53:
+ 342:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   }
+ 566              		.loc 1 342 5 is_stmt 1 view .LVU89
+ 567              		.syntax unified
+ 568              	@ 342 "../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c" 1
+ 569 002a 30BF     		wfi
+ 570              	@ 0 "" 2
+ 571              		.thumb
+ 572              		.syntax unified
+ 573 002c F7E7     		b	.L52
+ 574              	.L55:
+ 575 002e 00BF     		.align	2
+ 576              	.L54:
+ 577 0030 00700040 		.word	1073770496
+ 578 0034 00ED00E0 		.word	-536810240
+ 579              		.cfi_endproc
+ 580              	.LFE150:
+ 582              		.section	.text.HAL_PWREx_EnterSTOP1Mode,"ax",%progbits
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 17
+
+
+ 583              		.align	1
+ 584              		.global	HAL_PWREx_EnterSTOP1Mode
+ 585              		.syntax unified
+ 586              		.thumb
+ 587              		.thumb_func
+ 589              	HAL_PWREx_EnterSTOP1Mode:
+ 590              	.LVL8:
+ 591              	.LFB151:
+ 355:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 356:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** /**
+ 357:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @brief Enter Stop 1 mode.
+ 358:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  In Stop 1 mode, only low power voltage regulator is ON.
+ 359:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  In Stop 1 mode, all I/O pins keep the same state as in Run mode.
+ 360:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  All clocks in the VCORE domain are stopped; the PLL, the HSI
+ 361:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        and the HSE oscillators are disabled. Some peripherals with the wakeup capability
+ 362:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        (I2Cx, LPUART) can switch on the HSI to receive a frame, and switch off the HSI
+ 363:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        after receiving the frame if it is not a wakeup frame. In this case, the HSI clock is pr
+ 364:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        only to the peripheral requesting it.
+ 365:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        SRAM1, SRAM2 and register contents are preserved.
+ 366:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *        The BOR is available.
+ 367:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  When exiting Stop 1 mode by issuing an interrupt or a wakeup event,
+ 368:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *         the HSI RC oscillator is selected as system clock.
+ 369:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @note  Due to low power mode, an additional startup delay is incurred when waking up from Stop 
+ 370:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @param STOPEntry  specifies if Stop mode in entered with WFI or WFE instruction.
+ 371:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *          This parameter can be one of the following values:
+ 372:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg @ref PWR_STOPENTRY_WFI  Enter Stop mode with WFI instruction
+ 373:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   *            @arg @ref PWR_STOPENTRY_WFE  Enter Stop mode with WFE instruction
+ 374:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   * @retval None
+ 375:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   */
+ 376:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** void HAL_PWREx_EnterSTOP1Mode(uint8_t STOPEntry)
+ 377:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** {
+ 592              		.loc 1 377 1 view -0
+ 593              		.cfi_startproc
+ 594              		@ args = 0, pretend = 0, frame = 0
+ 595              		@ frame_needed = 0, uses_anonymous_args = 0
+ 596              		@ link register save eliminated.
+ 378:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Check the parameters */
+ 379:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   assert_param(IS_PWR_STOP_ENTRY(STOPEntry));
+ 597              		.loc 1 379 3 view .LVU91
+ 380:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 381:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Stop 1 mode with Low-Power Regulator */
+ 382:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   MODIFY_REG(PWR->CR1, PWR_CR1_LPMS, PWR_CR1_LPMS_STOP1);
+ 598              		.loc 1 382 3 view .LVU92
+ 599 0000 0C4A     		ldr	r2, .L60
+ 600 0002 1368     		ldr	r3, [r2]
+ 601 0004 23F00303 		bic	r3, r3, #3
+ 602 0008 43F00103 		orr	r3, r3, #1
+ 603 000c 1360     		str	r3, [r2]
+ 383:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 384:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Set SLEEPDEEP bit of Cortex System Control Register */
+ 385:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   SET_BIT(SCB->SCR, ((uint32_t)SCB_SCR_SLEEPDEEP_Msk));
+ 604              		.loc 1 385 3 view .LVU93
+ 605 000e 0A4A     		ldr	r2, .L60+4
+ 606 0010 1369     		ldr	r3, [r2, #16]
+ 607 0012 43F00403 		orr	r3, r3, #4
+ 608 0016 1361     		str	r3, [r2, #16]
+ 386:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 18
+
+
+ 387:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Select Stop mode entry --------------------------------------------------*/
+ 388:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   if(STOPEntry == PWR_STOPENTRY_WFI)
+ 609              		.loc 1 388 3 view .LVU94
+ 610              		.loc 1 388 5 is_stmt 0 view .LVU95
+ 611 0018 0128     		cmp	r0, #1
+ 612 001a 08D0     		beq	.L59
+ 389:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   {
+ 390:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     /* Request Wait For Interrupt */
+ 391:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     __WFI();
+ 392:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   }
+ 393:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   else
+ 394:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   {
+ 395:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     /* Request Wait For Event */
+ 396:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     __SEV();
+ 613              		.loc 1 396 5 is_stmt 1 view .LVU96
+ 614              		.syntax unified
+ 615              	@ 396 "../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c" 1
+ 616 001c 40BF     		sev
+ 617              	@ 0 "" 2
+ 397:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     __WFE();
+ 618              		.loc 1 397 5 view .LVU97
+ 619              	@ 397 "../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c" 1
+ 620 001e 20BF     		wfe
+ 621              	@ 0 "" 2
+ 398:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****     __WFE();
+ 622              		.loc 1 398 5 view .LVU98
+ 623              	@ 398 "../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c" 1
+ 624 0020 20BF     		wfe
+ 625              	@ 0 "" 2
+ 626              		.thumb
+ 627              		.syntax unified
+ 628              	.L58:
+ 399:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   }
+ 400:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** 
+ 401:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   /* Reset SLEEPDEEP bit of Cortex System Control Register */
+ 402:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   CLEAR_BIT(SCB->SCR, ((uint32_t)SCB_SCR_SLEEPDEEP_Msk));
+ 629              		.loc 1 402 3 view .LVU99
+ 630 0022 054A     		ldr	r2, .L60+4
+ 631 0024 1369     		ldr	r3, [r2, #16]
+ 632 0026 23F00403 		bic	r3, r3, #4
+ 633 002a 1361     		str	r3, [r2, #16]
+ 403:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c **** }
+ 634              		.loc 1 403 1 is_stmt 0 view .LVU100
+ 635 002c 7047     		bx	lr
+ 636              	.L59:
+ 391:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c ****   }
+ 637              		.loc 1 391 5 is_stmt 1 view .LVU101
+ 638              		.syntax unified
+ 639              	@ 391 "../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c" 1
+ 640 002e 30BF     		wfi
+ 641              	@ 0 "" 2
+ 642              		.thumb
+ 643              		.syntax unified
+ 644 0030 F7E7     		b	.L58
+ 645              	.L61:
+ 646 0032 00BF     		.align	2
+ 647              	.L60:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 19
+
+
+ 648 0034 00700040 		.word	1073770496
+ 649 0038 00ED00E0 		.word	-536810240
+ 650              		.cfi_endproc
+ 651              	.LFE151:
+ 653              		.text
+ 654              	.Letext0:
+ 655              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 656              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 657              		.file 4 "h:\\drivers\\cmsis\\include\\core_cm4.h"
+ 658              		.file 5 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 659              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 660              		.file 7 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\system_py32e4xx.h"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s 			page 20
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 py32e407_hal_pwr_ex.c
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:20     .text.HAL_PWREx_SetWakeupFlashDelay:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:26     .text.HAL_PWREx_SetWakeupFlashDelay:00000000 HAL_PWREx_SetWakeupFlashDelay
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:46     .text.HAL_PWREx_SetWakeupFlashDelay:00000010 $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:51     .text.HAL_PWREx_GetWakeupFlashDelay:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:57     .text.HAL_PWREx_GetWakeupFlashDelay:00000000 HAL_PWREx_GetWakeupFlashDelay
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:74     .text.HAL_PWREx_GetWakeupFlashDelay:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:79     .text.HAL_PWREx_SetWakeupMrReadyDelay:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:85     .text.HAL_PWREx_SetWakeupMrReadyDelay:00000000 HAL_PWREx_SetWakeupMrReadyDelay
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:104    .text.HAL_PWREx_SetWakeupMrReadyDelay:00000010 $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:109    .text.HAL_PWREx_GetWakeupMrReadyDelay:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:115    .text.HAL_PWREx_GetWakeupMrReadyDelay:00000000 HAL_PWREx_GetWakeupMrReadyDelay
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:132    .text.HAL_PWREx_GetWakeupMrReadyDelay:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:137    .text.HAL_PWREx_DisableHSIWakeupWait:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:143    .text.HAL_PWREx_DisableHSIWakeupWait:00000000 HAL_PWREx_DisableHSIWakeupWait
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:160    .text.HAL_PWREx_DisableHSIWakeupWait:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:165    .text.HAL_PWREx_EnableHSIWakeupWait:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:171    .text.HAL_PWREx_EnableHSIWakeupWait:00000000 HAL_PWREx_EnableHSIWakeupWait
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:188    .text.HAL_PWREx_EnableHSIWakeupWait:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:193    .text.HAL_PWREx_ControlVoltageScaling:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:199    .text.HAL_PWREx_ControlVoltageScaling:00000000 HAL_PWREx_ControlVoltageScaling
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:238    .text.HAL_PWREx_ControlVoltageScaling:0000001c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:243    .text.HAL_PWREx_GetVoltageRange:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:249    .text.HAL_PWREx_GetVoltageRange:00000000 HAL_PWREx_GetVoltageRange
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:266    .text.HAL_PWREx_GetVoltageRange:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:271    .text.HAL_PWREx_ControlSRAM2VoltageScaling:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:277    .text.HAL_PWREx_ControlSRAM2VoltageScaling:00000000 HAL_PWREx_ControlSRAM2VoltageScaling
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:318    .text.HAL_PWREx_ControlSRAM2VoltageScaling:00000020 $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:323    .text.HAL_PWREx_GetSRAM2VoltageRange:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:329    .text.HAL_PWREx_GetSRAM2VoltageRange:00000000 HAL_PWREx_GetSRAM2VoltageRange
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:346    .text.HAL_PWREx_GetSRAM2VoltageRange:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:351    .text.HAL_PWREx_EnableSRAM2ContentRetention:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:357    .text.HAL_PWREx_EnableSRAM2ContentRetention:00000000 HAL_PWREx_EnableSRAM2ContentRetention
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:374    .text.HAL_PWREx_EnableSRAM2ContentRetention:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:379    .text.HAL_PWREx_DisableSRAM2ContentRetention:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:385    .text.HAL_PWREx_DisableSRAM2ContentRetention:00000000 HAL_PWREx_DisableSRAM2ContentRetention
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:402    .text.HAL_PWREx_DisableSRAM2ContentRetention:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:407    .text.HAL_PWREx_EnableLowPowerRunMode:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:413    .text.HAL_PWREx_EnableLowPowerRunMode:00000000 HAL_PWREx_EnableLowPowerRunMode
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:430    .text.HAL_PWREx_EnableLowPowerRunMode:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:435    .text.HAL_PWREx_DisableLowPowerRunMode:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:441    .text.HAL_PWREx_DisableLowPowerRunMode:00000000 HAL_PWREx_DisableLowPowerRunMode
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:507    .text.HAL_PWREx_DisableLowPowerRunMode:0000004c $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:513    .text.HAL_PWREx_EnterSTOP0Mode:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:519    .text.HAL_PWREx_EnterSTOP0Mode:00000000 HAL_PWREx_EnterSTOP0Mode
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:577    .text.HAL_PWREx_EnterSTOP0Mode:00000030 $d
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:583    .text.HAL_PWREx_EnterSTOP1Mode:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:589    .text.HAL_PWREx_EnterSTOP1Mode:00000000 HAL_PWREx_EnterSTOP1Mode
+C:\Users\n11ak\AppData\Local\Temp\ccMMCYyw.s:648    .text.HAL_PWREx_EnterSTOP1Mode:00000034 $d
+
+UNDEFINED SYMBOLS
+SystemCoreClock

@@ -1,0 +1,239 @@
+[2026-10-03 01:55:49]	[info] incremental build: 15 source files changed
+These source files will be recompiled
+---
+'h:\Drivers\BSP\PY32E407xx_Start_Kit\py32e407xx_Start_Kit.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_cortex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_dma.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_gpio.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_uart.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\py32e407_hal_msp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\py32e407_it.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\system_py32e407.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\startup_py32e407xx.s': object (.o) file not exist
+
+[2026-10-03 01:55:50]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Project/.obj/__/Src/main.o: in function `main':
+h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE/./../Src/main.c:67: undefined reference to `LCD096_Init'
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE/./../Src/main.c:68: undefined reference to `LCD096_FillScreen'
+Memory region         Used Size  Region Size  %age Used
+             RAM:        1584 B       144 KB      1.07%
+           FLASH:        3904 B       512 KB      0.74%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2026-10-03 01:56:39]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Project/.obj/__/Src/main.o: in function `main':
+h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE/./../Src/main.c:67: undefined reference to `LCD096_Init'
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE/./../Src/main.c:68: undefined reference to `LCD096_FillScreen'
+Memory region         Used Size  Region Size  %age Used
+             RAM:        1584 B       144 KB      1.07%
+           FLASH:        3904 B       512 KB      0.74%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2026-10-03 01:57:31]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': object (.o) file not exist
+
+[2026-10-03 01:57:32]	[done]
+	build successfully !
+
+[2026-10-03 01:58:20]	[done]
+	build successfully !
+
+[2026-10-03 02:25:40]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+
+[2026-10-03 02:25:41]	[done]
+	build successfully !
+
+[2026-10-03 02:27:05]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+
+[2026-10-03 02:27:06]	[done]
+	build successfully !
+
+[2026-10-03 02:28:15]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\..\Inc\lcd096.h' has been changed.
+
+[2026-10-03 02:28:16]	[done]
+	build successfully !
+
+[2026-10-03 02:29:22]	[done]
+	build successfully !
+
+[2026-10-03 02:33:54]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 02:33:55]	[done]
+	build successfully !
+
+[2026-10-03 02:34:59]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 02:35:00]	[done]
+	build successfully !
+
+[2026-10-03 02:35:33]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 02:35:34]	[done]
+	build successfully !
+
+[2026-10-03 03:15:06]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 03:15:07]	[done]
+	build successfully !
+
+[2026-10-03 03:17:58]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 03:17:59]	[done]
+	build successfully !
+
+[2026-10-03 11:14:27]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 11:14:29]	[done]
+	build successfully !
+
+[2026-10-03 11:24:20]	[done]
+	build successfully !
+
+[2026-10-03 11:44:38]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\..\Inc\lcd096.h' has been changed.
+
+[2026-10-03 11:44:39]	[done]
+	build successfully !
+
+[2026-10-03 11:47:52]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 11:47:53]	[done]
+	build successfully !
+
+[2026-10-03 11:52:35]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 11:52:35]	[done]
+	build successfully !
+
+[2026-10-03 11:53:25]	[done]
+	build successfully !
+
+[2026-10-03 12:01:55]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 12:01:56]	[done]
+	build successfully !
+
+[2026-10-03 12:04:36]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\..\Inc\lcd096.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\..\Inc\lcd096.h' has been changed.
+
+[2026-10-03 12:04:36]	compilation failed at : "h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c", exit code: 1
+command: 
+  "H:\Program Files (x86)\PuyaSDE\tool\bin\arm-none-eabi-gcc.exe" -c -xc -std=c11 -I../../../../../Drivers/BSP/PY32E407xx_Start_Kit -I../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include -I../../../../../Drivers/CMSIS/Include -I../../../../../Drivers/PY32E407_HAL_Driver/Inc -I../Inc -D"USE_HAL_DRIVER" -D"PY32E407xE" -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Og -Wall -g -ffunction-sections -fdata-sections -funsigned-char --specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16 -o ./Project/.obj/__/Src/lcd096.o -MMD ./../Src/lcd096.c
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../Src/lcd096.c:26:
+../Inc/lcd096.h:91:31: error: 'GPIO' undeclared here (not in a function); did you mean 'GPIOD'?
+   91 | #define LCD096_R2_SDA_PORT    GPIO
+      |                               ^~~~
+./../Src/lcd096.c:53:3: note: in expansion of macro 'LCD096_R2_SDA_PORT'
+   53 |   LCD096_R2_SDA_PORT, LCD096_R2_SDA_PIN,
+      |   ^~~~~~~~~~~~~~~~~~
+
+[2026-10-03 12:04:53]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\..\Inc\lcd096.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\..\Inc\lcd096.h' has been changed.
+
+[2026-10-03 12:04:54]	[done]
+	build successfully !
+
+[2026-10-03 12:30:44]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\..\Inc\lcd096.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\..\Inc\lcd096.h' has been changed.
+
+[2026-10-03 12:30:45]	[done]
+	build successfully !
+
+[2026-10-03 12:31:13]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\lcd096.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\EIDE\..\Inc\lcd096.h' has been changed.
+
+[2026-10-03 12:31:14]	[done]
+	build successfully !
+
+[2026-10-03 12:32:26]	[done]
+	build successfully !
+
+[2026-10-03 12:40:44]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 12:40:45]	[done]
+	build successfully !
+
+[2026-10-03 12:41:37]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd096\Src\main.c': source file has been changed.
+
+[2026-10-03 12:41:37]	[done]
+	build successfully !
+

@@ -1,0 +1,1334 @@
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"py32e407xx_Start_Kit.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.BSP_GetVersion,"ax",%progbits
+  20              		.align	1
+  21              		.global	BSP_GetVersion
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	BSP_GetVersion:
+  27              	.LFB136:
+  28              		.file 1 "../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c"
+   1:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+   2:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   ******************************************************************************
+   3:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @file    py32e407xx_Start_Kit.c
+   4:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @author  MCU Application Team
+   5:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief   This file provides set of firmware functions to manage Leds, 
+   6:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *          push-button available on Start Kit.
+   7:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   ******************************************************************************
+   8:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @attention
+   9:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *
+  10:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  11:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * All rights reserved.</center></h2>
+  12:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *
+  13:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * This software component is licensed by Puya under BSD 3-Clause license,
+  14:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * the "License"; You may not use this file except in compliance with the
+  15:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * License. You may obtain a copy of the License at:
+  16:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  17:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *
+  18:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   ******************************************************************************
+  19:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @attention
+  20:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *
+  21:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  22:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * All rights reserved.</center></h2>
+  23:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *
+  24:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  25:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * the "License"; You may not use this file except in compliance with the
+  26:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * License. You may obtain a copy of the License at:
+  27:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  28:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *
+  29:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   ******************************************************************************
+  30:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****  */
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 2
+
+
+  31:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  32:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /* Includes ------------------------------------------------------------------*/
+  33:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #include "py32e407xx_Start_Kit.h"
+  34:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  35:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+  36:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief PY32E407xx STK BSP Driver version number
+  37:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+  38:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #define __PY32E407xx_STK_BSP_VERSION_MAIN   (0x01U) /*!< [31:24] main version */
+  39:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #define __PY32E407xx_STK_BSP_VERSION_SUB1   (0x00U) /*!< [23:16] sub1 version */
+  40:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #define __PY32E407xx_STK_BSP_VERSION_SUB2   (0x00U) /*!< [15:8]  sub2 version */
+  41:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #define __PY32E407xx_STK_BSP_VERSION_RC     (0x00U) /*!< [7:0]  release candidate */
+  42:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #define __PY32E407xx_STK_BSP_VERSION        ((__PY32E407xx_STK_BSP_VERSION_MAIN << 24) \
+  43:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****                                             |(__PY32E407xx_STK_BSP_VERSION_SUB1 << 16) \
+  44:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****                                             |(__PY32E407xx_STK_BSP_VERSION_SUB2 << 8 ) \
+  45:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****                                             |(__PY32E407xx_STK_BSP_VERSION_RC))
+  46:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  47:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  48:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #ifdef HAL_UART_MODULE_ENABLED
+  49:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** UART_HandleTypeDef DebugUartHandle;
+  50:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #endif
+  51:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  52:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** GPIO_TypeDef* LED_PORT[LEDn] = {LED2_GPIO_PORT};
+  53:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** const uint16_t LED_PIN[LEDn] = {LED2_PIN};
+  54:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  55:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** GPIO_TypeDef* BUTTON_PORT[BUTTONn] = {USER_BUTTON_GPIO_PORT };
+  56:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** const uint16_t BUTTON_PIN[BUTTONn] = {USER_BUTTON_PIN };
+  57:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** const uint8_t BUTTON_IRQn[BUTTONn] = {USER_BUTTON_EXTI_IRQn };
+  58:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  59:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /** @addtogroup PY32E407xx_STK_Exported_Functions
+  60:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @{
+  61:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+  62:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  63:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+  64:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  This method returns the P32E407 STK BSP Driver revision.
+  65:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval version : 0xXYZR (8bits for each decimal, R for RC)
+  66:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+  67:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** uint32_t BSP_GetVersion(void)
+  68:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+  29              		.loc 1 68 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  69:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   return __PY32E407xx_STK_BSP_VERSION;
+  34              		.loc 1 69 3 view .LVU1
+  70:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+  35              		.loc 1 70 1 is_stmt 0 view .LVU2
+  36 0000 4FF08070 		mov	r0, #16777216
+  37 0004 7047     		bx	lr
+  38              		.cfi_endproc
+  39              	.LFE136:
+  41              		.section	.text.BSP_LED_Init,"ax",%progbits
+  42              		.align	1
+  43              		.global	BSP_LED_Init
+  44              		.syntax unified
+  45              		.thumb
+  46              		.thumb_func
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 3
+
+
+  48              	BSP_LED_Init:
+  49              	.LVL0:
+  50              	.LFB137:
+  71:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  72:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /** @addtogroup LED_Functions
+  73:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @{
+  74:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+  75:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  76:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+  77:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  Configures LED GPIO.
+  78:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  Led Specifies the Led to be configured.
+  79:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *         This parameter can be one of following parameters:
+  80:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *         @arg  LED2
+  81:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval None
+  82:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+  83:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** void BSP_LED_Init(Led_TypeDef Led)
+  84:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+  51              		.loc 1 84 1 is_stmt 1 view -0
+  52              		.cfi_startproc
+  53              		@ args = 0, pretend = 0, frame = 24
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55              		.loc 1 84 1 is_stmt 0 view .LVU4
+  56 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  57              	.LCFI0:
+  58              		.cfi_def_cfa_offset 20
+  59              		.cfi_offset 4, -20
+  60              		.cfi_offset 5, -16
+  61              		.cfi_offset 6, -12
+  62              		.cfi_offset 7, -8
+  63              		.cfi_offset 14, -4
+  64 0002 87B0     		sub	sp, sp, #28
+  65              	.LCFI1:
+  66              		.cfi_def_cfa_offset 48
+  67 0004 0446     		mov	r4, r0
+  85:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitTypeDef  GPIO_InitStruct = {0};
+  68              		.loc 1 85 3 is_stmt 1 view .LVU5
+  69              		.loc 1 85 21 is_stmt 0 view .LVU6
+  70 0006 0023     		movs	r3, #0
+  71 0008 0193     		str	r3, [sp, #4]
+  72 000a 0293     		str	r3, [sp, #8]
+  73 000c 0393     		str	r3, [sp, #12]
+  74 000e 0493     		str	r3, [sp, #16]
+  75 0010 0593     		str	r3, [sp, #20]
+  86:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  87:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /* Enable the GPIO_LED Clock */
+  88:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   LEDx_GPIO_CLK_ENABLE(Led);
+  76              		.loc 1 88 3 is_stmt 1 view .LVU7
+  77              		.loc 1 88 3 view .LVU8
+  78              	.LBB2:
+  79              		.loc 1 88 3 view .LVU9
+  80              		.loc 1 88 3 view .LVU10
+  81 0012 03F18043 		add	r3, r3, #1073741824
+  82 0016 03F50433 		add	r3, r3, #135168
+  83 001a DA6C     		ldr	r2, [r3, #76]
+  84 001c 42F00802 		orr	r2, r2, #8
+  85 0020 DA64     		str	r2, [r3, #76]
+  86              		.loc 1 88 3 view .LVU11
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 4
+
+
+  87 0022 DB6C     		ldr	r3, [r3, #76]
+  88 0024 03F00803 		and	r3, r3, #8
+  89 0028 0093     		str	r3, [sp]
+  90              		.loc 1 88 3 view .LVU12
+  91 002a 009B     		ldr	r3, [sp]
+  92              	.LBE2:
+  93              		.loc 1 88 3 view .LVU13
+  94              		.loc 1 88 3 view .LVU14
+  89:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  90:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /* Configure the GPIO_LED pin */
+  91:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Pin = LED_PIN[Led];
+  95              		.loc 1 91 3 view .LVU15
+  96              		.loc 1 91 23 is_stmt 0 view .LVU16
+  97 002c 2026     		movs	r6, #32
+  98 002e 0196     		str	r6, [sp, #4]
+  92:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  99              		.loc 1 92 3 is_stmt 1 view .LVU17
+ 100              		.loc 1 92 24 is_stmt 0 view .LVU18
+ 101 0030 0127     		movs	r7, #1
+ 102 0032 0297     		str	r7, [sp, #8]
+  93:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 103              		.loc 1 93 3 is_stmt 1 view .LVU19
+  94:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 104              		.loc 1 94 3 view .LVU20
+ 105              		.loc 1 94 25 is_stmt 0 view .LVU21
+ 106 0034 0223     		movs	r3, #2
+ 107 0036 0493     		str	r3, [sp, #16]
+  95:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+  96:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_Init(LED_PORT[Led], &GPIO_InitStruct);
+ 108              		.loc 1 96 3 is_stmt 1 view .LVU22
+ 109 0038 064D     		ldr	r5, .L4
+ 110 003a 01A9     		add	r1, sp, #4
+ 111 003c 55F82000 		ldr	r0, [r5, r0, lsl #2]
+ 112              	.LVL1:
+ 113              		.loc 1 96 3 is_stmt 0 view .LVU23
+ 114 0040 FFF7FEFF 		bl	HAL_GPIO_Init
+ 115              	.LVL2:
+  97:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_WritePin(LED_PORT[Led], LED_PIN[Led], GPIO_PIN_SET);
+ 116              		.loc 1 97 3 is_stmt 1 view .LVU24
+ 117 0044 3A46     		mov	r2, r7
+ 118 0046 3146     		mov	r1, r6
+ 119 0048 55F82400 		ldr	r0, [r5, r4, lsl #2]
+ 120 004c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 121              	.LVL3:
+  98:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 122              		.loc 1 98 1 is_stmt 0 view .LVU25
+ 123 0050 07B0     		add	sp, sp, #28
+ 124              	.LCFI2:
+ 125              		.cfi_def_cfa_offset 20
+ 126              		@ sp needed
+ 127 0052 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 128              	.L5:
+ 129              		.align	2
+ 130              	.L4:
+ 131 0054 00000000 		.word	.LANCHOR0
+ 132              		.cfi_endproc
+ 133              	.LFE137:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 5
+
+
+ 135              		.section	.text.BSP_LED_DeInit,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	BSP_LED_DeInit
+ 138              		.syntax unified
+ 139              		.thumb
+ 140              		.thumb_func
+ 142              	BSP_LED_DeInit:
+ 143              	.LVL4:
+ 144              	.LFB138:
+  99:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 100:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 101:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  DeInitialize LED GPIO.
+ 102:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  Led Specifies the Led to be deconfigured.
+ 103:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *         This parameter can be one of the following values:
+ 104:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *         @arg  LED2
+ 105:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @note BSP_LED_DeInit() does not disable the GPIO clock
+ 106:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval None
+ 107:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 108:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** void BSP_LED_DeInit(Led_TypeDef Led)
+ 109:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 145              		.loc 1 109 1 is_stmt 1 view -0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 24
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149              		.loc 1 109 1 is_stmt 0 view .LVU27
+ 150 0000 30B5     		push	{r4, r5, lr}
+ 151              	.LCFI3:
+ 152              		.cfi_def_cfa_offset 12
+ 153              		.cfi_offset 4, -12
+ 154              		.cfi_offset 5, -8
+ 155              		.cfi_offset 14, -4
+ 156 0002 87B0     		sub	sp, sp, #28
+ 157              	.LCFI4:
+ 158              		.cfi_def_cfa_offset 40
+ 159 0004 0446     		mov	r4, r0
+ 110:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitTypeDef  GPIO_InitStruct = {0};
+ 160              		.loc 1 110 3 is_stmt 1 view .LVU28
+ 161              		.loc 1 110 21 is_stmt 0 view .LVU29
+ 162 0006 0022     		movs	r2, #0
+ 163 0008 0192     		str	r2, [sp, #4]
+ 164 000a 0292     		str	r2, [sp, #8]
+ 165 000c 0392     		str	r2, [sp, #12]
+ 166 000e 0492     		str	r2, [sp, #16]
+ 167 0010 0592     		str	r2, [sp, #20]
+ 111:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 112:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /* Turn off LED */
+ 113:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_WritePin(LED_PORT[Led], LED_PIN[Led], GPIO_PIN_RESET);
+ 168              		.loc 1 113 3 is_stmt 1 view .LVU30
+ 169 0012 074D     		ldr	r5, .L8
+ 170 0014 2021     		movs	r1, #32
+ 171 0016 55F82000 		ldr	r0, [r5, r0, lsl #2]
+ 172              	.LVL5:
+ 173              		.loc 1 113 3 is_stmt 0 view .LVU31
+ 174 001a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 175              	.LVL6:
+ 114:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /* DeInit the GPIO_LED pin */
+ 115:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Pin = LED_PIN[Led];
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 6
+
+
+ 176              		.loc 1 115 3 is_stmt 1 view .LVU32
+ 177              		.loc 1 115 23 is_stmt 0 view .LVU33
+ 178 001e 2021     		movs	r1, #32
+ 179 0020 0191     		str	r1, [sp, #4]
+ 116:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_DeInit(LED_PORT[Led], GPIO_InitStruct.Pin);
+ 180              		.loc 1 116 3 is_stmt 1 view .LVU34
+ 181 0022 55F82400 		ldr	r0, [r5, r4, lsl #2]
+ 182 0026 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 183              	.LVL7:
+ 117:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 184              		.loc 1 117 1 is_stmt 0 view .LVU35
+ 185 002a 07B0     		add	sp, sp, #28
+ 186              	.LCFI5:
+ 187              		.cfi_def_cfa_offset 12
+ 188              		@ sp needed
+ 189 002c 30BD     		pop	{r4, r5, pc}
+ 190              	.L9:
+ 191 002e 00BF     		.align	2
+ 192              	.L8:
+ 193 0030 00000000 		.word	.LANCHOR0
+ 194              		.cfi_endproc
+ 195              	.LFE138:
+ 197              		.section	.text.BSP_LED_On,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	BSP_LED_On
+ 200              		.syntax unified
+ 201              		.thumb
+ 202              		.thumb_func
+ 204              	BSP_LED_On:
+ 205              	.LVL8:
+ 206              	.LFB139:
+ 118:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 119:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 120:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  Turns selected LED On.
+ 121:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  Led Specifies the Led to be set on.
+ 122:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *   This parameter can be one of following parameters:
+ 123:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *   @arg  LED2
+ 124:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval None
+ 125:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 126:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** void BSP_LED_On(Led_TypeDef Led)
+ 127:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 207              		.loc 1 127 1 is_stmt 1 view -0
+ 208              		.cfi_startproc
+ 209              		@ args = 0, pretend = 0, frame = 0
+ 210              		@ frame_needed = 0, uses_anonymous_args = 0
+ 211              		.loc 1 127 1 is_stmt 0 view .LVU37
+ 212 0000 08B5     		push	{r3, lr}
+ 213              	.LCFI6:
+ 214              		.cfi_def_cfa_offset 8
+ 215              		.cfi_offset 3, -8
+ 216              		.cfi_offset 14, -4
+ 128:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_WritePin(LED_PORT[Led], LED_PIN[Led], GPIO_PIN_RESET);
+ 217              		.loc 1 128 3 is_stmt 1 view .LVU38
+ 218 0002 0022     		movs	r2, #0
+ 219 0004 2021     		movs	r1, #32
+ 220 0006 034B     		ldr	r3, .L12
+ 221 0008 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 7
+
+
+ 222              	.LVL9:
+ 223              		.loc 1 128 3 is_stmt 0 view .LVU39
+ 224 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 225              	.LVL10:
+ 129:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 226              		.loc 1 129 1 view .LVU40
+ 227 0010 08BD     		pop	{r3, pc}
+ 228              	.L13:
+ 229 0012 00BF     		.align	2
+ 230              	.L12:
+ 231 0014 00000000 		.word	.LANCHOR0
+ 232              		.cfi_endproc
+ 233              	.LFE139:
+ 235              		.section	.text.BSP_LED_Off,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	BSP_LED_Off
+ 238              		.syntax unified
+ 239              		.thumb
+ 240              		.thumb_func
+ 242              	BSP_LED_Off:
+ 243              	.LVL11:
+ 244              	.LFB140:
+ 130:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 131:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 132:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  Turns selected LED Off.
+ 133:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  Led Specifies the Led to be set off.
+ 134:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *   This parameter can be one of following parameters:
+ 135:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *            @arg  LED2
+ 136:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval None
+ 137:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 138:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** void BSP_LED_Off(Led_TypeDef Led)
+ 139:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 245              		.loc 1 139 1 is_stmt 1 view -0
+ 246              		.cfi_startproc
+ 247              		@ args = 0, pretend = 0, frame = 0
+ 248              		@ frame_needed = 0, uses_anonymous_args = 0
+ 249              		.loc 1 139 1 is_stmt 0 view .LVU42
+ 250 0000 08B5     		push	{r3, lr}
+ 251              	.LCFI7:
+ 252              		.cfi_def_cfa_offset 8
+ 253              		.cfi_offset 3, -8
+ 254              		.cfi_offset 14, -4
+ 140:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_WritePin(LED_PORT[Led], LED_PIN[Led], GPIO_PIN_SET);
+ 255              		.loc 1 140 3 is_stmt 1 view .LVU43
+ 256 0002 0122     		movs	r2, #1
+ 257 0004 2021     		movs	r1, #32
+ 258 0006 034B     		ldr	r3, .L16
+ 259 0008 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 260              	.LVL12:
+ 261              		.loc 1 140 3 is_stmt 0 view .LVU44
+ 262 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 263              	.LVL13:
+ 141:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 264              		.loc 1 141 1 view .LVU45
+ 265 0010 08BD     		pop	{r3, pc}
+ 266              	.L17:
+ 267 0012 00BF     		.align	2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 8
+
+
+ 268              	.L16:
+ 269 0014 00000000 		.word	.LANCHOR0
+ 270              		.cfi_endproc
+ 271              	.LFE140:
+ 273              		.section	.text.BSP_LED_Toggle,"ax",%progbits
+ 274              		.align	1
+ 275              		.global	BSP_LED_Toggle
+ 276              		.syntax unified
+ 277              		.thumb
+ 278              		.thumb_func
+ 280              	BSP_LED_Toggle:
+ 281              	.LVL14:
+ 282              	.LFB141:
+ 142:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 143:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 144:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  Toggles the selected LED.
+ 145:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  Led Specifies the Led to be toggled.
+ 146:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *   This parameter can be one of following parameters:
+ 147:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *            @arg  LED2
+ 148:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval None
+ 149:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 150:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** void BSP_LED_Toggle(Led_TypeDef Led)
+ 151:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 283              		.loc 1 151 1 is_stmt 1 view -0
+ 284              		.cfi_startproc
+ 285              		@ args = 0, pretend = 0, frame = 0
+ 286              		@ frame_needed = 0, uses_anonymous_args = 0
+ 287              		.loc 1 151 1 is_stmt 0 view .LVU47
+ 288 0000 08B5     		push	{r3, lr}
+ 289              	.LCFI8:
+ 290              		.cfi_def_cfa_offset 8
+ 291              		.cfi_offset 3, -8
+ 292              		.cfi_offset 14, -4
+ 152:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_TogglePin(LED_PORT[Led], LED_PIN[Led]);
+ 293              		.loc 1 152 3 is_stmt 1 view .LVU48
+ 294 0002 2021     		movs	r1, #32
+ 295 0004 024B     		ldr	r3, .L20
+ 296 0006 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 297              	.LVL15:
+ 298              		.loc 1 152 3 is_stmt 0 view .LVU49
+ 299 000a FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 300              	.LVL16:
+ 153:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 301              		.loc 1 153 1 view .LVU50
+ 302 000e 08BD     		pop	{r3, pc}
+ 303              	.L21:
+ 304              		.align	2
+ 305              	.L20:
+ 306 0010 00000000 		.word	.LANCHOR0
+ 307              		.cfi_endproc
+ 308              	.LFE141:
+ 310              		.section	.text.BSP_PB_Init,"ax",%progbits
+ 311              		.align	1
+ 312              		.global	BSP_PB_Init
+ 313              		.syntax unified
+ 314              		.thumb
+ 315              		.thumb_func
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 9
+
+
+ 317              	BSP_PB_Init:
+ 318              	.LVL17:
+ 319              	.LFB142:
+ 154:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 155:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 156:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  Configures Button GPIO and EXTI Line.
+ 157:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  Button: Specifies the Button to be configured.
+ 158:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *   This parameter should be: BUTTON_USER
+ 159:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  ButtonMode: Specifies Button mode.
+ 160:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *   This parameter can be one of following parameters:
+ 161:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *     @arg  BUTTON_MODE_GPIO: Button will be used as simple IO
+ 162:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *     @arg BUTTON_MODE_EXTI: Button will be connected to EXTI line with interrupt
+ 163:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *                            generation capability
+ 164:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval None
+ 165:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 166:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
+ 167:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 320              		.loc 1 167 1 is_stmt 1 view -0
+ 321              		.cfi_startproc
+ 322              		@ args = 0, pretend = 0, frame = 24
+ 323              		@ frame_needed = 0, uses_anonymous_args = 0
+ 324              		.loc 1 167 1 is_stmt 0 view .LVU52
+ 325 0000 30B5     		push	{r4, r5, lr}
+ 326              	.LCFI9:
+ 327              		.cfi_def_cfa_offset 12
+ 328              		.cfi_offset 4, -12
+ 329              		.cfi_offset 5, -8
+ 330              		.cfi_offset 14, -4
+ 331 0002 87B0     		sub	sp, sp, #28
+ 332              	.LCFI10:
+ 333              		.cfi_def_cfa_offset 40
+ 334 0004 0C46     		mov	r4, r1
+ 168:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitTypeDef gpioinitstruct = {0};
+ 335              		.loc 1 168 3 is_stmt 1 view .LVU53
+ 336              		.loc 1 168 20 is_stmt 0 view .LVU54
+ 337 0006 0023     		movs	r3, #0
+ 338 0008 0193     		str	r3, [sp, #4]
+ 339 000a 0293     		str	r3, [sp, #8]
+ 340 000c 0393     		str	r3, [sp, #12]
+ 341 000e 0493     		str	r3, [sp, #16]
+ 342 0010 0593     		str	r3, [sp, #20]
+ 169:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 170:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /* Enable the BUTTON Clock */
+ 171:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   BUTTONx_GPIO_CLK_ENABLE(Button);
+ 343              		.loc 1 171 3 is_stmt 1 view .LVU55
+ 344              		.loc 1 171 3 view .LVU56
+ 345 0012 0546     		mov	r5, r0
+ 346 0014 60B9     		cbnz	r0, .L23
+ 347              		.loc 1 171 3 discriminator 1 view .LVU57
+ 348              	.LBB3:
+ 349              		.loc 1 171 3 discriminator 1 view .LVU58
+ 350              		.loc 1 171 3 discriminator 1 view .LVU59
+ 351 0016 03F18043 		add	r3, r3, #1073741824
+ 352 001a 03F50433 		add	r3, r3, #135168
+ 353 001e DA6C     		ldr	r2, [r3, #76]
+ 354 0020 42F00802 		orr	r2, r2, #8
+ 355 0024 DA64     		str	r2, [r3, #76]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 10
+
+
+ 356              		.loc 1 171 3 discriminator 1 view .LVU60
+ 357 0026 DB6C     		ldr	r3, [r3, #76]
+ 358 0028 03F00803 		and	r3, r3, #8
+ 359 002c 0093     		str	r3, [sp]
+ 360              		.loc 1 171 3 discriminator 1 view .LVU61
+ 361 002e 009B     		ldr	r3, [sp]
+ 362              	.L23:
+ 363              	.LBE3:
+ 364              		.loc 1 171 3 discriminator 3 view .LVU62
+ 365              		.loc 1 171 3 discriminator 3 view .LVU63
+ 172:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 173:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   gpioinitstruct.Pin = BUTTON_PIN[Button];
+ 366              		.loc 1 173 3 discriminator 3 view .LVU64
+ 367              		.loc 1 173 22 is_stmt 0 discriminator 3 view .LVU65
+ 368 0030 4023     		movs	r3, #64
+ 369 0032 0193     		str	r3, [sp, #4]
+ 174:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   gpioinitstruct.Pull = GPIO_NOPULL;
+ 370              		.loc 1 174 3 is_stmt 1 discriminator 3 view .LVU66
+ 175:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   gpioinitstruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
+ 371              		.loc 1 175 3 discriminator 3 view .LVU67
+ 372              		.loc 1 175 24 is_stmt 0 discriminator 3 view .LVU68
+ 373 0034 0123     		movs	r3, #1
+ 374 0036 0493     		str	r3, [sp, #16]
+ 176:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 177:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   if(ButtonMode == BUTTON_MODE_GPIO)
+ 375              		.loc 1 177 3 is_stmt 1 discriminator 3 view .LVU69
+ 376              		.loc 1 177 5 is_stmt 0 discriminator 3 view .LVU70
+ 377 0038 1CB1     		cbz	r4, .L27
+ 378              	.LVL18:
+ 379              	.L24:
+ 178:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   {
+ 179:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     /* Configure Button pin as input */
+ 180:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     gpioinitstruct.Mode = GPIO_MODE_INPUT;
+ 181:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 182:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     HAL_GPIO_Init(BUTTON_PORT[Button], &gpioinitstruct);
+ 183:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   }
+ 184:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 185:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   if(ButtonMode == BUTTON_MODE_EXTI)
+ 380              		.loc 1 185 3 is_stmt 1 view .LVU71
+ 381              		.loc 1 185 5 is_stmt 0 view .LVU72
+ 382 003a 012C     		cmp	r4, #1
+ 383 003c 08D0     		beq	.L28
+ 384              	.L22:
+ 186:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   {
+ 187:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     /* Configure Button pin as input with External interrupt */
+ 188:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     gpioinitstruct.Mode   = GPIO_MODE_IT_RISING;
+ 189:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     HAL_GPIO_Init(BUTTON_PORT[Button], &gpioinitstruct);
+ 190:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 191:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     /* Enable and set Button EXTI Interrupt to the lowest priority */
+ 192:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     HAL_NVIC_SetPriority((IRQn_Type)(BUTTON_IRQn[Button]), 0x0F, 0);
+ 193:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     HAL_NVIC_EnableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
+ 194:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   }
+ 195:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 385              		.loc 1 195 1 view .LVU73
+ 386 003e 07B0     		add	sp, sp, #28
+ 387              	.LCFI11:
+ 388              		.cfi_remember_state
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 11
+
+
+ 389              		.cfi_def_cfa_offset 12
+ 390              		@ sp needed
+ 391 0040 30BD     		pop	{r4, r5, pc}
+ 392              	.LVL19:
+ 393              	.L27:
+ 394              	.LCFI12:
+ 395              		.cfi_restore_state
+ 180:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 396              		.loc 1 180 5 is_stmt 1 view .LVU74
+ 182:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   }
+ 397              		.loc 1 182 5 view .LVU75
+ 398 0042 01A9     		add	r1, sp, #4
+ 399              	.LVL20:
+ 182:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   }
+ 400              		.loc 1 182 5 is_stmt 0 view .LVU76
+ 401 0044 0B4B     		ldr	r3, .L29
+ 402 0046 53F82500 		ldr	r0, [r3, r5, lsl #2]
+ 403              	.LVL21:
+ 182:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   }
+ 404              		.loc 1 182 5 view .LVU77
+ 405 004a FFF7FEFF 		bl	HAL_GPIO_Init
+ 406              	.LVL22:
+ 407 004e F4E7     		b	.L24
+ 408              	.L28:
+ 188:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     HAL_GPIO_Init(BUTTON_PORT[Button], &gpioinitstruct);
+ 409              		.loc 1 188 5 is_stmt 1 view .LVU78
+ 188:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     HAL_GPIO_Init(BUTTON_PORT[Button], &gpioinitstruct);
+ 410              		.loc 1 188 27 is_stmt 0 view .LVU79
+ 411 0050 094B     		ldr	r3, .L29+4
+ 412 0052 0293     		str	r3, [sp, #8]
+ 189:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 413              		.loc 1 189 5 is_stmt 1 view .LVU80
+ 414 0054 01A9     		add	r1, sp, #4
+ 415 0056 074B     		ldr	r3, .L29
+ 416 0058 53F82500 		ldr	r0, [r3, r5, lsl #2]
+ 417 005c FFF7FEFF 		bl	HAL_GPIO_Init
+ 418              	.LVL23:
+ 192:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     HAL_NVIC_EnableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
+ 419              		.loc 1 192 5 view .LVU81
+ 420 0060 0022     		movs	r2, #0
+ 421 0062 0F21     		movs	r1, #15
+ 422 0064 1720     		movs	r0, #23
+ 423 0066 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 424              	.LVL24:
+ 193:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   }
+ 425              		.loc 1 193 5 view .LVU82
+ 426 006a 1720     		movs	r0, #23
+ 427 006c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 428              	.LVL25:
+ 429              		.loc 1 195 1 is_stmt 0 view .LVU83
+ 430 0070 E5E7     		b	.L22
+ 431              	.L30:
+ 432 0072 00BF     		.align	2
+ 433              	.L29:
+ 434 0074 00000000 		.word	.LANCHOR1
+ 435 0078 00001110 		.word	269549568
+ 436              		.cfi_endproc
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 12
+
+
+ 437              	.LFE142:
+ 439              		.section	.text.BSP_PB_DeInit,"ax",%progbits
+ 440              		.align	1
+ 441              		.global	BSP_PB_DeInit
+ 442              		.syntax unified
+ 443              		.thumb
+ 444              		.thumb_func
+ 446              	BSP_PB_DeInit:
+ 447              	.LVL26:
+ 448              	.LFB143:
+ 196:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 197:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 198:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  Push Button DeInit.
+ 199:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  Button: Button to be configured
+ 200:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *   This parameter should be: BUTTON_USER
+ 201:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @note PB DeInit does not disable the GPIO clock
+ 202:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval None
+ 203:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 204:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** void BSP_PB_DeInit(Button_TypeDef Button)
+ 205:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 449              		.loc 1 205 1 is_stmt 1 view -0
+ 450              		.cfi_startproc
+ 451              		@ args = 0, pretend = 0, frame = 24
+ 452              		@ frame_needed = 0, uses_anonymous_args = 0
+ 453              		.loc 1 205 1 is_stmt 0 view .LVU85
+ 454 0000 30B5     		push	{r4, r5, lr}
+ 455              	.LCFI13:
+ 456              		.cfi_def_cfa_offset 12
+ 457              		.cfi_offset 4, -12
+ 458              		.cfi_offset 5, -8
+ 459              		.cfi_offset 14, -4
+ 460 0002 87B0     		sub	sp, sp, #28
+ 461              	.LCFI14:
+ 462              		.cfi_def_cfa_offset 40
+ 463 0004 0446     		mov	r4, r0
+ 206:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitTypeDef gpio_init_structure = {0};
+ 464              		.loc 1 206 3 is_stmt 1 view .LVU86
+ 465              		.loc 1 206 20 is_stmt 0 view .LVU87
+ 466 0006 0023     		movs	r3, #0
+ 467 0008 0193     		str	r3, [sp, #4]
+ 468 000a 0293     		str	r3, [sp, #8]
+ 469 000c 0393     		str	r3, [sp, #12]
+ 470 000e 0493     		str	r3, [sp, #16]
+ 471 0010 0593     		str	r3, [sp, #20]
+ 207:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 208:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   gpio_init_structure.Pin = BUTTON_PIN[Button];
+ 472              		.loc 1 208 3 is_stmt 1 view .LVU88
+ 473              		.loc 1 208 27 is_stmt 0 view .LVU89
+ 474 0012 4025     		movs	r5, #64
+ 475 0014 0195     		str	r5, [sp, #4]
+ 209:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_NVIC_DisableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
+ 476              		.loc 1 209 3 is_stmt 1 view .LVU90
+ 477 0016 1720     		movs	r0, #23
+ 478              	.LVL27:
+ 479              		.loc 1 209 3 is_stmt 0 view .LVU91
+ 480 0018 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 481              	.LVL28:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 13
+
+
+ 210:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_DeInit(BUTTON_PORT[Button], gpio_init_structure.Pin);
+ 482              		.loc 1 210 3 is_stmt 1 view .LVU92
+ 483 001c 2946     		mov	r1, r5
+ 484 001e 034B     		ldr	r3, .L33
+ 485 0020 53F82400 		ldr	r0, [r3, r4, lsl #2]
+ 486 0024 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 487              	.LVL29:
+ 211:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 488              		.loc 1 211 1 is_stmt 0 view .LVU93
+ 489 0028 07B0     		add	sp, sp, #28
+ 490              	.LCFI15:
+ 491              		.cfi_def_cfa_offset 12
+ 492              		@ sp needed
+ 493 002a 30BD     		pop	{r4, r5, pc}
+ 494              	.L34:
+ 495              		.align	2
+ 496              	.L33:
+ 497 002c 00000000 		.word	.LANCHOR1
+ 498              		.cfi_endproc
+ 499              	.LFE143:
+ 501              		.section	.text.BSP_PB_GetState,"ax",%progbits
+ 502              		.align	1
+ 503              		.global	BSP_PB_GetState
+ 504              		.syntax unified
+ 505              		.thumb
+ 506              		.thumb_func
+ 508              	BSP_PB_GetState:
+ 509              	.LVL30:
+ 510              	.LFB144:
+ 212:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 213:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 214:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  Returns the selected Button state.
+ 215:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  Button: Specifies the Button to be checked.
+ 216:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *   This parameter should be: BUTTON_USER
+ 217:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval Button state.
+ 218:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 219:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** uint32_t BSP_PB_GetState(Button_TypeDef Button)
+ 220:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 511              		.loc 1 220 1 is_stmt 1 view -0
+ 512              		.cfi_startproc
+ 513              		@ args = 0, pretend = 0, frame = 0
+ 514              		@ frame_needed = 0, uses_anonymous_args = 0
+ 515              		.loc 1 220 1 is_stmt 0 view .LVU95
+ 516 0000 08B5     		push	{r3, lr}
+ 517              	.LCFI16:
+ 518              		.cfi_def_cfa_offset 8
+ 519              		.cfi_offset 3, -8
+ 520              		.cfi_offset 14, -4
+ 221:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   return HAL_GPIO_ReadPin(BUTTON_PORT[Button], BUTTON_PIN[Button]);
+ 521              		.loc 1 221 3 is_stmt 1 view .LVU96
+ 522              		.loc 1 221 10 is_stmt 0 view .LVU97
+ 523 0002 4021     		movs	r1, #64
+ 524 0004 024B     		ldr	r3, .L37
+ 525 0006 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 526              	.LVL31:
+ 527              		.loc 1 221 10 view .LVU98
+ 528 000a FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 14
+
+
+ 529              	.LVL32:
+ 222:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 530              		.loc 1 222 1 view .LVU99
+ 531 000e 08BD     		pop	{r3, pc}
+ 532              	.L38:
+ 533              		.align	2
+ 534              	.L37:
+ 535 0010 00000000 		.word	.LANCHOR1
+ 536              		.cfi_endproc
+ 537              	.LFE144:
+ 539              		.section	.text.BSP_UART_Config,"ax",%progbits
+ 540              		.align	1
+ 541              		.global	BSP_UART_Config
+ 542              		.syntax unified
+ 543              		.thumb
+ 544              		.thumb_func
+ 546              	BSP_UART_Config:
+ 547              	.LFB145:
+ 223:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 224:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #ifdef HAL_UART_MODULE_ENABLED
+ 225:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 226:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  DEBUG_UART GPIO Config,Mode Config,115200 8-N-1
+ 227:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  None
+ 228:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval None
+ 229:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 230:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** void BSP_UART_Config(void)
+ 231:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 548              		.loc 1 231 1 is_stmt 1 view -0
+ 549              		.cfi_startproc
+ 550              		@ args = 0, pretend = 0, frame = 32
+ 551              		@ frame_needed = 0, uses_anonymous_args = 0
+ 552 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 553              	.LCFI17:
+ 554              		.cfi_def_cfa_offset 20
+ 555              		.cfi_offset 4, -20
+ 556              		.cfi_offset 5, -16
+ 557              		.cfi_offset 6, -12
+ 558              		.cfi_offset 7, -8
+ 559              		.cfi_offset 14, -4
+ 560 0002 89B0     		sub	sp, sp, #36
+ 561              	.LCFI18:
+ 562              		.cfi_def_cfa_offset 56
+ 232:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitTypeDef  GPIO_InitStruct = {0};
+ 563              		.loc 1 232 3 view .LVU101
+ 564              		.loc 1 232 21 is_stmt 0 view .LVU102
+ 565 0004 0024     		movs	r4, #0
+ 566 0006 0394     		str	r4, [sp, #12]
+ 567 0008 0494     		str	r4, [sp, #16]
+ 568 000a 0594     		str	r4, [sp, #20]
+ 569 000c 0694     		str	r4, [sp, #24]
+ 570 000e 0794     		str	r4, [sp, #28]
+ 233:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 234:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #if defined (__GNUC__)
+ 235:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   setvbuf(stdout,NULL,_IONBF,0);
+ 571              		.loc 1 235 3 is_stmt 1 view .LVU103
+ 572              		.loc 1 235 11 is_stmt 0 view .LVU104
+ 573 0010 294B     		ldr	r3, .L41
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 15
+
+
+ 574 0012 1868     		ldr	r0, [r3]
+ 575              		.loc 1 235 3 view .LVU105
+ 576 0014 2346     		mov	r3, r4
+ 577 0016 0222     		movs	r2, #2
+ 578 0018 2146     		mov	r1, r4
+ 579 001a 8068     		ldr	r0, [r0, #8]
+ 580 001c FFF7FEFF 		bl	setvbuf
+ 581              	.LVL33:
+ 236:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #endif
+ 237:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 238:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   DEBUG_UART_CLK_ENABLE();
+ 582              		.loc 1 238 3 is_stmt 1 view .LVU106
+ 583              	.LBB4:
+ 584              		.loc 1 238 3 view .LVU107
+ 585 0020 0094     		str	r4, [sp]
+ 586              		.loc 1 238 3 view .LVU108
+ 587 0022 264D     		ldr	r5, .L41+4
+ 588 0024 AB6D     		ldr	r3, [r5, #88]
+ 589 0026 43F40023 		orr	r3, r3, #524288
+ 590 002a AB65     		str	r3, [r5, #88]
+ 591              		.loc 1 238 3 view .LVU109
+ 592 002c AB6D     		ldr	r3, [r5, #88]
+ 593 002e 03F40023 		and	r3, r3, #524288
+ 594 0032 0093     		str	r3, [sp]
+ 595              		.loc 1 238 3 view .LVU110
+ 596 0034 009B     		ldr	r3, [sp]
+ 597              	.LBE4:
+ 598              		.loc 1 238 3 view .LVU111
+ 239:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 240:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   DebugUartHandle.Instance          = DEBUG_UART;
+ 599              		.loc 1 240 3 view .LVU112
+ 600              		.loc 1 240 37 is_stmt 0 view .LVU113
+ 601 0036 2248     		ldr	r0, .L41+8
+ 602 0038 224B     		ldr	r3, .L41+12
+ 603 003a 0360     		str	r3, [r0]
+ 241:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   
+ 242:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   DebugUartHandle.Init.BaudRate = DEBUG_UART_BAUDRATE;
+ 604              		.loc 1 242 3 is_stmt 1 view .LVU114
+ 605              		.loc 1 242 33 is_stmt 0 view .LVU115
+ 606 003c 4FF4E133 		mov	r3, #115200
+ 607 0040 4360     		str	r3, [r0, #4]
+ 243:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   DebugUartHandle.Init.WordLength = UART_WORDLENGTH_8B;
+ 608              		.loc 1 243 3 is_stmt 1 view .LVU116
+ 609              		.loc 1 243 35 is_stmt 0 view .LVU117
+ 610 0042 0326     		movs	r6, #3
+ 611 0044 8660     		str	r6, [r0, #8]
+ 244:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   DebugUartHandle.Init.StopBits = UART_STOPBITS_1;
+ 612              		.loc 1 244 3 is_stmt 1 view .LVU118
+ 613              		.loc 1 244 33 is_stmt 0 view .LVU119
+ 614 0046 C460     		str	r4, [r0, #12]
+ 245:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   DebugUartHandle.Init.Parity = UART_PARITY_NONE;
+ 615              		.loc 1 245 3 is_stmt 1 view .LVU120
+ 616              		.loc 1 245 31 is_stmt 0 view .LVU121
+ 617 0048 0461     		str	r4, [r0, #16]
+ 246:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   DebugUartHandle.Init.MsbFirst = UART_MSB_FIRST_DISABLE;
+ 618              		.loc 1 246 3 is_stmt 1 view .LVU122
+ 619              		.loc 1 246 33 is_stmt 0 view .LVU123
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 16
+
+
+ 620 004a 4461     		str	r4, [r0, #20]
+ 247:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   
+ 248:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_UART_Init(&DebugUartHandle);
+ 621              		.loc 1 248 3 is_stmt 1 view .LVU124
+ 622 004c FFF7FEFF 		bl	HAL_UART_Init
+ 623              	.LVL34:
+ 249:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 250:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   DEBUG_UART_RX_GPIO_CLK_ENABLE();
+ 624              		.loc 1 250 3 view .LVU125
+ 625              	.LBB5:
+ 626              		.loc 1 250 3 view .LVU126
+ 627              		.loc 1 250 3 view .LVU127
+ 628 0050 EB6C     		ldr	r3, [r5, #76]
+ 629 0052 43F01003 		orr	r3, r3, #16
+ 630 0056 EB64     		str	r3, [r5, #76]
+ 631              		.loc 1 250 3 view .LVU128
+ 632 0058 EB6C     		ldr	r3, [r5, #76]
+ 633 005a 03F01003 		and	r3, r3, #16
+ 634 005e 0193     		str	r3, [sp, #4]
+ 635              		.loc 1 250 3 view .LVU129
+ 636 0060 019B     		ldr	r3, [sp, #4]
+ 637              	.LBE5:
+ 638              		.loc 1 250 3 view .LVU130
+ 251:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   DEBUG_UART_TX_GPIO_CLK_ENABLE();
+ 639              		.loc 1 251 3 view .LVU131
+ 640              	.LBB6:
+ 641              		.loc 1 251 3 view .LVU132
+ 642              		.loc 1 251 3 view .LVU133
+ 643 0062 EB6C     		ldr	r3, [r5, #76]
+ 644 0064 43F01003 		orr	r3, r3, #16
+ 645 0068 EB64     		str	r3, [r5, #76]
+ 646              		.loc 1 251 3 view .LVU134
+ 647 006a EB6C     		ldr	r3, [r5, #76]
+ 648 006c 03F01003 		and	r3, r3, #16
+ 649 0070 0293     		str	r3, [sp, #8]
+ 650              		.loc 1 251 3 view .LVU135
+ 651 0072 029B     		ldr	r3, [sp, #8]
+ 652              	.LBE6:
+ 653              		.loc 1 251 3 view .LVU136
+ 252:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 253:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /**UART GPIO Configuration
+ 254:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     PC10     ------> UART1_TX
+ 255:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     PC11     ------> UART1_RX
+ 256:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     */
+ 257:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Pin = DEBUG_UART_TX_PIN;
+ 654              		.loc 1 257 3 view .LVU137
+ 655              		.loc 1 257 23 is_stmt 0 view .LVU138
+ 656 0074 4FF48063 		mov	r3, #1024
+ 657 0078 0393     		str	r3, [sp, #12]
+ 258:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 658              		.loc 1 258 3 is_stmt 1 view .LVU139
+ 659              		.loc 1 258 24 is_stmt 0 view .LVU140
+ 660 007a 0223     		movs	r3, #2
+ 661 007c 0493     		str	r3, [sp, #16]
+ 259:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 662              		.loc 1 259 3 is_stmt 1 view .LVU141
+ 663              		.loc 1 259 24 is_stmt 0 view .LVU142
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 17
+
+
+ 664 007e 0125     		movs	r5, #1
+ 665 0080 0595     		str	r5, [sp, #20]
+ 260:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 666              		.loc 1 260 3 is_stmt 1 view .LVU143
+ 667              		.loc 1 260 25 is_stmt 0 view .LVU144
+ 668 0082 0696     		str	r6, [sp, #24]
+ 261:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Alternate = DEBUG_UART_TX_AF;
+ 669              		.loc 1 261 3 is_stmt 1 view .LVU145
+ 670              		.loc 1 261 29 is_stmt 0 view .LVU146
+ 671 0084 0527     		movs	r7, #5
+ 672 0086 0797     		str	r7, [sp, #28]
+ 262:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_Init(DEBUG_UART_TX_GPIO_PORT, &GPIO_InitStruct);
+ 673              		.loc 1 262 3 is_stmt 1 view .LVU147
+ 674 0088 0F4E     		ldr	r6, .L41+16
+ 675 008a 03A9     		add	r1, sp, #12
+ 676 008c 3046     		mov	r0, r6
+ 677 008e FFF7FEFF 		bl	HAL_GPIO_Init
+ 678              	.LVL35:
+ 263:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 264:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Pin = DEBUG_UART_RX_PIN;
+ 679              		.loc 1 264 3 view .LVU148
+ 680              		.loc 1 264 23 is_stmt 0 view .LVU149
+ 681 0092 4FF40063 		mov	r3, #2048
+ 682 0096 0393     		str	r3, [sp, #12]
+ 265:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   GPIO_InitStruct.Alternate = DEBUG_UART_RX_AF;
+ 683              		.loc 1 265 3 is_stmt 1 view .LVU150
+ 684              		.loc 1 265 29 is_stmt 0 view .LVU151
+ 685 0098 0797     		str	r7, [sp, #28]
+ 266:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 267:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_GPIO_Init(DEBUG_UART_RX_GPIO_PORT, &GPIO_InitStruct);
+ 686              		.loc 1 267 3 is_stmt 1 view .LVU152
+ 687 009a 03A9     		add	r1, sp, #12
+ 688 009c 3046     		mov	r0, r6
+ 689 009e FFF7FEFF 		bl	HAL_GPIO_Init
+ 690              	.LVL36:
+ 268:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 269:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /* ENABLE NVIC */
+ 270:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_NVIC_SetPriority(DEBUG_UART_IRQ,0,1);
+ 691              		.loc 1 270 3 view .LVU153
+ 692 00a2 2A46     		mov	r2, r5
+ 693 00a4 2146     		mov	r1, r4
+ 694 00a6 3420     		movs	r0, #52
+ 695 00a8 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 696              	.LVL37:
+ 271:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_NVIC_EnableIRQ(DEBUG_UART_IRQ );
+ 697              		.loc 1 271 3 view .LVU154
+ 698 00ac 3420     		movs	r0, #52
+ 699 00ae FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 700              	.LVL38:
+ 272:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 701              		.loc 1 272 1 is_stmt 0 view .LVU155
+ 702 00b2 09B0     		add	sp, sp, #36
+ 703              	.LCFI19:
+ 704              		.cfi_def_cfa_offset 20
+ 705              		@ sp needed
+ 706 00b4 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 707              	.L42:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 18
+
+
+ 708 00b6 00BF     		.align	2
+ 709              	.L41:
+ 710 00b8 00000000 		.word	_impure_ptr
+ 711 00bc 00100240 		.word	1073876992
+ 712 00c0 00000000 		.word	.LANCHOR2
+ 713 00c4 004C0040 		.word	1073761280
+ 714 00c8 00080048 		.word	1207961600
+ 715              		.cfi_endproc
+ 716              	.LFE145:
+ 718              		.section	.text.__io_putchar,"ax",%progbits
+ 719              		.align	1
+ 720              		.global	__io_putchar
+ 721              		.syntax unified
+ 722              		.thumb
+ 723              		.thumb_func
+ 725              	__io_putchar:
+ 726              	.LVL39:
+ 727              	.LFB146:
+ 273:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 274:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #if (defined (__CC_ARM)) || (defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050))
+ 275:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 276:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  writes a character to the uart
+ 277:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  ch
+ 278:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *         *f
+ 279:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval the character
+ 280:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 281:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** int fputc(int ch, FILE *f)
+ 282:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 283:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /* Send a byte to UART */
+ 284:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_UART_Transmit(&DebugUartHandle, (uint8_t *)&ch, 1, 1000);
+ 285:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 286:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   return (ch);
+ 287:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 288:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 289:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 290:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  get a character from the uart
+ 291:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  *f
+ 292:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval a character
+ 293:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 294:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** int fgetc(FILE *f)
+ 295:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 296:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   int ch;
+ 297:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_UART_Receive(&DebugUartHandle, (uint8_t *)&ch, 1, 1000);
+ 298:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   return (ch);
+ 299:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 300:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 301:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #elif defined(__ICCARM__)
+ 302:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 303:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  writes a character to the uart
+ 304:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  ch
+ 305:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   *         *f
+ 306:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval the character
+ 307:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 308:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** int putchar(int ch)
+ 309:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 310:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /* Send a byte to UART */
+ 311:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_UART_Transmit(&DebugUartHandle, (uint8_t *)&ch, 1, 1000);
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 19
+
+
+ 312:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 313:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   return (ch);
+ 314:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 315:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** #elif  defined(__GNUC__)
+ 316:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** /**
+ 317:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @brief  writes a character to the uart
+ 318:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @param  ch
+ 319:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   * @retval the character
+ 320:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   */
+ 321:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** int __io_putchar(int ch)
+ 322:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 728              		.loc 1 322 1 is_stmt 1 view -0
+ 729              		.cfi_startproc
+ 730              		@ args = 0, pretend = 0, frame = 8
+ 731              		@ frame_needed = 0, uses_anonymous_args = 0
+ 732              		.loc 1 322 1 is_stmt 0 view .LVU157
+ 733 0000 00B5     		push	{lr}
+ 734              	.LCFI20:
+ 735              		.cfi_def_cfa_offset 4
+ 736              		.cfi_offset 14, -4
+ 737 0002 83B0     		sub	sp, sp, #12
+ 738              	.LCFI21:
+ 739              		.cfi_def_cfa_offset 16
+ 740 0004 0190     		str	r0, [sp, #4]
+ 323:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   /* Send a byte to UART */
+ 324:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   HAL_UART_Transmit(&DebugUartHandle, (uint8_t *)&ch, 1, 1000);
+ 741              		.loc 1 324 3 is_stmt 1 view .LVU158
+ 742 0006 4FF47A73 		mov	r3, #1000
+ 743 000a 0122     		movs	r2, #1
+ 744 000c 01A9     		add	r1, sp, #4
+ 745 000e 0348     		ldr	r0, .L45
+ 746              	.LVL40:
+ 747              		.loc 1 324 3 is_stmt 0 view .LVU159
+ 748 0010 FFF7FEFF 		bl	HAL_UART_Transmit
+ 749              	.LVL41:
+ 325:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 326:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   return ch;
+ 750              		.loc 1 326 3 is_stmt 1 view .LVU160
+ 327:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 751              		.loc 1 327 1 is_stmt 0 view .LVU161
+ 752 0014 0198     		ldr	r0, [sp, #4]
+ 753 0016 03B0     		add	sp, sp, #12
+ 754              	.LCFI22:
+ 755              		.cfi_def_cfa_offset 4
+ 756              		@ sp needed
+ 757 0018 5DF804FB 		ldr	pc, [sp], #4
+ 758              	.L46:
+ 759              		.align	2
+ 760              	.L45:
+ 761 001c 00000000 		.word	.LANCHOR2
+ 762              		.cfi_endproc
+ 763              	.LFE146:
+ 765              		.section	.text._write,"ax",%progbits
+ 766              		.align	1
+ 767              		.global	_write
+ 768              		.syntax unified
+ 769              		.thumb
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 20
+
+
+ 770              		.thumb_func
+ 772              	_write:
+ 773              	.LVL42:
+ 774              	.LFB147:
+ 328:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** 
+ 329:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** int _write(int file, char *ptr, int len)
+ 330:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** {
+ 775              		.loc 1 330 1 is_stmt 1 view -0
+ 776              		.cfi_startproc
+ 777              		@ args = 0, pretend = 0, frame = 0
+ 778              		@ frame_needed = 0, uses_anonymous_args = 0
+ 779              		.loc 1 330 1 is_stmt 0 view .LVU163
+ 780 0000 70B5     		push	{r4, r5, r6, lr}
+ 781              	.LCFI23:
+ 782              		.cfi_def_cfa_offset 16
+ 783              		.cfi_offset 4, -16
+ 784              		.cfi_offset 5, -12
+ 785              		.cfi_offset 6, -8
+ 786              		.cfi_offset 14, -4
+ 787 0002 0C46     		mov	r4, r1
+ 788 0004 1646     		mov	r6, r2
+ 331:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   int DataIdx;
+ 789              		.loc 1 331 3 is_stmt 1 view .LVU164
+ 332:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   for (DataIdx=0;DataIdx<len;DataIdx++)
+ 790              		.loc 1 332 3 view .LVU165
+ 791              	.LVL43:
+ 792              		.loc 1 332 15 is_stmt 0 view .LVU166
+ 793 0006 0025     		movs	r5, #0
+ 794              		.loc 1 332 3 view .LVU167
+ 795 0008 04E0     		b	.L48
+ 796              	.LVL44:
+ 797              	.L49:
+ 333:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   {
+ 334:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****     __io_putchar(*ptr++);
+ 798              		.loc 1 334 5 is_stmt 1 discriminator 3 view .LVU168
+ 799              		.loc 1 334 5 is_stmt 0 discriminator 3 view .LVU169
+ 800 000a 14F8010B 		ldrb	r0, [r4], #1	@ zero_extendqisi2
+ 801              	.LVL45:
+ 802              		.loc 1 334 5 discriminator 3 view .LVU170
+ 803 000e FFF7FEFF 		bl	__io_putchar
+ 804              	.LVL46:
+ 332:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   for (DataIdx=0;DataIdx<len;DataIdx++)
+ 805              		.loc 1 332 30 is_stmt 1 discriminator 3 view .LVU171
+ 332:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   for (DataIdx=0;DataIdx<len;DataIdx++)
+ 806              		.loc 1 332 37 is_stmt 0 discriminator 3 view .LVU172
+ 807 0012 0135     		adds	r5, r5, #1
+ 808              	.LVL47:
+ 809              	.L48:
+ 332:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   for (DataIdx=0;DataIdx<len;DataIdx++)
+ 810              		.loc 1 332 18 is_stmt 1 discriminator 1 view .LVU173
+ 332:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   for (DataIdx=0;DataIdx<len;DataIdx++)
+ 811              		.loc 1 332 3 is_stmt 0 discriminator 1 view .LVU174
+ 812 0014 B542     		cmp	r5, r6
+ 813 0016 F8DB     		blt	.L49
+ 335:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   }
+ 336:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c ****   return len;
+ 814              		.loc 1 336 3 is_stmt 1 view .LVU175
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 21
+
+
+ 337:../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c **** }
+ 815              		.loc 1 337 1 is_stmt 0 view .LVU176
+ 816 0018 3046     		mov	r0, r6
+ 817 001a 70BD     		pop	{r4, r5, r6, pc}
+ 818              		.loc 1 337 1 view .LVU177
+ 819              		.cfi_endproc
+ 820              	.LFE147:
+ 822              		.global	BUTTON_IRQn
+ 823              		.global	BUTTON_PIN
+ 824              		.global	BUTTON_PORT
+ 825              		.global	LED_PIN
+ 826              		.global	LED_PORT
+ 827              		.global	DebugUartHandle
+ 828              		.section	.bss.DebugUartHandle,"aw",%nobits
+ 829              		.align	2
+ 830              		.set	.LANCHOR2,. + 0
+ 833              	DebugUartHandle:
+ 834 0000 00000000 		.space	76
+ 834      00000000 
+ 834      00000000 
+ 834      00000000 
+ 834      00000000 
+ 835              		.section	.data.BUTTON_PORT,"aw"
+ 836              		.align	2
+ 837              		.set	.LANCHOR1,. + 0
+ 840              	BUTTON_PORT:
+ 841 0000 00040048 		.word	1207960576
+ 842              		.section	.data.LED_PORT,"aw"
+ 843              		.align	2
+ 844              		.set	.LANCHOR0,. + 0
+ 847              	LED_PORT:
+ 848 0000 00040048 		.word	1207960576
+ 849              		.section	.rodata.BUTTON_IRQn,"a"
+ 850              		.align	2
+ 853              	BUTTON_IRQn:
+ 854 0000 17       		.ascii	"\027"
+ 855              		.section	.rodata.BUTTON_PIN,"a"
+ 856              		.align	2
+ 859              	BUTTON_PIN:
+ 860 0000 4000     		.short	64
+ 861              		.section	.rodata.LED_PIN,"a"
+ 862              		.align	2
+ 865              	LED_PIN:
+ 866 0000 2000     		.short	32
+ 867              		.text
+ 868              	.Letext0:
+ 869              		.file 2 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 870              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 871              		.file 4 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 872              		.file 5 "h:\\program files (x86)\\puyasde\\tool\\lib\\gcc\\arm-none-eabi\\10.3.1\\include\\stddef.
+ 873              		.file 6 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_types.h"
+ 874              		.file 7 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\reent.h"
+ 875              		.file 8 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\lock.h"
+ 876              		.file 9 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 877              		.file 10 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_gpio.h"
+ 878              		.file 11 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_dma.h"
+ 879              		.file 12 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_uart.h"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 22
+
+
+ 880              		.file 13 "h:\\drivers\\bsp\\py32e407xx_start_kit\\py32e407xx_Start_Kit.h"
+ 881              		.file 14 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\stdio.h"
+ 882              		.file 15 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_cortex.h"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 py32e407xx_Start_Kit.c
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:20     .text.BSP_GetVersion:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:26     .text.BSP_GetVersion:00000000 BSP_GetVersion
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:42     .text.BSP_LED_Init:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:48     .text.BSP_LED_Init:00000000 BSP_LED_Init
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:131    .text.BSP_LED_Init:00000054 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:136    .text.BSP_LED_DeInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:142    .text.BSP_LED_DeInit:00000000 BSP_LED_DeInit
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:193    .text.BSP_LED_DeInit:00000030 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:198    .text.BSP_LED_On:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:204    .text.BSP_LED_On:00000000 BSP_LED_On
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:231    .text.BSP_LED_On:00000014 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:236    .text.BSP_LED_Off:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:242    .text.BSP_LED_Off:00000000 BSP_LED_Off
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:269    .text.BSP_LED_Off:00000014 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:274    .text.BSP_LED_Toggle:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:280    .text.BSP_LED_Toggle:00000000 BSP_LED_Toggle
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:306    .text.BSP_LED_Toggle:00000010 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:311    .text.BSP_PB_Init:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:317    .text.BSP_PB_Init:00000000 BSP_PB_Init
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:434    .text.BSP_PB_Init:00000074 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:440    .text.BSP_PB_DeInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:446    .text.BSP_PB_DeInit:00000000 BSP_PB_DeInit
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:497    .text.BSP_PB_DeInit:0000002c $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:502    .text.BSP_PB_GetState:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:508    .text.BSP_PB_GetState:00000000 BSP_PB_GetState
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:535    .text.BSP_PB_GetState:00000010 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:540    .text.BSP_UART_Config:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:546    .text.BSP_UART_Config:00000000 BSP_UART_Config
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:710    .text.BSP_UART_Config:000000b8 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:719    .text.__io_putchar:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:725    .text.__io_putchar:00000000 __io_putchar
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:761    .text.__io_putchar:0000001c $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:766    .text._write:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:772    .text._write:00000000 _write
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:853    .rodata.BUTTON_IRQn:00000000 BUTTON_IRQn
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:859    .rodata.BUTTON_PIN:00000000 BUTTON_PIN
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:840    .data.BUTTON_PORT:00000000 BUTTON_PORT
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:865    .rodata.LED_PIN:00000000 LED_PIN
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:847    .data.LED_PORT:00000000 LED_PORT
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:833    .bss.DebugUartHandle:00000000 DebugUartHandle
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:829    .bss.DebugUartHandle:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:836    .data.BUTTON_PORT:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:843    .data.LED_PORT:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:850    .rodata.BUTTON_IRQn:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:856    .rodata.BUTTON_PIN:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s:862    .rodata.LED_PIN:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_WritePin
+HAL_GPIO_DeInit
+HAL_GPIO_TogglePin
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_NVIC_DisableIRQ
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccf9ZCm9.s 			page 24
+
+
+HAL_GPIO_ReadPin
+setvbuf
+HAL_UART_Init
+_impure_ptr
+HAL_UART_Transmit

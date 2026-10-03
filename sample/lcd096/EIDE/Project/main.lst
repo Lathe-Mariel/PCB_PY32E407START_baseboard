@@ -1,0 +1,971 @@
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.APP_GpioConfig,"ax",%progbits
+  20              		.align	1
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	APP_GpioConfig:
+  26              	.LFB140:
+  27              		.file 1 "../Src/main.c"
+   1:../Src/main.c **** /**
+   2:../Src/main.c ****   ******************************************************************************
+   3:../Src/main.c ****   * @file    main.c
+   4:../Src/main.c ****   * @author  MCU Application Team
+   5:../Src/main.c ****   * @brief   Main program body
+   6:../Src/main.c ****   ******************************************************************************
+   7:../Src/main.c ****   * @attention
+   8:../Src/main.c ****   *
+   9:../Src/main.c ****   * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  10:../Src/main.c ****   * All rights reserved.</center></h2>
+  11:../Src/main.c ****   *
+  12:../Src/main.c ****   * This software component is licensed by Puya under BSD 3-Clause license,
+  13:../Src/main.c ****   * the "License"; You may not use this file except in compliance with the
+  14:../Src/main.c ****   * License. You may obtain a copy of the License at:
+  15:../Src/main.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  16:../Src/main.c ****   *
+  17:../Src/main.c ****   ******************************************************************************
+  18:../Src/main.c ****   * @attention
+  19:../Src/main.c ****   *
+  20:../Src/main.c ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  21:../Src/main.c ****   * All rights reserved.</center></h2>
+  22:../Src/main.c ****   *
+  23:../Src/main.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  24:../Src/main.c ****   * the "License"; You may not use this file except in compliance with the
+  25:../Src/main.c ****   * License. You may obtain a copy of the License at:
+  26:../Src/main.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  27:../Src/main.c ****   *
+  28:../Src/main.c ****   ******************************************************************************
+  29:../Src/main.c ****   */
+  30:../Src/main.c **** 
+  31:../Src/main.c **** /* Includes ------------------------------------------------------------------*/
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 2
+
+
+  32:../Src/main.c **** #include "main.h"
+  33:../Src/main.c **** #include "lcd096.h"
+  34:../Src/main.c **** 
+  35:../Src/main.c **** /* Private define ------------------------------------------------------------*/
+  36:../Src/main.c **** #define LED_GPIO_PIN                 LED2_PIN
+  37:../Src/main.c **** #define LED_GPIO_PORT                LED2_GPIO_PORT
+  38:../Src/main.c **** #define LED_GPIO_CLK_ENABLE()        LED2_GPIO_CLK_ENABLE()
+  39:../Src/main.c **** 
+  40:../Src/main.c **** /* --------------------------------------------------------------------------
+  41:../Src/main.c ****    On-board debug LEDs (4x, ACTIVE LOW: pin driven LOW => LED lit).
+  42:../Src/main.c ****    They display the bring-up STAGE NUMBER in binary so a black screen can be
+  43:../Src/main.c ****    localised without a scope (bit0 = LED1/PA3, bit1 = LED2/PA4,
+  44:../Src/main.c ****    bit2 = LED3/PA5, bit3 = LED4/PA6). Read the pattern left-to-right as
+  45:../Src/main.c ****    LED4 LED3 LED2 LED1 = bit3 bit2 bit1 bit0.
+  46:../Src/main.c **** 
+  47:../Src/main.c ****    Stage codes emitted by this file and by lcd096.c via LCD096_DebugHook():
+  48:../Src/main.c ****      1  clock + debug-LED init done
+  49:../Src/main.c ****      2  APP_GpioConfig() done
+  50:../Src/main.c ****      3  LCD GPIO config done          (start of LCD096_Init)
+  51:../Src/main.c ****      4  hardware reset pulse done
+  52:../Src/main.c ****      5  SWRESET (0x01) sent
+  53:../Src/main.c ****      6  SLPOUT  (0x11) sent
+  54:../Src/main.c ****      7  COLMOD+MADCTL sent
+  55:../Src/main.c ****      8  FRMCTR/power/VCOM sent
+  56:../Src/main.c ****      9  gamma sent
+  57:../Src/main.c ****     10  DISPON (0x29) sent
+  58:../Src/main.c ****     11  frame-memory fill finished
+  59:../Src/main.c ****     81  pin self-test: CS  driven HIGH
+  60:../Src/main.c ****     82  pin self-test: SDA (MOSI) driven HIGH
+  61:../Src/main.c ****     83  pin self-test: DC  driven HIGH
+  62:../Src/main.c ****     84  pin self-test: SCK driven HIGH
+  63:../Src/main.c ****     85  pin self-test: RST driven HIGH
+  64:../Src/main.c ****    After stage 11 the LEDs are re-driven each loop iteration, so a frozen
+  65:../Src/main.c ****    pattern means the firmware stopped at that stage (or is looping there).
+  66:../Src/main.c ****    -------------------------------------------------------------------------- */
+  67:../Src/main.c **** #define DBG_LED_PORT                 GPIOA
+  68:../Src/main.c **** #define DBG_LED1_PIN                 GPIO_PIN_3
+  69:../Src/main.c **** #define DBG_LED2_PIN                 GPIO_PIN_4
+  70:../Src/main.c **** #define DBG_LED3_PIN                 GPIO_PIN_5
+  71:../Src/main.c **** #define DBG_LED4_PIN                 GPIO_PIN_6
+  72:../Src/main.c **** #define DBG_LED_ALL_PINS             (DBG_LED1_PIN | DBG_LED2_PIN | \
+  73:../Src/main.c ****                                       DBG_LED3_PIN | DBG_LED4_PIN)
+  74:../Src/main.c **** 
+  75:../Src/main.c **** /* Private variables ---------------------------------------------------------*/
+  76:../Src/main.c **** static volatile uint8_t g_dbg_stage = 0U;
+  77:../Src/main.c **** 
+  78:../Src/main.c **** /* Private user code ---------------------------------------------------------*/
+  79:../Src/main.c **** /* Private macro -------------------------------------------------------------*/
+  80:../Src/main.c **** /* Private function prototypes -----------------------------------------------*/
+  81:../Src/main.c **** static void APP_SystemClockConfig(void);
+  82:../Src/main.c **** static void APP_GpioConfig(void);
+  83:../Src/main.c **** static void APP_DebugLedInit(void);
+  84:../Src/main.c **** static void APP_DebugLedShow(uint8_t code);
+  85:../Src/main.c **** 
+  86:../Src/main.c **** /**
+  87:../Src/main.c ****   * @brief  Debug hook called from lcd096.c at each bring-up step.
+  88:../Src/main.c ****   * @param  stage stage code (see the table above).
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 3
+
+
+  89:../Src/main.c ****   * @retval None
+  90:../Src/main.c ****   */
+  91:../Src/main.c **** void LCD096_DebugHook(uint8_t stage);
+  92:../Src/main.c **** 
+  93:../Src/main.c **** /* Set to 1 to run the pin self-test instead of the normal boot. In that mode
+  94:../Src/main.c ****    each LCD pin is driven HIGH on its own for a second, so a meter or a bare LED
+  95:../Src/main.c ****    can confirm which MCU pin it is really connected to. */
+  96:../Src/main.c **** #define APP_RUN_PIN_SELFTEST         0
+  97:../Src/main.c **** 
+  98:../Src/main.c **** /**
+  99:../Src/main.c ****   * @brief  Main program.
+ 100:../Src/main.c ****   *
+ 101:../Src/main.c ****   *         Brings up the Pmod-LCD-0.96 panel (ST7735S, 160x80) over software
+ 102:../Src/main.c ****   *         SPI and paints it orange. The four on-board LEDs show the bring-up
+ 103:../Src/main.c ****   *         stage in binary so a failure can be localised.
+ 104:../Src/main.c ****   *
+ 105:../Src/main.c ****   *         A Pmod can be inserted either way round, so BOTH electrically valid
+ 106:../Src/main.c ****   *         pin maps are driven in turn (see LCD096_PMOD_ROW in lcd096.h).
+ 107:../Src/main.c ****   *         The insertion that is actually fitted paints the panel orange and
+ 108:../Src/main.c ****   *         holds it there; the other one does nothing and is overwritten.
+ 109:../Src/main.c ****   * @retval int
+ 110:../Src/main.c ****   */
+ 111:../Src/main.c **** int main(void)
+ 112:../Src/main.c **** {
+ 113:../Src/main.c ****   /* Reset of all peripherals, Initializes the Systick. */ 
+ 114:../Src/main.c ****   HAL_Init();
+ 115:../Src/main.c ****   
+ 116:../Src/main.c ****   /* System clock configuration */
+ 117:../Src/main.c ****   APP_SystemClockConfig(); 
+ 118:../Src/main.c **** 
+ 119:../Src/main.c ****   /* Debug LEDs first so stage 1 proves the clock + GPIO bring-up. */
+ 120:../Src/main.c ****   APP_DebugLedInit();
+ 121:../Src/main.c ****   LCD096_DebugHook(1U);
+ 122:../Src/main.c **** 
+ 123:../Src/main.c ****   /* Initialize GPIO */
+ 124:../Src/main.c ****   APP_GpioConfig();
+ 125:../Src/main.c ****   LCD096_DebugHook(2U);
+ 126:../Src/main.c **** 
+ 127:../Src/main.c **** #if (APP_RUN_PIN_SELFTEST)
+ 128:../Src/main.c ****   LCD096_PinSelfTest(1000U);
+ 129:../Src/main.c **** #endif
+ 130:../Src/main.c **** 
+ 131:../Src/main.c ****   /* Pmod row 1 (CS=PD7, MOSI=PB6, DC=PC8, CLK=PC9, RST=PD4). */
+ 132:../Src/main.c ****   APP_DebugLedShow(0x0FU);               /* all four lit while row 1 runs */
+ 133:../Src/main.c ****   LCD096_SetPmodRow(1U);
+ 134:../Src/main.c ****   LCD096_Init();
+ 135:../Src/main.c ****   LCD096_FillScreen(LCD096_ORANGE);
+ 136:../Src/main.c ****   HAL_Delay(2000);                       /* hold so the result is visible */
+ 137:../Src/main.c **** 
+ 138:../Src/main.c ****   /* Pmod row 2 (CS=PD3, MOSI=PD5, DC=PD6, CLK=PD4, RST=PC9). If the module is
+ 139:../Src/main.c ****      inserted this way round, this is the pass that paints it. */
+ 140:../Src/main.c ****   APP_DebugLedShow(0x00U);
+ 141:../Src/main.c ****   LCD096_SetPmodRow(2U);
+ 142:../Src/main.c ****   LCD096_Init();
+ 143:../Src/main.c ****   LCD096_FillScreen(LCD096_ORANGE);
+ 144:../Src/main.c ****   HAL_Delay(2000);
+ 145:../Src/main.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 4
+
+
+ 146:../Src/main.c ****   /* Row 1 again, and stay there: row 1 is the insertion the base board
+ 147:../Src/main.c ****      silkscreen labels describe, so it is the default end state. */
+ 148:../Src/main.c ****   LCD096_SetPmodRow(1U);
+ 149:../Src/main.c ****   LCD096_Init();
+ 150:../Src/main.c ****   LCD096_FillScreen(LCD096_ORANGE);
+ 151:../Src/main.c **** 
+ 152:../Src/main.c ****   while (1)
+ 153:../Src/main.c ****   {
+ 154:../Src/main.c ****     /* Pulse the last stage code on/off. Pulsing proves the main loop is
+ 155:../Src/main.c ****        running (i.e. LCD096_FillScreen() returned); a steady pattern means the
+ 156:../Src/main.c ****        code is stuck at that stage. */
+ 157:../Src/main.c ****     APP_DebugLedShow(g_dbg_stage);
+ 158:../Src/main.c ****     HAL_Delay(500);
+ 159:../Src/main.c ****     APP_DebugLedShow(0U);
+ 160:../Src/main.c ****     HAL_Delay(200);
+ 161:../Src/main.c ****   }  
+ 162:../Src/main.c **** }
+ 163:../Src/main.c **** 
+ 164:../Src/main.c **** /**
+ 165:../Src/main.c ****   * @brief  Configure the four on-board debug LEDs as push-pull outputs.
+ 166:../Src/main.c ****   * @param  None
+ 167:../Src/main.c ****   * @retval None
+ 168:../Src/main.c ****   */
+ 169:../Src/main.c **** static void APP_DebugLedInit(void)
+ 170:../Src/main.c **** {
+ 171:../Src/main.c ****   GPIO_InitTypeDef  GPIO_InitStruct = {0};
+ 172:../Src/main.c **** 
+ 173:../Src/main.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+ 174:../Src/main.c **** 
+ 175:../Src/main.c ****   GPIO_InitStruct.Pin = DBG_LED_ALL_PINS;
+ 176:../Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
+ 177:../Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 178:../Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 179:../Src/main.c ****   HAL_GPIO_Init(DBG_LED_PORT, &GPIO_InitStruct);
+ 180:../Src/main.c **** 
+ 181:../Src/main.c ****   /* Active Low: drive all HIGH to keep the LEDs dark at startup. */
+ 182:../Src/main.c ****   HAL_GPIO_WritePin(DBG_LED_PORT, DBG_LED_ALL_PINS, GPIO_PIN_SET);
+ 183:../Src/main.c **** }
+ 184:../Src/main.c **** 
+ 185:../Src/main.c **** /**
+ 186:../Src/main.c ****   * @brief  Show a 4-bit code on the debug LEDs (active low => bit set = lit).
+ 187:../Src/main.c ****   * @param  code 0..15, bit0 -> LED1 (PA3) ... bit3 -> LED4 (PA6).
+ 188:../Src/main.c ****   * @retval None
+ 189:../Src/main.c ****   */
+ 190:../Src/main.c **** static void APP_DebugLedShow(uint8_t code)
+ 191:../Src/main.c **** {
+ 192:../Src/main.c ****   HAL_GPIO_WritePin(DBG_LED_PORT, DBG_LED1_PIN,
+ 193:../Src/main.c ****                     ((code & 0x01U) != 0U) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 194:../Src/main.c ****   HAL_GPIO_WritePin(DBG_LED_PORT, DBG_LED2_PIN,
+ 195:../Src/main.c ****                     ((code & 0x02U) != 0U) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 196:../Src/main.c ****   HAL_GPIO_WritePin(DBG_LED_PORT, DBG_LED3_PIN,
+ 197:../Src/main.c ****                     ((code & 0x04U) != 0U) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 198:../Src/main.c ****   HAL_GPIO_WritePin(DBG_LED_PORT, DBG_LED4_PIN,
+ 199:../Src/main.c ****                     ((code & 0x08U) != 0U) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 200:../Src/main.c **** }
+ 201:../Src/main.c **** 
+ 202:../Src/main.c **** /**
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 5
+
+
+ 203:../Src/main.c ****   * @brief  Debug hook called from lcd096.c: latch the stage and show it.
+ 204:../Src/main.c ****   * @param  stage stage code (see the table above).
+ 205:../Src/main.c ****   * @retval None
+ 206:../Src/main.c ****   */
+ 207:../Src/main.c **** void LCD096_DebugHook(uint8_t stage)
+ 208:../Src/main.c **** {
+ 209:../Src/main.c ****   g_dbg_stage = stage;
+ 210:../Src/main.c ****   APP_DebugLedShow(stage);
+ 211:../Src/main.c **** }
+ 212:../Src/main.c **** 
+ 213:../Src/main.c **** /**
+ 214:../Src/main.c ****   * @brief  GPIO configuration.
+ 215:../Src/main.c ****   * @param  None
+ 216:../Src/main.c ****   * @retval None
+ 217:../Src/main.c ****   */
+ 218:../Src/main.c **** static void APP_GpioConfig(void)
+ 219:../Src/main.c **** {
+  28              		.loc 1 219 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 00B5     		push	{lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 14, -4
+  36 0002 87B0     		sub	sp, sp, #28
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 32
+ 220:../Src/main.c ****   GPIO_InitTypeDef  GPIO_InitStruct = {0};
+  39              		.loc 1 220 3 view .LVU1
+  40              		.loc 1 220 21 is_stmt 0 view .LVU2
+  41 0004 0023     		movs	r3, #0
+  42 0006 0193     		str	r3, [sp, #4]
+  43 0008 0293     		str	r3, [sp, #8]
+  44 000a 0393     		str	r3, [sp, #12]
+  45 000c 0493     		str	r3, [sp, #16]
+  46 000e 0593     		str	r3, [sp, #20]
+ 221:../Src/main.c **** 
+ 222:../Src/main.c ****   LED_GPIO_CLK_ENABLE();                                 /* Enable GPIOB clock */
+  47              		.loc 1 222 3 is_stmt 1 view .LVU3
+  48              	.LBB2:
+  49              		.loc 1 222 3 view .LVU4
+  50              		.loc 1 222 3 view .LVU5
+  51 0010 03F18043 		add	r3, r3, #1073741824
+  52 0014 03F50433 		add	r3, r3, #135168
+  53 0018 DA6C     		ldr	r2, [r3, #76]
+  54 001a 42F00802 		orr	r2, r2, #8
+  55 001e DA64     		str	r2, [r3, #76]
+  56              		.loc 1 222 3 view .LVU6
+  57 0020 DB6C     		ldr	r3, [r3, #76]
+  58 0022 03F00803 		and	r3, r3, #8
+  59 0026 0093     		str	r3, [sp]
+  60              		.loc 1 222 3 view .LVU7
+  61 0028 009B     		ldr	r3, [sp]
+  62              	.LBE2:
+  63              		.loc 1 222 3 view .LVU8
+ 223:../Src/main.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 6
+
+
+ 224:../Src/main.c ****   GPIO_InitStruct.Pin = LED_GPIO_PIN;
+  64              		.loc 1 224 3 view .LVU9
+  65              		.loc 1 224 23 is_stmt 0 view .LVU10
+  66 002a 2023     		movs	r3, #32
+  67 002c 0193     		str	r3, [sp, #4]
+ 225:../Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
+  68              		.loc 1 225 3 is_stmt 1 view .LVU11
+  69              		.loc 1 225 24 is_stmt 0 view .LVU12
+  70 002e 0123     		movs	r3, #1
+  71 0030 0293     		str	r3, [sp, #8]
+ 226:../Src/main.c ****   GPIO_InitStruct.Pull = GPIO_PULLUP;                    /* Enable pull-up */
+  72              		.loc 1 226 3 is_stmt 1 view .LVU13
+  73              		.loc 1 226 24 is_stmt 0 view .LVU14
+  74 0032 0393     		str	r3, [sp, #12]
+ 227:../Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;          /* GPIO speed */  
+  75              		.loc 1 227 3 is_stmt 1 view .LVU15
+  76              		.loc 1 227 25 is_stmt 0 view .LVU16
+  77 0034 0223     		movs	r3, #2
+  78 0036 0493     		str	r3, [sp, #16]
+ 228:../Src/main.c ****   /* GPIO initialization */
+ 229:../Src/main.c ****   HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct);
+  79              		.loc 1 229 3 is_stmt 1 view .LVU17
+  80 0038 01A9     		add	r1, sp, #4
+  81 003a 0348     		ldr	r0, .L3
+  82 003c FFF7FEFF 		bl	HAL_GPIO_Init
+  83              	.LVL0:
+ 230:../Src/main.c **** }
+  84              		.loc 1 230 1 is_stmt 0 view .LVU18
+  85 0040 07B0     		add	sp, sp, #28
+  86              	.LCFI2:
+  87              		.cfi_def_cfa_offset 4
+  88              		@ sp needed
+  89 0042 5DF804FB 		ldr	pc, [sp], #4
+  90              	.L4:
+  91 0046 00BF     		.align	2
+  92              	.L3:
+  93 0048 00040048 		.word	1207960576
+  94              		.cfi_endproc
+  95              	.LFE140:
+  97              		.section	.text.APP_DebugLedInit,"ax",%progbits
+  98              		.align	1
+  99              		.syntax unified
+ 100              		.thumb
+ 101              		.thumb_func
+ 103              	APP_DebugLedInit:
+ 104              	.LFB137:
+ 170:../Src/main.c ****   GPIO_InitTypeDef  GPIO_InitStruct = {0};
+ 105              		.loc 1 170 1 is_stmt 1 view -0
+ 106              		.cfi_startproc
+ 107              		@ args = 0, pretend = 0, frame = 24
+ 108              		@ frame_needed = 0, uses_anonymous_args = 0
+ 109 0000 30B5     		push	{r4, r5, lr}
+ 110              	.LCFI3:
+ 111              		.cfi_def_cfa_offset 12
+ 112              		.cfi_offset 4, -12
+ 113              		.cfi_offset 5, -8
+ 114              		.cfi_offset 14, -4
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 7
+
+
+ 115 0002 87B0     		sub	sp, sp, #28
+ 116              	.LCFI4:
+ 117              		.cfi_def_cfa_offset 40
+ 171:../Src/main.c **** 
+ 118              		.loc 1 171 3 view .LVU20
+ 171:../Src/main.c **** 
+ 119              		.loc 1 171 21 is_stmt 0 view .LVU21
+ 120 0004 0023     		movs	r3, #0
+ 121 0006 0193     		str	r3, [sp, #4]
+ 122 0008 0293     		str	r3, [sp, #8]
+ 123 000a 0393     		str	r3, [sp, #12]
+ 124 000c 0493     		str	r3, [sp, #16]
+ 125 000e 0593     		str	r3, [sp, #20]
+ 173:../Src/main.c **** 
+ 126              		.loc 1 173 3 is_stmt 1 view .LVU22
+ 127              	.LBB3:
+ 173:../Src/main.c **** 
+ 128              		.loc 1 173 3 view .LVU23
+ 173:../Src/main.c **** 
+ 129              		.loc 1 173 3 view .LVU24
+ 130 0010 03F18043 		add	r3, r3, #1073741824
+ 131 0014 03F50433 		add	r3, r3, #135168
+ 132 0018 DA6C     		ldr	r2, [r3, #76]
+ 133 001a 42F00402 		orr	r2, r2, #4
+ 134 001e DA64     		str	r2, [r3, #76]
+ 173:../Src/main.c **** 
+ 135              		.loc 1 173 3 view .LVU25
+ 136 0020 DB6C     		ldr	r3, [r3, #76]
+ 137 0022 03F00403 		and	r3, r3, #4
+ 138 0026 0093     		str	r3, [sp]
+ 173:../Src/main.c **** 
+ 139              		.loc 1 173 3 view .LVU26
+ 140 0028 009B     		ldr	r3, [sp]
+ 141              	.LBE3:
+ 173:../Src/main.c **** 
+ 142              		.loc 1 173 3 view .LVU27
+ 175:../Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
+ 143              		.loc 1 175 3 view .LVU28
+ 175:../Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
+ 144              		.loc 1 175 23 is_stmt 0 view .LVU29
+ 145 002a 7824     		movs	r4, #120
+ 146 002c 0194     		str	r4, [sp, #4]
+ 176:../Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 147              		.loc 1 176 3 is_stmt 1 view .LVU30
+ 176:../Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 148              		.loc 1 176 24 is_stmt 0 view .LVU31
+ 149 002e 0125     		movs	r5, #1
+ 150 0030 0295     		str	r5, [sp, #8]
+ 177:../Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 151              		.loc 1 177 3 is_stmt 1 view .LVU32
+ 178:../Src/main.c ****   HAL_GPIO_Init(DBG_LED_PORT, &GPIO_InitStruct);
+ 152              		.loc 1 178 3 view .LVU33
+ 178:../Src/main.c ****   HAL_GPIO_Init(DBG_LED_PORT, &GPIO_InitStruct);
+ 153              		.loc 1 178 25 is_stmt 0 view .LVU34
+ 154 0032 0223     		movs	r3, #2
+ 155 0034 0493     		str	r3, [sp, #16]
+ 179:../Src/main.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 8
+
+
+ 156              		.loc 1 179 3 is_stmt 1 view .LVU35
+ 157 0036 01A9     		add	r1, sp, #4
+ 158 0038 4FF09040 		mov	r0, #1207959552
+ 159 003c FFF7FEFF 		bl	HAL_GPIO_Init
+ 160              	.LVL1:
+ 182:../Src/main.c **** }
+ 161              		.loc 1 182 3 view .LVU36
+ 162 0040 2A46     		mov	r2, r5
+ 163 0042 2146     		mov	r1, r4
+ 164 0044 4FF09040 		mov	r0, #1207959552
+ 165 0048 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 166              	.LVL2:
+ 183:../Src/main.c **** 
+ 167              		.loc 1 183 1 is_stmt 0 view .LVU37
+ 168 004c 07B0     		add	sp, sp, #28
+ 169              	.LCFI5:
+ 170              		.cfi_def_cfa_offset 12
+ 171              		@ sp needed
+ 172 004e 30BD     		pop	{r4, r5, pc}
+ 173              		.cfi_endproc
+ 174              	.LFE137:
+ 176              		.section	.text.APP_DebugLedShow,"ax",%progbits
+ 177              		.align	1
+ 178              		.syntax unified
+ 179              		.thumb
+ 180              		.thumb_func
+ 182              	APP_DebugLedShow:
+ 183              	.LVL3:
+ 184              	.LFB138:
+ 191:../Src/main.c ****   HAL_GPIO_WritePin(DBG_LED_PORT, DBG_LED1_PIN,
+ 185              		.loc 1 191 1 is_stmt 1 view -0
+ 186              		.cfi_startproc
+ 187              		@ args = 0, pretend = 0, frame = 0
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 191:../Src/main.c ****   HAL_GPIO_WritePin(DBG_LED_PORT, DBG_LED1_PIN,
+ 189              		.loc 1 191 1 is_stmt 0 view .LVU39
+ 190 0000 10B5     		push	{r4, lr}
+ 191              	.LCFI6:
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 4, -8
+ 194              		.cfi_offset 14, -4
+ 195 0002 0446     		mov	r4, r0
+ 192:../Src/main.c ****                     ((code & 0x01U) != 0U) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 196              		.loc 1 192 3 is_stmt 1 view .LVU40
+ 197 0004 80F00102 		eor	r2, r0, #1
+ 198 0008 02F00102 		and	r2, r2, #1
+ 199 000c 0821     		movs	r1, #8
+ 200 000e 4FF09040 		mov	r0, #1207959552
+ 201              	.LVL4:
+ 192:../Src/main.c ****                     ((code & 0x01U) != 0U) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 202              		.loc 1 192 3 is_stmt 0 view .LVU41
+ 203 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 204              	.LVL5:
+ 194:../Src/main.c ****                     ((code & 0x02U) != 0U) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 205              		.loc 1 194 3 is_stmt 1 view .LVU42
+ 206 0016 6208     		lsrs	r2, r4, #1
+ 207 0018 82F00102 		eor	r2, r2, #1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 9
+
+
+ 208 001c 02F00102 		and	r2, r2, #1
+ 209 0020 1021     		movs	r1, #16
+ 210 0022 4FF09040 		mov	r0, #1207959552
+ 211 0026 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 212              	.LVL6:
+ 196:../Src/main.c ****                     ((code & 0x04U) != 0U) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 213              		.loc 1 196 3 view .LVU43
+ 214 002a A208     		lsrs	r2, r4, #2
+ 215 002c 82F00102 		eor	r2, r2, #1
+ 216 0030 02F00102 		and	r2, r2, #1
+ 217 0034 2021     		movs	r1, #32
+ 218 0036 4FF09040 		mov	r0, #1207959552
+ 219 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 220              	.LVL7:
+ 198:../Src/main.c ****                     ((code & 0x08U) != 0U) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+ 221              		.loc 1 198 3 view .LVU44
+ 222 003e E208     		lsrs	r2, r4, #3
+ 223 0040 82F00102 		eor	r2, r2, #1
+ 224 0044 02F00102 		and	r2, r2, #1
+ 225 0048 4021     		movs	r1, #64
+ 226 004a 4FF09040 		mov	r0, #1207959552
+ 227 004e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 228              	.LVL8:
+ 200:../Src/main.c **** 
+ 229              		.loc 1 200 1 is_stmt 0 view .LVU45
+ 230 0052 10BD     		pop	{r4, pc}
+ 231              		.cfi_endproc
+ 232              	.LFE138:
+ 234              		.section	.text.LCD096_DebugHook,"ax",%progbits
+ 235              		.align	1
+ 236              		.global	LCD096_DebugHook
+ 237              		.syntax unified
+ 238              		.thumb
+ 239              		.thumb_func
+ 241              	LCD096_DebugHook:
+ 242              	.LVL9:
+ 243              	.LFB139:
+ 208:../Src/main.c ****   g_dbg_stage = stage;
+ 244              		.loc 1 208 1 is_stmt 1 view -0
+ 245              		.cfi_startproc
+ 246              		@ args = 0, pretend = 0, frame = 0
+ 247              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208:../Src/main.c ****   g_dbg_stage = stage;
+ 248              		.loc 1 208 1 is_stmt 0 view .LVU47
+ 249 0000 08B5     		push	{r3, lr}
+ 250              	.LCFI7:
+ 251              		.cfi_def_cfa_offset 8
+ 252              		.cfi_offset 3, -8
+ 253              		.cfi_offset 14, -4
+ 209:../Src/main.c ****   APP_DebugLedShow(stage);
+ 254              		.loc 1 209 3 is_stmt 1 view .LVU48
+ 209:../Src/main.c ****   APP_DebugLedShow(stage);
+ 255              		.loc 1 209 15 is_stmt 0 view .LVU49
+ 256 0002 024A     		ldr	r2, .L11
+ 257 0004 1070     		strb	r0, [r2]
+ 210:../Src/main.c **** }
+ 258              		.loc 1 210 3 is_stmt 1 view .LVU50
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 10
+
+
+ 259 0006 FFF7FEFF 		bl	APP_DebugLedShow
+ 260              	.LVL10:
+ 211:../Src/main.c **** 
+ 261              		.loc 1 211 1 is_stmt 0 view .LVU51
+ 262 000a 08BD     		pop	{r3, pc}
+ 263              	.L12:
+ 264              		.align	2
+ 265              	.L11:
+ 266 000c 00000000 		.word	.LANCHOR0
+ 267              		.cfi_endproc
+ 268              	.LFE139:
+ 270              		.section	.text.APP_ErrorHandler,"ax",%progbits
+ 271              		.align	1
+ 272              		.global	APP_ErrorHandler
+ 273              		.syntax unified
+ 274              		.thumb
+ 275              		.thumb_func
+ 277              	APP_ErrorHandler:
+ 278              	.LFB142:
+ 231:../Src/main.c **** 
+ 232:../Src/main.c **** /**
+ 233:../Src/main.c ****   * @brief  System clock configuration function.
+ 234:../Src/main.c ****   * @param  None
+ 235:../Src/main.c ****   * @retval None
+ 236:../Src/main.c ****   */
+ 237:../Src/main.c **** static void APP_SystemClockConfig(void)
+ 238:../Src/main.c **** {
+ 239:../Src/main.c ****   RCC_OscInitTypeDef  OscInitstruct = {0};
+ 240:../Src/main.c ****   RCC_ClkInitTypeDef  ClkInitstruct = {0};
+ 241:../Src/main.c ****   
+ 242:../Src/main.c ****   OscInitstruct.OscillatorType  = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORT
+ 243:../Src/main.c ****                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
+ 244:../Src/main.c ****   OscInitstruct.HSEState        = RCC_HSE_OFF;                              /* Close HSE */
+ 245:../Src/main.c **** /* OscInitstruct.HSEFreq         = RCC_HSE_16_32MHz; */                       /* Choose HSE frequen
+ 246:../Src/main.c ****   OscInitstruct.HSI48MState     = RCC_HSI48M_OFF;                           /* Close HSI48M */
+ 247:../Src/main.c ****   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
+ 248:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
+ 249:../Src/main.c **** /* OscInitstruct.LSEDriver       = RCC_LSEDRIVE_HIGH; */                    /* Drive capability lev
+ 250:../Src/main.c ****   OscInitstruct.LSIState        = RCC_LSI_OFF;                              /* Close LSI */
+ 251:../Src/main.c ****   OscInitstruct.PLL.PLLState    = RCC_PLL_OFF;                              /* Close PLL */
+ 252:../Src/main.c **** /* OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2; */               /* PLL clock source sel
+ 253:../Src/main.c **** /* OscInitstruct.PLL.PLLPrediv   = RCC_PLL_PREDIV_DIV1; */                  /* PLL clock Prediv fac
+ 254:../Src/main.c **** /* OscInitstruct.PLL.PLLMUL      = 12; */                                   /* PLL clock source 12-
+ 255:../Src/main.c **** /* OscInitstruct.PLL.PLLPostdiv  = RCC_PLL_POSTDIV_DIV1; */                 /* PLL clock Postdiv fa
+ 256:../Src/main.c ****   /* Configure oscillator */
+ 257:../Src/main.c ****   if(HAL_RCC_OscConfig(&OscInitstruct) != HAL_OK)
+ 258:../Src/main.c ****   {
+ 259:../Src/main.c ****     APP_ErrorHandler();
+ 260:../Src/main.c ****   }
+ 261:../Src/main.c ****   
+ 262:../Src/main.c ****   ClkInitstruct.ClockType       = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 |
+ 263:../Src/main.c ****   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection H
+ 264:../Src/main.c ****   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+ 265:../Src/main.c ****   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+ 266:../Src/main.c ****   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock 2 division */
+ 267:../Src/main.c ****   /* Configure Clock */
+ 268:../Src/main.c ****   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 11
+
+
+ 269:../Src/main.c ****   {
+ 270:../Src/main.c ****     APP_ErrorHandler();
+ 271:../Src/main.c ****   }
+ 272:../Src/main.c **** }
+ 273:../Src/main.c **** 
+ 274:../Src/main.c **** /**
+ 275:../Src/main.c ****   * @brief  This function is executed in case of error occurrence.
+ 276:../Src/main.c ****   * @param  None
+ 277:../Src/main.c ****   * @retval None
+ 278:../Src/main.c ****   */
+ 279:../Src/main.c **** void APP_ErrorHandler(void)
+ 280:../Src/main.c **** {
+ 279              		.loc 1 280 1 is_stmt 1 view -0
+ 280              		.cfi_startproc
+ 281              		@ Volatile: function does not return.
+ 282              		@ args = 0, pretend = 0, frame = 0
+ 283              		@ frame_needed = 0, uses_anonymous_args = 0
+ 284              		@ link register save eliminated.
+ 285              	.L14:
+ 281:../Src/main.c ****   while (1)
+ 286              		.loc 1 281 3 discriminator 1 view .LVU53
+ 282:../Src/main.c ****   {
+ 283:../Src/main.c ****   }
+ 287              		.loc 1 283 3 discriminator 1 view .LVU54
+ 281:../Src/main.c ****   while (1)
+ 288              		.loc 1 281 9 discriminator 1 view .LVU55
+ 289 0000 FEE7     		b	.L14
+ 290              		.cfi_endproc
+ 291              	.LFE142:
+ 293              		.section	.text.APP_SystemClockConfig,"ax",%progbits
+ 294              		.align	1
+ 295              		.syntax unified
+ 296              		.thumb
+ 297              		.thumb_func
+ 299              	APP_SystemClockConfig:
+ 300              	.LFB141:
+ 238:../Src/main.c ****   RCC_OscInitTypeDef  OscInitstruct = {0};
+ 301              		.loc 1 238 1 view -0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 72
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305 0000 00B5     		push	{lr}
+ 306              	.LCFI8:
+ 307              		.cfi_def_cfa_offset 4
+ 308              		.cfi_offset 14, -4
+ 309 0002 93B0     		sub	sp, sp, #76
+ 310              	.LCFI9:
+ 311              		.cfi_def_cfa_offset 80
+ 239:../Src/main.c ****   RCC_ClkInitTypeDef  ClkInitstruct = {0};
+ 312              		.loc 1 239 3 view .LVU57
+ 239:../Src/main.c ****   RCC_ClkInitTypeDef  ClkInitstruct = {0};
+ 313              		.loc 1 239 23 is_stmt 0 view .LVU58
+ 314 0004 3422     		movs	r2, #52
+ 315 0006 0021     		movs	r1, #0
+ 316 0008 05A8     		add	r0, sp, #20
+ 317 000a FFF7FEFF 		bl	memset
+ 318              	.LVL11:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 12
+
+
+ 240:../Src/main.c ****   
+ 319              		.loc 1 240 3 is_stmt 1 view .LVU59
+ 240:../Src/main.c ****   
+ 320              		.loc 1 240 23 is_stmt 0 view .LVU60
+ 321 000e 0023     		movs	r3, #0
+ 322 0010 0093     		str	r3, [sp]
+ 323 0012 0193     		str	r3, [sp, #4]
+ 324 0014 0293     		str	r3, [sp, #8]
+ 325 0016 0393     		str	r3, [sp, #12]
+ 326 0018 0493     		str	r3, [sp, #16]
+ 242:../Src/main.c ****                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
+ 327              		.loc 1 242 3 is_stmt 1 view .LVU61
+ 242:../Src/main.c ****                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
+ 328              		.loc 1 242 33 is_stmt 0 view .LVU62
+ 329 001a 1F23     		movs	r3, #31
+ 330 001c 0593     		str	r3, [sp, #20]
+ 244:../Src/main.c **** /* OscInitstruct.HSEFreq         = RCC_HSE_16_32MHz; */                       /* Choose HSE frequen
+ 331              		.loc 1 244 3 is_stmt 1 view .LVU63
+ 246:../Src/main.c ****   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
+ 332              		.loc 1 246 3 view .LVU64
+ 247:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
+ 333              		.loc 1 247 3 view .LVU65
+ 247:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
+ 334              		.loc 1 247 33 is_stmt 0 view .LVU66
+ 335 001e 0123     		movs	r3, #1
+ 336 0020 0A93     		str	r3, [sp, #40]
+ 248:../Src/main.c **** /* OscInitstruct.LSEDriver       = RCC_LSEDRIVE_HIGH; */                    /* Drive capability lev
+ 337              		.loc 1 248 3 is_stmt 1 view .LVU67
+ 250:../Src/main.c ****   OscInitstruct.PLL.PLLState    = RCC_PLL_OFF;                              /* Close PLL */
+ 338              		.loc 1 250 3 view .LVU68
+ 251:../Src/main.c **** /* OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2; */               /* PLL clock source sel
+ 339              		.loc 1 251 3 view .LVU69
+ 251:../Src/main.c **** /* OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2; */               /* PLL clock source sel
+ 340              		.loc 1 251 33 is_stmt 0 view .LVU70
+ 341 0022 0D93     		str	r3, [sp, #52]
+ 257:../Src/main.c ****   {
+ 342              		.loc 1 257 3 is_stmt 1 view .LVU71
+ 257:../Src/main.c ****   {
+ 343              		.loc 1 257 6 is_stmt 0 view .LVU72
+ 344 0024 05A8     		add	r0, sp, #20
+ 345 0026 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 346              	.LVL12:
+ 257:../Src/main.c ****   {
+ 347              		.loc 1 257 5 view .LVU73
+ 348 002a 78B9     		cbnz	r0, .L19
+ 262:../Src/main.c ****   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection H
+ 349              		.loc 1 262 3 is_stmt 1 view .LVU74
+ 262:../Src/main.c ****   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection H
+ 350              		.loc 1 262 33 is_stmt 0 view .LVU75
+ 351 002c 0F23     		movs	r3, #15
+ 352 002e 0093     		str	r3, [sp]
+ 263:../Src/main.c ****   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+ 353              		.loc 1 263 3 is_stmt 1 view .LVU76
+ 263:../Src/main.c ****   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+ 354              		.loc 1 263 33 is_stmt 0 view .LVU77
+ 355 0030 0021     		movs	r1, #0
+ 356 0032 0191     		str	r1, [sp, #4]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 13
+
+
+ 264:../Src/main.c ****   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+ 357              		.loc 1 264 3 is_stmt 1 view .LVU78
+ 264:../Src/main.c ****   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+ 358              		.loc 1 264 33 is_stmt 0 view .LVU79
+ 359 0034 0291     		str	r1, [sp, #8]
+ 265:../Src/main.c ****   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock 2 division */
+ 360              		.loc 1 265 3 is_stmt 1 view .LVU80
+ 265:../Src/main.c ****   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock 2 division */
+ 361              		.loc 1 265 33 is_stmt 0 view .LVU81
+ 362 0036 0391     		str	r1, [sp, #12]
+ 266:../Src/main.c ****   /* Configure Clock */
+ 363              		.loc 1 266 3 is_stmt 1 view .LVU82
+ 266:../Src/main.c ****   /* Configure Clock */
+ 364              		.loc 1 266 33 is_stmt 0 view .LVU83
+ 365 0038 4FF48063 		mov	r3, #1024
+ 366 003c 0493     		str	r3, [sp, #16]
+ 268:../Src/main.c ****   {
+ 367              		.loc 1 268 3 is_stmt 1 view .LVU84
+ 268:../Src/main.c ****   {
+ 368              		.loc 1 268 6 is_stmt 0 view .LVU85
+ 369 003e 6846     		mov	r0, sp
+ 370 0040 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 371              	.LVL13:
+ 268:../Src/main.c ****   {
+ 372              		.loc 1 268 5 view .LVU86
+ 373 0044 20B9     		cbnz	r0, .L20
+ 272:../Src/main.c **** 
+ 374              		.loc 1 272 1 view .LVU87
+ 375 0046 13B0     		add	sp, sp, #76
+ 376              	.LCFI10:
+ 377              		.cfi_remember_state
+ 378              		.cfi_def_cfa_offset 4
+ 379              		@ sp needed
+ 380 0048 5DF804FB 		ldr	pc, [sp], #4
+ 381              	.L19:
+ 382              	.LCFI11:
+ 383              		.cfi_restore_state
+ 259:../Src/main.c ****   }
+ 384              		.loc 1 259 5 is_stmt 1 view .LVU88
+ 385 004c FFF7FEFF 		bl	APP_ErrorHandler
+ 386              	.LVL14:
+ 387              	.L20:
+ 270:../Src/main.c ****   }
+ 388              		.loc 1 270 5 view .LVU89
+ 389 0050 FFF7FEFF 		bl	APP_ErrorHandler
+ 390              	.LVL15:
+ 391              		.cfi_endproc
+ 392              	.LFE141:
+ 394              		.section	.text.main,"ax",%progbits
+ 395              		.align	1
+ 396              		.global	main
+ 397              		.syntax unified
+ 398              		.thumb
+ 399              		.thumb_func
+ 401              	main:
+ 402              	.LFB136:
+ 112:../Src/main.c ****   /* Reset of all peripherals, Initializes the Systick. */ 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 14
+
+
+ 403              		.loc 1 112 1 view -0
+ 404              		.cfi_startproc
+ 405              		@ Volatile: function does not return.
+ 406              		@ args = 0, pretend = 0, frame = 0
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408 0000 08B5     		push	{r3, lr}
+ 409              	.LCFI12:
+ 410              		.cfi_def_cfa_offset 8
+ 411              		.cfi_offset 3, -8
+ 412              		.cfi_offset 14, -4
+ 114:../Src/main.c ****   
+ 413              		.loc 1 114 3 view .LVU91
+ 414 0002 FFF7FEFF 		bl	HAL_Init
+ 415              	.LVL16:
+ 117:../Src/main.c **** 
+ 416              		.loc 1 117 3 view .LVU92
+ 417 0006 FFF7FEFF 		bl	APP_SystemClockConfig
+ 418              	.LVL17:
+ 120:../Src/main.c ****   LCD096_DebugHook(1U);
+ 419              		.loc 1 120 3 view .LVU93
+ 420 000a FFF7FEFF 		bl	APP_DebugLedInit
+ 421              	.LVL18:
+ 121:../Src/main.c **** 
+ 422              		.loc 1 121 3 view .LVU94
+ 423 000e 0120     		movs	r0, #1
+ 424 0010 FFF7FEFF 		bl	LCD096_DebugHook
+ 425              	.LVL19:
+ 124:../Src/main.c ****   LCD096_DebugHook(2U);
+ 426              		.loc 1 124 3 view .LVU95
+ 427 0014 FFF7FEFF 		bl	APP_GpioConfig
+ 428              	.LVL20:
+ 125:../Src/main.c **** 
+ 429              		.loc 1 125 3 view .LVU96
+ 430 0018 0220     		movs	r0, #2
+ 431 001a FFF7FEFF 		bl	LCD096_DebugHook
+ 432              	.LVL21:
+ 132:../Src/main.c ****   LCD096_SetPmodRow(1U);
+ 433              		.loc 1 132 3 view .LVU97
+ 434 001e 0F20     		movs	r0, #15
+ 435 0020 FFF7FEFF 		bl	APP_DebugLedShow
+ 436              	.LVL22:
+ 133:../Src/main.c ****   LCD096_Init();
+ 437              		.loc 1 133 3 view .LVU98
+ 438 0024 0120     		movs	r0, #1
+ 439 0026 FFF7FEFF 		bl	LCD096_SetPmodRow
+ 440              	.LVL23:
+ 134:../Src/main.c ****   LCD096_FillScreen(LCD096_ORANGE);
+ 441              		.loc 1 134 3 view .LVU99
+ 442 002a FFF7FEFF 		bl	LCD096_Init
+ 443              	.LVL24:
+ 135:../Src/main.c ****   HAL_Delay(2000);                       /* hold so the result is visible */
+ 444              		.loc 1 135 3 view .LVU100
+ 445 002e 4FF47C40 		mov	r0, #64512
+ 446 0032 FFF7FEFF 		bl	LCD096_FillScreen
+ 447              	.LVL25:
+ 136:../Src/main.c **** 
+ 448              		.loc 1 136 3 view .LVU101
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 15
+
+
+ 449 0036 4FF4FA60 		mov	r0, #2000
+ 450 003a FFF7FEFF 		bl	HAL_Delay
+ 451              	.LVL26:
+ 140:../Src/main.c ****   LCD096_SetPmodRow(2U);
+ 452              		.loc 1 140 3 view .LVU102
+ 453 003e 0020     		movs	r0, #0
+ 454 0040 FFF7FEFF 		bl	APP_DebugLedShow
+ 455              	.LVL27:
+ 141:../Src/main.c ****   LCD096_Init();
+ 456              		.loc 1 141 3 view .LVU103
+ 457 0044 0220     		movs	r0, #2
+ 458 0046 FFF7FEFF 		bl	LCD096_SetPmodRow
+ 459              	.LVL28:
+ 142:../Src/main.c ****   LCD096_FillScreen(LCD096_ORANGE);
+ 460              		.loc 1 142 3 view .LVU104
+ 461 004a FFF7FEFF 		bl	LCD096_Init
+ 462              	.LVL29:
+ 143:../Src/main.c ****   HAL_Delay(2000);
+ 463              		.loc 1 143 3 view .LVU105
+ 464 004e 4FF47C40 		mov	r0, #64512
+ 465 0052 FFF7FEFF 		bl	LCD096_FillScreen
+ 466              	.LVL30:
+ 144:../Src/main.c **** 
+ 467              		.loc 1 144 3 view .LVU106
+ 468 0056 4FF4FA60 		mov	r0, #2000
+ 469 005a FFF7FEFF 		bl	HAL_Delay
+ 470              	.LVL31:
+ 148:../Src/main.c ****   LCD096_Init();
+ 471              		.loc 1 148 3 view .LVU107
+ 472 005e 0120     		movs	r0, #1
+ 473 0060 FFF7FEFF 		bl	LCD096_SetPmodRow
+ 474              	.LVL32:
+ 149:../Src/main.c ****   LCD096_FillScreen(LCD096_ORANGE);
+ 475              		.loc 1 149 3 view .LVU108
+ 476 0064 FFF7FEFF 		bl	LCD096_Init
+ 477              	.LVL33:
+ 150:../Src/main.c **** 
+ 478              		.loc 1 150 3 view .LVU109
+ 479 0068 4FF47C40 		mov	r0, #64512
+ 480 006c FFF7FEFF 		bl	LCD096_FillScreen
+ 481              	.LVL34:
+ 482              	.L22:
+ 152:../Src/main.c ****   {
+ 483              		.loc 1 152 3 discriminator 1 view .LVU110
+ 157:../Src/main.c ****     HAL_Delay(500);
+ 484              		.loc 1 157 5 discriminator 1 view .LVU111
+ 485 0070 074B     		ldr	r3, .L24
+ 486 0072 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 487 0074 FFF7FEFF 		bl	APP_DebugLedShow
+ 488              	.LVL35:
+ 158:../Src/main.c ****     APP_DebugLedShow(0U);
+ 489              		.loc 1 158 5 discriminator 1 view .LVU112
+ 490 0078 4FF4FA70 		mov	r0, #500
+ 491 007c FFF7FEFF 		bl	HAL_Delay
+ 492              	.LVL36:
+ 159:../Src/main.c ****     HAL_Delay(200);
+ 493              		.loc 1 159 5 discriminator 1 view .LVU113
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 16
+
+
+ 494 0080 0020     		movs	r0, #0
+ 495 0082 FFF7FEFF 		bl	APP_DebugLedShow
+ 496              	.LVL37:
+ 160:../Src/main.c ****   }  
+ 497              		.loc 1 160 5 discriminator 1 view .LVU114
+ 498 0086 C820     		movs	r0, #200
+ 499 0088 FFF7FEFF 		bl	HAL_Delay
+ 500              	.LVL38:
+ 152:../Src/main.c ****   {
+ 501              		.loc 1 152 9 discriminator 1 view .LVU115
+ 502 008c F0E7     		b	.L22
+ 503              	.L25:
+ 504 008e 00BF     		.align	2
+ 505              	.L24:
+ 506 0090 00000000 		.word	.LANCHOR0
+ 507              		.cfi_endproc
+ 508              	.LFE136:
+ 510              		.section	.bss.g_dbg_stage,"aw",%nobits
+ 511              		.set	.LANCHOR0,. + 0
+ 514              	g_dbg_stage:
+ 515 0000 00       		.space	1
+ 516              		.text
+ 517              	.Letext0:
+ 518              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 519              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 520              		.file 4 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 521              		.file 5 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_rcc.h"
+ 522              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_gpio.h"
+ 523              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 524              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e4xx_hal.h"
+ 525              		.file 9 "../Inc/lcd096.h"
+ 526              		.file 10 "<built-in>"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:20     .text.APP_GpioConfig:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:25     .text.APP_GpioConfig:00000000 APP_GpioConfig
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:93     .text.APP_GpioConfig:00000048 $d
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:98     .text.APP_DebugLedInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:103    .text.APP_DebugLedInit:00000000 APP_DebugLedInit
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:177    .text.APP_DebugLedShow:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:182    .text.APP_DebugLedShow:00000000 APP_DebugLedShow
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:235    .text.LCD096_DebugHook:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:241    .text.LCD096_DebugHook:00000000 LCD096_DebugHook
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:266    .text.LCD096_DebugHook:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:271    .text.APP_ErrorHandler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:277    .text.APP_ErrorHandler:00000000 APP_ErrorHandler
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:294    .text.APP_SystemClockConfig:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:299    .text.APP_SystemClockConfig:00000000 APP_SystemClockConfig
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:395    .text.main:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:401    .text.main:00000000 main
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:506    .text.main:00000090 $d
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:514    .bss.g_dbg_stage:00000000 g_dbg_stage
+C:\Users\n11ak\AppData\Local\Temp\cc2nLoGR.s:515    .bss.g_dbg_stage:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_WritePin
+memset
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_Init
+LCD096_SetPmodRow
+LCD096_Init
+LCD096_FillScreen
+HAL_Delay
