@@ -1168,7 +1168,12 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "Default",
+        "pattern": "/Pmod2_5"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
