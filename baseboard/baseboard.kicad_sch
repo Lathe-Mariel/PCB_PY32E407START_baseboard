@@ -20156,7 +20156,7 @@
 				)
 			)
 		)
-		(property "Footprint" "QFN50P500X500X100-33N-D"
+		(property "Footprint" "kicad9_samacsys:QFN50P500X500X100-33N-D"
 			(at 370.205 80.95 0)
 			(effects
 				(font
@@ -24292,7 +24292,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RESC1005X55N"
+		(property "Footprint" "kicad9_samacsys:RESC1005X55N"
 			(at 148.92 -27.305 0)
 			(effects
 				(font
@@ -26518,7 +26518,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ACT1210E1312PTL00"
+		(property "Footprint" "kicad9_samacsys:ACT1210E1312PTL00"
 			(at 316.865 -140.005 0)
 			(effects
 				(font
@@ -27706,7 +27706,7 @@
 				)
 			)
 		)
-		(property "Footprint" "DTS63NV"
+		(property "Footprint" "kicad9_samacsys:DTS63NV"
 			(at 274.955 195.885 0)
 			(effects
 				(font
@@ -28482,7 +28482,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "RESC1005X55N"
+		(property "Footprint" "kicad9_samacsys:RESC1005X55N"
 			(at 157.81 -26.67 0)
 			(effects
 				(font

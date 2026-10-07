@@ -1,4 +1,4 @@
-25691427767307493
+25700382601598041
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -67869,8 +67869,8 @@ PY32E407V1xT_START
 
 
 0
-100
-100
+108
+108
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -102921,6 +102921,20 @@ Connector
 4
 4
 kicad9_samacsys
+ACT1210E1312PTL00
+3.2mm x 2.5mm x 2.5mm
+Filter
+0
+4
+4
+kicad9_samacsys
+DTS63NV
+DTS-63N-V-3
+Switch
+0
+4
+4
+kicad9_samacsys
 NE555DR
 D (R-PDSO-G8)
 Integrated Circuit
@@ -102942,12 +102956,33 @@ Diode ESD (Bi-directional)
 3
 3
 kicad9_samacsys
+QFN50P400X400X90-25N-D
+24-Lead VQFN  (U3B)
+Integrated Circuit
+0
+25
+25
+kicad9_samacsys
 QFN50P400X400X100-25N-D
 24-Lead Very Thin Plastic Quad Flat, No Lead Package (U3B) - 4x4 mm Body [VQFN]
 Integrated Circuit
 0
 25
 25
+kicad9_samacsys
+QFN50P500X500X100-33N-D
+32-VQFN_2024
+Integrated Circuit
+0
+33
+33
+kicad9_samacsys
+RESC1005X55N
+MMZ1005
+Varistor
+0
+2
+2
 kicad9_samacsys
 RK09D117000B
 RK09D117000B-1
