@@ -1,4 +1,4 @@
-25700382601598041
+25702175289710314
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -102924,6 +102924,13 @@ kicad9_samacsys
 ACT1210E1312PTL00
 3.2mm x 2.5mm x 2.5mm
 Filter
+0
+4
+4
+kicad9_samacsys
+CB3LV3C50M0000
+CB3LV-3C-50M0000-1
+Crystal or Oscillator
 0
 4
 4
