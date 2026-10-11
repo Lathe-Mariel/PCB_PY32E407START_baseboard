@@ -1,0 +1,2488 @@
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"audio.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.AUDIO_GetTimerClock,"ax",%progbits
+  20              		.align	1
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	AUDIO_GetTimerClock:
+  26              	.LVL0:
+  27              	.LFB141:
+  28              		.file 1 "../Src/audio.c"
+   1:../Src/audio.c **** /**
+   2:../Src/audio.c ****   ******************************************************************************
+   3:../Src/audio.c ****   * @file    audio.c
+   4:../Src/audio.c ****   * @author  MCU Application Team
+   5:../Src/audio.c ****   * @brief   PWM audio playback (TIM2_CH2 on PA1) for the PY32E407 base board.
+   6:../Src/audio.c ****   ******************************************************************************
+   7:../Src/audio.c ****   * @attention
+   8:../Src/audio.c ****   *
+   9:../Src/audio.c ****   * This software component is licensed under BSD 3-Clause license.
+  10:../Src/audio.c ****   *
+  11:../Src/audio.c ****   ******************************************************************************
+  12:../Src/audio.c ****   */
+  13:../Src/audio.c **** 
+  14:../Src/audio.c **** /* Includes ------------------------------------------------------------------*/
+  15:../Src/audio.c **** #include "main.h"
+  16:../Src/audio.c **** #include "audio.h"
+  17:../Src/audio.c **** 
+  18:../Src/audio.c **** /* Private define ------------------------------------------------------------*/
+  19:../Src/audio.c **** /**
+  20:../Src/audio.c ****   * @brief  Peripheral used to generate the audio output.
+  21:../Src/audio.c ****   *
+  22:../Src/audio.c ****   *         PA1 is wired to AF1 on the PY32E407 and AF1 selects TIM2_CH2
+  23:../Src/audio.c ****   *         (PY32E407 datasheet, Table 3-3 "Port A alternate functions
+  24:../Src/audio.c ****   *         mapping"). The pin only needs a series resistor into a small
+  25:../Src/audio.c ****   *         speaker, plus a simple RC low pass filter for sample playback.
+  26:../Src/audio.c ****   *
+  27:../Src/audio.c ****   *         Sample playback follows the PCM sample with the PWM duty cycle.
+  28:../Src/audio.c ****   *
+  29:../Src/audio.c ****   *         IMPORTANT - the pin CANNOT be chosen freely: PD8 in particular has no
+  30:../Src/audio.c ****   *         timer output at all on the PY32E407 (PY32E407 datasheet, Table 3-6:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 2
+
+
+  31:../Src/audio.c ****   *         AF7 = USART3_TX, AF12 = LCDC_D13, AF13 = ETH_RMII_CRS_DV, AF15 =
+  32:../Src/audio.c ****   *         EVENTOUT only), so it cannot generate timer PWM. Use one of the
+  33:../Src/audio.c ****   *         timer-capable pins below instead:
+  34:../Src/audio.c ****   *
+  35:../Src/audio.c ****   *           pin  timer channel   board connection
+  36:../Src/audio.c ****   *           PA1  TIM2_CH2 (AF1)  base board: ETH_RMII_REF_CLK, not used here
+  37:../Src/audio.c ****   *           PD4  TIM2_CH2 (AF2)  base board: Pmod3 pin 6
+  38:../Src/audio.c ****   *           PD6  TIM2_CH4 (AF2)  base board: Pmod3 pin 8
+  39:../Src/audio.c ****   *           PD7  TIM2_CH3 (AF2)  base board: Pmod3 pin 1
+  40:../Src/audio.c ****   *           PE9  TIM1_CH1 (AF2)  base board: Pmod4 pin 4
+  41:../Src/audio.c ****   *           PE11 TIM1_CH2 (AF2)  base board: Pmod4 pin 6
+  42:../Src/audio.c ****   *
+  43:../Src/audio.c ****   *         Uncomment exactly one AUDIO_PWM_PIN_* selection below.
+  44:../Src/audio.c ****   */
+  45:../Src/audio.c **** /* #define AUDIO_PWM_PIN_PD4 */
+  46:../Src/audio.c **** /* #define AUDIO_PWM_PIN_PD6 */
+  47:../Src/audio.c **** #define AUDIO_PWM_PIN_PD7
+  48:../Src/audio.c **** /* #define AUDIO_PWM_PIN_PE9 */
+  49:../Src/audio.c **** /* #define AUDIO_PWM_PIN_PE11 */
+  50:../Src/audio.c **** 
+  51:../Src/audio.c **** #if   defined(AUDIO_PWM_PIN_PD4)
+  52:../Src/audio.c ****   #define AUDIO_PWM_TIM                TIM2
+  53:../Src/audio.c ****   #define AUDIO_PWM_CHANNEL            TIM_CHANNEL_2
+  54:../Src/audio.c ****   #define AUDIO_PWM_TIM_CLK_ENABLE()   __HAL_RCC_TIM2_CLK_ENABLE()
+  55:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PORT          GPIOD
+  56:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PIN           GPIO_PIN_4
+  57:../Src/audio.c ****   #define AUDIO_PWM_GPIO_AF            GPIO_AF2_TIM2
+  58:../Src/audio.c ****   #define AUDIO_PWM_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOD_CLK_ENABLE()
+  59:../Src/audio.c **** #elif defined(AUDIO_PWM_PIN_PD6)
+  60:../Src/audio.c ****   #define AUDIO_PWM_TIM                TIM2
+  61:../Src/audio.c ****   #define AUDIO_PWM_CHANNEL            TIM_CHANNEL_4
+  62:../Src/audio.c ****   #define AUDIO_PWM_TIM_CLK_ENABLE()   __HAL_RCC_TIM2_CLK_ENABLE()
+  63:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PORT          GPIOD
+  64:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PIN           GPIO_PIN_6
+  65:../Src/audio.c ****   #define AUDIO_PWM_GPIO_AF            GPIO_AF2_TIM2
+  66:../Src/audio.c ****   #define AUDIO_PWM_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOD_CLK_ENABLE()
+  67:../Src/audio.c **** #elif defined(AUDIO_PWM_PIN_PD7)
+  68:../Src/audio.c ****   #define AUDIO_PWM_TIM                TIM2
+  69:../Src/audio.c ****   #define AUDIO_PWM_CHANNEL            TIM_CHANNEL_3
+  70:../Src/audio.c ****   #define AUDIO_PWM_TIM_CLK_ENABLE()   __HAL_RCC_TIM2_CLK_ENABLE()
+  71:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PORT          GPIOD
+  72:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PIN           GPIO_PIN_7
+  73:../Src/audio.c ****   #define AUDIO_PWM_GPIO_AF            GPIO_AF2_TIM2
+  74:../Src/audio.c ****   #define AUDIO_PWM_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOD_CLK_ENABLE()
+  75:../Src/audio.c **** #elif defined(AUDIO_PWM_PIN_PE9)
+  76:../Src/audio.c ****   #define AUDIO_PWM_TIM                TIM1
+  77:../Src/audio.c ****   #define AUDIO_PWM_CHANNEL            TIM_CHANNEL_1
+  78:../Src/audio.c ****   #define AUDIO_PWM_TIM_CLK_ENABLE()   __HAL_RCC_TIM1_CLK_ENABLE()
+  79:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PORT          GPIOE
+  80:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PIN           GPIO_PIN_9
+  81:../Src/audio.c ****   #define AUDIO_PWM_GPIO_AF            GPIO_AF2_TIM1
+  82:../Src/audio.c ****   #define AUDIO_PWM_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOE_CLK_ENABLE()
+  83:../Src/audio.c **** #elif defined(AUDIO_PWM_PIN_PE11)
+  84:../Src/audio.c ****   #define AUDIO_PWM_TIM                TIM1
+  85:../Src/audio.c ****   #define AUDIO_PWM_CHANNEL            TIM_CHANNEL_2
+  86:../Src/audio.c ****   #define AUDIO_PWM_TIM_CLK_ENABLE()   __HAL_RCC_TIM1_CLK_ENABLE()
+  87:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PORT          GPIOE
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 3
+
+
+  88:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PIN           GPIO_PIN_11
+  89:../Src/audio.c ****   #define AUDIO_PWM_GPIO_AF            GPIO_AF2_TIM1
+  90:../Src/audio.c ****   #define AUDIO_PWM_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOE_CLK_ENABLE()
+  91:../Src/audio.c **** #else
+  92:../Src/audio.c ****   /* PA1 = TIM2_CH2 (AF1). */
+  93:../Src/audio.c ****   #define AUDIO_PWM_TIM                TIM2
+  94:../Src/audio.c ****   #define AUDIO_PWM_CHANNEL            TIM_CHANNEL_2
+  95:../Src/audio.c ****   #define AUDIO_PWM_TIM_CLK_ENABLE()   __HAL_RCC_TIM2_CLK_ENABLE()
+  96:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PORT          GPIOA
+  97:../Src/audio.c ****   #define AUDIO_PWM_GPIO_PIN           GPIO_PIN_1
+  98:../Src/audio.c ****   #define AUDIO_PWM_GPIO_AF            GPIO_AF1_TIM2
+  99:../Src/audio.c ****   #define AUDIO_PWM_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOA_CLK_ENABLE()
+ 100:../Src/audio.c **** #endif
+ 101:../Src/audio.c **** 
+ 102:../Src/audio.c **** /**
+ 103:../Src/audio.c ****   * @brief  PWM carrier used for sample playback, in Hz.
+ 104:../Src/audio.c ****   *
+ 105:../Src/audio.c ****   *         Sample mode runs the counter straight from the timer clock, so the
+ 106:../Src/audio.c ****   *         period is large and the duty cycle gets many steps: 256 counts (8
+ 107:../Src/audio.c ****   *         bits, one step per sample value) at a 16 MHz timer clock. 62.5 kHz
+ 108:../Src/audio.c ****   *         is far above the audio band, so the carrier itself is inaudible.
+ 109:../Src/audio.c ****   */
+ 110:../Src/audio.c **** #define AUDIO_SAMPLE_CARRIER_HZ     62500U
+ 111:../Src/audio.c **** 
+ 112:../Src/audio.c **** /**
+ 113:../Src/audio.c ****   * @brief  Lowest carrier accepted for sample playback, in Hz.
+ 114:../Src/audio.c ****   *
+ 115:../Src/audio.c ****   *         Guards against a very slow timer clock ending up with an audible
+ 116:../Src/audio.c ****   *         carrier.
+ 117:../Src/audio.c ****   */
+ 118:../Src/audio.c **** #define AUDIO_SAMPLE_MIN_CARRIER_HZ 40000U
+ 119:../Src/audio.c **** 
+ 120:../Src/audio.c **** /**
+ 121:../Src/audio.c ****   * @brief  Duty span used for the sample playback, in percent of full scale.
+ 122:../Src/audio.c ****   *
+ 123:../Src/audio.c ****   *         The audio information of a PWM signal is carried in its duty cycle, so
+ 124:../Src/audio.c ****   *         the span directly sets both the loudness and the resolution: the duty
+ 125:../Src/audio.c ****   *         travels over span% of the timer period, i.e. over span% of the 256
+ 126:../Src/audio.c ****   *         timer counts, which is also the number of quantisation steps that are
+ 127:../Src/audio.c ****   *         available. A small span therefore means a quiet AND noisy output.
+ 128:../Src/audio.c ****   *
+ 129:../Src/audio.c ****   *         This is why the span is 100 % by default. The Pmod-AUDIO V1.2 (and the
+ 130:../Src/audio.c ****   *         reference designs for it) drive the module from a plain 3V3 logic
+ 131:../Src/audio.c ****   *         square wave: the PAM8403 acts as a buffer for the PWM and the speaker
+ 132:../Src/audio.c ****   *         plus its output network recover the audio, so the carrier does not have
+ 133:../Src/audio.c ****   *         to be attenuated and the full duty range can be used. That gives the
+ 134:../Src/audio.c ****   *         full 8 bit resolution of the 256 count period.
+ 135:../Src/audio.c ****   *
+ 136:../Src/audio.c ****   *         Lower it only to reduce the volume (and accept the extra quantisation
+ 137:../Src/audio.c ****   *         noise that comes with it), or when the output is fed to a linear
+ 138:../Src/audio.c ****   *         amplifier that needs a smaller signal.
+ 139:../Src/audio.c ****   */
+ 140:../Src/audio.c **** #define AUDIO_SAMPLE_SPAN_PCT       100U
+ 141:../Src/audio.c **** 
+ 142:../Src/audio.c **** /**
+ 143:../Src/audio.c ****   * @brief  Drive of the soft limiter applied to the samples, in percent.
+ 144:../Src/audio.c ****   *
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 4
+
+
+ 145:../Src/audio.c ****   *         The soft limiter lifts quiet passages more than the peaks, which makes
+ 146:../Src/audio.c ****   *         the playback louder at the same peak level:
+ 147:../Src/audio.c ****   *
+ 148:../Src/audio.c ****   *             f(s) = s * (1 + k) / (1 + k * |s|)      (s in -1..1, k >= 0)
+ 149:../Src/audio.c ****   *
+ 150:../Src/audio.c ****   *         with f(0) = 0, f(1) = 1 and f'(0) = 1 + k. It is disabled by default,
+ 151:../Src/audio.c ****   *         because with the span at 100 % the playback is already at full scale
+ 152:../Src/audio.c ****   *         and any compression only costs resolution (the curve squeezes the duty
+ 153:../Src/audio.c ****   *         values together, so fewer of the 256 steps are used, which raises the
+ 154:../Src/audio.c ****   *         noise floor). Enable it (100..400) if the material is quiet and extra
+ 155:../Src/audio.c ****   *         loudness matters more than the last few dB of noise.
+ 156:../Src/audio.c ****   */
+ 157:../Src/audio.c **** #define AUDIO_SAMPLE_COMPRESS_PCT   0U
+ 158:../Src/audio.c **** 
+ 159:../Src/audio.c **** /**
+ 160:../Src/audio.c ****   * @brief  Peripheral used to pace the PCM samples.
+ 161:../Src/audio.c ****   *
+ 162:../Src/audio.c ****   *         TIM3 only runs internally and drives no pin; its update rate is the
+ 163:../Src/audio.c ****   *         PCM sample rate.
+ 164:../Src/audio.c ****   */
+ 165:../Src/audio.c **** #define AUDIO_SAMPLE_TIM             TIM3
+ 166:../Src/audio.c **** #define AUDIO_SAMPLE_IRQn            TIM3_IRQn
+ 167:../Src/audio.c **** #define AUDIO_SAMPLE_TIM_CLK_ENABLE()  __HAL_RCC_TIM3_CLK_ENABLE()
+ 168:../Src/audio.c **** 
+ 169:../Src/audio.c **** /** Sample rate limits. */
+ 170:../Src/audio.c **** #define AUDIO_SAMPLE_MIN_RATE_HZ    8000U
+ 171:../Src/audio.c **** #define AUDIO_SAMPLE_MAX_RATE_HZ    48000U
+ 172:../Src/audio.c **** 
+ 173:../Src/audio.c **** /* Private variables ---------------------------------------------------------*/
+ 174:../Src/audio.c **** static TIM_HandleTypeDef s_pwm;
+ 175:../Src/audio.c **** static TIM_HandleTypeDef s_sample;
+ 176:../Src/audio.c **** 
+ 177:../Src/audio.c **** static uint32_t s_timer_clk_hz;                /* raw timer clock, for the pacing timer */
+ 178:../Src/audio.c **** 
+ 179:../Src/audio.c **** /* Sample (PCM) playback state. */
+ 180:../Src/audio.c **** static const uint8_t *s_pcm;                   /* sample buffer being played     */
+ 181:../Src/audio.c **** static uint32_t s_pcm_length;                  /* number of samples              */
+ 182:../Src/audio.c **** static uint32_t s_pcm_index;                   /* next sample to output          */
+ 183:../Src/audio.c **** static uint8_t  s_sample_playing;
+ 184:../Src/audio.c **** 
+ 185:../Src/audio.c **** /**
+ 186:../Src/audio.c ****   * @brief  Compare register values for the 256 possible sample bytes.
+ 187:../Src/audio.c ****   *
+ 188:../Src/audio.c ****   *         The mapping from a sample to a duty count is a division, which is too
+ 189:../Src/audio.c ****   *         slow to run in a 16 kHz interrupt at a 16 MHz core clock, so it is
+ 190:../Src/audio.c ****   *         precomputed once per mode change. 512 bytes of RAM buy a very short
+ 191:../Src/audio.c ****   *         interrupt handler.
+ 192:../Src/audio.c ****   */
+ 193:../Src/audio.c **** static uint16_t s_duty_lut[256];
+ 194:../Src/audio.c **** 
+ 195:../Src/audio.c **** /* Private function prototypes -----------------------------------------------*/
+ 196:../Src/audio.c **** static uint32_t AUDIO_GetTimerClock(uint32_t pclk);
+ 197:../Src/audio.c **** static void AUDIO_PwmGpioConfig(void);
+ 198:../Src/audio.c **** static void AUDIO_PwmSampleInit(void);
+ 199:../Src/audio.c **** static void AUDIO_ProgramPaceTimer(uint32_t rate_hz);
+ 200:../Src/audio.c **** static void AUDIO_SetSample(uint8_t value);
+ 201:../Src/audio.c **** static void AUDIO_Mute(void);
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 5
+
+
+ 202:../Src/audio.c **** static void AUDIO_ResetPwm(void);
+ 203:../Src/audio.c **** static void AUDIO_SampleTimerStop(void);
+ 204:../Src/audio.c **** 
+ 205:../Src/audio.c **** /* Exported functions --------------------------------------------------------*/
+ 206:../Src/audio.c **** 
+ 207:../Src/audio.c **** /**
+ 208:../Src/audio.c ****   * @brief  Initialise the PWM output on PA1 and the audio timers.
+ 209:../Src/audio.c ****   * @param  None
+ 210:../Src/audio.c ****   * @retval None
+ 211:../Src/audio.c ****   */
+ 212:../Src/audio.c **** void AUDIO_Init(void)
+ 213:../Src/audio.c **** {
+ 214:../Src/audio.c ****   TIM_OC_InitTypeDef oc = {0};
+ 215:../Src/audio.c **** 
+ 216:../Src/audio.c ****   /* Derive timer settings from the clocks that actually feed them, so the
+ 217:../Src/audio.c ****      sample rate stays correct if the system clock is changed later on. */
+ 218:../Src/audio.c ****   s_timer_clk_hz = AUDIO_GetTimerClock(HAL_RCC_GetPCLK1Freq());
+ 219:../Src/audio.c **** 
+ 220:../Src/audio.c ****   /* Sample mode sets the carrier period before the first sample is played. */
+ 221:../Src/audio.c ****   s_pwm.Instance               = AUDIO_PWM_TIM;
+ 222:../Src/audio.c ****   s_pwm.Init.Prescaler         = 0U;
+ 223:../Src/audio.c ****   s_pwm.Init.CounterMode       = TIM_COUNTERMODE_UP;
+ 224:../Src/audio.c ****   s_pwm.Init.Period            = 255U;
+ 225:../Src/audio.c ****   s_pwm.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+ 226:../Src/audio.c ****   s_pwm.Init.RepetitionCounter = 0U;
+ 227:../Src/audio.c ****   s_pwm.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+ 228:../Src/audio.c ****   if (HAL_TIM_PWM_Init(&s_pwm) != HAL_OK)
+ 229:../Src/audio.c ****   {
+ 230:../Src/audio.c ****     APP_ErrorHandler();
+ 231:../Src/audio.c ****   }
+ 232:../Src/audio.c **** 
+ 233:../Src/audio.c ****   oc.OCMode       = TIM_OCMODE_PWM1;
+ 234:../Src/audio.c ****   oc.Pulse        = 0U;                      /* 0 % duty, i.e. silence */
+ 235:../Src/audio.c ****   oc.OCPolarity   = TIM_OCPOLARITY_HIGH;
+ 236:../Src/audio.c ****   oc.OCNPolarity  = TIM_OCNPOLARITY_HIGH;
+ 237:../Src/audio.c ****   oc.OCFastMode   = TIM_OCFAST_DISABLE;
+ 238:../Src/audio.c ****   oc.OCIdleState  = TIM_OCIDLESTATE_RESET;
+ 239:../Src/audio.c ****   oc.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+ 240:../Src/audio.c ****   if (HAL_TIM_PWM_ConfigChannel(&s_pwm, &oc, AUDIO_PWM_CHANNEL) != HAL_OK)
+ 241:../Src/audio.c ****   {
+ 242:../Src/audio.c ****     APP_ErrorHandler();
+ 243:../Src/audio.c ****   }
+ 244:../Src/audio.c **** 
+ 245:../Src/audio.c ****   if (HAL_TIM_PWM_Start(&s_pwm, AUDIO_PWM_CHANNEL) != HAL_OK)
+ 246:../Src/audio.c ****   {
+ 247:../Src/audio.c ****     APP_ErrorHandler();
+ 248:../Src/audio.c ****   }
+ 249:../Src/audio.c **** 
+ 250:../Src/audio.c ****   /* The timer that paces the PCM samples. Its prescaler and period are set by
+ 251:../Src/audio.c ****      AUDIO_PlaySample() because they depend on the sample rate; the values below
+ 252:../Src/audio.c ****      are only a safe placeholder. */
+ 253:../Src/audio.c ****   s_sample.Instance               = AUDIO_SAMPLE_TIM;
+ 254:../Src/audio.c ****   s_sample.Init.Prescaler         = 0U;
+ 255:../Src/audio.c ****   s_sample.Init.CounterMode       = TIM_COUNTERMODE_UP;
+ 256:../Src/audio.c ****   s_sample.Init.Period            = 15U;
+ 257:../Src/audio.c ****   s_sample.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+ 258:../Src/audio.c ****   s_sample.Init.RepetitionCounter = 0U;
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 6
+
+
+ 259:../Src/audio.c ****   s_sample.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+ 260:../Src/audio.c ****   if (HAL_TIM_Base_Init(&s_sample) != HAL_OK)
+ 261:../Src/audio.c ****   {
+ 262:../Src/audio.c ****     APP_ErrorHandler();
+ 263:../Src/audio.c ****   }
+ 264:../Src/audio.c **** 
+ 265:../Src/audio.c ****   HAL_NVIC_SetPriority(AUDIO_SAMPLE_IRQn, 3U, 0U);
+ 266:../Src/audio.c ****   HAL_NVIC_EnableIRQ(AUDIO_SAMPLE_IRQn);
+ 267:../Src/audio.c **** }
+ 268:../Src/audio.c **** 
+ 269:../Src/audio.c **** /* Sample (PCM) playback -----------------------------------------------------*/
+ 270:../Src/audio.c **** 
+ 271:../Src/audio.c **** /**
+ 272:../Src/audio.c ****   * @brief  Start (or restart) the playback of a PCM sample buffer.
+ 273:../Src/audio.c ****   *
+ 274:../Src/audio.c ****   *         The buffer holds unsigned 8 bit samples where 128 is silence. The
+ 275:../Src/audio.c ****   *         duty cycle of the PWM follows the sample value, so an RC low pass
+ 276:../Src/audio.c ****   *         filter turns the output back into the original signal.
+ 277:../Src/audio.c ****   * @param  samples pointer to the unsigned 8 bit samples.
+ 278:../Src/audio.c ****   * @param  length  number of samples to play.
+ 279:../Src/audio.c ****   * @param  rate_hz playback rate in Hz (8 kHz to 48 kHz).
+ 280:../Src/audio.c ****   * @retval None
+ 281:../Src/audio.c ****   */
+ 282:../Src/audio.c **** void AUDIO_PlaySample(const uint8_t *samples, uint32_t length, uint32_t rate_hz)
+ 283:../Src/audio.c **** {
+ 284:../Src/audio.c ****   if ((samples == NULL) || (length == 0U))
+ 285:../Src/audio.c ****   {
+ 286:../Src/audio.c ****     AUDIO_StopSample();
+ 287:../Src/audio.c ****     return;
+ 288:../Src/audio.c ****   }
+ 289:../Src/audio.c **** 
+ 290:../Src/audio.c ****   if (rate_hz < AUDIO_SAMPLE_MIN_RATE_HZ)
+ 291:../Src/audio.c ****   {
+ 292:../Src/audio.c ****     rate_hz = AUDIO_SAMPLE_MIN_RATE_HZ;
+ 293:../Src/audio.c ****   }
+ 294:../Src/audio.c ****   if (rate_hz > AUDIO_SAMPLE_MAX_RATE_HZ)
+ 295:../Src/audio.c ****   {
+ 296:../Src/audio.c ****     rate_hz = AUDIO_SAMPLE_MAX_RATE_HZ;
+ 297:../Src/audio.c ****   }
+ 298:../Src/audio.c **** 
+ 299:../Src/audio.c ****   __HAL_TIM_DISABLE_IT(&s_sample, TIM_IT_UPDATE);
+ 300:../Src/audio.c ****   AUDIO_SampleTimerStop();
+ 301:../Src/audio.c **** 
+ 302:../Src/audio.c ****   s_pcm            = samples;
+ 303:../Src/audio.c ****   s_pcm_length     = length;
+ 304:../Src/audio.c ****   s_pcm_index      = 0U;
+ 305:../Src/audio.c ****   s_sample_playing = 1U;
+ 306:../Src/audio.c **** 
+ 307:../Src/audio.c ****   /* Sample mode: fast carrier, duty from the sample value. */
+ 308:../Src/audio.c ****   AUDIO_ResetPwm();
+ 309:../Src/audio.c ****   AUDIO_PwmSampleInit();
+ 310:../Src/audio.c **** 
+ 311:../Src/audio.c ****   /* One interrupt per sample, with the period chosen as close to the exact
+ 312:../Src/audio.c ****      sample interval as the timer clock allows. */
+ 313:../Src/audio.c ****   AUDIO_ProgramPaceTimer(rate_hz);
+ 314:../Src/audio.c **** 
+ 315:../Src/audio.c ****   /* Release the first sample right away so the playback starts immediately. */
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 7
+
+
+ 316:../Src/audio.c ****   AUDIO_SetSample(s_pcm[0]);
+ 317:../Src/audio.c ****   s_pcm_index = 1U;
+ 318:../Src/audio.c **** }
+ 319:../Src/audio.c **** 
+ 320:../Src/audio.c **** /**
+ 321:../Src/audio.c ****   * @brief  Stop the sample playback and mute the output.
+ 322:../Src/audio.c ****   * @param  None
+ 323:../Src/audio.c ****   * @retval None
+ 324:../Src/audio.c ****   */
+ 325:../Src/audio.c **** void AUDIO_StopSample(void)
+ 326:../Src/audio.c **** {
+ 327:../Src/audio.c ****   __HAL_TIM_DISABLE_IT(&s_sample, TIM_IT_UPDATE);
+ 328:../Src/audio.c ****   AUDIO_SampleTimerStop();
+ 329:../Src/audio.c **** 
+ 330:../Src/audio.c ****   s_sample_playing = 0U;
+ 331:../Src/audio.c ****   s_pcm            = NULL;
+ 332:../Src/audio.c **** 
+ 333:../Src/audio.c ****   AUDIO_Mute();
+ 334:../Src/audio.c **** }
+ 335:../Src/audio.c **** 
+ 336:../Src/audio.c **** /**
+ 337:../Src/audio.c ****   * @brief  Tell whether a sample is currently being played.
+ 338:../Src/audio.c ****   * @param  None
+ 339:../Src/audio.c ****   * @retval 1 if playing, 0 otherwise.
+ 340:../Src/audio.c ****   */
+ 341:../Src/audio.c **** uint8_t AUDIO_IsPlayingSample(void)
+ 342:../Src/audio.c **** {
+ 343:../Src/audio.c ****   return s_sample_playing;
+ 344:../Src/audio.c **** }
+ 345:../Src/audio.c **** 
+ 346:../Src/audio.c **** /**
+ 347:../Src/audio.c ****   * @brief  Interrupt handler body for the audio timer.
+ 348:../Src/audio.c ****   *
+ 349:../Src/audio.c ****   *         Called from TIM3_IRQHandler(), see py32e407_it.c. The timer paces
+ 350:../Src/audio.c ****   *         PCM samples at their sample rate.
+ 351:../Src/audio.c ****   * @param  None
+ 352:../Src/audio.c ****   * @retval None
+ 353:../Src/audio.c ****   */
+ 354:../Src/audio.c **** void AUDIO_TimerIRQHandler(void)
+ 355:../Src/audio.c **** {
+ 356:../Src/audio.c ****   if (__HAL_TIM_GET_FLAG(&s_sample, TIM_FLAG_UPDATE) == RESET)
+ 357:../Src/audio.c ****   {
+ 358:../Src/audio.c ****     return;
+ 359:../Src/audio.c ****   }
+ 360:../Src/audio.c ****   __HAL_TIM_CLEAR_FLAG(&s_sample, TIM_FLAG_UPDATE);
+ 361:../Src/audio.c **** 
+ 362:../Src/audio.c ****   if (s_sample_playing == 0U)
+ 363:../Src/audio.c ****   {
+ 364:../Src/audio.c ****     return;
+ 365:../Src/audio.c ****   }
+ 366:../Src/audio.c **** 
+ 367:../Src/audio.c ****   if (s_pcm_index >= s_pcm_length)
+ 368:../Src/audio.c ****   {
+ 369:../Src/audio.c ****     AUDIO_StopSample();
+ 370:../Src/audio.c ****     return;
+ 371:../Src/audio.c ****   }
+ 372:../Src/audio.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 8
+
+
+ 373:../Src/audio.c ****   AUDIO_SetSample(s_pcm[s_pcm_index]);
+ 374:../Src/audio.c ****   ++s_pcm_index;
+ 375:../Src/audio.c **** }
+ 376:../Src/audio.c **** 
+ 377:../Src/audio.c **** /* Private functions --------------------------------------------------------*/
+ 378:../Src/audio.c **** 
+ 379:../Src/audio.c **** /**
+ 380:../Src/audio.c ****   * @brief  Return the clock that feeds the APB1 timers.
+ 381:../Src/audio.c ****   *
+ 382:../Src/audio.c ****   *         As on the whole PY32E4 family, the APB1 timers run at PCLK1 when the
+ 383:../Src/audio.c ****   *         APB1 prescaler is 1 and at twice PCLK1 otherwise.
+ 384:../Src/audio.c ****   * @param  pclk PCLK1 frequency in Hz.
+ 385:../Src/audio.c ****   * @retval Timer input clock in Hz.
+ 386:../Src/audio.c ****   */
+ 387:../Src/audio.c **** static uint32_t AUDIO_GetTimerClock(uint32_t pclk)
+ 388:../Src/audio.c **** {
+  29              		.loc 1 388 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+ 389:../Src/audio.c ****   if (pclk == 0U)
+  34              		.loc 1 389 3 view .LVU1
+  35              		.loc 1 389 6 is_stmt 0 view .LVU2
+  36 0000 30B1     		cbz	r0, .L4
+  37              	.LVL1:
+  38              	.L2:
+ 390:../Src/audio.c ****   {
+ 391:../Src/audio.c ****     pclk = 16000000U;
+ 392:../Src/audio.c ****   }
+ 393:../Src/audio.c **** 
+ 394:../Src/audio.c ****   if (((RCC->CFGR & RCC_CFGR_PPRE1) >> RCC_CFGR_PPRE1_Pos) < 4U)
+  39              		.loc 1 394 3 is_stmt 1 view .LVU3
+  40              		.loc 1 394 12 is_stmt 0 view .LVU4
+  41 0002 044B     		ldr	r3, .L5
+  42 0004 5B68     		ldr	r3, [r3, #4]
+  43              		.loc 1 394 6 view .LVU5
+  44 0006 13F4806F 		tst	r3, #1024
+  45 000a 00D0     		beq	.L1
+ 395:../Src/audio.c ****   {
+ 396:../Src/audio.c ****     return pclk;
+ 397:../Src/audio.c ****   }
+ 398:../Src/audio.c **** 
+ 399:../Src/audio.c ****   return pclk * 2U;
+  46              		.loc 1 399 3 is_stmt 1 view .LVU6
+  47              		.loc 1 399 15 is_stmt 0 view .LVU7
+  48 000c 4000     		lsls	r0, r0, #1
+  49              	.LVL2:
+  50              	.L1:
+ 400:../Src/audio.c **** }
+  51              		.loc 1 400 1 view .LVU8
+  52 000e 7047     		bx	lr
+  53              	.LVL3:
+  54              	.L4:
+ 391:../Src/audio.c ****   }
+  55              		.loc 1 391 10 view .LVU9
+  56 0010 0148     		ldr	r0, .L5+4
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 9
+
+
+  57              	.LVL4:
+ 391:../Src/audio.c ****   }
+  58              		.loc 1 391 10 view .LVU10
+  59 0012 F6E7     		b	.L2
+  60              	.L6:
+  61              		.align	2
+  62              	.L5:
+  63 0014 00100240 		.word	1073876992
+  64 0018 0024F400 		.word	16000000
+  65              		.cfi_endproc
+  66              	.LFE141:
+  68              		.section	.text.AUDIO_SetSample,"ax",%progbits
+  69              		.align	1
+  70              		.syntax unified
+  71              		.thumb
+  72              		.thumb_func
+  74              	AUDIO_SetSample:
+  75              	.LVL5:
+  76              	.LFB142:
+ 401:../Src/audio.c **** 
+ 402:../Src/audio.c **** /**
+ 403:../Src/audio.c ****   * @brief  Output one unsigned 8 bit PCM sample.
+ 404:../Src/audio.c ****   *
+ 405:../Src/audio.c ****   *         128 (silence) maps to a 50 % duty cycle, 0 to the minimum duty and
+ 406:../Src/audio.c ****   *         255 to the maximum one. The value is looked up in a table that was
+ 407:../Src/audio.c ****   *         filled when the mode was selected, so this is a single store.
+ 408:../Src/audio.c ****   * @param  value unsigned 8 bit sample.
+ 409:../Src/audio.c ****   * @retval None
+ 410:../Src/audio.c ****   */
+ 411:../Src/audio.c **** static void AUDIO_SetSample(uint8_t value)
+ 412:../Src/audio.c **** {
+  77              		.loc 1 412 1 is_stmt 1 view -0
+  78              		.cfi_startproc
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81              		@ link register save eliminated.
+ 413:../Src/audio.c ****   __HAL_TIM_SET_COMPARE(&s_pwm, AUDIO_PWM_CHANNEL, s_duty_lut[value]);
+  82              		.loc 1 413 3 view .LVU12
+  83 0000 034B     		ldr	r3, .L8
+  84 0002 1B68     		ldr	r3, [r3]
+  85 0004 034A     		ldr	r2, .L8+4
+  86 0006 32F81020 		ldrh	r2, [r2, r0, lsl #1]
+  87 000a DA63     		str	r2, [r3, #60]
+ 414:../Src/audio.c **** }
+  88              		.loc 1 414 1 is_stmt 0 view .LVU13
+  89 000c 7047     		bx	lr
+  90              	.L9:
+  91 000e 00BF     		.align	2
+  92              	.L8:
+  93 0010 00000000 		.word	.LANCHOR0
+  94 0014 00000000 		.word	.LANCHOR1
+  95              		.cfi_endproc
+  96              	.LFE142:
+  98              		.section	.text.AUDIO_Mute,"ax",%progbits
+  99              		.align	1
+ 100              		.syntax unified
+ 101              		.thumb
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 10
+
+
+ 102              		.thumb_func
+ 104              	AUDIO_Mute:
+ 105              	.LFB143:
+ 415:../Src/audio.c **** 
+ 416:../Src/audio.c **** /**
+ 417:../Src/audio.c ****   * @brief  Drive the output permanently low, i.e. silence.
+ 418:../Src/audio.c ****   * @param  None
+ 419:../Src/audio.c ****   * @retval None
+ 420:../Src/audio.c ****   */
+ 421:../Src/audio.c **** static void AUDIO_Mute(void)
+ 422:../Src/audio.c **** {
+ 106              		.loc 1 422 1 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110              		@ link register save eliminated.
+ 423:../Src/audio.c ****   __HAL_TIM_SET_COMPARE(&s_pwm, AUDIO_PWM_CHANNEL, 0U);
+ 111              		.loc 1 423 3 view .LVU15
+ 112 0000 024B     		ldr	r3, .L11
+ 113 0002 1B68     		ldr	r3, [r3]
+ 114 0004 0022     		movs	r2, #0
+ 115 0006 DA63     		str	r2, [r3, #60]
+ 424:../Src/audio.c **** }
+ 116              		.loc 1 424 1 is_stmt 0 view .LVU16
+ 117 0008 7047     		bx	lr
+ 118              	.L12:
+ 119 000a 00BF     		.align	2
+ 120              	.L11:
+ 121 000c 00000000 		.word	.LANCHOR0
+ 122              		.cfi_endproc
+ 123              	.LFE143:
+ 125              		.section	.text.AUDIO_ResetPwm,"ax",%progbits
+ 126              		.align	1
+ 127              		.syntax unified
+ 128              		.thumb
+ 129              		.thumb_func
+ 131              	AUDIO_ResetPwm:
+ 132              	.LFB144:
+ 425:../Src/audio.c **** 
+ 426:../Src/audio.c **** /**
+ 427:../Src/audio.c ****   * @brief  Restore the PWM period before starting sample playback.
+ 428:../Src/audio.c ****   * @param  None
+ 429:../Src/audio.c ****   * @retval None
+ 430:../Src/audio.c ****   */
+ 431:../Src/audio.c **** static void AUDIO_ResetPwm(void)
+ 432:../Src/audio.c **** {
+ 133              		.loc 1 432 1 is_stmt 1 view -0
+ 134              		.cfi_startproc
+ 135              		@ args = 0, pretend = 0, frame = 0
+ 136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 137 0000 08B5     		push	{r3, lr}
+ 138              	.LCFI0:
+ 139              		.cfi_def_cfa_offset 8
+ 140              		.cfi_offset 3, -8
+ 141              		.cfi_offset 14, -4
+ 433:../Src/audio.c ****   AUDIO_Mute();
+ 142              		.loc 1 433 3 view .LVU18
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 11
+
+
+ 143 0002 FFF7FEFF 		bl	AUDIO_Mute
+ 144              	.LVL6:
+ 434:../Src/audio.c ****   __HAL_TIM_SET_AUTORELOAD(&s_pwm, 999U);
+ 145              		.loc 1 434 3 view .LVU19
+ 146              		.loc 1 434 3 view .LVU20
+ 147 0006 034B     		ldr	r3, .L15
+ 148 0008 1968     		ldr	r1, [r3]
+ 149 000a 40F2E732 		movw	r2, #999
+ 150 000e CA62     		str	r2, [r1, #44]
+ 151              		.loc 1 434 3 view .LVU21
+ 152 0010 DA60     		str	r2, [r3, #12]
+ 153              		.loc 1 434 3 view .LVU22
+ 435:../Src/audio.c **** }
+ 154              		.loc 1 435 1 is_stmt 0 view .LVU23
+ 155 0012 08BD     		pop	{r3, pc}
+ 156              	.L16:
+ 157              		.align	2
+ 158              	.L15:
+ 159 0014 00000000 		.word	.LANCHOR0
+ 160              		.cfi_endproc
+ 161              	.LFE144:
+ 163              		.section	.text.AUDIO_PwmSampleInit,"ax",%progbits
+ 164              		.align	1
+ 165              		.syntax unified
+ 166              		.thumb
+ 167              		.thumb_func
+ 169              	AUDIO_PwmSampleInit:
+ 170              	.LFB145:
+ 436:../Src/audio.c **** 
+ 437:../Src/audio.c **** /**
+ 438:../Src/audio.c ****   * @brief  Prepare the PWM for sample generation.
+ 439:../Src/audio.c ****   *
+ 440:../Src/audio.c ****   *         Sample mode runs the counter straight from the timer clock so that
+ 441:../Src/audio.c ****   *         the 16 bit period gives many duty steps, i.e. a proper 8 bit PWM
+ 442:../Src/audio.c ****   *         DAC. The carrier is kept above the audio band.
+ 443:../Src/audio.c ****   * @param  None
+ 444:../Src/audio.c ****   * @retval None
+ 445:../Src/audio.c ****   */
+ 446:../Src/audio.c **** static void AUDIO_PwmSampleInit(void)
+ 447:../Src/audio.c **** {
+ 171              		.loc 1 447 1 is_stmt 1 view -0
+ 172              		.cfi_startproc
+ 173              		@ args = 0, pretend = 0, frame = 0
+ 174              		@ frame_needed = 0, uses_anonymous_args = 0
+ 175 0000 00B5     		push	{lr}
+ 176              	.LCFI1:
+ 177              		.cfi_def_cfa_offset 4
+ 178              		.cfi_offset 14, -4
+ 448:../Src/audio.c ****   uint32_t carrier = AUDIO_SAMPLE_CARRIER_HZ;
+ 179              		.loc 1 448 3 view .LVU25
+ 180              	.LVL7:
+ 449:../Src/audio.c ****   uint32_t period;
+ 181              		.loc 1 449 3 view .LVU26
+ 450:../Src/audio.c ****   uint32_t value;
+ 182              		.loc 1 450 3 view .LVU27
+ 451:../Src/audio.c ****   int32_t  mid;
+ 183              		.loc 1 451 3 view .LVU28
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 12
+
+
+ 452:../Src/audio.c ****   int32_t  span;
+ 184              		.loc 1 452 3 view .LVU29
+ 453:../Src/audio.c **** 
+ 454:../Src/audio.c ****   if (s_timer_clk_hz < (AUDIO_SAMPLE_MIN_CARRIER_HZ * 2U))
+ 185              		.loc 1 454 3 view .LVU30
+ 186              		.loc 1 454 22 is_stmt 0 view .LVU31
+ 187 0002 2A4B     		ldr	r3, .L34
+ 188 0004 1B68     		ldr	r3, [r3]
+ 189              		.loc 1 454 6 view .LVU32
+ 190 0006 2A4A     		ldr	r2, .L34+4
+ 191 0008 9342     		cmp	r3, r2
+ 192 000a 12D9     		bls	.L24
+ 455:../Src/audio.c ****   {
+ 456:../Src/audio.c ****     /* Very slow timer clock: keep the maximum resolution the clock allows. */
+ 457:../Src/audio.c ****     period = 2U;
+ 458:../Src/audio.c ****   }
+ 459:../Src/audio.c ****   else
+ 460:../Src/audio.c ****   {
+ 461:../Src/audio.c ****     period = s_timer_clk_hz / carrier;
+ 193              		.loc 1 461 5 is_stmt 1 view .LVU33
+ 194              		.loc 1 461 12 is_stmt 0 view .LVU34
+ 195 000c 02F18642 		add	r2, r2, #1124073472
+ 196 0010 02F5D512 		add	r2, r2, #1744896
+ 197 0014 02F20462 		addw	r2, r2, #1540
+ 198 0018 A2FB032E 		umull	r2, lr, r2, r3
+ 199 001c 4FEA9E3E 		lsr	lr, lr, #14
+ 200              	.LVL8:
+ 462:../Src/audio.c ****     if (period < 2U)
+ 201              		.loc 1 462 5 is_stmt 1 view .LVU35
+ 202              		.loc 1 462 8 is_stmt 0 view .LVU36
+ 203 0020 244A     		ldr	r2, .L34+8
+ 204 0022 9342     		cmp	r3, r2
+ 205 0024 1BD9     		bls	.L25
+ 463:../Src/audio.c ****     {
+ 464:../Src/audio.c ****       period = 2U;
+ 465:../Src/audio.c ****     }
+ 466:../Src/audio.c ****     else if (period > 65536U)
+ 206              		.loc 1 466 10 is_stmt 1 view .LVU37
+ 207              		.loc 1 466 13 is_stmt 0 view .LVU38
+ 208 0026 244A     		ldr	r2, .L34+12
+ 209 0028 9342     		cmp	r3, r2
+ 210 002a 04D3     		bcc	.L18
+ 467:../Src/audio.c ****     {
+ 468:../Src/audio.c ****       period = 65536U;
+ 211              		.loc 1 468 14 view .LVU39
+ 212 002c 4FF4803E 		mov	lr, #65536
+ 213              	.LVL9:
+ 214              		.loc 1 468 14 view .LVU40
+ 215 0030 01E0     		b	.L18
+ 216              	.LVL10:
+ 217              	.L24:
+ 457:../Src/audio.c ****   }
+ 218              		.loc 1 457 12 view .LVU41
+ 219 0032 4FF0020E 		mov	lr, #2
+ 220              	.L18:
+ 221              	.LVL11:
+ 469:../Src/audio.c ****     }
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 13
+
+
+ 470:../Src/audio.c ****   }
+ 471:../Src/audio.c **** 
+ 472:../Src/audio.c ****   __HAL_TIM_SET_PRESCALER(&s_pwm, 0U);
+ 222              		.loc 1 472 3 is_stmt 1 view .LVU42
+ 223 0036 214B     		ldr	r3, .L34+16
+ 224 0038 1868     		ldr	r0, [r3]
+ 225 003a 0022     		movs	r2, #0
+ 226 003c 8262     		str	r2, [r0, #40]
+ 473:../Src/audio.c ****   __HAL_TIM_SET_AUTORELOAD(&s_pwm, period - 1U);
+ 227              		.loc 1 473 3 view .LVU43
+ 228              		.loc 1 473 3 view .LVU44
+ 229 003e 0EF1FF31 		add	r1, lr, #-1
+ 230 0042 C162     		str	r1, [r0, #44]
+ 231              		.loc 1 473 3 view .LVU45
+ 232 0044 D960     		str	r1, [r3, #12]
+ 233              		.loc 1 473 3 view .LVU46
+ 474:../Src/audio.c **** 
+ 475:../Src/audio.c ****   /* Precompute the sample to duty mapping. The sample is centred on a 50 %
+ 476:../Src/audio.c ****      duty (which the AC coupling of the amplifier turns into silence) and the
+ 477:../Src/audio.c ****      span around that midpoint is set by AUDIO_SAMPLE_SPAN_PCT. The duty is kept
+ 478:../Src/audio.c ****      just below the period so that the output can never be left permanently
+ 479:../Src/audio.c ****      high.
+ 480:../Src/audio.c ****    *
+ 481:../Src/audio.c ****    * The mapping also applies the compressor selected by
+ 482:../Src/audio.c ****    * AUDIO_SAMPLE_COMPRESS_PCT. The curve used is
+ 483:../Src/audio.c ****    *
+ 484:../Src/audio.c ****    *     f(s) = s * (1 + k) / (1 + k * |s|)          with s in [-1, 1]
+ 485:../Src/audio.c ****    *
+ 486:../Src/audio.c ****    * which is a smooth saturation: f(0) = 0, f(1) = 1 and f'(0) = 1 + k. Small
+ 487:../Src/audio.c ****    * signals are therefore lifted by 1 + k while the peak stays anchored at 1,
+ 488:../Src/audio.c ****    * which is exactly the ratio that raises the average level. The arithmetic is
+ 489:../Src/audio.c ****    * done in integers so no floating point library is pulled in. */
+ 490:../Src/audio.c ****   mid  = (int32_t)(period / 2U);
+ 234              		.loc 1 490 3 view .LVU47
+ 235              		.loc 1 490 27 is_stmt 0 view .LVU48
+ 236 0046 4FEA5E01 		lsr	r1, lr, #1
+ 237              	.LVL12:
+ 491:../Src/audio.c ****   span = (int32_t)((period / 2U) * AUDIO_SAMPLE_SPAN_PCT / 100U);
+ 238              		.loc 1 491 3 is_stmt 1 view .LVU49
+ 239              		.loc 1 491 34 is_stmt 0 view .LVU50
+ 240 004a 4FF0640C 		mov	ip, #100
+ 241 004e 0CFB01FC 		mul	ip, ip, r1
+ 242              		.loc 1 491 58 view .LVU51
+ 243 0052 1B4B     		ldr	r3, .L34+20
+ 244 0054 A3FB0C3C 		umull	r3, ip, r3, ip
+ 245 0058 4FEA5C1C 		lsr	ip, ip, #5
+ 246              	.LVL13:
+ 492:../Src/audio.c **** 
+ 493:../Src/audio.c ****   for (value = 0U; value < 256U; ++value)
+ 247              		.loc 1 493 3 is_stmt 1 view .LVU52
+ 248              		.loc 1 493 3 is_stmt 0 view .LVU53
+ 249 005c 0EE0     		b	.L19
+ 250              	.LVL14:
+ 251              	.L25:
+ 464:../Src/audio.c ****     }
+ 252              		.loc 1 464 14 view .LVU54
+ 253 005e 4FF0020E 		mov	lr, #2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 14
+
+
+ 254              	.LVL15:
+ 464:../Src/audio.c ****     }
+ 255              		.loc 1 464 14 view .LVU55
+ 256 0062 E8E7     		b	.L18
+ 257              	.LVL16:
+ 258              	.L27:
+ 259              	.LBB2:
+ 494:../Src/audio.c ****   {
+ 495:../Src/audio.c ****     int32_t s    = (int32_t)value - 128;      /* -128 .. +127               */
+ 496:../Src/audio.c ****     int32_t k    = (int32_t)AUDIO_SAMPLE_COMPRESS_PCT;
+ 497:../Src/audio.c ****     int32_t num  = s * (128 + k);
+ 498:../Src/audio.c ****     int32_t den  = 128 + ((k * (s < 0 ? -s : s)) / 128);
+ 499:../Src/audio.c ****     int32_t shaped;
+ 500:../Src/audio.c ****     int32_t duty;
+ 501:../Src/audio.c **** 
+ 502:../Src/audio.c ****     /* q15 value in the same -128..+128 range as the input. */
+ 503:../Src/audio.c ****     shaped = (den != 0) ? (num / den) : s;
+ 504:../Src/audio.c ****     if (shaped >  128) shaped =  128;
+ 260              		.loc 1 504 31 view .LVU56
+ 261 0064 8023     		movs	r3, #128
+ 262              	.LVL17:
+ 263              		.loc 1 504 31 view .LVU57
+ 264 0066 12E0     		b	.L20
+ 265              	.LVL18:
+ 266              	.L32:
+ 505:../Src/audio.c ****     if (shaped < -128) shaped = -128;
+ 267              		.loc 1 505 31 view .LVU58
+ 268 0068 6FF07F03 		mvn	r3, #127
+ 269              	.LVL19:
+ 270              		.loc 1 505 31 view .LVU59
+ 271 006c 0FE0     		b	.L20
+ 272              	.LVL20:
+ 273              	.L33:
+ 506:../Src/audio.c **** 
+ 507:../Src/audio.c ****     duty = mid + ((shaped * span) / 128);
+ 274              		.loc 1 507 35 view .LVU60
+ 275 006e 7F33     		adds	r3, r3, #127
+ 276 0070 11E0     		b	.L21
+ 277              	.LVL21:
+ 278              	.L29:
+ 508:../Src/audio.c **** 
+ 509:../Src/audio.c ****     if (duty < 0)
+ 510:../Src/audio.c ****     {
+ 511:../Src/audio.c ****       duty = 0;
+ 279              		.loc 1 511 12 view .LVU61
+ 280 0072 0023     		movs	r3, #0
+ 281              	.LVL22:
+ 282              	.L22:
+ 512:../Src/audio.c ****     }
+ 513:../Src/audio.c ****     else if (duty > (int32_t)period - 1)
+ 514:../Src/audio.c ****     {
+ 515:../Src/audio.c ****       duty = (int32_t)period - 1;
+ 516:../Src/audio.c ****     }
+ 517:../Src/audio.c ****     s_duty_lut[value] = (uint16_t)duty;
+ 283              		.loc 1 517 5 is_stmt 1 discriminator 2 view .LVU62
+ 284              		.loc 1 517 23 is_stmt 0 discriminator 2 view .LVU63
+ 285 0074 1348     		ldr	r0, .L34+24
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 15
+
+
+ 286 0076 20F81230 		strh	r3, [r0, r2, lsl #1]	@ movhi
+ 287              	.LBE2:
+ 493:../Src/audio.c ****   {
+ 288              		.loc 1 493 34 is_stmt 1 discriminator 2 view .LVU64
+ 289 007a 0132     		adds	r2, r2, #1
+ 290              	.LVL23:
+ 291              	.L19:
+ 493:../Src/audio.c ****   {
+ 292              		.loc 1 493 20 discriminator 1 view .LVU65
+ 493:../Src/audio.c ****   {
+ 293              		.loc 1 493 3 is_stmt 0 discriminator 1 view .LVU66
+ 294 007c FF2A     		cmp	r2, #255
+ 295 007e 12D8     		bhi	.L31
+ 296              	.LBB3:
+ 495:../Src/audio.c ****     int32_t k    = (int32_t)AUDIO_SAMPLE_COMPRESS_PCT;
+ 297              		.loc 1 495 5 is_stmt 1 view .LVU67
+ 495:../Src/audio.c ****     int32_t k    = (int32_t)AUDIO_SAMPLE_COMPRESS_PCT;
+ 298              		.loc 1 495 13 is_stmt 0 view .LVU68
+ 299 0080 A2F18003 		sub	r3, r2, #128
+ 300              	.LVL24:
+ 496:../Src/audio.c ****     int32_t num  = s * (128 + k);
+ 301              		.loc 1 496 5 is_stmt 1 view .LVU69
+ 497:../Src/audio.c ****     int32_t den  = 128 + ((k * (s < 0 ? -s : s)) / 128);
+ 302              		.loc 1 497 5 view .LVU70
+ 498:../Src/audio.c ****     int32_t shaped;
+ 303              		.loc 1 498 5 view .LVU71
+ 499:../Src/audio.c ****     int32_t duty;
+ 304              		.loc 1 499 5 view .LVU72
+ 500:../Src/audio.c **** 
+ 305              		.loc 1 500 5 view .LVU73
+ 503:../Src/audio.c ****     if (shaped >  128) shaped =  128;
+ 306              		.loc 1 503 5 view .LVU74
+ 504:../Src/audio.c ****     if (shaped < -128) shaped = -128;
+ 307              		.loc 1 504 5 view .LVU75
+ 504:../Src/audio.c ****     if (shaped < -128) shaped = -128;
+ 308              		.loc 1 504 8 is_stmt 0 view .LVU76
+ 309 0084 802B     		cmp	r3, #128
+ 310 0086 EDDC     		bgt	.L27
+ 505:../Src/audio.c **** 
+ 311              		.loc 1 505 5 is_stmt 1 view .LVU77
+ 505:../Src/audio.c **** 
+ 312              		.loc 1 505 8 is_stmt 0 view .LVU78
+ 313 0088 13F1800F 		cmn	r3, #128
+ 314 008c ECDB     		blt	.L32
+ 315              	.LVL25:
+ 316              	.L20:
+ 507:../Src/audio.c **** 
+ 317              		.loc 1 507 5 is_stmt 1 view .LVU79
+ 507:../Src/audio.c **** 
+ 318              		.loc 1 507 27 is_stmt 0 view .LVU80
+ 319 008e 0CFB03F3 		mul	r3, ip, r3
+ 320              	.LVL26:
+ 507:../Src/audio.c **** 
+ 321              		.loc 1 507 35 view .LVU81
+ 322 0092 002B     		cmp	r3, #0
+ 323 0094 EBDB     		blt	.L33
+ 324              	.L21:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 16
+
+
+ 325              	.LVL27:
+ 509:../Src/audio.c ****     {
+ 326              		.loc 1 509 5 is_stmt 1 view .LVU82
+ 509:../Src/audio.c ****     {
+ 327              		.loc 1 509 8 is_stmt 0 view .LVU83
+ 328 0096 11EBE313 		adds	r3, r1, r3, asr #7
+ 329              	.LVL28:
+ 509:../Src/audio.c ****     {
+ 330              		.loc 1 509 8 view .LVU84
+ 331 009a EAD4     		bmi	.L29
+ 513:../Src/audio.c ****     {
+ 332              		.loc 1 513 10 is_stmt 1 view .LVU85
+ 513:../Src/audio.c ****     {
+ 333              		.loc 1 513 13 is_stmt 0 view .LVU86
+ 334 009c 9E45     		cmp	lr, r3
+ 335 009e E9DC     		bgt	.L22
+ 515:../Src/audio.c ****     }
+ 336              		.loc 1 515 7 is_stmt 1 view .LVU87
+ 515:../Src/audio.c ****     }
+ 337              		.loc 1 515 12 is_stmt 0 view .LVU88
+ 338 00a0 0EF1FF33 		add	r3, lr, #-1
+ 339              	.LVL29:
+ 515:../Src/audio.c ****     }
+ 340              		.loc 1 515 12 view .LVU89
+ 341 00a4 E6E7     		b	.L22
+ 342              	.LVL30:
+ 343              	.L31:
+ 515:../Src/audio.c ****     }
+ 344              		.loc 1 515 12 view .LVU90
+ 345              	.LBE3:
+ 518:../Src/audio.c ****   }
+ 519:../Src/audio.c **** }
+ 346              		.loc 1 519 1 view .LVU91
+ 347 00a6 5DF804FB 		ldr	pc, [sp], #4
+ 348              	.L35:
+ 349 00aa 00BF     		.align	2
+ 350              	.L34:
+ 351 00ac 00000000 		.word	.LANCHOR2
+ 352 00b0 7F380100 		.word	79999
+ 353 00b4 47E80100 		.word	124999
+ 354 00b8 24F424F4 		.word	-198904796
+ 355 00bc 00000000 		.word	.LANCHOR0
+ 356 00c0 1F85EB51 		.word	1374389535
+ 357 00c4 00000000 		.word	.LANCHOR1
+ 358              		.cfi_endproc
+ 359              	.LFE145:
+ 361              		.section	.text.AUDIO_SampleTimerStop,"ax",%progbits
+ 362              		.align	1
+ 363              		.syntax unified
+ 364              		.thumb
+ 365              		.thumb_func
+ 367              	AUDIO_SampleTimerStop:
+ 368              	.LFB146:
+ 520:../Src/audio.c **** 
+ 521:../Src/audio.c **** /**
+ 522:../Src/audio.c ****   * @brief  Stop the sample pacing timer.
+ 523:../Src/audio.c ****   * @param  None
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 17
+
+
+ 524:../Src/audio.c ****   * @retval None
+ 525:../Src/audio.c ****   */
+ 526:../Src/audio.c **** static void AUDIO_SampleTimerStop(void)
+ 527:../Src/audio.c **** {
+ 369              		.loc 1 527 1 is_stmt 1 view -0
+ 370              		.cfi_startproc
+ 371              		@ args = 0, pretend = 0, frame = 0
+ 372              		@ frame_needed = 0, uses_anonymous_args = 0
+ 373              		@ link register save eliminated.
+ 528:../Src/audio.c ****   __HAL_TIM_DISABLE(&s_sample);
+ 374              		.loc 1 528 3 view .LVU93
+ 375              		.loc 1 528 3 view .LVU94
+ 376 0000 0B4B     		ldr	r3, .L38
+ 377 0002 1B68     		ldr	r3, [r3]
+ 378 0004 196A     		ldr	r1, [r3, #32]
+ 379 0006 41F21112 		movw	r2, #4369
+ 380 000a 1142     		tst	r1, r2
+ 381 000c 08D1     		bne	.L37
+ 382              		.loc 1 528 3 discriminator 1 view .LVU95
+ 383 000e 196A     		ldr	r1, [r3, #32]
+ 384 0010 44F24442 		movw	r2, #17476
+ 385 0014 1142     		tst	r1, r2
+ 386 0016 03D1     		bne	.L37
+ 387              		.loc 1 528 3 discriminator 3 view .LVU96
+ 388 0018 1A68     		ldr	r2, [r3]
+ 389 001a 22F00102 		bic	r2, r2, #1
+ 390 001e 1A60     		str	r2, [r3]
+ 391              	.L37:
+ 392              		.loc 1 528 3 discriminator 5 view .LVU97
+ 529:../Src/audio.c ****   __HAL_TIM_SET_COUNTER(&s_sample, 0U);
+ 393              		.loc 1 529 3 discriminator 5 view .LVU98
+ 394 0020 034B     		ldr	r3, .L38
+ 395 0022 1B68     		ldr	r3, [r3]
+ 396 0024 0022     		movs	r2, #0
+ 397 0026 5A62     		str	r2, [r3, #36]
+ 530:../Src/audio.c ****   __HAL_TIM_CLEAR_FLAG(&s_sample, TIM_FLAG_UPDATE);
+ 398              		.loc 1 530 3 discriminator 5 view .LVU99
+ 399 0028 6FF00102 		mvn	r2, #1
+ 400 002c 1A61     		str	r2, [r3, #16]
+ 531:../Src/audio.c **** }
+ 401              		.loc 1 531 1 is_stmt 0 discriminator 5 view .LVU100
+ 402 002e 7047     		bx	lr
+ 403              	.L39:
+ 404              		.align	2
+ 405              	.L38:
+ 406 0030 00000000 		.word	.LANCHOR3
+ 407              		.cfi_endproc
+ 408              	.LFE146:
+ 410              		.global	__aeabi_uldivmod
+ 411              		.section	.text.AUDIO_ProgramPaceTimer,"ax",%progbits
+ 412              		.align	1
+ 413              		.syntax unified
+ 414              		.thumb
+ 415              		.thumb_func
+ 417              	AUDIO_ProgramPaceTimer:
+ 418              	.LVL31:
+ 419              	.LFB147:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 18
+
+
+ 532:../Src/audio.c **** 
+ 533:../Src/audio.c **** /**
+ 534:../Src/audio.c ****   * @brief  Program the pacing timer to fire at the requested rate.
+ 535:../Src/audio.c ****   *
+ 536:../Src/audio.c ****   *         The timer clock is divided as accurately as possible by searching a
+ 537:../Src/audio.c ****   *         small window of prescaler values for the combination with the
+ 538:../Src/audio.c ****   *         smallest rate error. The error stays below 0.1 % for every supported
+ 539:../Src/audio.c ****   *         rate (it is exactly zero for the common standard rates).
+ 540:../Src/audio.c ****   * @param  rate_hz rate of the update interrupt, in Hz.
+ 541:../Src/audio.c ****   * @retval None
+ 542:../Src/audio.c ****   */
+ 543:../Src/audio.c **** static void AUDIO_ProgramPaceTimer(uint32_t rate_hz)
+ 544:../Src/audio.c **** {
+ 420              		.loc 1 544 1 is_stmt 1 view -0
+ 421              		.cfi_startproc
+ 422              		@ args = 0, pretend = 0, frame = 32
+ 423              		@ frame_needed = 0, uses_anonymous_args = 0
+ 424              		.loc 1 544 1 is_stmt 0 view .LVU102
+ 425 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 426              	.LCFI2:
+ 427              		.cfi_def_cfa_offset 36
+ 428              		.cfi_offset 4, -36
+ 429              		.cfi_offset 5, -32
+ 430              		.cfi_offset 6, -28
+ 431              		.cfi_offset 7, -24
+ 432              		.cfi_offset 8, -20
+ 433              		.cfi_offset 9, -16
+ 434              		.cfi_offset 10, -12
+ 435              		.cfi_offset 11, -8
+ 436              		.cfi_offset 14, -4
+ 437 0004 89B0     		sub	sp, sp, #36
+ 438              	.LCFI3:
+ 439              		.cfi_def_cfa_offset 72
+ 440 0006 0746     		mov	r7, r0
+ 545:../Src/audio.c ****   uint64_t clk = s_timer_clk_hz;
+ 441              		.loc 1 545 3 is_stmt 1 view .LVU103
+ 442              		.loc 1 545 12 is_stmt 0 view .LVU104
+ 443 0008 524B     		ldr	r3, .L55
+ 444 000a D3F80080 		ldr	r8, [r3]
+ 445 000e 4FF0000A 		mov	r10, #0
+ 446              	.LVL32:
+ 546:../Src/audio.c ****   uint32_t guess;
+ 447              		.loc 1 546 3 is_stmt 1 view .LVU105
+ 547:../Src/audio.c ****   uint32_t best_pre = 1U;
+ 448              		.loc 1 547 3 view .LVU106
+ 548:../Src/audio.c ****   uint32_t best_arr = 1U;
+ 449              		.loc 1 548 3 view .LVU107
+ 549:../Src/audio.c ****   uint64_t best_err = UINT64_MAX;
+ 450              		.loc 1 549 3 view .LVU108
+ 550:../Src/audio.c ****   uint32_t lo;
+ 451              		.loc 1 550 3 view .LVU109
+ 551:../Src/audio.c ****   uint32_t hi;
+ 452              		.loc 1 551 3 view .LVU110
+ 552:../Src/audio.c ****   uint32_t i;
+ 453              		.loc 1 552 3 view .LVU111
+ 553:../Src/audio.c **** 
+ 554:../Src/audio.c ****   /* Smallest prescaler that brings the period for *this* rate into the 16 bit
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 19
+
+
+ 555:../Src/audio.c ****      range of the auto-reload register. */
+ 556:../Src/audio.c ****   guess = 1U;
+ 454              		.loc 1 556 3 view .LVU112
+ 557:../Src/audio.c ****   while ((clk / ((uint64_t)guess * (uint64_t)rate_hz)) > 65536ULL)
+ 455              		.loc 1 557 3 view .LVU113
+ 556:../Src/audio.c ****   while ((clk / ((uint64_t)guess * (uint64_t)rate_hz)) > 65536ULL)
+ 456              		.loc 1 556 9 is_stmt 0 view .LVU114
+ 457 0012 0124     		movs	r4, #1
+ 458              		.loc 1 557 9 view .LVU115
+ 459 0014 00E0     		b	.L41
+ 460              	.LVL33:
+ 461              	.L42:
+ 558:../Src/audio.c ****   {
+ 559:../Src/audio.c ****     ++guess;
+ 462              		.loc 1 559 5 is_stmt 1 view .LVU116
+ 463 0016 0134     		adds	r4, r4, #1
+ 464              	.LVL34:
+ 465              	.L41:
+ 557:../Src/audio.c ****   {
+ 466              		.loc 1 557 9 view .LVU117
+ 557:../Src/audio.c ****   {
+ 467              		.loc 1 557 18 is_stmt 0 view .LVU118
+ 468 0018 4FF0000B 		mov	fp, #0
+ 557:../Src/audio.c ****   {
+ 469              		.loc 1 557 15 view .LVU119
+ 470 001c A4FB0723 		umull	r2, r3, r4, r7
+ 471 0020 4046     		mov	r0, r8
+ 472 0022 5146     		mov	r1, r10
+ 473 0024 FFF7FEFF 		bl	__aeabi_uldivmod
+ 474              	.LVL35:
+ 557:../Src/audio.c ****   {
+ 475              		.loc 1 557 9 view .LVU120
+ 476 0028 B0F1011F 		cmp	r0, #65537
+ 477 002c 71F10003 		sbcs	r3, r1, #0
+ 478 0030 F1D2     		bcs	.L42
+ 560:../Src/audio.c ****   }
+ 561:../Src/audio.c **** 
+ 562:../Src/audio.c ****   /* Below that prescaler the period no longer fits, so only search upwards. */
+ 563:../Src/audio.c ****   lo = guess;
+ 479              		.loc 1 563 3 is_stmt 1 view .LVU121
+ 480              	.LVL36:
+ 564:../Src/audio.c ****   hi = guess + 8U;
+ 481              		.loc 1 564 3 view .LVU122
+ 482              		.loc 1 564 6 is_stmt 0 view .LVU123
+ 483 0032 04F10803 		add	r3, r4, #8
+ 484 0036 0393     		str	r3, [sp, #12]
+ 485              	.LVL37:
+ 565:../Src/audio.c **** 
+ 566:../Src/audio.c ****   for (i = lo; i <= hi; ++i)
+ 486              		.loc 1 566 3 is_stmt 1 view .LVU124
+ 549:../Src/audio.c ****   uint32_t lo;
+ 487              		.loc 1 549 12 is_stmt 0 view .LVU125
+ 488 0038 4FF0FF33 		mov	r3, #-1
+ 489              	.LVL38:
+ 549:../Src/audio.c ****   uint32_t lo;
+ 490              		.loc 1 549 12 view .LVU126
+ 491 003c 0493     		str	r3, [sp, #16]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 20
+
+
+ 492 003e 0593     		str	r3, [sp, #20]
+ 548:../Src/audio.c ****   uint64_t best_err = UINT64_MAX;
+ 493              		.loc 1 548 12 view .LVU127
+ 494 0040 0123     		movs	r3, #1
+ 495 0042 0793     		str	r3, [sp, #28]
+ 547:../Src/audio.c ****   uint32_t best_arr = 1U;
+ 496              		.loc 1 547 12 view .LVU128
+ 497 0044 0693     		str	r3, [sp, #24]
+ 498              		.loc 1 566 3 view .LVU129
+ 499 0046 48E0     		b	.L43
+ 500              	.LVL39:
+ 501              	.L51:
+ 502              	.LBB4:
+ 567:../Src/audio.c ****   {
+ 568:../Src/audio.c ****     uint64_t ticks = clk / i;
+ 569:../Src/audio.c ****     uint64_t ideal;
+ 570:../Src/audio.c ****     uint64_t got;
+ 571:../Src/audio.c ****     uint64_t diff;
+ 572:../Src/audio.c ****     uint64_t err;
+ 573:../Src/audio.c ****     uint32_t arr;
+ 574:../Src/audio.c **** 
+ 575:../Src/audio.c ****     if (ticks == 0ULL)
+ 576:../Src/audio.c ****     {
+ 577:../Src/audio.c ****       continue;
+ 578:../Src/audio.c ****     }
+ 579:../Src/audio.c **** 
+ 580:../Src/audio.c ****     arr = (uint32_t)((ticks + (rate_hz / 2U)) / rate_hz);
+ 581:../Src/audio.c ****     if (arr == 0U)
+ 582:../Src/audio.c ****     {
+ 583:../Src/audio.c ****       arr = 1U;
+ 503              		.loc 1 583 11 view .LVU130
+ 504 0048 0123     		movs	r3, #1
+ 505 004a 0193     		str	r3, [sp, #4]
+ 506              	.L45:
+ 507              	.LVL40:
+ 584:../Src/audio.c ****     }
+ 585:../Src/audio.c ****     if (arr > 65536U)
+ 586:../Src/audio.c ****     {
+ 587:../Src/audio.c ****       continue;
+ 588:../Src/audio.c ****     }
+ 589:../Src/audio.c **** 
+ 590:../Src/audio.c ****     /* The achieved period is the prescaler times the auto-reload value. The
+ 591:../Src/audio.c ****        error is expressed in parts per million of the ideal period. */
+ 592:../Src/audio.c ****     ideal = clk / rate_hz;
+ 508              		.loc 1 592 5 is_stmt 1 view .LVU131
+ 509              		.loc 1 592 11 is_stmt 0 view .LVU132
+ 510 004c 3A46     		mov	r2, r7
+ 511 004e 5B46     		mov	r3, fp
+ 512 0050 4046     		mov	r0, r8
+ 513 0052 5146     		mov	r1, r10
+ 514 0054 FFF7FEFF 		bl	__aeabi_uldivmod
+ 515              	.LVL41:
+ 516 0058 8146     		mov	r9, r0
+ 517 005a 0291     		str	r1, [sp, #8]
+ 518              	.LVL42:
+ 593:../Src/audio.c ****     got   = (uint64_t)i * (uint64_t)arr;
+ 519              		.loc 1 593 5 is_stmt 1 view .LVU133
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 21
+
+
+ 520              		.loc 1 593 11 is_stmt 0 view .LVU134
+ 521 005c 019B     		ldr	r3, [sp, #4]
+ 522 005e A6FB0365 		umull	r6, r5, r6, r3
+ 523              	.LVL43:
+ 594:../Src/audio.c ****     diff  = (got > ideal) ? (got - ideal) : (ideal - got);
+ 524              		.loc 1 594 5 is_stmt 1 view .LVU135
+ 525              		.loc 1 594 43 is_stmt 0 view .LVU136
+ 526 0062 B042     		cmp	r0, r6
+ 527 0064 71EB0503 		sbcs	r3, r1, r5
+ 528 0068 52D2     		bcs	.L46
+ 529              		.loc 1 594 43 discriminator 1 view .LVU137
+ 530 006a 331A     		subs	r3, r6, r0
+ 531 006c 65EB0105 		sbc	r5, r5, r1
+ 532              	.LVL44:
+ 533              	.L47:
+ 595:../Src/audio.c ****     err   = (diff * 1000000ULL) / (ideal ? ideal : 1ULL);
+ 534              		.loc 1 595 5 is_stmt 1 discriminator 4 view .LVU138
+ 535              		.loc 1 595 19 is_stmt 0 discriminator 4 view .LVU139
+ 536 0070 6801     		lsls	r0, r5, #5
+ 537              	.LVL45:
+ 538              		.loc 1 595 19 discriminator 4 view .LVU140
+ 539 0072 40EAD360 		orr	r0, r0, r3, lsr #27
+ 540 0076 5A01     		lsls	r2, r3, #5
+ 541 0078 D21A     		subs	r2, r2, r3
+ 542 007a 60EB0500 		sbc	r0, r0, r5
+ 543 007e 4002     		lsls	r0, r0, #9
+ 544 0080 40EAD250 		orr	r0, r0, r2, lsr #23
+ 545 0084 5202     		lsls	r2, r2, #9
+ 546 0086 D218     		adds	r2, r2, r3
+ 547 0088 45EB0000 		adc	r0, r5, r0
+ 548 008c 8101     		lsls	r1, r0, #6
+ 549              	.LVL46:
+ 550              		.loc 1 595 19 discriminator 4 view .LVU141
+ 551 008e 41EA9261 		orr	r1, r1, r2, lsr #26
+ 552 0092 9601     		lsls	r6, r2, #6
+ 553              	.LVL47:
+ 554              		.loc 1 595 19 discriminator 4 view .LVU142
+ 555 0094 B61A     		subs	r6, r6, r2
+ 556 0096 61EB0000 		sbc	r0, r1, r0
+ 557 009a F618     		adds	r6, r6, r3
+ 558 009c 45EB0005 		adc	r5, r5, r0
+ 559              	.LVL48:
+ 560              		.loc 1 595 50 discriminator 4 view .LVU143
+ 561 00a0 B845     		cmp	r8, r7
+ 562 00a2 03D2     		bcs	.L48
+ 563              		.loc 1 595 50 view .LVU144
+ 564 00a4 4FF00109 		mov	r9, #1
+ 565              	.LVL49:
+ 566              		.loc 1 595 50 view .LVU145
+ 567 00a8 0023     		movs	r3, #0
+ 568              		.loc 1 595 50 view .LVU146
+ 569 00aa 0293     		str	r3, [sp, #8]
+ 570              	.L48:
+ 571              		.loc 1 595 11 discriminator 4 view .LVU147
+ 572 00ac 4A46     		mov	r2, r9
+ 573 00ae 029B     		ldr	r3, [sp, #8]
+ 574 00b0 3046     		mov	r0, r6
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 22
+
+
+ 575 00b2 2946     		mov	r1, r5
+ 576 00b4 FFF7FEFF 		bl	__aeabi_uldivmod
+ 577              	.LVL50:
+ 596:../Src/audio.c **** 
+ 597:../Src/audio.c ****     if (err < best_err)
+ 578              		.loc 1 597 5 is_stmt 1 discriminator 4 view .LVU148
+ 579              		.loc 1 597 8 is_stmt 0 discriminator 4 view .LVU149
+ 580 00b8 049A     		ldr	r2, [sp, #16]
+ 581 00ba 9042     		cmp	r0, r2
+ 582 00bc 059A     		ldr	r2, [sp, #20]
+ 583 00be 71EB0202 		sbcs	r2, r1, r2
+ 584 00c2 09D2     		bcs	.L44
+ 598:../Src/audio.c ****     {
+ 599:../Src/audio.c ****       best_err = err;
+ 585              		.loc 1 599 7 is_stmt 1 view .LVU150
+ 586              	.LVL51:
+ 600:../Src/audio.c ****       best_pre = i;
+ 587              		.loc 1 600 7 view .LVU151
+ 601:../Src/audio.c ****       best_arr = arr;
+ 588              		.loc 1 601 7 view .LVU152
+ 602:../Src/audio.c ****       if (err == 0ULL)
+ 589              		.loc 1 602 7 view .LVU153
+ 590              		.loc 1 602 10 is_stmt 0 view .LVU154
+ 591 00c4 4E45     		cmp	r6, r9
+ 592 00c6 029B     		ldr	r3, [sp, #8]
+ 593 00c8 75EB0303 		sbcs	r3, r5, r3
+ 594 00cc 24D3     		bcc	.L53
+ 599:../Src/audio.c ****       best_pre = i;
+ 595              		.loc 1 599 16 view .LVU155
+ 596 00ce 0490     		str	r0, [sp, #16]
+ 597 00d0 0591     		str	r1, [sp, #20]
+ 598 00d2 019B     		ldr	r3, [sp, #4]
+ 599 00d4 0793     		str	r3, [sp, #28]
+ 600:../Src/audio.c ****       best_arr = arr;
+ 600              		.loc 1 600 16 view .LVU156
+ 601 00d6 0694     		str	r4, [sp, #24]
+ 602              	.LVL52:
+ 603              	.L44:
+ 600:../Src/audio.c ****       best_arr = arr;
+ 604              		.loc 1 600 16 view .LVU157
+ 605              	.LBE4:
+ 566:../Src/audio.c ****   {
+ 606              		.loc 1 566 25 is_stmt 1 discriminator 2 view .LVU158
+ 607 00d8 0134     		adds	r4, r4, #1
+ 608              	.LVL53:
+ 609              	.L43:
+ 566:../Src/audio.c ****   {
+ 610              		.loc 1 566 16 discriminator 1 view .LVU159
+ 566:../Src/audio.c ****   {
+ 611              		.loc 1 566 3 is_stmt 0 discriminator 1 view .LVU160
+ 612 00da 039B     		ldr	r3, [sp, #12]
+ 613 00dc 9C42     		cmp	r4, r3
+ 614 00de 1ED8     		bhi	.L49
+ 615              	.LBB5:
+ 568:../Src/audio.c ****     uint64_t ideal;
+ 616              		.loc 1 568 5 is_stmt 1 view .LVU161
+ 568:../Src/audio.c ****     uint64_t ideal;
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 23
+
+
+ 617              		.loc 1 568 26 is_stmt 0 view .LVU162
+ 618 00e0 2646     		mov	r6, r4
+ 568:../Src/audio.c ****     uint64_t ideal;
+ 619              		.loc 1 568 14 view .LVU163
+ 620 00e2 2246     		mov	r2, r4
+ 621 00e4 0023     		movs	r3, #0
+ 622 00e6 4046     		mov	r0, r8
+ 623 00e8 5146     		mov	r1, r10
+ 624 00ea FFF7FEFF 		bl	__aeabi_uldivmod
+ 625              	.LVL54:
+ 569:../Src/audio.c ****     uint64_t got;
+ 626              		.loc 1 569 5 is_stmt 1 view .LVU164
+ 570:../Src/audio.c ****     uint64_t diff;
+ 627              		.loc 1 570 5 view .LVU165
+ 571:../Src/audio.c ****     uint64_t err;
+ 628              		.loc 1 571 5 view .LVU166
+ 572:../Src/audio.c ****     uint32_t arr;
+ 629              		.loc 1 572 5 view .LVU167
+ 573:../Src/audio.c **** 
+ 630              		.loc 1 573 5 view .LVU168
+ 575:../Src/audio.c ****     {
+ 631              		.loc 1 575 5 view .LVU169
+ 575:../Src/audio.c ****     {
+ 632              		.loc 1 575 8 is_stmt 0 view .LVU170
+ 633 00ee A045     		cmp	r8, r4
+ 634 00f0 F2D3     		bcc	.L44
+ 580:../Src/audio.c ****     if (arr == 0U)
+ 635              		.loc 1 580 5 is_stmt 1 view .LVU171
+ 580:../Src/audio.c ****     if (arr == 0U)
+ 636              		.loc 1 580 40 is_stmt 0 view .LVU172
+ 637 00f2 7B08     		lsrs	r3, r7, #1
+ 580:../Src/audio.c ****     if (arr == 0U)
+ 638              		.loc 1 580 29 view .LVU173
+ 639 00f4 1818     		adds	r0, r3, r0
+ 640              	.LVL55:
+ 580:../Src/audio.c ****     if (arr == 0U)
+ 641              		.loc 1 580 47 view .LVU174
+ 642 00f6 3A46     		mov	r2, r7
+ 643 00f8 5B46     		mov	r3, fp
+ 644 00fa 41F10001 		adc	r1, r1, #0
+ 645 00fe FFF7FEFF 		bl	__aeabi_uldivmod
+ 646              	.LVL56:
+ 580:../Src/audio.c ****     if (arr == 0U)
+ 647              		.loc 1 580 9 view .LVU175
+ 648 0102 0190     		str	r0, [sp, #4]
+ 649              	.LVL57:
+ 581:../Src/audio.c ****     {
+ 650              		.loc 1 581 5 is_stmt 1 view .LVU176
+ 581:../Src/audio.c ****     {
+ 651              		.loc 1 581 8 is_stmt 0 view .LVU177
+ 652 0104 0028     		cmp	r0, #0
+ 653 0106 9FD0     		beq	.L51
+ 585:../Src/audio.c ****     {
+ 654              		.loc 1 585 5 is_stmt 1 view .LVU178
+ 585:../Src/audio.c ****     {
+ 655              		.loc 1 585 8 is_stmt 0 view .LVU179
+ 656 0108 B0F5803F 		cmp	r0, #65536
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 24
+
+
+ 657 010c 9ED9     		bls	.L45
+ 658 010e E3E7     		b	.L44
+ 659              	.LVL58:
+ 660              	.L46:
+ 594:../Src/audio.c ****     err   = (diff * 1000000ULL) / (ideal ? ideal : 1ULL);
+ 661              		.loc 1 594 43 discriminator 2 view .LVU180
+ 662 0110 831B     		subs	r3, r0, r6
+ 663 0112 61EB0505 		sbc	r5, r1, r5
+ 664              	.LVL59:
+ 594:../Src/audio.c ****     err   = (diff * 1000000ULL) / (ideal ? ideal : 1ULL);
+ 665              		.loc 1 594 43 discriminator 2 view .LVU181
+ 666 0116 ABE7     		b	.L47
+ 667              	.LVL60:
+ 668              	.L53:
+ 594:../Src/audio.c ****     err   = (diff * 1000000ULL) / (ideal ? ideal : 1ULL);
+ 669              		.loc 1 594 43 discriminator 2 view .LVU182
+ 670              	.LBE5:
+ 671 0118 019B     		ldr	r3, [sp, #4]
+ 672 011a 0793     		str	r3, [sp, #28]
+ 673              	.LBB6:
+ 600:../Src/audio.c ****       best_arr = arr;
+ 674              		.loc 1 600 16 view .LVU183
+ 675 011c 0694     		str	r4, [sp, #24]
+ 676              	.LVL61:
+ 677              	.L49:
+ 600:../Src/audio.c ****       best_arr = arr;
+ 678              		.loc 1 600 16 view .LVU184
+ 679              	.LBE6:
+ 603:../Src/audio.c ****       {
+ 604:../Src/audio.c ****         break;
+ 605:../Src/audio.c ****       }
+ 606:../Src/audio.c ****     }
+ 607:../Src/audio.c ****   }
+ 608:../Src/audio.c **** 
+ 609:../Src/audio.c ****   __HAL_TIM_SET_PRESCALER(&s_sample, best_pre - 1U);
+ 680              		.loc 1 609 3 is_stmt 1 view .LVU185
+ 681 011e 0E49     		ldr	r1, .L55+4
+ 682 0120 0A68     		ldr	r2, [r1]
+ 683 0122 069B     		ldr	r3, [sp, #24]
+ 684 0124 013B     		subs	r3, r3, #1
+ 685 0126 9362     		str	r3, [r2, #40]
+ 610:../Src/audio.c ****   __HAL_TIM_SET_AUTORELOAD(&s_sample, best_arr - 1U);
+ 686              		.loc 1 610 3 view .LVU186
+ 687              		.loc 1 610 3 view .LVU187
+ 688 0128 079B     		ldr	r3, [sp, #28]
+ 689 012a 013B     		subs	r3, r3, #1
+ 690 012c D362     		str	r3, [r2, #44]
+ 691              		.loc 1 610 3 view .LVU188
+ 692 012e CB60     		str	r3, [r1, #12]
+ 693              		.loc 1 610 3 view .LVU189
+ 611:../Src/audio.c ****   __HAL_TIM_SET_COUNTER(&s_sample, 0U);
+ 694              		.loc 1 611 3 view .LVU190
+ 695 0130 0023     		movs	r3, #0
+ 696 0132 5362     		str	r3, [r2, #36]
+ 612:../Src/audio.c ****   __HAL_TIM_CLEAR_FLAG(&s_sample, TIM_FLAG_UPDATE);
+ 697              		.loc 1 612 3 view .LVU191
+ 698 0134 6FF00103 		mvn	r3, #1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 25
+
+
+ 699 0138 1361     		str	r3, [r2, #16]
+ 613:../Src/audio.c ****   __HAL_TIM_ENABLE(&s_sample);
+ 700              		.loc 1 613 3 view .LVU192
+ 701 013a 1368     		ldr	r3, [r2]
+ 702 013c 43F00103 		orr	r3, r3, #1
+ 703 0140 1360     		str	r3, [r2]
+ 614:../Src/audio.c ****   __HAL_TIM_ENABLE_IT(&s_sample, TIM_IT_UPDATE);
+ 704              		.loc 1 614 3 view .LVU193
+ 705 0142 0A68     		ldr	r2, [r1]
+ 706 0144 D368     		ldr	r3, [r2, #12]
+ 707 0146 43F00103 		orr	r3, r3, #1
+ 708 014a D360     		str	r3, [r2, #12]
+ 615:../Src/audio.c **** }
+ 709              		.loc 1 615 1 is_stmt 0 view .LVU194
+ 710 014c 09B0     		add	sp, sp, #36
+ 711              	.LCFI4:
+ 712              		.cfi_def_cfa_offset 36
+ 713              		@ sp needed
+ 714 014e BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 715              	.LVL62:
+ 716              	.L56:
+ 717              		.loc 1 615 1 view .LVU195
+ 718 0152 00BF     		.align	2
+ 719              	.L55:
+ 720 0154 00000000 		.word	.LANCHOR2
+ 721 0158 00000000 		.word	.LANCHOR3
+ 722              		.cfi_endproc
+ 723              	.LFE147:
+ 725              		.section	.text.AUDIO_PwmGpioConfig,"ax",%progbits
+ 726              		.align	1
+ 727              		.syntax unified
+ 728              		.thumb
+ 729              		.thumb_func
+ 731              	AUDIO_PwmGpioConfig:
+ 732              	.LFB148:
+ 616:../Src/audio.c **** 
+ 617:../Src/audio.c **** /**
+ 618:../Src/audio.c ****   * @brief  Configure PA1 as the TIM2_CH2 alternate function output.
+ 619:../Src/audio.c ****   * @param  None
+ 620:../Src/audio.c ****   * @retval None
+ 621:../Src/audio.c ****   */
+ 622:../Src/audio.c **** static void AUDIO_PwmGpioConfig(void)
+ 623:../Src/audio.c **** {
+ 733              		.loc 1 623 1 is_stmt 1 view -0
+ 734              		.cfi_startproc
+ 735              		@ args = 0, pretend = 0, frame = 24
+ 736              		@ frame_needed = 0, uses_anonymous_args = 0
+ 737 0000 00B5     		push	{lr}
+ 738              	.LCFI5:
+ 739              		.cfi_def_cfa_offset 4
+ 740              		.cfi_offset 14, -4
+ 741 0002 87B0     		sub	sp, sp, #28
+ 742              	.LCFI6:
+ 743              		.cfi_def_cfa_offset 32
+ 624:../Src/audio.c ****   GPIO_InitTypeDef gpio = {0};
+ 744              		.loc 1 624 3 view .LVU197
+ 745              		.loc 1 624 20 is_stmt 0 view .LVU198
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 26
+
+
+ 746 0004 0023     		movs	r3, #0
+ 747 0006 0193     		str	r3, [sp, #4]
+ 748 0008 0293     		str	r3, [sp, #8]
+ 749 000a 0393     		str	r3, [sp, #12]
+ 750 000c 0493     		str	r3, [sp, #16]
+ 751 000e 0593     		str	r3, [sp, #20]
+ 625:../Src/audio.c **** 
+ 626:../Src/audio.c ****   AUDIO_PWM_GPIO_CLK_ENABLE();
+ 752              		.loc 1 626 3 is_stmt 1 view .LVU199
+ 753              	.LBB7:
+ 754              		.loc 1 626 3 view .LVU200
+ 755              		.loc 1 626 3 view .LVU201
+ 756 0010 03F18043 		add	r3, r3, #1073741824
+ 757 0014 03F50433 		add	r3, r3, #135168
+ 758 0018 DA6C     		ldr	r2, [r3, #76]
+ 759 001a 42F02002 		orr	r2, r2, #32
+ 760 001e DA64     		str	r2, [r3, #76]
+ 761              		.loc 1 626 3 view .LVU202
+ 762 0020 DB6C     		ldr	r3, [r3, #76]
+ 763 0022 03F02003 		and	r3, r3, #32
+ 764 0026 0093     		str	r3, [sp]
+ 765              		.loc 1 626 3 view .LVU203
+ 766 0028 009B     		ldr	r3, [sp]
+ 767              	.LBE7:
+ 768              		.loc 1 626 3 view .LVU204
+ 627:../Src/audio.c **** 
+ 628:../Src/audio.c ****   gpio.Pin       = AUDIO_PWM_GPIO_PIN;
+ 769              		.loc 1 628 3 view .LVU205
+ 770              		.loc 1 628 18 is_stmt 0 view .LVU206
+ 771 002a 8023     		movs	r3, #128
+ 772 002c 0193     		str	r3, [sp, #4]
+ 629:../Src/audio.c ****   gpio.Mode      = GPIO_MODE_AF_PP;
+ 773              		.loc 1 629 3 is_stmt 1 view .LVU207
+ 774              		.loc 1 629 18 is_stmt 0 view .LVU208
+ 775 002e 0223     		movs	r3, #2
+ 776 0030 0293     		str	r3, [sp, #8]
+ 630:../Src/audio.c ****   gpio.Pull      = GPIO_NOPULL;
+ 777              		.loc 1 630 3 is_stmt 1 view .LVU209
+ 631:../Src/audio.c ****   gpio.Speed     = GPIO_SPEED_FREQ_HIGH;
+ 778              		.loc 1 631 3 view .LVU210
+ 779              		.loc 1 631 18 is_stmt 0 view .LVU211
+ 780 0032 0493     		str	r3, [sp, #16]
+ 632:../Src/audio.c ****   gpio.Alternate = AUDIO_PWM_GPIO_AF;
+ 781              		.loc 1 632 3 is_stmt 1 view .LVU212
+ 782              		.loc 1 632 18 is_stmt 0 view .LVU213
+ 783 0034 0593     		str	r3, [sp, #20]
+ 633:../Src/audio.c ****   HAL_GPIO_Init(AUDIO_PWM_GPIO_PORT, &gpio);
+ 784              		.loc 1 633 3 is_stmt 1 view .LVU214
+ 785 0036 01A9     		add	r1, sp, #4
+ 786 0038 0248     		ldr	r0, .L59
+ 787 003a FFF7FEFF 		bl	HAL_GPIO_Init
+ 788              	.LVL63:
+ 634:../Src/audio.c **** }
+ 789              		.loc 1 634 1 is_stmt 0 view .LVU215
+ 790 003e 07B0     		add	sp, sp, #28
+ 791              	.LCFI7:
+ 792              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 27
+
+
+ 793              		@ sp needed
+ 794 0040 5DF804FB 		ldr	pc, [sp], #4
+ 795              	.L60:
+ 796              		.align	2
+ 797              	.L59:
+ 798 0044 000C0048 		.word	1207962624
+ 799              		.cfi_endproc
+ 800              	.LFE148:
+ 802              		.section	.text.AUDIO_Init,"ax",%progbits
+ 803              		.align	1
+ 804              		.global	AUDIO_Init
+ 805              		.syntax unified
+ 806              		.thumb
+ 807              		.thumb_func
+ 809              	AUDIO_Init:
+ 810              	.LFB136:
+ 213:../Src/audio.c ****   TIM_OC_InitTypeDef oc = {0};
+ 811              		.loc 1 213 1 is_stmt 1 view -0
+ 812              		.cfi_startproc
+ 813              		@ args = 0, pretend = 0, frame = 32
+ 814              		@ frame_needed = 0, uses_anonymous_args = 0
+ 815 0000 10B5     		push	{r4, lr}
+ 816              	.LCFI8:
+ 817              		.cfi_def_cfa_offset 8
+ 818              		.cfi_offset 4, -8
+ 819              		.cfi_offset 14, -4
+ 820 0002 88B0     		sub	sp, sp, #32
+ 821              	.LCFI9:
+ 822              		.cfi_def_cfa_offset 40
+ 214:../Src/audio.c **** 
+ 823              		.loc 1 214 3 view .LVU217
+ 214:../Src/audio.c **** 
+ 824              		.loc 1 214 22 is_stmt 0 view .LVU218
+ 825 0004 0024     		movs	r4, #0
+ 826 0006 0194     		str	r4, [sp, #4]
+ 827 0008 0294     		str	r4, [sp, #8]
+ 828 000a 0394     		str	r4, [sp, #12]
+ 829 000c 0494     		str	r4, [sp, #16]
+ 830 000e 0594     		str	r4, [sp, #20]
+ 831 0010 0694     		str	r4, [sp, #24]
+ 832 0012 0794     		str	r4, [sp, #28]
+ 218:../Src/audio.c **** 
+ 833              		.loc 1 218 3 is_stmt 1 view .LVU219
+ 218:../Src/audio.c **** 
+ 834              		.loc 1 218 20 is_stmt 0 view .LVU220
+ 835 0014 FFF7FEFF 		bl	HAL_RCC_GetPCLK1Freq
+ 836              	.LVL64:
+ 837 0018 FFF7FEFF 		bl	AUDIO_GetTimerClock
+ 838              	.LVL65:
+ 218:../Src/audio.c **** 
+ 839              		.loc 1 218 18 view .LVU221
+ 840 001c 244B     		ldr	r3, .L71
+ 841 001e 1860     		str	r0, [r3]
+ 221:../Src/audio.c ****   s_pwm.Init.Prescaler         = 0U;
+ 842              		.loc 1 221 3 is_stmt 1 view .LVU222
+ 221:../Src/audio.c ****   s_pwm.Init.Prescaler         = 0U;
+ 843              		.loc 1 221 32 is_stmt 0 view .LVU223
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 28
+
+
+ 844 0020 2448     		ldr	r0, .L71+4
+ 845 0022 4FF08043 		mov	r3, #1073741824
+ 846 0026 0360     		str	r3, [r0]
+ 222:../Src/audio.c ****   s_pwm.Init.CounterMode       = TIM_COUNTERMODE_UP;
+ 847              		.loc 1 222 3 is_stmt 1 view .LVU224
+ 222:../Src/audio.c ****   s_pwm.Init.CounterMode       = TIM_COUNTERMODE_UP;
+ 848              		.loc 1 222 32 is_stmt 0 view .LVU225
+ 849 0028 4460     		str	r4, [r0, #4]
+ 223:../Src/audio.c ****   s_pwm.Init.Period            = 255U;
+ 850              		.loc 1 223 3 is_stmt 1 view .LVU226
+ 223:../Src/audio.c ****   s_pwm.Init.Period            = 255U;
+ 851              		.loc 1 223 32 is_stmt 0 view .LVU227
+ 852 002a 8460     		str	r4, [r0, #8]
+ 224:../Src/audio.c ****   s_pwm.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+ 853              		.loc 1 224 3 is_stmt 1 view .LVU228
+ 224:../Src/audio.c ****   s_pwm.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+ 854              		.loc 1 224 32 is_stmt 0 view .LVU229
+ 855 002c FF23     		movs	r3, #255
+ 856 002e C360     		str	r3, [r0, #12]
+ 225:../Src/audio.c ****   s_pwm.Init.RepetitionCounter = 0U;
+ 857              		.loc 1 225 3 is_stmt 1 view .LVU230
+ 225:../Src/audio.c ****   s_pwm.Init.RepetitionCounter = 0U;
+ 858              		.loc 1 225 32 is_stmt 0 view .LVU231
+ 859 0030 0461     		str	r4, [r0, #16]
+ 226:../Src/audio.c ****   s_pwm.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+ 860              		.loc 1 226 3 is_stmt 1 view .LVU232
+ 226:../Src/audio.c ****   s_pwm.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+ 861              		.loc 1 226 32 is_stmt 0 view .LVU233
+ 862 0032 4461     		str	r4, [r0, #20]
+ 227:../Src/audio.c ****   if (HAL_TIM_PWM_Init(&s_pwm) != HAL_OK)
+ 863              		.loc 1 227 3 is_stmt 1 view .LVU234
+ 227:../Src/audio.c ****   if (HAL_TIM_PWM_Init(&s_pwm) != HAL_OK)
+ 864              		.loc 1 227 32 is_stmt 0 view .LVU235
+ 865 0034 8023     		movs	r3, #128
+ 866 0036 8361     		str	r3, [r0, #24]
+ 228:../Src/audio.c ****   {
+ 867              		.loc 1 228 3 is_stmt 1 view .LVU236
+ 228:../Src/audio.c ****   {
+ 868              		.loc 1 228 7 is_stmt 0 view .LVU237
+ 869 0038 FFF7FEFF 		bl	HAL_TIM_PWM_Init
+ 870              	.LVL66:
+ 228:../Src/audio.c ****   {
+ 871              		.loc 1 228 6 view .LVU238
+ 872 003c 58BB     		cbnz	r0, .L67
+ 873              	.L62:
+ 233:../Src/audio.c ****   oc.Pulse        = 0U;                      /* 0 % duty, i.e. silence */
+ 874              		.loc 1 233 3 is_stmt 1 view .LVU239
+ 233:../Src/audio.c ****   oc.Pulse        = 0U;                      /* 0 % duty, i.e. silence */
+ 875              		.loc 1 233 19 is_stmt 0 view .LVU240
+ 876 003e 6023     		movs	r3, #96
+ 877 0040 0193     		str	r3, [sp, #4]
+ 234:../Src/audio.c ****   oc.OCPolarity   = TIM_OCPOLARITY_HIGH;
+ 878              		.loc 1 234 3 is_stmt 1 view .LVU241
+ 234:../Src/audio.c ****   oc.OCPolarity   = TIM_OCPOLARITY_HIGH;
+ 879              		.loc 1 234 19 is_stmt 0 view .LVU242
+ 880 0042 0023     		movs	r3, #0
+ 881 0044 0293     		str	r3, [sp, #8]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 29
+
+
+ 235:../Src/audio.c ****   oc.OCNPolarity  = TIM_OCNPOLARITY_HIGH;
+ 882              		.loc 1 235 3 is_stmt 1 view .LVU243
+ 235:../Src/audio.c ****   oc.OCNPolarity  = TIM_OCNPOLARITY_HIGH;
+ 883              		.loc 1 235 19 is_stmt 0 view .LVU244
+ 884 0046 0393     		str	r3, [sp, #12]
+ 236:../Src/audio.c ****   oc.OCFastMode   = TIM_OCFAST_DISABLE;
+ 885              		.loc 1 236 3 is_stmt 1 view .LVU245
+ 236:../Src/audio.c ****   oc.OCFastMode   = TIM_OCFAST_DISABLE;
+ 886              		.loc 1 236 19 is_stmt 0 view .LVU246
+ 887 0048 0493     		str	r3, [sp, #16]
+ 237:../Src/audio.c ****   oc.OCIdleState  = TIM_OCIDLESTATE_RESET;
+ 888              		.loc 1 237 3 is_stmt 1 view .LVU247
+ 237:../Src/audio.c ****   oc.OCIdleState  = TIM_OCIDLESTATE_RESET;
+ 889              		.loc 1 237 19 is_stmt 0 view .LVU248
+ 890 004a 0593     		str	r3, [sp, #20]
+ 238:../Src/audio.c ****   oc.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+ 891              		.loc 1 238 3 is_stmt 1 view .LVU249
+ 238:../Src/audio.c ****   oc.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+ 892              		.loc 1 238 19 is_stmt 0 view .LVU250
+ 893 004c 0693     		str	r3, [sp, #24]
+ 239:../Src/audio.c ****   if (HAL_TIM_PWM_ConfigChannel(&s_pwm, &oc, AUDIO_PWM_CHANNEL) != HAL_OK)
+ 894              		.loc 1 239 3 is_stmt 1 view .LVU251
+ 239:../Src/audio.c ****   if (HAL_TIM_PWM_ConfigChannel(&s_pwm, &oc, AUDIO_PWM_CHANNEL) != HAL_OK)
+ 895              		.loc 1 239 19 is_stmt 0 view .LVU252
+ 896 004e 0793     		str	r3, [sp, #28]
+ 240:../Src/audio.c ****   {
+ 897              		.loc 1 240 3 is_stmt 1 view .LVU253
+ 240:../Src/audio.c ****   {
+ 898              		.loc 1 240 7 is_stmt 0 view .LVU254
+ 899 0050 0822     		movs	r2, #8
+ 900 0052 01A9     		add	r1, sp, #4
+ 901 0054 1748     		ldr	r0, .L71+4
+ 902 0056 FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
+ 903              	.LVL67:
+ 240:../Src/audio.c ****   {
+ 904              		.loc 1 240 6 view .LVU255
+ 905 005a F8B9     		cbnz	r0, .L68
+ 906              	.L63:
+ 245:../Src/audio.c ****   {
+ 907              		.loc 1 245 3 is_stmt 1 view .LVU256
+ 245:../Src/audio.c ****   {
+ 908              		.loc 1 245 7 is_stmt 0 view .LVU257
+ 909 005c 0821     		movs	r1, #8
+ 910 005e 1548     		ldr	r0, .L71+4
+ 911 0060 FFF7FEFF 		bl	HAL_TIM_PWM_Start
+ 912              	.LVL68:
+ 245:../Src/audio.c ****   {
+ 913              		.loc 1 245 6 view .LVU258
+ 914 0064 E8B9     		cbnz	r0, .L69
+ 915              	.L64:
+ 253:../Src/audio.c ****   s_sample.Init.Prescaler         = 0U;
+ 916              		.loc 1 253 3 is_stmt 1 view .LVU259
+ 253:../Src/audio.c ****   s_sample.Init.Prescaler         = 0U;
+ 917              		.loc 1 253 35 is_stmt 0 view .LVU260
+ 918 0066 1448     		ldr	r0, .L71+8
+ 919 0068 144B     		ldr	r3, .L71+12
+ 920 006a 0360     		str	r3, [r0]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 30
+
+
+ 254:../Src/audio.c ****   s_sample.Init.CounterMode       = TIM_COUNTERMODE_UP;
+ 921              		.loc 1 254 3 is_stmt 1 view .LVU261
+ 254:../Src/audio.c ****   s_sample.Init.CounterMode       = TIM_COUNTERMODE_UP;
+ 922              		.loc 1 254 35 is_stmt 0 view .LVU262
+ 923 006c 0023     		movs	r3, #0
+ 924 006e 4360     		str	r3, [r0, #4]
+ 255:../Src/audio.c ****   s_sample.Init.Period            = 15U;
+ 925              		.loc 1 255 3 is_stmt 1 view .LVU263
+ 255:../Src/audio.c ****   s_sample.Init.Period            = 15U;
+ 926              		.loc 1 255 35 is_stmt 0 view .LVU264
+ 927 0070 8360     		str	r3, [r0, #8]
+ 256:../Src/audio.c ****   s_sample.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+ 928              		.loc 1 256 3 is_stmt 1 view .LVU265
+ 256:../Src/audio.c ****   s_sample.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+ 929              		.loc 1 256 35 is_stmt 0 view .LVU266
+ 930 0072 0F22     		movs	r2, #15
+ 931 0074 C260     		str	r2, [r0, #12]
+ 257:../Src/audio.c ****   s_sample.Init.RepetitionCounter = 0U;
+ 932              		.loc 1 257 3 is_stmt 1 view .LVU267
+ 257:../Src/audio.c ****   s_sample.Init.RepetitionCounter = 0U;
+ 933              		.loc 1 257 35 is_stmt 0 view .LVU268
+ 934 0076 0361     		str	r3, [r0, #16]
+ 258:../Src/audio.c ****   s_sample.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+ 935              		.loc 1 258 3 is_stmt 1 view .LVU269
+ 258:../Src/audio.c ****   s_sample.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+ 936              		.loc 1 258 35 is_stmt 0 view .LVU270
+ 937 0078 4361     		str	r3, [r0, #20]
+ 259:../Src/audio.c ****   if (HAL_TIM_Base_Init(&s_sample) != HAL_OK)
+ 938              		.loc 1 259 3 is_stmt 1 view .LVU271
+ 259:../Src/audio.c ****   if (HAL_TIM_Base_Init(&s_sample) != HAL_OK)
+ 939              		.loc 1 259 35 is_stmt 0 view .LVU272
+ 940 007a 8361     		str	r3, [r0, #24]
+ 260:../Src/audio.c ****   {
+ 941              		.loc 1 260 3 is_stmt 1 view .LVU273
+ 260:../Src/audio.c ****   {
+ 942              		.loc 1 260 7 is_stmt 0 view .LVU274
+ 943 007c FFF7FEFF 		bl	HAL_TIM_Base_Init
+ 944              	.LVL69:
+ 260:../Src/audio.c ****   {
+ 945              		.loc 1 260 6 view .LVU275
+ 946 0080 90B9     		cbnz	r0, .L70
+ 947              	.L65:
+ 265:../Src/audio.c ****   HAL_NVIC_EnableIRQ(AUDIO_SAMPLE_IRQn);
+ 948              		.loc 1 265 3 is_stmt 1 view .LVU276
+ 949 0082 0022     		movs	r2, #0
+ 950 0084 0321     		movs	r1, #3
+ 951 0086 1D20     		movs	r0, #29
+ 952 0088 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 953              	.LVL70:
+ 266:../Src/audio.c **** }
+ 954              		.loc 1 266 3 view .LVU277
+ 955 008c 1D20     		movs	r0, #29
+ 956 008e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 957              	.LVL71:
+ 267:../Src/audio.c **** 
+ 958              		.loc 1 267 1 is_stmt 0 view .LVU278
+ 959 0092 08B0     		add	sp, sp, #32
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 31
+
+
+ 960              	.LCFI10:
+ 961              		.cfi_remember_state
+ 962              		.cfi_def_cfa_offset 8
+ 963              		@ sp needed
+ 964 0094 10BD     		pop	{r4, pc}
+ 965              	.L67:
+ 966              	.LCFI11:
+ 967              		.cfi_restore_state
+ 230:../Src/audio.c ****   }
+ 968              		.loc 1 230 5 is_stmt 1 view .LVU279
+ 969 0096 FFF7FEFF 		bl	APP_ErrorHandler
+ 970              	.LVL72:
+ 971 009a D0E7     		b	.L62
+ 972              	.L68:
+ 242:../Src/audio.c ****   }
+ 973              		.loc 1 242 5 view .LVU280
+ 974 009c FFF7FEFF 		bl	APP_ErrorHandler
+ 975              	.LVL73:
+ 976 00a0 DCE7     		b	.L63
+ 977              	.L69:
+ 247:../Src/audio.c ****   }
+ 978              		.loc 1 247 5 view .LVU281
+ 979 00a2 FFF7FEFF 		bl	APP_ErrorHandler
+ 980              	.LVL74:
+ 981 00a6 DEE7     		b	.L64
+ 982              	.L70:
+ 262:../Src/audio.c ****   }
+ 983              		.loc 1 262 5 view .LVU282
+ 984 00a8 FFF7FEFF 		bl	APP_ErrorHandler
+ 985              	.LVL75:
+ 986 00ac E9E7     		b	.L65
+ 987              	.L72:
+ 988 00ae 00BF     		.align	2
+ 989              	.L71:
+ 990 00b0 00000000 		.word	.LANCHOR2
+ 991 00b4 00000000 		.word	.LANCHOR0
+ 992 00b8 00000000 		.word	.LANCHOR3
+ 993 00bc 00040040 		.word	1073742848
+ 994              		.cfi_endproc
+ 995              	.LFE136:
+ 997              		.section	.text.AUDIO_StopSample,"ax",%progbits
+ 998              		.align	1
+ 999              		.global	AUDIO_StopSample
+ 1000              		.syntax unified
+ 1001              		.thumb
+ 1002              		.thumb_func
+ 1004              	AUDIO_StopSample:
+ 1005              	.LFB138:
+ 326:../Src/audio.c ****   __HAL_TIM_DISABLE_IT(&s_sample, TIM_IT_UPDATE);
+ 1006              		.loc 1 326 1 view -0
+ 1007              		.cfi_startproc
+ 1008              		@ args = 0, pretend = 0, frame = 0
+ 1009              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1010 0000 08B5     		push	{r3, lr}
+ 1011              	.LCFI12:
+ 1012              		.cfi_def_cfa_offset 8
+ 1013              		.cfi_offset 3, -8
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 32
+
+
+ 1014              		.cfi_offset 14, -4
+ 327:../Src/audio.c ****   AUDIO_SampleTimerStop();
+ 1015              		.loc 1 327 3 view .LVU284
+ 1016 0002 084B     		ldr	r3, .L75
+ 1017 0004 1A68     		ldr	r2, [r3]
+ 1018 0006 D368     		ldr	r3, [r2, #12]
+ 1019 0008 23F00103 		bic	r3, r3, #1
+ 1020 000c D360     		str	r3, [r2, #12]
+ 328:../Src/audio.c **** 
+ 1021              		.loc 1 328 3 view .LVU285
+ 1022 000e FFF7FEFF 		bl	AUDIO_SampleTimerStop
+ 1023              	.LVL76:
+ 330:../Src/audio.c ****   s_pcm            = NULL;
+ 1024              		.loc 1 330 3 view .LVU286
+ 330:../Src/audio.c ****   s_pcm            = NULL;
+ 1025              		.loc 1 330 20 is_stmt 0 view .LVU287
+ 1026 0012 0023     		movs	r3, #0
+ 1027 0014 044A     		ldr	r2, .L75+4
+ 1028 0016 1370     		strb	r3, [r2]
+ 331:../Src/audio.c **** 
+ 1029              		.loc 1 331 3 is_stmt 1 view .LVU288
+ 331:../Src/audio.c **** 
+ 1030              		.loc 1 331 20 is_stmt 0 view .LVU289
+ 1031 0018 044A     		ldr	r2, .L75+8
+ 1032 001a 1360     		str	r3, [r2]
+ 333:../Src/audio.c **** }
+ 1033              		.loc 1 333 3 is_stmt 1 view .LVU290
+ 1034 001c FFF7FEFF 		bl	AUDIO_Mute
+ 1035              	.LVL77:
+ 334:../Src/audio.c **** 
+ 1036              		.loc 1 334 1 is_stmt 0 view .LVU291
+ 1037 0020 08BD     		pop	{r3, pc}
+ 1038              	.L76:
+ 1039 0022 00BF     		.align	2
+ 1040              	.L75:
+ 1041 0024 00000000 		.word	.LANCHOR3
+ 1042 0028 00000000 		.word	.LANCHOR4
+ 1043 002c 00000000 		.word	.LANCHOR5
+ 1044              		.cfi_endproc
+ 1045              	.LFE138:
+ 1047              		.section	.text.AUDIO_PlaySample,"ax",%progbits
+ 1048              		.align	1
+ 1049              		.global	AUDIO_PlaySample
+ 1050              		.syntax unified
+ 1051              		.thumb
+ 1052              		.thumb_func
+ 1054              	AUDIO_PlaySample:
+ 1055              	.LVL78:
+ 1056              	.LFB137:
+ 283:../Src/audio.c ****   if ((samples == NULL) || (length == 0U))
+ 1057              		.loc 1 283 1 is_stmt 1 view -0
+ 1058              		.cfi_startproc
+ 1059              		@ args = 0, pretend = 0, frame = 0
+ 1060              		@ frame_needed = 0, uses_anonymous_args = 0
+ 283:../Src/audio.c ****   if ((samples == NULL) || (length == 0U))
+ 1061              		.loc 1 283 1 is_stmt 0 view .LVU293
+ 1062 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 33
+
+
+ 1063              	.LCFI13:
+ 1064              		.cfi_def_cfa_offset 24
+ 1065              		.cfi_offset 3, -24
+ 1066              		.cfi_offset 4, -20
+ 1067              		.cfi_offset 5, -16
+ 1068              		.cfi_offset 6, -12
+ 1069              		.cfi_offset 7, -8
+ 1070              		.cfi_offset 14, -4
+ 284:../Src/audio.c ****   {
+ 1071              		.loc 1 284 3 is_stmt 1 view .LVU294
+ 284:../Src/audio.c ****   {
+ 1072              		.loc 1 284 6 is_stmt 0 view .LVU295
+ 1073 0002 68B1     		cbz	r0, .L78
+ 1074 0004 0D46     		mov	r5, r1
+ 1075 0006 1446     		mov	r4, r2
+ 1076 0008 0646     		mov	r6, r0
+ 284:../Src/audio.c ****   {
+ 1077              		.loc 1 284 25 discriminator 1 view .LVU296
+ 1078 000a 49B1     		cbz	r1, .L78
+ 290:../Src/audio.c ****   {
+ 1079              		.loc 1 290 3 is_stmt 1 view .LVU297
+ 290:../Src/audio.c ****   {
+ 1080              		.loc 1 290 6 is_stmt 0 view .LVU298
+ 1081 000c B2F5FA5F 		cmp	r2, #8000
+ 1082 0010 09D3     		bcc	.L82
+ 294:../Src/audio.c ****   {
+ 1083              		.loc 1 294 3 is_stmt 1 view .LVU299
+ 294:../Src/audio.c ****   {
+ 1084              		.loc 1 294 6 is_stmt 0 view .LVU300
+ 1085 0012 4BF68033 		movw	r3, #48000
+ 1086 0016 9A42     		cmp	r2, r3
+ 1087 0018 07D9     		bls	.L81
+ 296:../Src/audio.c ****   }
+ 1088              		.loc 1 296 13 view .LVU301
+ 1089 001a 4BF68034 		movw	r4, #48000
+ 1090 001e 04E0     		b	.L81
+ 1091              	.L78:
+ 286:../Src/audio.c ****     return;
+ 1092              		.loc 1 286 5 is_stmt 1 view .LVU302
+ 1093 0020 FFF7FEFF 		bl	AUDIO_StopSample
+ 1094              	.LVL79:
+ 287:../Src/audio.c ****   }
+ 1095              		.loc 1 287 5 view .LVU303
+ 1096 0024 1FE0     		b	.L77
+ 1097              	.LVL80:
+ 1098              	.L82:
+ 292:../Src/audio.c ****   }
+ 1099              		.loc 1 292 13 is_stmt 0 view .LVU304
+ 1100 0026 4FF4FA54 		mov	r4, #8000
+ 1101              	.L81:
+ 1102              	.LVL81:
+ 299:../Src/audio.c ****   AUDIO_SampleTimerStop();
+ 1103              		.loc 1 299 3 is_stmt 1 view .LVU305
+ 1104 002a 0F4B     		ldr	r3, .L85
+ 1105 002c 1A68     		ldr	r2, [r3]
+ 1106 002e D368     		ldr	r3, [r2, #12]
+ 1107 0030 23F00103 		bic	r3, r3, #1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 34
+
+
+ 1108 0034 D360     		str	r3, [r2, #12]
+ 300:../Src/audio.c **** 
+ 1109              		.loc 1 300 3 view .LVU306
+ 1110 0036 FFF7FEFF 		bl	AUDIO_SampleTimerStop
+ 1111              	.LVL82:
+ 302:../Src/audio.c ****   s_pcm_length     = length;
+ 1112              		.loc 1 302 3 view .LVU307
+ 302:../Src/audio.c ****   s_pcm_length     = length;
+ 1113              		.loc 1 302 20 is_stmt 0 view .LVU308
+ 1114 003a 0C4F     		ldr	r7, .L85+4
+ 1115 003c 3E60     		str	r6, [r7]
+ 303:../Src/audio.c ****   s_pcm_index      = 0U;
+ 1116              		.loc 1 303 3 is_stmt 1 view .LVU309
+ 303:../Src/audio.c ****   s_pcm_index      = 0U;
+ 1117              		.loc 1 303 20 is_stmt 0 view .LVU310
+ 1118 003e 0C4B     		ldr	r3, .L85+8
+ 1119 0040 1D60     		str	r5, [r3]
+ 304:../Src/audio.c ****   s_sample_playing = 1U;
+ 1120              		.loc 1 304 3 is_stmt 1 view .LVU311
+ 304:../Src/audio.c ****   s_sample_playing = 1U;
+ 1121              		.loc 1 304 20 is_stmt 0 view .LVU312
+ 1122 0042 0C4D     		ldr	r5, .L85+12
+ 1123              	.LVL83:
+ 304:../Src/audio.c ****   s_sample_playing = 1U;
+ 1124              		.loc 1 304 20 view .LVU313
+ 1125 0044 0023     		movs	r3, #0
+ 304:../Src/audio.c ****   s_sample_playing = 1U;
+ 1126              		.loc 1 304 20 view .LVU314
+ 1127 0046 2B60     		str	r3, [r5]
+ 305:../Src/audio.c **** 
+ 1128              		.loc 1 305 3 is_stmt 1 view .LVU315
+ 305:../Src/audio.c **** 
+ 1129              		.loc 1 305 20 is_stmt 0 view .LVU316
+ 1130 0048 0126     		movs	r6, #1
+ 1131              	.LVL84:
+ 305:../Src/audio.c **** 
+ 1132              		.loc 1 305 20 view .LVU317
+ 1133 004a 0B4B     		ldr	r3, .L85+16
+ 1134 004c 1E70     		strb	r6, [r3]
+ 308:../Src/audio.c ****   AUDIO_PwmSampleInit();
+ 1135              		.loc 1 308 3 is_stmt 1 view .LVU318
+ 1136 004e FFF7FEFF 		bl	AUDIO_ResetPwm
+ 1137              	.LVL85:
+ 309:../Src/audio.c **** 
+ 1138              		.loc 1 309 3 view .LVU319
+ 1139 0052 FFF7FEFF 		bl	AUDIO_PwmSampleInit
+ 1140              	.LVL86:
+ 313:../Src/audio.c **** 
+ 1141              		.loc 1 313 3 view .LVU320
+ 1142 0056 2046     		mov	r0, r4
+ 1143 0058 FFF7FEFF 		bl	AUDIO_ProgramPaceTimer
+ 1144              	.LVL87:
+ 316:../Src/audio.c ****   s_pcm_index = 1U;
+ 1145              		.loc 1 316 3 view .LVU321
+ 1146 005c 3B68     		ldr	r3, [r7]
+ 1147 005e 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 1148 0060 FFF7FEFF 		bl	AUDIO_SetSample
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 35
+
+
+ 1149              	.LVL88:
+ 317:../Src/audio.c **** }
+ 1150              		.loc 1 317 3 view .LVU322
+ 317:../Src/audio.c **** }
+ 1151              		.loc 1 317 15 is_stmt 0 view .LVU323
+ 1152 0064 2E60     		str	r6, [r5]
+ 1153              	.LVL89:
+ 1154              	.L77:
+ 318:../Src/audio.c **** 
+ 1155              		.loc 1 318 1 view .LVU324
+ 1156 0066 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1157              	.L86:
+ 1158              		.align	2
+ 1159              	.L85:
+ 1160 0068 00000000 		.word	.LANCHOR3
+ 1161 006c 00000000 		.word	.LANCHOR5
+ 1162 0070 00000000 		.word	.LANCHOR6
+ 1163 0074 00000000 		.word	.LANCHOR7
+ 1164 0078 00000000 		.word	.LANCHOR4
+ 1165              		.cfi_endproc
+ 1166              	.LFE137:
+ 1168              		.section	.text.AUDIO_IsPlayingSample,"ax",%progbits
+ 1169              		.align	1
+ 1170              		.global	AUDIO_IsPlayingSample
+ 1171              		.syntax unified
+ 1172              		.thumb
+ 1173              		.thumb_func
+ 1175              	AUDIO_IsPlayingSample:
+ 1176              	.LFB139:
+ 342:../Src/audio.c ****   return s_sample_playing;
+ 1177              		.loc 1 342 1 is_stmt 1 view -0
+ 1178              		.cfi_startproc
+ 1179              		@ args = 0, pretend = 0, frame = 0
+ 1180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1181              		@ link register save eliminated.
+ 343:../Src/audio.c **** }
+ 1182              		.loc 1 343 3 view .LVU326
+ 344:../Src/audio.c **** 
+ 1183              		.loc 1 344 1 is_stmt 0 view .LVU327
+ 1184 0000 014B     		ldr	r3, .L88
+ 1185 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 1186 0004 7047     		bx	lr
+ 1187              	.L89:
+ 1188 0006 00BF     		.align	2
+ 1189              	.L88:
+ 1190 0008 00000000 		.word	.LANCHOR4
+ 1191              		.cfi_endproc
+ 1192              	.LFE139:
+ 1194              		.section	.text.AUDIO_TimerIRQHandler,"ax",%progbits
+ 1195              		.align	1
+ 1196              		.global	AUDIO_TimerIRQHandler
+ 1197              		.syntax unified
+ 1198              		.thumb
+ 1199              		.thumb_func
+ 1201              	AUDIO_TimerIRQHandler:
+ 1202              	.LFB140:
+ 355:../Src/audio.c ****   if (__HAL_TIM_GET_FLAG(&s_sample, TIM_FLAG_UPDATE) == RESET)
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 36
+
+
+ 1203              		.loc 1 355 1 is_stmt 1 view -0
+ 1204              		.cfi_startproc
+ 1205              		@ args = 0, pretend = 0, frame = 0
+ 1206              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1207 0000 08B5     		push	{r3, lr}
+ 1208              	.LCFI14:
+ 1209              		.cfi_def_cfa_offset 8
+ 1210              		.cfi_offset 3, -8
+ 1211              		.cfi_offset 14, -4
+ 356:../Src/audio.c ****   {
+ 1212              		.loc 1 356 3 view .LVU329
+ 356:../Src/audio.c ****   {
+ 1213              		.loc 1 356 7 is_stmt 0 view .LVU330
+ 1214 0002 0F4B     		ldr	r3, .L95
+ 1215 0004 1B68     		ldr	r3, [r3]
+ 1216 0006 1A69     		ldr	r2, [r3, #16]
+ 356:../Src/audio.c ****   {
+ 1217              		.loc 1 356 6 view .LVU331
+ 1218 0008 12F0010F 		tst	r2, #1
+ 1219 000c 14D0     		beq	.L90
+ 360:../Src/audio.c **** 
+ 1220              		.loc 1 360 3 is_stmt 1 view .LVU332
+ 1221 000e 6FF00102 		mvn	r2, #1
+ 1222 0012 1A61     		str	r2, [r3, #16]
+ 362:../Src/audio.c ****   {
+ 1223              		.loc 1 362 3 view .LVU333
+ 362:../Src/audio.c ****   {
+ 1224              		.loc 1 362 24 is_stmt 0 view .LVU334
+ 1225 0014 0B4B     		ldr	r3, .L95+4
+ 1226 0016 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 362:../Src/audio.c ****   {
+ 1227              		.loc 1 362 6 view .LVU335
+ 1228 0018 73B1     		cbz	r3, .L90
+ 367:../Src/audio.c ****   {
+ 1229              		.loc 1 367 3 is_stmt 1 view .LVU336
+ 367:../Src/audio.c ****   {
+ 1230              		.loc 1 367 19 is_stmt 0 view .LVU337
+ 1231 001a 0B4B     		ldr	r3, .L95+8
+ 1232 001c 1B68     		ldr	r3, [r3]
+ 1233 001e 0B4A     		ldr	r2, .L95+12
+ 1234 0020 1268     		ldr	r2, [r2]
+ 367:../Src/audio.c ****   {
+ 1235              		.loc 1 367 6 view .LVU338
+ 1236 0022 9342     		cmp	r3, r2
+ 1237 0024 09D2     		bcs	.L94
+ 373:../Src/audio.c ****   ++s_pcm_index;
+ 1238              		.loc 1 373 3 is_stmt 1 view .LVU339
+ 373:../Src/audio.c ****   ++s_pcm_index;
+ 1239              		.loc 1 373 24 is_stmt 0 view .LVU340
+ 1240 0026 0A4A     		ldr	r2, .L95+16
+ 1241 0028 1268     		ldr	r2, [r2]
+ 373:../Src/audio.c ****   ++s_pcm_index;
+ 1242              		.loc 1 373 3 view .LVU341
+ 1243 002a D05C     		ldrb	r0, [r2, r3]	@ zero_extendqisi2
+ 1244 002c FFF7FEFF 		bl	AUDIO_SetSample
+ 1245              	.LVL90:
+ 374:../Src/audio.c **** }
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 37
+
+
+ 1246              		.loc 1 374 3 is_stmt 1 view .LVU342
+ 1247 0030 054A     		ldr	r2, .L95+8
+ 1248 0032 1368     		ldr	r3, [r2]
+ 1249 0034 0133     		adds	r3, r3, #1
+ 1250 0036 1360     		str	r3, [r2]
+ 1251              	.L90:
+ 375:../Src/audio.c **** 
+ 1252              		.loc 1 375 1 is_stmt 0 view .LVU343
+ 1253 0038 08BD     		pop	{r3, pc}
+ 1254              	.L94:
+ 369:../Src/audio.c ****     return;
+ 1255              		.loc 1 369 5 is_stmt 1 view .LVU344
+ 1256 003a FFF7FEFF 		bl	AUDIO_StopSample
+ 1257              	.LVL91:
+ 370:../Src/audio.c ****   }
+ 1258              		.loc 1 370 5 view .LVU345
+ 1259 003e FBE7     		b	.L90
+ 1260              	.L96:
+ 1261              		.align	2
+ 1262              	.L95:
+ 1263 0040 00000000 		.word	.LANCHOR3
+ 1264 0044 00000000 		.word	.LANCHOR4
+ 1265 0048 00000000 		.word	.LANCHOR7
+ 1266 004c 00000000 		.word	.LANCHOR6
+ 1267 0050 00000000 		.word	.LANCHOR5
+ 1268              		.cfi_endproc
+ 1269              	.LFE140:
+ 1271              		.section	.text.HAL_TIM_PWM_MspInit,"ax",%progbits
+ 1272              		.align	1
+ 1273              		.global	HAL_TIM_PWM_MspInit
+ 1274              		.syntax unified
+ 1275              		.thumb
+ 1276              		.thumb_func
+ 1278              	HAL_TIM_PWM_MspInit:
+ 1279              	.LVL92:
+ 1280              	.LFB149:
+ 635:../Src/audio.c **** 
+ 636:../Src/audio.c **** /**
+ 637:../Src/audio.c ****   * @brief  Initialise the low level hardware of the PWM timer, called by
+ 638:../Src/audio.c ****   *         HAL_TIM_PWM_Init().
+ 639:../Src/audio.c ****   * @param  htim TIM handle.
+ 640:../Src/audio.c ****   * @retval None
+ 641:../Src/audio.c ****   */
+ 642:../Src/audio.c **** void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
+ 643:../Src/audio.c **** {
+ 1281              		.loc 1 643 1 view -0
+ 1282              		.cfi_startproc
+ 1283              		@ args = 0, pretend = 0, frame = 8
+ 1284              		@ frame_needed = 0, uses_anonymous_args = 0
+ 644:../Src/audio.c ****   if (htim->Instance == AUDIO_PWM_TIM)
+ 1285              		.loc 1 644 3 view .LVU347
+ 1286              		.loc 1 644 11 is_stmt 0 view .LVU348
+ 1287 0000 0368     		ldr	r3, [r0]
+ 1288              		.loc 1 644 6 view .LVU349
+ 1289 0002 B3F1804F 		cmp	r3, #1073741824
+ 1290 0006 00D0     		beq	.L103
+ 1291 0008 7047     		bx	lr
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 38
+
+
+ 1292              	.L103:
+ 643:../Src/audio.c ****   if (htim->Instance == AUDIO_PWM_TIM)
+ 1293              		.loc 1 643 1 view .LVU350
+ 1294 000a 00B5     		push	{lr}
+ 1295              	.LCFI15:
+ 1296              		.cfi_def_cfa_offset 4
+ 1297              		.cfi_offset 14, -4
+ 1298 000c 83B0     		sub	sp, sp, #12
+ 1299              	.LCFI16:
+ 1300              		.cfi_def_cfa_offset 16
+ 645:../Src/audio.c ****   {
+ 646:../Src/audio.c ****     AUDIO_PWM_TIM_CLK_ENABLE();
+ 1301              		.loc 1 646 5 is_stmt 1 view .LVU351
+ 1302              	.LBB8:
+ 1303              		.loc 1 646 5 view .LVU352
+ 1304              		.loc 1 646 5 view .LVU353
+ 1305 000e 03F50433 		add	r3, r3, #135168
+ 1306 0012 9A6D     		ldr	r2, [r3, #88]
+ 1307 0014 42F00102 		orr	r2, r2, #1
+ 1308 0018 9A65     		str	r2, [r3, #88]
+ 1309              		.loc 1 646 5 view .LVU354
+ 1310 001a 9B6D     		ldr	r3, [r3, #88]
+ 1311 001c 03F00103 		and	r3, r3, #1
+ 1312 0020 0193     		str	r3, [sp, #4]
+ 1313              		.loc 1 646 5 view .LVU355
+ 1314 0022 019B     		ldr	r3, [sp, #4]
+ 1315              	.LBE8:
+ 1316              		.loc 1 646 5 view .LVU356
+ 647:../Src/audio.c ****     AUDIO_PwmGpioConfig();
+ 1317              		.loc 1 647 5 view .LVU357
+ 1318 0024 FFF7FEFF 		bl	AUDIO_PwmGpioConfig
+ 1319              	.LVL93:
+ 648:../Src/audio.c ****   }
+ 649:../Src/audio.c **** }
+ 1320              		.loc 1 649 1 is_stmt 0 view .LVU358
+ 1321 0028 03B0     		add	sp, sp, #12
+ 1322              	.LCFI17:
+ 1323              		.cfi_def_cfa_offset 4
+ 1324              		@ sp needed
+ 1325 002a 5DF804FB 		ldr	pc, [sp], #4
+ 1326              		.cfi_endproc
+ 1327              	.LFE149:
+ 1329              		.section	.text.HAL_TIM_Base_MspInit,"ax",%progbits
+ 1330              		.align	1
+ 1331              		.global	HAL_TIM_Base_MspInit
+ 1332              		.syntax unified
+ 1333              		.thumb
+ 1334              		.thumb_func
+ 1336              	HAL_TIM_Base_MspInit:
+ 1337              	.LVL94:
+ 1338              	.LFB150:
+ 650:../Src/audio.c **** 
+ 651:../Src/audio.c **** /**
+ 652:../Src/audio.c ****   * @brief  Initialise the low level hardware of the audio timer, called by
+ 653:../Src/audio.c ****   *         HAL_TIM_Base_Init().
+ 654:../Src/audio.c ****   * @param  htim TIM handle.
+ 655:../Src/audio.c ****   * @retval None
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 39
+
+
+ 656:../Src/audio.c ****   */
+ 657:../Src/audio.c **** void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
+ 658:../Src/audio.c **** {
+ 1339              		.loc 1 658 1 is_stmt 1 view -0
+ 1340              		.cfi_startproc
+ 1341              		@ args = 0, pretend = 0, frame = 8
+ 1342              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1343              		@ link register save eliminated.
+ 659:../Src/audio.c ****   if (htim->Instance == AUDIO_SAMPLE_TIM)
+ 1344              		.loc 1 659 3 view .LVU360
+ 1345              		.loc 1 659 11 is_stmt 0 view .LVU361
+ 1346 0000 0268     		ldr	r2, [r0]
+ 1347              		.loc 1 659 6 view .LVU362
+ 1348 0002 094B     		ldr	r3, .L111
+ 1349 0004 9A42     		cmp	r2, r3
+ 1350 0006 00D0     		beq	.L110
+ 1351 0008 7047     		bx	lr
+ 1352              	.L110:
+ 658:../Src/audio.c ****   if (htim->Instance == AUDIO_SAMPLE_TIM)
+ 1353              		.loc 1 658 1 view .LVU363
+ 1354 000a 82B0     		sub	sp, sp, #8
+ 1355              	.LCFI18:
+ 1356              		.cfi_def_cfa_offset 8
+ 660:../Src/audio.c ****   {
+ 661:../Src/audio.c ****     AUDIO_SAMPLE_TIM_CLK_ENABLE();
+ 1357              		.loc 1 661 5 is_stmt 1 view .LVU364
+ 1358              	.LBB9:
+ 1359              		.loc 1 661 5 view .LVU365
+ 1360              		.loc 1 661 5 view .LVU366
+ 1361 000c 03F50333 		add	r3, r3, #134144
+ 1362 0010 9A6D     		ldr	r2, [r3, #88]
+ 1363 0012 42F00202 		orr	r2, r2, #2
+ 1364 0016 9A65     		str	r2, [r3, #88]
+ 1365              		.loc 1 661 5 view .LVU367
+ 1366 0018 9B6D     		ldr	r3, [r3, #88]
+ 1367 001a 03F00203 		and	r3, r3, #2
+ 1368 001e 0193     		str	r3, [sp, #4]
+ 1369              		.loc 1 661 5 view .LVU368
+ 1370 0020 019B     		ldr	r3, [sp, #4]
+ 1371              	.LBE9:
+ 1372              		.loc 1 661 5 view .LVU369
+ 662:../Src/audio.c ****   }
+ 663:../Src/audio.c **** }
+ 1373              		.loc 1 663 1 is_stmt 0 view .LVU370
+ 1374 0022 02B0     		add	sp, sp, #8
+ 1375              	.LCFI19:
+ 1376              		.cfi_def_cfa_offset 0
+ 1377              		@ sp needed
+ 1378 0024 7047     		bx	lr
+ 1379              	.L112:
+ 1380 0026 00BF     		.align	2
+ 1381              	.L111:
+ 1382 0028 00040040 		.word	1073742848
+ 1383              		.cfi_endproc
+ 1384              	.LFE150:
+ 1386              		.section	.bss.s_duty_lut,"aw",%nobits
+ 1387              		.align	2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 40
+
+
+ 1388              		.set	.LANCHOR1,. + 0
+ 1391              	s_duty_lut:
+ 1392 0000 00000000 		.space	512
+ 1392      00000000 
+ 1392      00000000 
+ 1392      00000000 
+ 1392      00000000 
+ 1393              		.section	.bss.s_pcm,"aw",%nobits
+ 1394              		.align	2
+ 1395              		.set	.LANCHOR5,. + 0
+ 1398              	s_pcm:
+ 1399 0000 00000000 		.space	4
+ 1400              		.section	.bss.s_pcm_index,"aw",%nobits
+ 1401              		.align	2
+ 1402              		.set	.LANCHOR7,. + 0
+ 1405              	s_pcm_index:
+ 1406 0000 00000000 		.space	4
+ 1407              		.section	.bss.s_pcm_length,"aw",%nobits
+ 1408              		.align	2
+ 1409              		.set	.LANCHOR6,. + 0
+ 1412              	s_pcm_length:
+ 1413 0000 00000000 		.space	4
+ 1414              		.section	.bss.s_pwm,"aw",%nobits
+ 1415              		.align	2
+ 1416              		.set	.LANCHOR0,. + 0
+ 1419              	s_pwm:
+ 1420 0000 00000000 		.space	76
+ 1420      00000000 
+ 1420      00000000 
+ 1420      00000000 
+ 1420      00000000 
+ 1421              		.section	.bss.s_sample,"aw",%nobits
+ 1422              		.align	2
+ 1423              		.set	.LANCHOR3,. + 0
+ 1426              	s_sample:
+ 1427 0000 00000000 		.space	76
+ 1427      00000000 
+ 1427      00000000 
+ 1427      00000000 
+ 1427      00000000 
+ 1428              		.section	.bss.s_sample_playing,"aw",%nobits
+ 1429              		.set	.LANCHOR4,. + 0
+ 1432              	s_sample_playing:
+ 1433 0000 00       		.space	1
+ 1434              		.section	.bss.s_timer_clk_hz,"aw",%nobits
+ 1435              		.align	2
+ 1436              		.set	.LANCHOR2,. + 0
+ 1439              	s_timer_clk_hz:
+ 1440 0000 00000000 		.space	4
+ 1441              		.text
+ 1442              	.Letext0:
+ 1443              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 1444              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1445              		.file 4 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 1446              		.file 5 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e4xx.h"
+ 1447              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 1448              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_gpio.h"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 41
+
+
+ 1449              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_dma.h"
+ 1450              		.file 9 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_tim.h"
+ 1451              		.file 10 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_rcc.h"
+ 1452              		.file 11 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_cortex.h"
+ 1453              		.file 12 "../Inc/main.h"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 42
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 audio.c
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:20     .text.AUDIO_GetTimerClock:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:25     .text.AUDIO_GetTimerClock:00000000 AUDIO_GetTimerClock
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:63     .text.AUDIO_GetTimerClock:00000014 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:69     .text.AUDIO_SetSample:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:74     .text.AUDIO_SetSample:00000000 AUDIO_SetSample
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:93     .text.AUDIO_SetSample:00000010 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:99     .text.AUDIO_Mute:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:104    .text.AUDIO_Mute:00000000 AUDIO_Mute
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:121    .text.AUDIO_Mute:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:126    .text.AUDIO_ResetPwm:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:131    .text.AUDIO_ResetPwm:00000000 AUDIO_ResetPwm
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:159    .text.AUDIO_ResetPwm:00000014 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:164    .text.AUDIO_PwmSampleInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:169    .text.AUDIO_PwmSampleInit:00000000 AUDIO_PwmSampleInit
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:351    .text.AUDIO_PwmSampleInit:000000ac $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:362    .text.AUDIO_SampleTimerStop:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:367    .text.AUDIO_SampleTimerStop:00000000 AUDIO_SampleTimerStop
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:406    .text.AUDIO_SampleTimerStop:00000030 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:412    .text.AUDIO_ProgramPaceTimer:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:417    .text.AUDIO_ProgramPaceTimer:00000000 AUDIO_ProgramPaceTimer
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:720    .text.AUDIO_ProgramPaceTimer:00000154 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:726    .text.AUDIO_PwmGpioConfig:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:731    .text.AUDIO_PwmGpioConfig:00000000 AUDIO_PwmGpioConfig
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:798    .text.AUDIO_PwmGpioConfig:00000044 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:803    .text.AUDIO_Init:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:809    .text.AUDIO_Init:00000000 AUDIO_Init
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:990    .text.AUDIO_Init:000000b0 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:998    .text.AUDIO_StopSample:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1004   .text.AUDIO_StopSample:00000000 AUDIO_StopSample
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1041   .text.AUDIO_StopSample:00000024 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1048   .text.AUDIO_PlaySample:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1054   .text.AUDIO_PlaySample:00000000 AUDIO_PlaySample
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1160   .text.AUDIO_PlaySample:00000068 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1169   .text.AUDIO_IsPlayingSample:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1175   .text.AUDIO_IsPlayingSample:00000000 AUDIO_IsPlayingSample
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1190   .text.AUDIO_IsPlayingSample:00000008 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1195   .text.AUDIO_TimerIRQHandler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1201   .text.AUDIO_TimerIRQHandler:00000000 AUDIO_TimerIRQHandler
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1263   .text.AUDIO_TimerIRQHandler:00000040 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1272   .text.HAL_TIM_PWM_MspInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1278   .text.HAL_TIM_PWM_MspInit:00000000 HAL_TIM_PWM_MspInit
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1330   .text.HAL_TIM_Base_MspInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1336   .text.HAL_TIM_Base_MspInit:00000000 HAL_TIM_Base_MspInit
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1382   .text.HAL_TIM_Base_MspInit:00000028 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1387   .bss.s_duty_lut:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1391   .bss.s_duty_lut:00000000 s_duty_lut
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1394   .bss.s_pcm:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1398   .bss.s_pcm:00000000 s_pcm
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1401   .bss.s_pcm_index:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1405   .bss.s_pcm_index:00000000 s_pcm_index
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1408   .bss.s_pcm_length:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1412   .bss.s_pcm_length:00000000 s_pcm_length
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1415   .bss.s_pwm:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1419   .bss.s_pwm:00000000 s_pwm
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1422   .bss.s_sample:00000000 $d
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s 			page 43
+
+
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1426   .bss.s_sample:00000000 s_sample
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1432   .bss.s_sample_playing:00000000 s_sample_playing
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1433   .bss.s_sample_playing:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1435   .bss.s_timer_clk_hz:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\ccLXk4Nw.s:1439   .bss.s_timer_clk_hz:00000000 s_timer_clk_hz
+
+UNDEFINED SYMBOLS
+__aeabi_uldivmod
+HAL_GPIO_Init
+HAL_RCC_GetPCLK1Freq
+HAL_TIM_PWM_Init
+HAL_TIM_PWM_ConfigChannel
+HAL_TIM_PWM_Start
+HAL_TIM_Base_Init
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+APP_ErrorHandler

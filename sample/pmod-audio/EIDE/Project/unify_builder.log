@@ -1,0 +1,44 @@
+[2026-10-11 18:36:31]	[info] incremental build: 19 source files changed
+These source files will be recompiled
+---
+'h:\Drivers\BSP\PY32E407xx_Start_Kit\py32e407xx_Start_Kit.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_cortex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_dma.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_gpio.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_tim.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_tim_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_uart.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\audio.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\main.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\melody_wav.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\py32e407_hal_msp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\py32e407_it.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\system_py32e407.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\EIDE\startup_py32e407xx.s': object (.o) file not exist
+
+[2026-10-11 18:36:32]	[done]
+	build successfully !
+
+[2026-10-11 20:39:21]	[done]
+	build successfully !
+
+[2026-10-11 21:14:29]	[info] incremental build: 5 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\audio.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\main.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\melody_wav.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\melody_wav_s.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\pmod-audio\Src\py32e407_it.c': source file has been changed.
+
+[2026-10-11 21:14:30]	[done]
+	build successfully !
+
+[2026-10-11 21:22:38]	[done]
+	build successfully !
+
