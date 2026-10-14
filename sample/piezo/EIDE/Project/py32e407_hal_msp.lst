@@ -1,0 +1,357 @@
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"py32e407_hal_msp.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.HAL_MspInit,"ax",%progbits
+  20              		.align	1
+  21              		.global	HAL_MspInit
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	HAL_MspInit:
+  27              	.LFB136:
+  28              		.file 1 "../Src/py32e407_hal_msp.c"
+   1:../Src/py32e407_hal_msp.c **** /**
+   2:../Src/py32e407_hal_msp.c ****   ******************************************************************************
+   3:../Src/py32e407_hal_msp.c ****   * @file    py32e407_hal_msp.c
+   4:../Src/py32e407_hal_msp.c ****   * @author  MCU Application Team
+   5:../Src/py32e407_hal_msp.c ****   * @brief   This file provides code for the MSP Initialization
+   6:../Src/py32e407_hal_msp.c ****   *          and de-Initialization codes.
+   7:../Src/py32e407_hal_msp.c ****   ******************************************************************************
+   8:../Src/py32e407_hal_msp.c ****   * @attention
+   9:../Src/py32e407_hal_msp.c ****   *
+  10:../Src/py32e407_hal_msp.c ****   * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  11:../Src/py32e407_hal_msp.c ****   * All rights reserved.</center></h2>
+  12:../Src/py32e407_hal_msp.c ****   *
+  13:../Src/py32e407_hal_msp.c ****   * This software component is licensed by Puya under BSD 3-Clause license,
+  14:../Src/py32e407_hal_msp.c ****   * the "License"; You may not use this file except in compliance with the
+  15:../Src/py32e407_hal_msp.c ****   * License. You may obtain a copy of the License at:
+  16:../Src/py32e407_hal_msp.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  17:../Src/py32e407_hal_msp.c ****   *
+  18:../Src/py32e407_hal_msp.c ****   ******************************************************************************
+  19:../Src/py32e407_hal_msp.c ****   * @attention
+  20:../Src/py32e407_hal_msp.c ****   *
+  21:../Src/py32e407_hal_msp.c ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  22:../Src/py32e407_hal_msp.c ****   * All rights reserved.</center></h2>
+  23:../Src/py32e407_hal_msp.c ****   *
+  24:../Src/py32e407_hal_msp.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  25:../Src/py32e407_hal_msp.c ****   * the "License"; You may not use this file except in compliance with the
+  26:../Src/py32e407_hal_msp.c ****   * License. You may obtain a copy of the License at:
+  27:../Src/py32e407_hal_msp.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  28:../Src/py32e407_hal_msp.c ****   *
+  29:../Src/py32e407_hal_msp.c ****   ******************************************************************************
+  30:../Src/py32e407_hal_msp.c ****   */
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s 			page 2
+
+
+  31:../Src/py32e407_hal_msp.c **** 
+  32:../Src/py32e407_hal_msp.c **** /* Includes ------------------------------------------------------------------*/
+  33:../Src/py32e407_hal_msp.c **** #include "main.h"
+  34:../Src/py32e407_hal_msp.c **** 
+  35:../Src/py32e407_hal_msp.c **** /* Private typedef -----------------------------------------------------------*/
+  36:../Src/py32e407_hal_msp.c **** /* Private define ------------------------------------------------------------*/
+  37:../Src/py32e407_hal_msp.c **** /* Private macro -------------------------------------------------------------*/
+  38:../Src/py32e407_hal_msp.c **** /* Private variables ---------------------------------------------------------*/
+  39:../Src/py32e407_hal_msp.c **** /* Private function prototypes -----------------------------------------------*/
+  40:../Src/py32e407_hal_msp.c **** /* External functions --------------------------------------------------------*/
+  41:../Src/py32e407_hal_msp.c **** 
+  42:../Src/py32e407_hal_msp.c **** /**
+  43:../Src/py32e407_hal_msp.c ****   * @brief Initialize global MSP
+  44:../Src/py32e407_hal_msp.c ****   */
+  45:../Src/py32e407_hal_msp.c **** void HAL_MspInit(void)
+  46:../Src/py32e407_hal_msp.c **** {
+  29              		.loc 1 46 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34 0000 82B0     		sub	sp, sp, #8
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  47:../Src/py32e407_hal_msp.c ****   __HAL_RCC_SYSCFG_CLK_ENABLE();
+  37              		.loc 1 47 3 view .LVU1
+  38              	.LBB2:
+  39              		.loc 1 47 3 view .LVU2
+  40              		.loc 1 47 3 view .LVU3
+  41 0002 0A4B     		ldr	r3, .L3
+  42 0004 1A6E     		ldr	r2, [r3, #96]
+  43 0006 42F00102 		orr	r2, r2, #1
+  44 000a 1A66     		str	r2, [r3, #96]
+  45              		.loc 1 47 3 view .LVU4
+  46 000c 1A6E     		ldr	r2, [r3, #96]
+  47 000e 02F00102 		and	r2, r2, #1
+  48 0012 0092     		str	r2, [sp]
+  49              		.loc 1 47 3 view .LVU5
+  50 0014 009A     		ldr	r2, [sp]
+  51              	.LBE2:
+  52              		.loc 1 47 3 view .LVU6
+  48:../Src/py32e407_hal_msp.c ****   __HAL_RCC_PWR_CLK_ENABLE();
+  53              		.loc 1 48 3 view .LVU7
+  54              	.LBB3:
+  55              		.loc 1 48 3 view .LVU8
+  56              		.loc 1 48 3 view .LVU9
+  57 0016 9A6D     		ldr	r2, [r3, #88]
+  58 0018 42F08052 		orr	r2, r2, #268435456
+  59 001c 9A65     		str	r2, [r3, #88]
+  60              		.loc 1 48 3 view .LVU10
+  61 001e 9B6D     		ldr	r3, [r3, #88]
+  62 0020 03F08053 		and	r3, r3, #268435456
+  63 0024 0193     		str	r3, [sp, #4]
+  64              		.loc 1 48 3 view .LVU11
+  65 0026 019B     		ldr	r3, [sp, #4]
+  66              	.LBE3:
+  67              		.loc 1 48 3 view .LVU12
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s 			page 3
+
+
+  49:../Src/py32e407_hal_msp.c **** }
+  68              		.loc 1 49 1 is_stmt 0 view .LVU13
+  69 0028 02B0     		add	sp, sp, #8
+  70              	.LCFI1:
+  71              		.cfi_def_cfa_offset 0
+  72              		@ sp needed
+  73 002a 7047     		bx	lr
+  74              	.L4:
+  75              		.align	2
+  76              	.L3:
+  77 002c 00100240 		.word	1073876992
+  78              		.cfi_endproc
+  79              	.LFE136:
+  81              		.section	.text.HAL_TIM_PWM_MspInit,"ax",%progbits
+  82              		.align	1
+  83              		.global	HAL_TIM_PWM_MspInit
+  84              		.syntax unified
+  85              		.thumb
+  86              		.thumb_func
+  88              	HAL_TIM_PWM_MspInit:
+  89              	.LVL0:
+  90              	.LFB137:
+  50:../Src/py32e407_hal_msp.c **** 
+  51:../Src/py32e407_hal_msp.c **** /**
+  52:../Src/py32e407_hal_msp.c ****   * @brief Initialize TIM1 related MSP (buzzer complementary PWM)
+  53:../Src/py32e407_hal_msp.c ****   */
+  54:../Src/py32e407_hal_msp.c **** void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
+  55:../Src/py32e407_hal_msp.c **** {
+  91              		.loc 1 55 1 is_stmt 1 view -0
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 32
+  94              		@ frame_needed = 0, uses_anonymous_args = 0
+  95              		.loc 1 55 1 is_stmt 0 view .LVU15
+  96 0000 00B5     		push	{lr}
+  97              	.LCFI2:
+  98              		.cfi_def_cfa_offset 4
+  99              		.cfi_offset 14, -4
+ 100 0002 89B0     		sub	sp, sp, #36
+ 101              	.LCFI3:
+ 102              		.cfi_def_cfa_offset 40
+  56:../Src/py32e407_hal_msp.c ****   GPIO_InitTypeDef   GPIO_InitStruct = {0};
+ 103              		.loc 1 56 3 is_stmt 1 view .LVU16
+ 104              		.loc 1 56 22 is_stmt 0 view .LVU17
+ 105 0004 0023     		movs	r3, #0
+ 106 0006 0393     		str	r3, [sp, #12]
+ 107 0008 0493     		str	r3, [sp, #16]
+ 108 000a 0593     		str	r3, [sp, #20]
+ 109 000c 0693     		str	r3, [sp, #24]
+ 110 000e 0793     		str	r3, [sp, #28]
+  57:../Src/py32e407_hal_msp.c ****   /* Enable TIM1 clock */
+  58:../Src/py32e407_hal_msp.c ****   __HAL_RCC_TIM1_CLK_ENABLE();
+ 111              		.loc 1 58 3 is_stmt 1 view .LVU18
+ 112              	.LBB4:
+ 113              		.loc 1 58 3 view .LVU19
+ 114              		.loc 1 58 3 view .LVU20
+ 115 0010 03F18043 		add	r3, r3, #1073741824
+ 116 0014 03F50433 		add	r3, r3, #135168
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s 			page 4
+
+
+ 117 0018 1A6E     		ldr	r2, [r3, #96]
+ 118 001a 42F40062 		orr	r2, r2, #2048
+ 119 001e 1A66     		str	r2, [r3, #96]
+ 120              		.loc 1 58 3 view .LVU21
+ 121 0020 1A6E     		ldr	r2, [r3, #96]
+ 122 0022 02F40062 		and	r2, r2, #2048
+ 123 0026 0192     		str	r2, [sp, #4]
+ 124              		.loc 1 58 3 view .LVU22
+ 125 0028 019A     		ldr	r2, [sp, #4]
+ 126              	.LBE4:
+ 127              		.loc 1 58 3 view .LVU23
+  59:../Src/py32e407_hal_msp.c ****   /* Enable GPIOA clock */
+  60:../Src/py32e407_hal_msp.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+ 128              		.loc 1 60 3 view .LVU24
+ 129              	.LBB5:
+ 130              		.loc 1 60 3 view .LVU25
+ 131              		.loc 1 60 3 view .LVU26
+ 132 002a DA6C     		ldr	r2, [r3, #76]
+ 133 002c 42F00402 		orr	r2, r2, #4
+ 134 0030 DA64     		str	r2, [r3, #76]
+ 135              		.loc 1 60 3 view .LVU27
+ 136 0032 DB6C     		ldr	r3, [r3, #76]
+ 137 0034 03F00403 		and	r3, r3, #4
+ 138 0038 0293     		str	r3, [sp, #8]
+ 139              		.loc 1 60 3 view .LVU28
+ 140 003a 029B     		ldr	r3, [sp, #8]
+ 141              	.LBE5:
+ 142              		.loc 1 60 3 view .LVU29
+  61:../Src/py32e407_hal_msp.c **** 
+  62:../Src/py32e407_hal_msp.c ****   /* Configure PA9/PA12 alternate Function: TIM1 */
+  63:../Src/py32e407_hal_msp.c ****   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 143              		.loc 1 63 3 view .LVU30
+ 144              		.loc 1 63 24 is_stmt 0 view .LVU31
+ 145 003c 0223     		movs	r3, #2
+ 146 003e 0493     		str	r3, [sp, #16]
+  64:../Src/py32e407_hal_msp.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 147              		.loc 1 64 3 is_stmt 1 view .LVU32
+  65:../Src/py32e407_hal_msp.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 148              		.loc 1 65 3 view .LVU33
+ 149              		.loc 1 65 25 is_stmt 0 view .LVU34
+ 150 0040 0693     		str	r3, [sp, #24]
+  66:../Src/py32e407_hal_msp.c ****   GPIO_InitStruct.Alternate = GPIO_AF6_TIM1;
+ 151              		.loc 1 66 3 is_stmt 1 view .LVU35
+ 152              		.loc 1 66 29 is_stmt 0 view .LVU36
+ 153 0042 0623     		movs	r3, #6
+ 154 0044 0793     		str	r3, [sp, #28]
+  67:../Src/py32e407_hal_msp.c ****   /* A9-TIM1_CH2  (buzzer terminal A) */
+  68:../Src/py32e407_hal_msp.c ****   GPIO_InitStruct.Pin = GPIO_PIN_9;
+ 155              		.loc 1 68 3 is_stmt 1 view .LVU37
+ 156              		.loc 1 68 23 is_stmt 0 view .LVU38
+ 157 0046 4FF40073 		mov	r3, #512
+ 158 004a 0393     		str	r3, [sp, #12]
+  69:../Src/py32e407_hal_msp.c ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 159              		.loc 1 69 3 is_stmt 1 view .LVU39
+ 160 004c 03A9     		add	r1, sp, #12
+ 161 004e 4FF09040 		mov	r0, #1207959552
+ 162              	.LVL1:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s 			page 5
+
+
+ 163              		.loc 1 69 3 is_stmt 0 view .LVU40
+ 164 0052 FFF7FEFF 		bl	HAL_GPIO_Init
+ 165              	.LVL2:
+  70:../Src/py32e407_hal_msp.c ****   /* A12-TIM1_CH2N (buzzer terminal B) */
+  71:../Src/py32e407_hal_msp.c ****   GPIO_InitStruct.Pin = GPIO_PIN_12;
+ 166              		.loc 1 71 3 is_stmt 1 view .LVU41
+ 167              		.loc 1 71 23 is_stmt 0 view .LVU42
+ 168 0056 4FF48053 		mov	r3, #4096
+ 169 005a 0393     		str	r3, [sp, #12]
+  72:../Src/py32e407_hal_msp.c ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 170              		.loc 1 72 3 is_stmt 1 view .LVU43
+ 171 005c 03A9     		add	r1, sp, #12
+ 172 005e 4FF09040 		mov	r0, #1207959552
+ 173 0062 FFF7FEFF 		bl	HAL_GPIO_Init
+ 174              	.LVL3:
+  73:../Src/py32e407_hal_msp.c **** }
+ 175              		.loc 1 73 1 is_stmt 0 view .LVU44
+ 176 0066 09B0     		add	sp, sp, #36
+ 177              	.LCFI4:
+ 178              		.cfi_def_cfa_offset 4
+ 179              		@ sp needed
+ 180 0068 5DF804FB 		ldr	pc, [sp], #4
+ 181              		.cfi_endproc
+ 182              	.LFE137:
+ 184              		.section	.text.HAL_TIM_Base_MspInit,"ax",%progbits
+ 185              		.align	1
+ 186              		.global	HAL_TIM_Base_MspInit
+ 187              		.syntax unified
+ 188              		.thumb
+ 189              		.thumb_func
+ 191              	HAL_TIM_Base_MspInit:
+ 192              	.LVL4:
+ 193              	.LFB138:
+  74:../Src/py32e407_hal_msp.c **** 
+  75:../Src/py32e407_hal_msp.c **** /**
+  76:../Src/py32e407_hal_msp.c ****   * @brief Initialize TIM2 related MSP (note pacing timer, no pins)
+  77:../Src/py32e407_hal_msp.c ****   */
+  78:../Src/py32e407_hal_msp.c **** void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
+  79:../Src/py32e407_hal_msp.c **** {
+ 194              		.loc 1 79 1 is_stmt 1 view -0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 8
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 198              		@ link register save eliminated.
+  80:../Src/py32e407_hal_msp.c ****   if (htim->Instance == TIM2)
+ 199              		.loc 1 80 3 view .LVU46
+ 200              		.loc 1 80 11 is_stmt 0 view .LVU47
+ 201 0000 0368     		ldr	r3, [r0]
+ 202              		.loc 1 80 6 view .LVU48
+ 203 0002 B3F1804F 		cmp	r3, #1073741824
+ 204 0006 00D0     		beq	.L13
+ 205 0008 7047     		bx	lr
+ 206              	.L13:
+  79:../Src/py32e407_hal_msp.c ****   if (htim->Instance == TIM2)
+ 207              		.loc 1 79 1 view .LVU49
+ 208 000a 82B0     		sub	sp, sp, #8
+ 209              	.LCFI5:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s 			page 6
+
+
+ 210              		.cfi_def_cfa_offset 8
+  81:../Src/py32e407_hal_msp.c ****   {
+  82:../Src/py32e407_hal_msp.c ****     /* Enable TIM2 clock */
+  83:../Src/py32e407_hal_msp.c ****     __HAL_RCC_TIM2_CLK_ENABLE();
+ 211              		.loc 1 83 5 is_stmt 1 view .LVU50
+ 212              	.LBB6:
+ 213              		.loc 1 83 5 view .LVU51
+ 214              		.loc 1 83 5 view .LVU52
+ 215 000c 03F50433 		add	r3, r3, #135168
+ 216 0010 9A6D     		ldr	r2, [r3, #88]
+ 217 0012 42F00102 		orr	r2, r2, #1
+ 218 0016 9A65     		str	r2, [r3, #88]
+ 219              		.loc 1 83 5 view .LVU53
+ 220 0018 9B6D     		ldr	r3, [r3, #88]
+ 221 001a 03F00103 		and	r3, r3, #1
+ 222 001e 0193     		str	r3, [sp, #4]
+ 223              		.loc 1 83 5 view .LVU54
+ 224 0020 019B     		ldr	r3, [sp, #4]
+ 225              	.LBE6:
+ 226              		.loc 1 83 5 view .LVU55
+  84:../Src/py32e407_hal_msp.c ****   }
+  85:../Src/py32e407_hal_msp.c **** }
+ 227              		.loc 1 85 1 is_stmt 0 view .LVU56
+ 228 0022 02B0     		add	sp, sp, #8
+ 229              	.LCFI6:
+ 230              		.cfi_def_cfa_offset 0
+ 231              		@ sp needed
+ 232 0024 7047     		bx	lr
+ 233              		.cfi_endproc
+ 234              	.LFE138:
+ 236              		.text
+ 237              	.Letext0:
+ 238              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 239              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 240              		.file 4 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 241              		.file 5 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 242              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_gpio.h"
+ 243              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_dma.h"
+ 244              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_tim.h"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 py32e407_hal_msp.c
+C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s:20     .text.HAL_MspInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s:26     .text.HAL_MspInit:00000000 HAL_MspInit
+C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s:77     .text.HAL_MspInit:0000002c $d
+C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s:82     .text.HAL_TIM_PWM_MspInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s:88     .text.HAL_TIM_PWM_MspInit:00000000 HAL_TIM_PWM_MspInit
+C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s:185    .text.HAL_TIM_Base_MspInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccpE3Dfi.s:191    .text.HAL_TIM_Base_MspInit:00000000 HAL_TIM_Base_MspInit
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init

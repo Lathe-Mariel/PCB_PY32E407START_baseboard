@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "regen pcm",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "H:\\git\\PCB_PY32E407START_baseboard\\sample\\piezo\\tools\\regen_pcm.bat"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

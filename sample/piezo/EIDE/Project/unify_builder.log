@@ -1,0 +1,52 @@
+[2026-10-15 03:48:34]	[info] incremental build: 18 source files changed
+These source files will be recompiled
+---
+'h:\Drivers\BSP\PY32E407xx_Start_Kit\py32e407xx_Start_Kit.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_cortex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_dma.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_gpio.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_tim.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_tim_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_uart.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\Src\main.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\Src\music.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\Src\py32e407_hal_msp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\Src\py32e407_it.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\Src\system_py32e407.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\EIDE\startup_py32e407xx.s': object (.o) file not exist
+
+[2026-10-15 03:48:36]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Project/.obj/__/Src/music.o: in function `MUSIC_Play':
+h:\git\PCB_PY32E407START_baseboard\sample\piezo\EIDE/./../Src/music.c:323: undefined reference to `PLATFORM_PCM_SAMPLES'
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: h:\git\PCB_PY32E407START_baseboard\sample\piezo\EIDE/./../Src/music.c:323: undefined reference to `PLATFORM_PCM_LENGTH'
+Memory region         Used Size  Region Size  %age Used
+             RAM:        2080 B       144 KB      1.41%
+           FLASH:       18024 B       512 KB      3.44%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2026-10-15 04:01:49]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\Src\platform_pcm.c': object (.o) file not exist
+
+[2026-10-15 04:01:51]	[done]
+	build successfully !
+
+[2026-10-15 04:04:36]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\Src\main.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\piezo\EIDE\..\Inc\music.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\Src\music.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\piezo\EIDE\..\Inc\music.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\piezo\Src\py32e407_it.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\piezo\EIDE\..\Inc\music.h' has been changed.
+
+[2026-10-15 04:04:37]	[done]
+	build successfully !
+
