@@ -59,8 +59,12 @@ typedef struct
   *         turns that headroom into loudness: 200 % is about +6 dB of
   *         average level, with the peaks smoothly limited instead of
   *         hard-clipped. MUSIC_SetVolume() can change it at runtime.
+  *
+  *         NOTE: 200 % is the level confirmed audible on the board. 100 %
+  *         (the untouched offline level, crest factor ~12 dB) is far too
+  *         quiet on the piezo.
   */
-#define MUSIC_DEFAULT_VOLUME_PCT      400U
+#define MUSIC_DEFAULT_VOLUME_PCT      120U
 
 /**
   * @brief  Default band layout of the speech equaliser (16 kHz sample rate).
@@ -90,6 +94,17 @@ void MUSIC_Init(void);
   * @brief  Start (or restart) playing the built-in PCM sample.
   */
 void MUSIC_Play(void);
+
+/**
+  * @brief  Bring-up self-test, independent of the EQ, the sample data and
+  *         the pacing timer. Runs ~3 s:
+  *         1. ~1 s constant 50 % duty: plain 62.5 kHz carrier on PA9/PA12
+  *            (scope-visible).
+  *         2. ~2 s of 500 Hz beeps: duty switched between 35 % and 65 %
+  *            every millisecond - an audible square wave that proves the
+  *            whole output chain (timer, both pins, piezo) by itself.
+  */
+void MUSIC_SelfTest(void);
 
 /**
   * @brief  Stop playback and mute both outputs.

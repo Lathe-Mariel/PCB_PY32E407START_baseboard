@@ -421,6 +421,39 @@ void MUSIC_EqEnable(uint8_t enable)
 }
 
 /**
+  * @brief  Bring-up self-test: drive the buzzer from raw timer duty cycles,
+  *         without the EQ, the sample data or the pacing timer.
+  * @retval None
+  */
+void MUSIC_SelfTest(void)
+{
+  uint32_t k;
+
+  /* Enable both outputs, the main output and the counter - the same line
+     MUSIC_Play() uses; without it the pins would stay high-impedance. */
+  s_pwm.Instance->CCER |= (TIM_CCER_CC2E | TIM_CCER_CC2NE);
+  __HAL_TIM_MOE_ENABLE(&s_pwm);
+  __HAL_TIM_ENABLE(&s_pwm);
+
+  /* Phase 1: fix 50 % duty for a second - the plain carrier. On a scope
+     PA9 shows 62.5 kHz PWM and PA12 its complement. */
+  __HAL_TIM_SET_COMPARE(&s_pwm, TIM_CHANNEL_2, 128U);
+  HAL_Delay(1000U);
+
+  /* Phase 2: switch the duty between ~35 % and ~65 % every millisecond.
+     Through the PWM DAC that is a 500 Hz square wave - a clearly audible
+     beep that involves none of the EQ / sample / TIM2 machinery. */
+  for (k = 0U; k < 2000U; k++)
+  {
+    __HAL_TIM_SET_COMPARE(&s_pwm, TIM_CHANNEL_2, ((k & 1U) != 0U) ? 88U : 168U);
+    HAL_Delay(1U);
+  }
+
+  /* Leave at centre duty; real playback takes over next. */
+  __HAL_TIM_SET_COMPARE(&s_pwm, TIM_CHANNEL_2, 128U);
+}
+
+/**
   * @brief  Interrupt handler body for the sample pacing timer.
   *
   *         Called from TIM2_IRQHandler(), see py32e407_it.c. One update

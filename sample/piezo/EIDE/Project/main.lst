@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 1
   29:../Src/main.c ****   */
   30:../Src/main.c **** 
   31:../Src/main.c **** /* Includes ------------------------------------------------------------------*/
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 2
 
 
   32:../Src/main.c **** #include "main.h"
@@ -108,37 +108,43 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 1
   76:../Src/main.c ****   /* Initialize GPIO */
   77:../Src/main.c ****   APP_GpioConfig();
   78:../Src/main.c **** 
-  79:../Src/main.c ****   /* Initialize the buzzer output and start playing */
-  80:../Src/main.c ****   MUSIC_Init();
-  81:../Src/main.c ****   MUSIC_Play();
+  79:../Src/main.c ****   /* Boot marker: LED on as soon as main() runs. It stays on during the
+  80:../Src/main.c ****      ~3 second buzzer self-test, then the loop below blinks it at 2 Hz. */
+  81:../Src/main.c ****   HAL_GPIO_WritePin(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_SET);
   82:../Src/main.c **** 
-  83:../Src/main.c ****   /* Infinite loop */
-  84:../Src/main.c ****   while (1)
-  85:../Src/main.c ****   {
-  86:../Src/main.c ****     /* Restart the playback when it is over */
-  87:../Src/main.c ****     if (MUSIC_IsPlaying() == 0U)
-  88:../Src/main.c ****     {
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 3
+  83:../Src/main.c ****   /* Initialize the buzzer output, prove the pins by ear/scope, then start
+  84:../Src/main.c ****      playing the sample. */
+  85:../Src/main.c ****   MUSIC_Init();
+  86:../Src/main.c ****   //MUSIC_SelfTest();
+  87:../Src/main.c ****   MUSIC_Play();
+  88:../Src/main.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 3
 
 
-  89:../Src/main.c ****       HAL_Delay(APP_SONG_GAP_MS);
-  90:../Src/main.c ****       MUSIC_Play();
-  91:../Src/main.c ****     }
-  92:../Src/main.c **** 
-  93:../Src/main.c ****     /* Heartbeat: 2 Hz blink while the melody is playing */
-  94:../Src/main.c ****     HAL_Delay(250);
-  95:../Src/main.c ****     HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GPIO_PIN);
-  96:../Src/main.c ****   }
-  97:../Src/main.c **** }
+  89:../Src/main.c ****   /* Infinite loop */
+  90:../Src/main.c ****   while (1)
+  91:../Src/main.c ****   {
+  92:../Src/main.c ****     /* Restart the playback when it is over */
+  93:../Src/main.c ****     if (MUSIC_IsPlaying() == 0U)
+  94:../Src/main.c ****     {
+  95:../Src/main.c ****       HAL_Delay(APP_SONG_GAP_MS);
+  96:../Src/main.c ****       MUSIC_Play();
+  97:../Src/main.c ****     }
   98:../Src/main.c **** 
-  99:../Src/main.c **** /**
- 100:../Src/main.c ****   * @brief  GPIO configuration.
- 101:../Src/main.c ****   * @param  None
- 102:../Src/main.c ****   * @retval None
- 103:../Src/main.c ****   */
- 104:../Src/main.c **** static void APP_GpioConfig(void)
- 105:../Src/main.c **** {
-  28              		.loc 1 105 1 view -0
+  99:../Src/main.c ****     /* Heartbeat: 2 Hz blink while the melody is playing */
+ 100:../Src/main.c ****     HAL_Delay(250);
+ 101:../Src/main.c ****     HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GPIO_PIN);
+ 102:../Src/main.c ****   }
+ 103:../Src/main.c **** }
+ 104:../Src/main.c **** 
+ 105:../Src/main.c **** /**
+ 106:../Src/main.c ****   * @brief  GPIO configuration.
+ 107:../Src/main.c ****   * @param  None
+ 108:../Src/main.c ****   * @retval None
+ 109:../Src/main.c ****   */
+ 110:../Src/main.c **** static void APP_GpioConfig(void)
+ 111:../Src/main.c **** {
+  28              		.loc 1 111 1 view -0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 24
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -149,66 +155,66 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 1
   36 0002 87B0     		sub	sp, sp, #28
   37              	.LCFI1:
   38              		.cfi_def_cfa_offset 32
- 106:../Src/main.c ****   GPIO_InitTypeDef  GPIO_InitStruct = {0};
-  39              		.loc 1 106 3 view .LVU1
-  40              		.loc 1 106 21 is_stmt 0 view .LVU2
+ 112:../Src/main.c ****   GPIO_InitTypeDef  GPIO_InitStruct = {0};
+  39              		.loc 1 112 3 view .LVU1
+  40              		.loc 1 112 21 is_stmt 0 view .LVU2
   41 0004 0023     		movs	r3, #0
   42 0006 0193     		str	r3, [sp, #4]
   43 0008 0293     		str	r3, [sp, #8]
   44 000a 0393     		str	r3, [sp, #12]
   45 000c 0493     		str	r3, [sp, #16]
   46 000e 0593     		str	r3, [sp, #20]
- 107:../Src/main.c **** 
- 108:../Src/main.c ****   LED_GPIO_CLK_ENABLE();                                 /* Enable GPIOB clock */
-  47              		.loc 1 108 3 is_stmt 1 view .LVU3
+ 113:../Src/main.c **** 
+ 114:../Src/main.c ****   LED_GPIO_CLK_ENABLE();                                 /* Enable GPIOB clock */
+  47              		.loc 1 114 3 is_stmt 1 view .LVU3
   48              	.LBB2:
-  49              		.loc 1 108 3 view .LVU4
-  50              		.loc 1 108 3 view .LVU5
+  49              		.loc 1 114 3 view .LVU4
+  50              		.loc 1 114 3 view .LVU5
   51 0010 03F18043 		add	r3, r3, #1073741824
   52 0014 03F50433 		add	r3, r3, #135168
   53 0018 DA6C     		ldr	r2, [r3, #76]
   54 001a 42F00802 		orr	r2, r2, #8
   55 001e DA64     		str	r2, [r3, #76]
-  56              		.loc 1 108 3 view .LVU6
+  56              		.loc 1 114 3 view .LVU6
   57 0020 DB6C     		ldr	r3, [r3, #76]
   58 0022 03F00803 		and	r3, r3, #8
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 4
+
+
   59 0026 0093     		str	r3, [sp]
-  60              		.loc 1 108 3 view .LVU7
+  60              		.loc 1 114 3 view .LVU7
   61 0028 009B     		ldr	r3, [sp]
   62              	.LBE2:
-  63              		.loc 1 108 3 view .LVU8
- 109:../Src/main.c **** 
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 4
-
-
- 110:../Src/main.c ****   GPIO_InitStruct.Pin = LED_GPIO_PIN;
-  64              		.loc 1 110 3 view .LVU9
-  65              		.loc 1 110 23 is_stmt 0 view .LVU10
+  63              		.loc 1 114 3 view .LVU8
+ 115:../Src/main.c **** 
+ 116:../Src/main.c ****   GPIO_InitStruct.Pin = LED_GPIO_PIN;
+  64              		.loc 1 116 3 view .LVU9
+  65              		.loc 1 116 23 is_stmt 0 view .LVU10
   66 002a 2023     		movs	r3, #32
   67 002c 0193     		str	r3, [sp, #4]
- 111:../Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
-  68              		.loc 1 111 3 is_stmt 1 view .LVU11
-  69              		.loc 1 111 24 is_stmt 0 view .LVU12
+ 117:../Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
+  68              		.loc 1 117 3 is_stmt 1 view .LVU11
+  69              		.loc 1 117 24 is_stmt 0 view .LVU12
   70 002e 0123     		movs	r3, #1
   71 0030 0293     		str	r3, [sp, #8]
- 112:../Src/main.c ****   GPIO_InitStruct.Pull = GPIO_PULLUP;                    /* Enable pull-up */
-  72              		.loc 1 112 3 is_stmt 1 view .LVU13
-  73              		.loc 1 112 24 is_stmt 0 view .LVU14
+ 118:../Src/main.c ****   GPIO_InitStruct.Pull = GPIO_PULLUP;                    /* Enable pull-up */
+  72              		.loc 1 118 3 is_stmt 1 view .LVU13
+  73              		.loc 1 118 24 is_stmt 0 view .LVU14
   74 0032 0393     		str	r3, [sp, #12]
- 113:../Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;          /* GPIO speed */
-  75              		.loc 1 113 3 is_stmt 1 view .LVU15
-  76              		.loc 1 113 25 is_stmt 0 view .LVU16
+ 119:../Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;          /* GPIO speed */
+  75              		.loc 1 119 3 is_stmt 1 view .LVU15
+  76              		.loc 1 119 25 is_stmt 0 view .LVU16
   77 0034 0223     		movs	r3, #2
   78 0036 0493     		str	r3, [sp, #16]
- 114:../Src/main.c ****   /* GPIO initialization */
- 115:../Src/main.c ****   HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct);
-  79              		.loc 1 115 3 is_stmt 1 view .LVU17
+ 120:../Src/main.c ****   /* GPIO initialization */
+ 121:../Src/main.c ****   HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct);
+  79              		.loc 1 121 3 is_stmt 1 view .LVU17
   80 0038 01A9     		add	r1, sp, #4
   81 003a 0348     		ldr	r0, .L3
   82 003c FFF7FEFF 		bl	HAL_GPIO_Init
   83              	.LVL0:
- 116:../Src/main.c **** }
-  84              		.loc 1 116 1 is_stmt 0 view .LVU18
+ 122:../Src/main.c **** }
+  84              		.loc 1 122 1 is_stmt 0 view .LVU18
   85 0040 07B0     		add	sp, sp, #28
   86              	.LCFI2:
   87              		.cfi_def_cfa_offset 4
@@ -228,79 +234,79 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 1
  102              		.thumb_func
  104              	APP_ErrorHandler:
  105              	.LFB139:
- 117:../Src/main.c **** 
- 118:../Src/main.c **** /**
- 119:../Src/main.c ****   * @brief  System Clock Configuration
- 120:../Src/main.c ****   * @param  None
- 121:../Src/main.c ****   * @retval None
- 122:../Src/main.c ****   */
- 123:../Src/main.c **** static void APP_SystemClockConfig(void)
- 124:../Src/main.c **** {
- 125:../Src/main.c ****   RCC_OscInitTypeDef  OscInitstruct = {0};
- 126:../Src/main.c ****   RCC_ClkInitTypeDef  ClkInitstruct = {0};
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 5
+ 123:../Src/main.c **** 
+ 124:../Src/main.c **** /**
+ 125:../Src/main.c ****   * @brief  System Clock Configuration
+ 126:../Src/main.c ****   * @param  None
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 5
 
 
- 127:../Src/main.c ****   
- 128:../Src/main.c ****   OscInitstruct.OscillatorType  = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORT
- 129:../Src/main.c ****                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
- 130:../Src/main.c ****   OscInitstruct.HSEState        = RCC_HSE_OFF;                              /* Close HSE */
- 131:../Src/main.c **** /* OscInitstruct.HSEFreq         = RCC_HSE_16_32MHz; */                       /* Choose HSE frequen
- 132:../Src/main.c ****   OscInitstruct.HSI48MState     = RCC_HSI48M_OFF;                           /* Close HSI48M */
- 133:../Src/main.c ****   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
- 134:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
- 135:../Src/main.c **** /* OscInitstruct.LSEDriver       = RCC_LSEDRIVE_HIGH; */                    /* Drive capability lev
- 136:../Src/main.c ****   OscInitstruct.LSIState        = RCC_LSI_OFF;                              /* Close LSI */
- 137:../Src/main.c ****   OscInitstruct.PLL.PLLState    = RCC_PLL_OFF;                              /* Close PLL */
- 138:../Src/main.c **** /* OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2; */               /* PLL clock source sel
- 139:../Src/main.c **** /* OscInitstruct.PLL.PLLPrediv   = RCC_PLL_PREDIV_DIV1; */                  /* PLL clock Prediv fac
- 140:../Src/main.c **** /* OscInitstruct.PLL.PLLMUL      = 12; */                                   /* PLL clock source 12-
- 141:../Src/main.c **** /* OscInitstruct.PLL.PLLPostdiv  = RCC_PLL_POSTDIV_DIV1; */                 /* PLL clock Postdiv fa
- 142:../Src/main.c ****   /* Configure oscillator */
- 143:../Src/main.c ****   if(HAL_RCC_OscConfig(&OscInitstruct) != HAL_OK)
- 144:../Src/main.c ****   {
- 145:../Src/main.c ****     APP_ErrorHandler();
- 146:../Src/main.c ****   }
- 147:../Src/main.c ****   
- 148:../Src/main.c ****   ClkInitstruct.ClockType       = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 |
- 149:../Src/main.c ****   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection H
- 150:../Src/main.c ****   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
- 151:../Src/main.c ****   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
- 152:../Src/main.c ****   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV1;                        /* APB2 clock 1 division */
- 153:../Src/main.c ****   /* Configure Clock */
- 154:../Src/main.c ****   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
- 155:../Src/main.c ****   {
- 156:../Src/main.c ****     APP_ErrorHandler();
- 157:../Src/main.c ****   }
- 158:../Src/main.c **** }
- 159:../Src/main.c **** 
- 160:../Src/main.c **** /**
- 161:../Src/main.c ****   * @brief  This function is executed in case of error occurrence.
- 162:../Src/main.c ****   * @param  None
- 163:../Src/main.c ****   * @retval None
- 164:../Src/main.c ****   */
- 165:../Src/main.c **** void APP_ErrorHandler(void)
- 166:../Src/main.c **** {
- 106              		.loc 1 166 1 is_stmt 1 view -0
+ 127:../Src/main.c ****   * @retval None
+ 128:../Src/main.c ****   */
+ 129:../Src/main.c **** static void APP_SystemClockConfig(void)
+ 130:../Src/main.c **** {
+ 131:../Src/main.c ****   RCC_OscInitTypeDef  OscInitstruct = {0};
+ 132:../Src/main.c ****   RCC_ClkInitTypeDef  ClkInitstruct = {0};
+ 133:../Src/main.c ****   
+ 134:../Src/main.c ****   OscInitstruct.OscillatorType  = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORT
+ 135:../Src/main.c ****                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
+ 136:../Src/main.c ****   OscInitstruct.HSEState        = RCC_HSE_OFF;                              /* Close HSE */
+ 137:../Src/main.c **** /* OscInitstruct.HSEFreq         = RCC_HSE_16_32MHz; */                       /* Choose HSE frequen
+ 138:../Src/main.c ****   OscInitstruct.HSI48MState     = RCC_HSI48M_OFF;                           /* Close HSI48M */
+ 139:../Src/main.c ****   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
+ 140:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
+ 141:../Src/main.c **** /* OscInitstruct.LSEDriver       = RCC_LSEDRIVE_HIGH; */                    /* Drive capability lev
+ 142:../Src/main.c ****   OscInitstruct.LSIState        = RCC_LSI_OFF;                              /* Close LSI */
+ 143:../Src/main.c ****   OscInitstruct.PLL.PLLState    = RCC_PLL_OFF;                              /* Close PLL */
+ 144:../Src/main.c **** /* OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2; */               /* PLL clock source sel
+ 145:../Src/main.c **** /* OscInitstruct.PLL.PLLPrediv   = RCC_PLL_PREDIV_DIV1; */                  /* PLL clock Prediv fac
+ 146:../Src/main.c **** /* OscInitstruct.PLL.PLLMUL      = 12; */                                   /* PLL clock source 12-
+ 147:../Src/main.c **** /* OscInitstruct.PLL.PLLPostdiv  = RCC_PLL_POSTDIV_DIV1; */                 /* PLL clock Postdiv fa
+ 148:../Src/main.c ****   /* Configure oscillator */
+ 149:../Src/main.c ****   if(HAL_RCC_OscConfig(&OscInitstruct) != HAL_OK)
+ 150:../Src/main.c ****   {
+ 151:../Src/main.c ****     APP_ErrorHandler();
+ 152:../Src/main.c ****   }
+ 153:../Src/main.c ****   
+ 154:../Src/main.c ****   ClkInitstruct.ClockType       = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 |
+ 155:../Src/main.c ****   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection H
+ 156:../Src/main.c ****   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+ 157:../Src/main.c ****   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+ 158:../Src/main.c ****   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV1;                        /* APB2 clock 1 division */
+ 159:../Src/main.c ****   /* Configure Clock */
+ 160:../Src/main.c ****   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
+ 161:../Src/main.c ****   {
+ 162:../Src/main.c ****     APP_ErrorHandler();
+ 163:../Src/main.c ****   }
+ 164:../Src/main.c **** }
+ 165:../Src/main.c **** 
+ 166:../Src/main.c **** /**
+ 167:../Src/main.c ****   * @brief  This function is executed in case of error occurrence.
+ 168:../Src/main.c ****   * @param  None
+ 169:../Src/main.c ****   * @retval None
+ 170:../Src/main.c ****   */
+ 171:../Src/main.c **** void APP_ErrorHandler(void)
+ 172:../Src/main.c **** {
+ 106              		.loc 1 172 1 is_stmt 1 view -0
  107              		.cfi_startproc
  108              		@ Volatile: function does not return.
  109              		@ args = 0, pretend = 0, frame = 0
  110              		@ frame_needed = 0, uses_anonymous_args = 0
  111              		@ link register save eliminated.
  112              	.L6:
- 167:../Src/main.c ****   /* Infinite loop */
- 168:../Src/main.c ****   while (1)
- 113              		.loc 1 168 3 discriminator 1 view .LVU20
- 169:../Src/main.c ****   {
- 170:../Src/main.c ****   }
- 114              		.loc 1 170 3 discriminator 1 view .LVU21
- 168:../Src/main.c ****   {
- 115              		.loc 1 168 9 discriminator 1 view .LVU22
+ 173:../Src/main.c ****   /* Infinite loop */
+ 174:../Src/main.c ****   while (1)
+ 113              		.loc 1 174 3 discriminator 1 view .LVU20
+ 175:../Src/main.c ****   {
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 6
+
+
+ 176:../Src/main.c ****   }
+ 114              		.loc 1 176 3 discriminator 1 view .LVU21
+ 174:../Src/main.c ****   {
+ 115              		.loc 1 174 9 discriminator 1 view .LVU22
  116 0000 FEE7     		b	.L6
  117              		.cfi_endproc
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 6
-
-
  118              	.LFE139:
  120              		.section	.text.APP_SystemClockConfig,"ax",%progbits
  121              		.align	1
@@ -309,8 +315,8 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 1
  124              		.thumb_func
  126              	APP_SystemClockConfig:
  127              	.LFB138:
- 124:../Src/main.c ****   RCC_OscInitTypeDef  OscInitstruct = {0};
- 128              		.loc 1 124 1 view -0
+ 130:../Src/main.c ****   RCC_OscInitTypeDef  OscInitstruct = {0};
+ 128              		.loc 1 130 1 view -0
  129              		.cfi_startproc
  130              		@ args = 0, pretend = 0, frame = 72
  131              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -321,106 +327,106 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 1
  136 0002 93B0     		sub	sp, sp, #76
  137              	.LCFI4:
  138              		.cfi_def_cfa_offset 80
- 125:../Src/main.c ****   RCC_ClkInitTypeDef  ClkInitstruct = {0};
- 139              		.loc 1 125 3 view .LVU24
- 125:../Src/main.c ****   RCC_ClkInitTypeDef  ClkInitstruct = {0};
- 140              		.loc 1 125 23 is_stmt 0 view .LVU25
+ 131:../Src/main.c ****   RCC_ClkInitTypeDef  ClkInitstruct = {0};
+ 139              		.loc 1 131 3 view .LVU24
+ 131:../Src/main.c ****   RCC_ClkInitTypeDef  ClkInitstruct = {0};
+ 140              		.loc 1 131 23 is_stmt 0 view .LVU25
  141 0004 3422     		movs	r2, #52
  142 0006 0021     		movs	r1, #0
  143 0008 05A8     		add	r0, sp, #20
  144 000a FFF7FEFF 		bl	memset
  145              	.LVL1:
- 126:../Src/main.c ****   
- 146              		.loc 1 126 3 is_stmt 1 view .LVU26
- 126:../Src/main.c ****   
- 147              		.loc 1 126 23 is_stmt 0 view .LVU27
+ 132:../Src/main.c ****   
+ 146              		.loc 1 132 3 is_stmt 1 view .LVU26
+ 132:../Src/main.c ****   
+ 147              		.loc 1 132 23 is_stmt 0 view .LVU27
  148 000e 0023     		movs	r3, #0
  149 0010 0093     		str	r3, [sp]
  150 0012 0193     		str	r3, [sp, #4]
  151 0014 0293     		str	r3, [sp, #8]
  152 0016 0393     		str	r3, [sp, #12]
  153 0018 0493     		str	r3, [sp, #16]
- 128:../Src/main.c ****                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
- 154              		.loc 1 128 3 is_stmt 1 view .LVU28
- 128:../Src/main.c ****                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
- 155              		.loc 1 128 33 is_stmt 0 view .LVU29
+ 134:../Src/main.c ****                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
+ 154              		.loc 1 134 3 is_stmt 1 view .LVU28
+ 134:../Src/main.c ****                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
+ 155              		.loc 1 134 33 is_stmt 0 view .LVU29
  156 001a 1F23     		movs	r3, #31
  157 001c 0593     		str	r3, [sp, #20]
- 130:../Src/main.c **** /* OscInitstruct.HSEFreq         = RCC_HSE_16_32MHz; */                       /* Choose HSE frequen
- 158              		.loc 1 130 3 is_stmt 1 view .LVU30
- 132:../Src/main.c ****   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
- 159              		.loc 1 132 3 view .LVU31
- 133:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
- 160              		.loc 1 133 3 view .LVU32
- 133:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
- 161              		.loc 1 133 33 is_stmt 0 view .LVU33
+ 136:../Src/main.c **** /* OscInitstruct.HSEFreq         = RCC_HSE_16_32MHz; */                       /* Choose HSE frequen
+ 158              		.loc 1 136 3 is_stmt 1 view .LVU30
+ 138:../Src/main.c ****   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
+ 159              		.loc 1 138 3 view .LVU31
+ 139:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
+ 160              		.loc 1 139 3 view .LVU32
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 7
+
+
+ 139:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
+ 161              		.loc 1 139 33 is_stmt 0 view .LVU33
  162 001e 0123     		movs	r3, #1
  163 0020 0A93     		str	r3, [sp, #40]
- 134:../Src/main.c **** /* OscInitstruct.LSEDriver       = RCC_LSEDRIVE_HIGH; */                    /* Drive capability lev
- 164              		.loc 1 134 3 is_stmt 1 view .LVU34
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 7
-
-
- 136:../Src/main.c ****   OscInitstruct.PLL.PLLState    = RCC_PLL_OFF;                              /* Close PLL */
- 165              		.loc 1 136 3 view .LVU35
- 137:../Src/main.c **** /* OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2; */               /* PLL clock source sel
- 166              		.loc 1 137 3 view .LVU36
- 137:../Src/main.c **** /* OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2; */               /* PLL clock source sel
- 167              		.loc 1 137 33 is_stmt 0 view .LVU37
+ 140:../Src/main.c **** /* OscInitstruct.LSEDriver       = RCC_LSEDRIVE_HIGH; */                    /* Drive capability lev
+ 164              		.loc 1 140 3 is_stmt 1 view .LVU34
+ 142:../Src/main.c ****   OscInitstruct.PLL.PLLState    = RCC_PLL_OFF;                              /* Close PLL */
+ 165              		.loc 1 142 3 view .LVU35
+ 143:../Src/main.c **** /* OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2; */               /* PLL clock source sel
+ 166              		.loc 1 143 3 view .LVU36
+ 143:../Src/main.c **** /* OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2; */               /* PLL clock source sel
+ 167              		.loc 1 143 33 is_stmt 0 view .LVU37
  168 0022 0D93     		str	r3, [sp, #52]
- 143:../Src/main.c ****   {
- 169              		.loc 1 143 3 is_stmt 1 view .LVU38
- 143:../Src/main.c ****   {
- 170              		.loc 1 143 6 is_stmt 0 view .LVU39
+ 149:../Src/main.c ****   {
+ 169              		.loc 1 149 3 is_stmt 1 view .LVU38
+ 149:../Src/main.c ****   {
+ 170              		.loc 1 149 6 is_stmt 0 view .LVU39
  171 0024 05A8     		add	r0, sp, #20
  172 0026 FFF7FEFF 		bl	HAL_RCC_OscConfig
  173              	.LVL2:
- 143:../Src/main.c ****   {
- 174              		.loc 1 143 5 view .LVU40
+ 149:../Src/main.c ****   {
+ 174              		.loc 1 149 5 view .LVU40
  175 002a 68B9     		cbnz	r0, .L11
- 148:../Src/main.c ****   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection H
- 176              		.loc 1 148 3 is_stmt 1 view .LVU41
- 148:../Src/main.c ****   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection H
- 177              		.loc 1 148 33 is_stmt 0 view .LVU42
+ 154:../Src/main.c ****   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection H
+ 176              		.loc 1 154 3 is_stmt 1 view .LVU41
+ 154:../Src/main.c ****   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection H
+ 177              		.loc 1 154 33 is_stmt 0 view .LVU42
  178 002c 0F23     		movs	r3, #15
  179 002e 0093     		str	r3, [sp]
- 149:../Src/main.c ****   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
- 180              		.loc 1 149 3 is_stmt 1 view .LVU43
- 149:../Src/main.c ****   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
- 181              		.loc 1 149 33 is_stmt 0 view .LVU44
+ 155:../Src/main.c ****   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+ 180              		.loc 1 155 3 is_stmt 1 view .LVU43
+ 155:../Src/main.c ****   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+ 181              		.loc 1 155 33 is_stmt 0 view .LVU44
  182 0030 0021     		movs	r1, #0
  183 0032 0191     		str	r1, [sp, #4]
- 150:../Src/main.c ****   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
- 184              		.loc 1 150 3 is_stmt 1 view .LVU45
- 150:../Src/main.c ****   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
- 185              		.loc 1 150 33 is_stmt 0 view .LVU46
+ 156:../Src/main.c ****   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+ 184              		.loc 1 156 3 is_stmt 1 view .LVU45
+ 156:../Src/main.c ****   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+ 185              		.loc 1 156 33 is_stmt 0 view .LVU46
  186 0034 0291     		str	r1, [sp, #8]
- 151:../Src/main.c ****   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV1;                        /* APB2 clock 1 division */
- 187              		.loc 1 151 3 is_stmt 1 view .LVU47
- 151:../Src/main.c ****   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV1;                        /* APB2 clock 1 division */
- 188              		.loc 1 151 33 is_stmt 0 view .LVU48
+ 157:../Src/main.c ****   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV1;                        /* APB2 clock 1 division */
+ 187              		.loc 1 157 3 is_stmt 1 view .LVU47
+ 157:../Src/main.c ****   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV1;                        /* APB2 clock 1 division */
+ 188              		.loc 1 157 33 is_stmt 0 view .LVU48
  189 0036 0391     		str	r1, [sp, #12]
- 152:../Src/main.c ****   /* Configure Clock */
- 190              		.loc 1 152 3 is_stmt 1 view .LVU49
- 152:../Src/main.c ****   /* Configure Clock */
- 191              		.loc 1 152 33 is_stmt 0 view .LVU50
+ 158:../Src/main.c ****   /* Configure Clock */
+ 190              		.loc 1 158 3 is_stmt 1 view .LVU49
+ 158:../Src/main.c ****   /* Configure Clock */
+ 191              		.loc 1 158 33 is_stmt 0 view .LVU50
  192 0038 0491     		str	r1, [sp, #16]
- 154:../Src/main.c ****   {
- 193              		.loc 1 154 3 is_stmt 1 view .LVU51
- 154:../Src/main.c ****   {
- 194              		.loc 1 154 6 is_stmt 0 view .LVU52
+ 160:../Src/main.c ****   {
+ 193              		.loc 1 160 3 is_stmt 1 view .LVU51
+ 160:../Src/main.c ****   {
+ 194              		.loc 1 160 6 is_stmt 0 view .LVU52
  195 003a 6846     		mov	r0, sp
  196 003c FFF7FEFF 		bl	HAL_RCC_ClockConfig
  197              	.LVL3:
- 154:../Src/main.c ****   {
- 198              		.loc 1 154 5 view .LVU53
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 8
+
+
+ 160:../Src/main.c ****   {
+ 198              		.loc 1 160 5 view .LVU53
  199 0040 20B9     		cbnz	r0, .L12
- 158:../Src/main.c **** 
- 200              		.loc 1 158 1 view .LVU54
+ 164:../Src/main.c **** 
+ 200              		.loc 1 164 1 view .LVU54
  201 0042 13B0     		add	sp, sp, #76
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 8
-
-
  202              	.LCFI5:
  203              		.cfi_remember_state
  204              		.cfi_def_cfa_offset 4
@@ -429,13 +435,13 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 1
  207              	.L11:
  208              	.LCFI6:
  209              		.cfi_restore_state
- 145:../Src/main.c ****   }
- 210              		.loc 1 145 5 is_stmt 1 view .LVU55
+ 151:../Src/main.c ****   }
+ 210              		.loc 1 151 5 is_stmt 1 view .LVU55
  211 0048 FFF7FEFF 		bl	APP_ErrorHandler
  212              	.LVL4:
  213              	.L12:
- 156:../Src/main.c ****   }
- 214              		.loc 1 156 5 view .LVU56
+ 162:../Src/main.c ****   }
+ 214              		.loc 1 162 5 view .LVU56
  215 004c FFF7FEFF 		bl	APP_ErrorHandler
  216              	.LVL5:
  217              		.cfi_endproc
@@ -471,126 +477,133 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 1
  245              		.loc 1 77 3 view .LVU60
  246 000a FFF7FEFF 		bl	APP_GpioConfig
  247              	.LVL8:
-  80:../Src/main.c ****   MUSIC_Play();
- 248              		.loc 1 80 3 view .LVU61
- 249 000e FFF7FEFF 		bl	MUSIC_Init
- 250              	.LVL9:
   81:../Src/main.c **** 
- 251              		.loc 1 81 3 view .LVU62
- 252 0012 FFF7FEFF 		bl	MUSIC_Play
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 9
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 9
 
 
- 253              	.LVL10:
- 254 0016 0CE0     		b	.L15
- 255              	.L17:
-  89:../Src/main.c ****       MUSIC_Play();
- 256              		.loc 1 89 7 view .LVU63
- 257 0018 40F2DC50 		movw	r0, #1500
- 258 001c FFF7FEFF 		bl	HAL_Delay
+ 248              		.loc 1 81 3 view .LVU61
+ 249 000e 0122     		movs	r2, #1
+ 250 0010 2021     		movs	r1, #32
+ 251 0012 0D48     		ldr	r0, .L18
+ 252 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 253              	.LVL9:
+  85:../Src/main.c ****   //MUSIC_SelfTest();
+ 254              		.loc 1 85 3 view .LVU62
+ 255 0018 FFF7FEFF 		bl	MUSIC_Init
+ 256              	.LVL10:
+  87:../Src/main.c **** 
+ 257              		.loc 1 87 3 view .LVU63
+ 258 001c FFF7FEFF 		bl	MUSIC_Play
  259              	.LVL11:
-  90:../Src/main.c ****     }
- 260              		.loc 1 90 7 view .LVU64
- 261 0020 FFF7FEFF 		bl	MUSIC_Play
- 262              	.LVL12:
- 263              	.L14:
-  94:../Src/main.c ****     HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GPIO_PIN);
- 264              		.loc 1 94 5 view .LVU65
- 265 0024 FA20     		movs	r0, #250
- 266 0026 FFF7FEFF 		bl	HAL_Delay
- 267              	.LVL13:
-  95:../Src/main.c ****   }
- 268              		.loc 1 95 5 view .LVU66
- 269 002a 2021     		movs	r1, #32
- 270 002c 0348     		ldr	r0, .L18
- 271 002e FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 272              	.LVL14:
-  84:../Src/main.c ****   {
- 273              		.loc 1 84 9 view .LVU67
- 274              	.L15:
-  84:../Src/main.c ****   {
- 275              		.loc 1 84 3 view .LVU68
-  87:../Src/main.c ****     {
- 276              		.loc 1 87 5 view .LVU69
-  87:../Src/main.c ****     {
- 277              		.loc 1 87 9 is_stmt 0 view .LVU70
- 278 0032 FFF7FEFF 		bl	MUSIC_IsPlaying
- 279              	.LVL15:
-  87:../Src/main.c ****     {
- 280              		.loc 1 87 8 view .LVU71
- 281 0036 0028     		cmp	r0, #0
- 282 0038 EED0     		beq	.L17
- 283 003a F3E7     		b	.L14
- 284              	.L19:
- 285              		.align	2
- 286              	.L18:
- 287 003c 00040048 		.word	1207960576
- 288              		.cfi_endproc
- 289              	.LFE136:
- 291              		.global	sBreakConfig
- 292              		.global	sPWMConfig
- 293              		.global	TimHandle
- 294              		.section	.bss.TimHandle,"aw",%nobits
- 295              		.align	2
- 298              	TimHandle:
- 299 0000 00000000 		.space	76
- 299      00000000 
- 299      00000000 
- 299      00000000 
- 299      00000000 
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 10
+ 260 0020 0CE0     		b	.L15
+ 261              	.L17:
+  95:../Src/main.c ****       MUSIC_Play();
+ 262              		.loc 1 95 7 view .LVU64
+ 263 0022 40F2DC50 		movw	r0, #1500
+ 264 0026 FFF7FEFF 		bl	HAL_Delay
+ 265              	.LVL12:
+  96:../Src/main.c ****     }
+ 266              		.loc 1 96 7 view .LVU65
+ 267 002a FFF7FEFF 		bl	MUSIC_Play
+ 268              	.LVL13:
+ 269              	.L14:
+ 100:../Src/main.c ****     HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GPIO_PIN);
+ 270              		.loc 1 100 5 view .LVU66
+ 271 002e FA20     		movs	r0, #250
+ 272 0030 FFF7FEFF 		bl	HAL_Delay
+ 273              	.LVL14:
+ 101:../Src/main.c ****   }
+ 274              		.loc 1 101 5 view .LVU67
+ 275 0034 2021     		movs	r1, #32
+ 276 0036 0448     		ldr	r0, .L18
+ 277 0038 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 278              	.LVL15:
+  90:../Src/main.c ****   {
+ 279              		.loc 1 90 9 view .LVU68
+ 280              	.L15:
+  90:../Src/main.c ****   {
+ 281              		.loc 1 90 3 view .LVU69
+  93:../Src/main.c ****     {
+ 282              		.loc 1 93 5 view .LVU70
+  93:../Src/main.c ****     {
+ 283              		.loc 1 93 9 is_stmt 0 view .LVU71
+ 284 003c FFF7FEFF 		bl	MUSIC_IsPlaying
+ 285              	.LVL16:
+  93:../Src/main.c ****     {
+ 286              		.loc 1 93 8 view .LVU72
+ 287 0040 0028     		cmp	r0, #0
+ 288 0042 EED0     		beq	.L17
+ 289 0044 F3E7     		b	.L14
+ 290              	.L19:
+ 291 0046 00BF     		.align	2
+ 292              	.L18:
+ 293 0048 00040048 		.word	1207960576
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 10
 
 
- 300              		.section	.bss.sBreakConfig,"aw",%nobits
+ 294              		.cfi_endproc
+ 295              	.LFE136:
+ 297              		.global	sBreakConfig
+ 298              		.global	sPWMConfig
+ 299              		.global	TimHandle
+ 300              		.section	.bss.TimHandle,"aw",%nobits
  301              		.align	2
- 304              	sBreakConfig:
- 305 0000 00000000 		.space	52
+ 304              	TimHandle:
+ 305 0000 00000000 		.space	76
  305      00000000 
  305      00000000 
  305      00000000 
  305      00000000 
- 306              		.section	.bss.sPWMConfig,"aw",%nobits
+ 306              		.section	.bss.sBreakConfig,"aw",%nobits
  307              		.align	2
- 310              	sPWMConfig:
- 311 0000 00000000 		.space	28
+ 310              	sBreakConfig:
+ 311 0000 00000000 		.space	52
  311      00000000 
  311      00000000 
  311      00000000 
  311      00000000 
- 312              		.text
- 313              	.Letext0:
- 314              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
- 315              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
- 316              		.file 4 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
- 317              		.file 5 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
- 318              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_rcc.h"
- 319              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_gpio.h"
- 320              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_dma.h"
- 321              		.file 9 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_tim.h"
- 322              		.file 10 "../Inc/music.h"
- 323              		.file 11 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e4xx_hal.h"
- 324              		.file 12 "<built-in>"
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s 			page 11
+ 312              		.section	.bss.sPWMConfig,"aw",%nobits
+ 313              		.align	2
+ 316              	sPWMConfig:
+ 317 0000 00000000 		.space	28
+ 317      00000000 
+ 317      00000000 
+ 317      00000000 
+ 317      00000000 
+ 318              		.text
+ 319              	.Letext0:
+ 320              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 321              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 322              		.file 4 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 323              		.file 5 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 324              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_rcc.h"
+ 325              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_gpio.h"
+ 326              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_dma.h"
+ 327              		.file 9 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_tim.h"
+ 328              		.file 10 "../Inc/music.h"
+ 329              		.file 11 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e4xx_hal.h"
+ 330              		.file 12 "<built-in>"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:20     .text.APP_GpioConfig:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:25     .text.APP_GpioConfig:00000000 APP_GpioConfig
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:93     .text.APP_GpioConfig:00000048 $d
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:98     .text.APP_ErrorHandler:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:104    .text.APP_ErrorHandler:00000000 APP_ErrorHandler
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:121    .text.APP_SystemClockConfig:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:126    .text.APP_SystemClockConfig:00000000 APP_SystemClockConfig
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:221    .text.main:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:227    .text.main:00000000 main
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:287    .text.main:0000003c $d
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:304    .bss.sBreakConfig:00000000 sBreakConfig
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:310    .bss.sPWMConfig:00000000 sPWMConfig
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:298    .bss.TimHandle:00000000 TimHandle
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:295    .bss.TimHandle:00000000 $d
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:301    .bss.sBreakConfig:00000000 $d
-C:\Users\n11ak\AppData\Local\Temp\ccXoHYNv.s:307    .bss.sPWMConfig:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:20     .text.APP_GpioConfig:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:25     .text.APP_GpioConfig:00000000 APP_GpioConfig
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:93     .text.APP_GpioConfig:00000048 $d
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:98     .text.APP_ErrorHandler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:104    .text.APP_ErrorHandler:00000000 APP_ErrorHandler
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:121    .text.APP_SystemClockConfig:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:126    .text.APP_SystemClockConfig:00000000 APP_SystemClockConfig
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:221    .text.main:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:227    .text.main:00000000 main
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:293    .text.main:00000048 $d
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:310    .bss.sBreakConfig:00000000 sBreakConfig
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:316    .bss.sPWMConfig:00000000 sPWMConfig
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:304    .bss.TimHandle:00000000 TimHandle
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:301    .bss.TimHandle:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:307    .bss.sBreakConfig:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cc5qAfVU.s:313    .bss.sPWMConfig:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_Init
@@ -598,6 +611,7 @@ memset
 HAL_RCC_OscConfig
 HAL_RCC_ClockConfig
 HAL_Init
+HAL_GPIO_WritePin
 MUSIC_Init
 MUSIC_Play
 HAL_Delay

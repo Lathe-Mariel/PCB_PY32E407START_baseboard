@@ -83,7 +83,7 @@ targets:
             warnings: all-warnings
           global:
             $float-abi-type: hard
-            misc-control: --specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16
+            misc-control: --specs=nosys.specs --specs=nano.specs
             output-debug-info: enable
           linker:
             $toolName: auto

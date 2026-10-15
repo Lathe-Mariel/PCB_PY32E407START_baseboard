@@ -76,8 +76,14 @@ int main(void)
   /* Initialize GPIO */
   APP_GpioConfig();
 
-  /* Initialize the buzzer output and start playing */
+  /* Boot marker: LED on as soon as main() runs. It stays on during the
+     ~3 second buzzer self-test, then the loop below blinks it at 2 Hz. */
+  HAL_GPIO_WritePin(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_SET);
+
+  /* Initialize the buzzer output, prove the pins by ear/scope, then start
+     playing the sample. */
   MUSIC_Init();
+  //MUSIC_SelfTest();
   MUSIC_Play();
 
   /* Infinite loop */

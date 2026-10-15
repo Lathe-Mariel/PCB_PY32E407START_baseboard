@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
   28:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * This software component is licensed by ST under BSD 3-Clause license,
   29:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * the "License"; You may not use this file except in compliance with the
   30:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * License. You may obtain a copy of the License at:
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 2
 
 
   31:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   *                        opensource.org/licenses/BSD-3-Clause
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
   85:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****  ===============================================================================
   86:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****               ##### Initialization and de-initialization functions #####
   87:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****  ===============================================================================
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 3
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 3
 
 
   88:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****     [..]
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  112:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @note  LSEON bit that switches on and off the LSE crystal belongs as well to the
  113:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   *        back-up domain.
  114:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @retval None
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 4
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 4
 
 
  115:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  102              		.align	2
  103              	.L8:
  104 000c 00700040 		.word	1073770496
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 5
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 5
 
 
  105              		.cfi_endproc
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  173:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****       (+) Sleep mode: Cortex-M4 core stopped, peripherals kept running, main and low power regulato
  174:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****       (+) Low-power Sleep mode: Cortex-M4 core stopped, peripherals kept running, main regulator of
  175:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****       (+) Stop 0 mode: all clocks are stopped except LSI and LSE, main and low power regulators on.
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 6
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 6
 
 
  176:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****       (+) Stop 1 mode: all clocks are stopped except LSI and LSE, main regulator off, low power reg
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  230:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****       (+) WFE Exit:
  231:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****           (++) Any EXTI Line (Internal or External) configured in Event mode.
  232:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** 
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 7
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 7
 
 
  233:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****        [..]
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  287:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @brief Configure the voltage threshold detected by the Power Voltage Detector (PVD).
  288:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @param sConfigPVD: pointer to a PWR_PVDTypeDef structure that contains the PVD
  289:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   *        configuration information.
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 8
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 8
 
 
  290:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @note Refer to the electrical characteristics of your device datasheet for
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  151 0032 DA60     		str	r2, [r3, #12]
  311:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   __HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE();
  152              		.loc 1 311 3 view .LVU19
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 9
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 9
 
 
  153 0034 9A68     		ldr	r2, [r3, #8]
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  190 0070 9360     		str	r3, [r2, #8]
  191              	.L13:
  329:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   }
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 10
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 10
 
 
  330:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** 
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  232              		.loc 1 345 3 view .LVU40
  233 0000 024A     		ldr	r2, .L18
  234 0002 5368     		ldr	r3, [r2, #4]
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 11
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 11
 
 
  235 0004 43F00103 		orr	r3, r3, #1
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  283              	.LFB142:
  356:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** 
  357:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** /**
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 12
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 12
 
 
  358:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @brief Enable the WakeUp PINx functionality.
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  312              		.section	.text.HAL_PWR_DisableWakeUpPin,"ax",%progbits
  313              		.align	1
  314              		.global	HAL_PWR_DisableWakeUpPin
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 13
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 13
 
 
  315              		.syntax unified
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  402:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @brief Enter Sleep or Low-power Sleep mode.
  403:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @note  In Sleep/Low-power Sleep mode, all I/O pins keep the same state as in Run mode.
  404:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @param Regulator: Specifies the regulator state in Sleep/Low-power Sleep mode.
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 14
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 14
 
 
  405:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   *          This parameter can be one of the following values:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  434:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****       (void)HAL_PWREx_DisableLowPowerRunMode();
  435:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****     }
  436:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****     /* Regulator now in main mode. */
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 15
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 15
 
 
  437:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   }
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  405              		.loc 1 465 1 is_stmt 0 view .LVU71
  406 0024 10BD     		pop	{r4, pc}
  407              	.LVL8:
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 16
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 16
 
 
  408              	.L35:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  455              	.LFB145:
  466:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** 
  467:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** /**
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 17
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 17
 
 
  468:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @brief Enter Stop mode
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  507:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****     HAL_PWREx_EnterSTOP0Mode(STOPEntry);
  471              		.loc 1 507 5 is_stmt 1 view .LVU86
  472 0008 0846     		mov	r0, r1
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 18
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 18
 
 
  473              	.LVL13:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  507              		.loc 1 526 3 view .LVU93
  508 0000 064B     		ldr	r3, .L45
  509 0002 1F22     		movs	r2, #31
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 19
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 19
 
 
  510 0004 5A61     		str	r2, [r3, #20]
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  547:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   *       interruptions handling.
  548:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @retval None
  549:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   */
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 20
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 20
 
 
  550:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** void HAL_PWR_EnableSleepOnExit(void)
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  585 000a 7047     		bx	lr
  586              	.L52:
  587              		.align	2
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 21
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 21
 
 
  588              	.L51:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  583:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   *       WFE to wake up when an interrupt moves from inactive to pended.
  584:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   * @retval None
  585:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c ****   */
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 22
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 22
 
 
  586:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** void HAL_PWR_DisableSEVOnPend(void)
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  614:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** __weak void HAL_PWR_PVDCallback(void)
  615:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** {
  658              		.loc 1 615 1 is_stmt 1 view -0
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 23
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 23
 
 
  659              		.cfi_startproc
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  608:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c **** 
  704              		.loc 1 608 1 is_stmt 0 view .LVU119
  705 001a F7E7     		b	.L60
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 24
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 24
 
 
  706              	.L65:
@@ -1397,66 +1397,66 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 1
  720              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
  721              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_pwr.h"
  722              		.file 9 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_pwr_ex.h"
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 25
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 25
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 py32e407_hal_pwr.c
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:20     .text.HAL_PWR_DeInit:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:26     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:48     .text.HAL_PWR_DeInit:00000014 $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:53     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:59     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:76     .text.HAL_PWR_EnableBkUpAccess:0000000c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:81     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:87     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:104    .text.HAL_PWR_DisableBkUpAccess:0000000c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:109    .text.HAL_PWR_ConfigPVD:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:115    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:213    .text.HAL_PWR_ConfigPVD:00000088 $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:219    .text.HAL_PWR_EnablePVD:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:225    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:242    .text.HAL_PWR_EnablePVD:0000000c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:247    .text.HAL_PWR_DisablePVD:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:253    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:270    .text.HAL_PWR_DisablePVD:0000000c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:275    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:281    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:308    .text.HAL_PWR_EnableWakeUpPin:0000001c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:313    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:319    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:341    .text.HAL_PWR_DisableWakeUpPin:00000010 $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:346    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:352    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:441    .text.HAL_PWR_EnterSLEEPMode:00000040 $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:447    .text.HAL_PWR_EnterSTOPMode:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:453    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:494    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:500    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:532    .text.HAL_PWR_EnterSTANDBYMode:0000001c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:538    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:544    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:561    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:566    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:572    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:589    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:594    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:600    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:617    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:622    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:628    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:645    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:650    .text.HAL_PWR_PVDCallback:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:656    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:669    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:675    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
-C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s:709    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:20     .text.HAL_PWR_DeInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:26     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:48     .text.HAL_PWR_DeInit:00000014 $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:53     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:59     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:76     .text.HAL_PWR_EnableBkUpAccess:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:81     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:87     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:104    .text.HAL_PWR_DisableBkUpAccess:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:109    .text.HAL_PWR_ConfigPVD:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:115    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:213    .text.HAL_PWR_ConfigPVD:00000088 $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:219    .text.HAL_PWR_EnablePVD:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:225    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:242    .text.HAL_PWR_EnablePVD:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:247    .text.HAL_PWR_DisablePVD:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:253    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:270    .text.HAL_PWR_DisablePVD:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:275    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:281    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:308    .text.HAL_PWR_EnableWakeUpPin:0000001c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:313    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:319    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:341    .text.HAL_PWR_DisableWakeUpPin:00000010 $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:346    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:352    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:441    .text.HAL_PWR_EnterSLEEPMode:00000040 $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:447    .text.HAL_PWR_EnterSTOPMode:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:453    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:494    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:500    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:532    .text.HAL_PWR_EnterSTANDBYMode:0000001c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:538    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:544    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:561    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:566    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:572    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:589    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:594    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:600    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:617    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:622    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:628    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:645    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:650    .text.HAL_PWR_PVDCallback:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:656    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:669    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:675    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
+C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s:709    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
 
 UNDEFINED SYMBOLS
 HAL_PWREx_DisableLowPowerRunMode
 HAL_PWREx_EnableLowPowerRunMode
 HAL_PWREx_EnterSTOP0Mode
 HAL_PWREx_EnterSTOP1Mode
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccjXPZyk.s 			page 26
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc22pDdi.s 			page 26
 
 

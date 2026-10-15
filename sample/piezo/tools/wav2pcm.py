@@ -266,7 +266,11 @@ def main():
 
     pcm = []
     for v in data:
-        s = int(round(v)) + 128
+        # v is a -1..1 fraction (post-normalise); scale it to the full
+        # unsigned 8 bit range FIRST, then round to an integer count.
+        # (Rounding before scaling would collapse the whole signal into
+        # 127..129 and produce silence.)
+        s = int(round(v * 127)) + 128
         if s < 0:
             s = 0
         elif s > 255:

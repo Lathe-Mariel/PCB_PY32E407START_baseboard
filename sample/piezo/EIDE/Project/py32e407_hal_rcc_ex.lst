@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
   27:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   *
   28:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   * This software component is licensed by ST under BSD 3-Clause license,
   29:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   * the "License"; You may not use this file except in compliance with the
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 2
 
 
   30:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   * License. You may obtain a copy of the License at:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
   84:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     frequencies.
   85:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     [..]
   86:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     (@) Important note: Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 3
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 3
 
 
   87:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****         select the RTC clock source; in this case the Backup domain will be reset in
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
   54 000c 3BD0     		beq	.L2
   55              	.LBB2:
  117:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   {
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 4
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 4
 
 
  118:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     /* check for RTC Parameters used to output RTCCLK */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
   95              	.LVL5:
   96              	.L4:
  133:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     {
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 5
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 5
 
 
  134:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       /* Enable write access to Backup domain */
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  157:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       __HAL_RCC_BACKUPRESET_RELEASE();
  128              		.loc 1 157 7 view .LVU36
  129 0060 1A6F     		ldr	r2, [r3, #112]
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 6
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 6
 
 
  130 0062 22F48032 		bic	r2, r2, #65536
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  186:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   /*------------------------------ ADC clock Configuration ------------------*/
  187:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   if (((PeriphClkInit->PeriphClockSelection) & RCC_PERIPHCLK_ADC) == RCC_PERIPHCLK_ADC)
  156              		.loc 1 187 3 is_stmt 1 view .LVU45
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 7
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 7
 
 
  157              		.loc 1 187 22 is_stmt 0 view .LVU46
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  190 00b8 5368     		ldr	r3, [r2, #4]
  191 00ba 23F4E003 		bic	r3, r3, #7340032
  192 00be E168     		ldr	r1, [r4, #12]
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 8
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 8
 
 
  193 00c0 0B43     		orrs	r3, r3, r1
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  221 00e6 23F00F03 		bic	r3, r3, #15
  222 00ea 6169     		ldr	r1, [r4, #20]
  223 00ec 0B43     		orrs	r3, r3, r1
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 9
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 9
 
 
  224 00ee D367     		str	r3, [r2, #124]
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  257:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   /*-------------------------- USART2 clock source configuration -------------------*/
  258:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   if(((PeriphClkInit->PeriphClockSelection) & RCC_PERIPHCLK_USART2) == RCC_PERIPHCLK_USART2)
  256              		.loc 1 258 3 view .LVU79
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 10
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 10
 
 
  257              		.loc 1 258 21 is_stmt 0 view .LVU80
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  291 014e 06D0     		beq	.L20
  279:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   {
  280:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     /* Check the parameters */
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 11
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 11
 
 
  281:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     assert_param(IS_RCC_LPUART1CLKSOURCE(PeriphClkInit->Lpuart1ClockSelection));
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  304:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     __HAL_RCC_COMP1_CONFIG(PeriphClkInit->Comp1ClockSelection);
  323              		.loc 1 304 5 view .LVU103
  324 017c 304A     		ldr	r2, .L33
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 12
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 12
 
 
  325 017e 936E     		ldr	r3, [r2, #104]
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  359 01b4 9366     		str	r3, [r2, #104]
  360              	.L24:
  325:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   }
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 13
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 13
 
 
  326:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  138:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c **** 
  400              		.loc 1 138 7 view .LVU123
  138:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c **** 
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 14
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 14
 
 
  401              		.loc 1 138 19 is_stmt 0 view .LVU124
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  168:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****         {
  440              		.loc 1 168 16 is_stmt 0 view .LVU140
  441 0206 0E4B     		ldr	r3, .L33
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 15
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 15
 
 
  442 0208 1B6F     		ldr	r3, [r3, #112]
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  486              	.LFE136:
  488              		.section	.text.HAL_RCCEx_GetPeriphCLKConfig,"ax",%progbits
  489              		.align	1
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 16
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 16
 
 
  490              		.global	HAL_RCCEx_GetPeriphCLKConfig
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  525              		.loc 1 358 39 is_stmt 0 view .LVU163
  526 001a 0722     		movs	r2, #7
  527 001c 0260     		str	r2, [r0]
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 17
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 17
 
 
  359:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   if(READ_BIT(RCC->CFGR1,RCC_USBCLKSOURCE_HSI48M) != RCC_USBCLKSOURCE_HSI48M)
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  563              		.loc 1 377 3 is_stmt 1 view .LVU180
  564              		.loc 1 377 39 is_stmt 0 view .LVU181
  565 0048 3F22     		movs	r2, #63
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 18
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 18
 
 
  566 004a 0260     		str	r2, [r0]
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  604              		.loc 1 393 39 is_stmt 0 view .LVU201
  605 007a 40F2FF32 		movw	r2, #1023
  606 007e 0260     		str	r2, [r0]
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 19
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 19
 
 
  394:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   PeriphClkInit->Lpuart1ClockSelection = __HAL_RCC_GET_LPUART1_SOURCE();
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  645 00b2 43F6FF72 		movw	r2, #16383
  646 00b6 0260     		str	r2, [r0]
  410:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   PeriphClkInit->Comp3ClockSelection = __HAL_RCC_GET_COMP3_SOURCE();
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 20
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 20
 
 
  647              		.loc 1 410 3 is_stmt 1 view .LVU222
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  424:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   *            @arg @ref RCC_PERIPHCLK_USB      USB peripheral clock
  425:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   *            @arg @ref RCC_PERIPHCLK_SRAM2    SRAM2 peripheral clock
  426:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   *            @arg @ref RCC_PERIPHCLK_CAN      CAN peripheral clock
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 21
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 21
 
 
  427:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****   *            @arg @ref RCC_PERIPHCLK_PVD      PVD peripheral clock
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  716 0016 4AD8     		bhi	.L42
  717 0018 2028     		cmp	r0, #32
  718 001a 28D8     		bhi	.L43
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 22
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 22
 
 
  719 001c 0028     		cmp	r0, #0
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  460:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       if (((temp_reg & RCC_BDCR_RTCSEL) == RCC_RTCCLKSOURCE_LSE) && (HAL_IS_BIT_SET(temp_reg, RCC_B
  461:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
  462:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****         frequency = LSE_VALUE;
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 23
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 23
 
 
  463:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  517:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****         }
  518:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
  519:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       break;
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 24
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 24
 
 
  520:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     }
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  574:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           {
  575:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****             frequency = pllclk / 3U;
  576:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****             break;
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 25
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 25
 
 
  577:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           }
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  631:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
  632:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       else if(((temp_reg & RCC_CFGR2_CANCKSEL) == RCC_CANCLKSOURCE_HSE) && (HAL_IS_BIT_SET(RCC->CR,
  633:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 26
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 26
 
 
  634:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****         frequency = HSE_VALUE;
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  688:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     
  689:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     case RCC_PERIPHCLK_USART1:
  690:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     {
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 27
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 27
 
 
  691:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       /* Get the current USART1 source */
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  803              		.loc 1 447 27 view .LVU261
  804 00a6 0020     		movs	r0, #0
  805 00a8 9BE2     		b	.L40
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 28
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 28
 
 
  806              	.LVL31:
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  741:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
  742:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****         /* nothing to do: frequency already initialized to 0 */
  743:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 29
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 29
 
 
  744:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       break;
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  798:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       else
  799:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
  800:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****         /* nothing to do: frequency already initialized to 0 */
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 30
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 30
 
 
  801:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  855:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
  856:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       break;
  857:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     }
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 31
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 31
 
 
  858:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****     
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  912:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       srcclk = __HAL_RCC_GET_COMP4_SOURCE();
  823              		.loc 1 912 7 is_stmt 1 view .LVU265
  824              		.loc 1 912 16 is_stmt 0 view .LVU266
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 32
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 32
 
 
  825 00c6 714B     		ldr	r3, .L176+4
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  866              		.loc 1 808 7 is_stmt 1 view .LVU280
  808:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c **** 
  867              		.loc 1 808 16 is_stmt 0 view .LVU281
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 33
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 33
 
 
  868 010a 604B     		ldr	r3, .L176+4
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  907              		.loc 1 822 60 discriminator 1 view .LVU296
  908 0146 B3F5404F 		cmp	r3, #49152
  909 014a 00F07382 		beq	.L135
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 34
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 34
 
 
  447:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c **** 
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  764:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
  949              		.loc 1 764 14 view .LVU312
  950 017e 10F00200 		ands	r0, r0, #2
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 35
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 35
 
 
  951 0182 00F02E82 		beq	.L40
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  991              	.L107:
  872:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
  992              		.loc 1 872 12 is_stmt 1 view .LVU327
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 36
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 36
 
 
  872:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1033 01ee 04D0     		beq	.L158
  1034              	.L61:
  469:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 37
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 37
 
 
  1035              		.loc 1 469 12 is_stmt 1 view .LVU342
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  496:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           break;
  1078              		.loc 1 496 11 is_stmt 1 view .LVU354
  496:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           break;
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 38
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 38
 
 
  1079              		.loc 1 496 23 is_stmt 0 view .LVU355
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1121              	.LVL66:
  1122              	.L162:
  512:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****         }
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 39
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 39
 
 
  1123              		.loc 1 512 11 is_stmt 0 view .LVU368
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1165 0290 6CDC0200 		.word	187500
  1166 0294 ABAAAAAA 		.word	-1431655765
  1167              	.LVL75:
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 40
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 40
 
 
  1168              	.L49:
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1206 02c8 D2F88030 		ldr	r3, [r2, #128]
  535:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****         pllmul = (READ_BIT(RCC->CFGR3, RCC_CFGR3_PLLFBDIV) >> RCC_CFGR3_PLLFBDIV_Pos) + 2U;
  1207              		.loc 1 535 84 view .LVU397
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 41
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 41
 
 
  1208 02cc C3F30113 		ubfx	r3, r3, #4, #2
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  527:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
  1247              		.loc 1 527 76 discriminator 1 view .LVU413
  1248 0302 12F0200F 		tst	r2, #32
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 42
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 42
 
 
  1249 0306 CBD0     		beq	.L69
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1288              		.loc 1 551 9 is_stmt 0 view .LVU428
  1289 033e 15D8     		bhi	.L74
  1290 0340 B3F5801F 		cmp	r3, #1048576
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 43
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 43
 
 
  1291 0344 00F04D81 		beq	.L40
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1332              	.L74:
  561:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           }
  1333              		.loc 1 561 13 view .LVU442
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 44
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 44
 
 
  1334 036c B3F5A00F 		cmp	r3, #5242880
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1374              		.loc 1 566 13 is_stmt 1 view .LVU456
  1375 0392 26E1     		b	.L40
  1376              	.LVL106:
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 45
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 45
 
 
  1377              	.L77:
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1418              	.LVL114:
  612:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           break;
  1419              		.loc 1 612 21 view .LVU470
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 46
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 46
 
 
  1420 03c0 4008     		lsrs	r0, r0, #1
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1459              	.LVL119:
  642:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           pllpostdiv = aDivFactorTable[(uint32_t)(RCC->CFGR3 & RCC_CFGR3_PLLPOSTDIV) >> RCC_CFGR3_P
  1460              		.loc 1 642 11 is_stmt 1 view .LVU486
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 47
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 47
 
 
  642:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           pllpostdiv = aDivFactorTable[(uint32_t)(RCC->CFGR3 & RCC_CFGR3_PLLPOSTDIV) >> RCC_CFGR3_P
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1498              		.loc 1 655 51 is_stmt 0 view .LVU503
  1499 0424 4A4A     		ldr	r2, .L178+4
  1500 0426 B2FBFCF2 		udiv	r2, r2, ip
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 48
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 48
 
 
  655:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           }
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1541              	.LVL128:
  650:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****           }
  1542              		.loc 1 650 20 view .LVU518
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 49
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 49
 
 
  1543 0462 B3FBF0F0 		udiv	r0, r3, r0
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  673:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
  1582              		.loc 1 673 14 view .LVU534
  1583 0490 12F0020F 		tst	r2, #2
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 50
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 50
 
 
  1584 0494 03D0     		beq	.L88
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1623 04ba 244B     		ldr	r3, .L178
  1624 04bc 9B6E     		ldr	r3, [r3, #104]
  1625              	.LVL139:
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 51
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 51
 
 
  723:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1664              		.loc 1 725 21 is_stmt 0 view .LVU565
  1665 04ec FFF7FEFF 		bl	HAL_RCC_GetPCLK1Freq
  1666              	.LVL143:
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 52
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 52
 
 
  725:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  785:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
  1706              		.loc 1 785 12 is_stmt 1 view .LVU581
  785:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 53
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 53
 
 
  1707              		.loc 1 785 14 is_stmt 0 view .LVU582
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1747 053e FFF7FEFF 		bl	HAL_RCC_GetSysClockFreq
  1748              	.LVL157:
  787:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 54
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 54
 
 
  1749              		.loc 1 787 21 view .LVU597
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1791 0580 5BD0     		beq	.L136
  1792              	.L105:
  847:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 55
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 55
 
 
  1793              		.loc 1 847 12 is_stmt 1 view .LVU610
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1833              	.LVL170:
  889:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       {
  1834              		.loc 1 889 9 view .LVU625
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 56
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 56
 
 
  1835 05aa 11D0     		beq	.L175
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  916:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
  1875              		.loc 1 916 21 view .LVU640
  1876 05da 02E0     		b	.L40
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 57
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 57
 
 
  1877              	.LVL176:
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1908              	.L120:
  447:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c **** 
  1909              		.loc 1 447 27 view .LVU646
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 58
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 58
 
 
  1910 05f2 0020     		movs	r0, #0
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1953 061e E0E7     		b	.L40
  1954              	.LVL189:
  1955              	.L131:
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 59
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 59
 
 
  791:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  1998              	.LVL198:
  870:../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_rcc_ex.c ****       }
  1999              		.loc 1 870 19 view .LVU670
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 60
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 60
 
 
  2000 064a CAE7     		b	.L40
@@ -3597,26 +3597,26 @@ ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 1
  2045              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_rcc_ex.h"
  2046              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_rcc.h"
  2047              		.file 9 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e4xx_hal.h"
-ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s 			page 61
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s 			page 61
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 py32e407_hal_rcc_ex.c
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:20     .text.HAL_RCCEx_PeriphCLKConfig:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:26     .text.HAL_RCCEx_PeriphCLKConfig:00000000 HAL_RCCEx_PeriphCLKConfig
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:483    .text.HAL_RCCEx_PeriphCLKConfig:00000240 $d
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:489    .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:495    .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 HAL_RCCEx_GetPeriphCLKConfig
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:674    .text.HAL_RCCEx_GetPeriphCLKConfig:000000d8 $d
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:679    .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 $t
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:685    .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 HAL_RCCEx_GetPeriphCLKFreq
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:728    .text.HAL_RCCEx_GetPeriphCLKFreq:0000002e $d
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:761    .text.HAL_RCCEx_GetPeriphCLKFreq:0000006e $t
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:1163   .text.HAL_RCCEx_GetPeriphCLKFreq:00000288 $d
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:1171   .text.HAL_RCCEx_GetPeriphCLKFreq:00000298 $t
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:1762   .text.HAL_RCCEx_GetPeriphCLKFreq:0000054c $d
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:1773   .text.HAL_RCCEx_GetPeriphCLKFreq:00000568 $t
-C:\Users\n11ak\AppData\Local\Temp\cczKcJVD.s:2033   .text.HAL_RCCEx_GetPeriphCLKFreq:0000066c $d
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:20     .text.HAL_RCCEx_PeriphCLKConfig:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:26     .text.HAL_RCCEx_PeriphCLKConfig:00000000 HAL_RCCEx_PeriphCLKConfig
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:483    .text.HAL_RCCEx_PeriphCLKConfig:00000240 $d
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:489    .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:495    .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 HAL_RCCEx_GetPeriphCLKConfig
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:674    .text.HAL_RCCEx_GetPeriphCLKConfig:000000d8 $d
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:679    .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:685    .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 HAL_RCCEx_GetPeriphCLKFreq
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:728    .text.HAL_RCCEx_GetPeriphCLKFreq:0000002e $d
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:761    .text.HAL_RCCEx_GetPeriphCLKFreq:0000006e $t
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:1163   .text.HAL_RCCEx_GetPeriphCLKFreq:00000288 $d
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:1171   .text.HAL_RCCEx_GetPeriphCLKFreq:00000298 $t
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:1762   .text.HAL_RCCEx_GetPeriphCLKFreq:0000054c $d
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:1773   .text.HAL_RCCEx_GetPeriphCLKFreq:00000568 $t
+C:\Users\n11ak\AppData\Local\Temp\ccsRUUrA.s:2033   .text.HAL_RCCEx_GetPeriphCLKFreq:0000066c $d
 
 UNDEFINED SYMBOLS
 HAL_GetTick

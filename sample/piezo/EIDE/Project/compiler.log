@@ -21,7 +21,7 @@ The amount of Asm files: 0
 
 Memory region         Used Size  Region Size  %age Used
              RAM:        2080 B       144 KB      1.41%
-           FLASH:      329264 B       512 KB     62.80%
+           FLASH:      330056 B       512 KB     62.95%
 
 
 >>> postbuild

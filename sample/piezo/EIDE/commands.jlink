@@ -1,6 +1,7 @@
 r
 halt
 loadfile "Project\Project.hex"
+verifybin "Project\Project.bin" 0x08000000
 r
 go
 exit
