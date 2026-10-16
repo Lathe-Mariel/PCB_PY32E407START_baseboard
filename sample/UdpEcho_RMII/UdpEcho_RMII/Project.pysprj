@@ -1,0 +1,456 @@
+{
+  "appVersion": "0.3.78",
+  "gitHash": "733ef3d7cc5fe6d1db228a0ebbda7a5589488424",
+  "createTime": 1773994699620,
+  "lastTime": 1786529605541,
+  "version": 6,
+  "name": "Project",
+  "platform": "EIDE",
+  "vendor": "Puya",
+  "serial": "PY32E407",
+  "chip": "PY32E407V1ET7",
+  "firmversion": "V0.7.1",
+  "frameWork": "cortex-m4",
+  "minstack": "0x400",
+  "minheap": "0x400",
+  "ramSize": "0x24000",
+  "flashSize": "0x80000",
+  "default_firmware_location": true,
+  "custom_firmware_location": "",
+  "library_copy": "all",
+  "data": {
+    "version": 6,
+    "dict": [
+      "ETH",
+      true,
+      "Mode",
+      "ETHMode",
+      "RMII",
+      "Disable",
+      "Parameter",
+      "General",
+      "EthernetMacAddress",
+      "02:00:00:00:00:00",
+      "00:80:E1:00:00:00",
+      "EthernetBasicConfiguration",
+      "RxMode",
+      "InterruptMode",
+      "PollingMode",
+      "PB6",
+      "GPIO_EXTI6",
+      "PB5",
+      "GPIO_Output",
+      "GPIO",
+      "body",
+      "speed",
+      "High",
+      "Low",
+      "Medium",
+      "UART1",
+      "NVIC",
+      "ETH_IRQn",
+      "enable",
+      false,
+      "LWIP",
+      "Enabled",
+      "GeneralSettings",
+      "ProtocolsOptions",
+      "MEMP_NUM_TCP_PCB",
+      "6",
+      "4",
+      "LWIP_DNS",
+      "0",
+      "1",
+      "Checksum",
+      "InfrastructureChecksumOptions",
+      "CHECKSUM_BY_HARDWARE",
+      "CHECKSUM_CHECK_ICMP6",
+      "CHECKSUM_GEN_ICMP6",
+      "CHECKSUM_CHECK_ICMP",
+      "CHECKSUM_GEN_ICMP",
+      "KeyOptions",
+      "InfrastructureHeapAndMemoryPoolsOptions",
+      "MEM_SIZE",
+      "10240",
+      "1600",
+      "101024",
+      "",
+      "1024",
+      "2048",
+      "InfrastructureInternalMemoryPoolSizes",
+      "MEMP_NUM_PBUF",
+      "10",
+      "16",
+      "MEMP_NUM_TCP_PCB_LISTEN",
+      "8",
+      "PbufOptions",
+      "PBUF_POOL_SIZE",
+      "12",
+      "MEMP_NUM_TCP_SEG",
+      "CallbackTCPOptions",
+      "TCP_WND",
+      "2920",
+      "41440",
+      "TCP_QUEUE_OOSEQ",
+      "TCP_MSS",
+      "1460",
+      "536",
+      "1426",
+      "TCP_SND_BUF",
+      "5704",
+      "1072",
+      "IPAddressSettings",
+      "IP_ADDRESS",
+      "192.168.0.122",
+      "000.000.000.000",
+      "NETMASK_ADDRESS",
+      "255.255.255.0",
+      "GATEWAY_ADDRESS",
+      "192.168.0.1",
+      "000.168.0.122",
+      "EXTI9_5_IRQn",
+      "GPIO_Input",
+      "PA7",
+      "-1",
+      "PD8",
+      "GPIO_AF13_ETH"
+    ],
+    "value": {
+      "ETH.Parameter.General.EthernetMacAddress.value": {
+        "order": 2,
+        "type": "global-value",
+        "value": "02:00:00:00:00:00"
+      },
+      "ETH.Parameter.EthernetBasicConfiguration.RxMode.value": {
+        "order": 3,
+        "type": "global-value",
+        "value": "InterruptMode"
+      },
+      "PB5;GPIO_Output": {
+        "order": 5,
+        "type": "pins-af"
+      },
+      "GPIO.Parameter.body.PB5.speed.value": {
+        "order": 6,
+        "type": "global-value",
+        "value": "High"
+      },
+      "ETH.NVIC.body.ETH_IRQn.enable.value": {
+        "order": 9,
+        "type": "global-value",
+        "value": true
+      },
+      "LWIP.GeneralSettings.ProtocolsOptions.MEMP_NUM_TCP_PCB.value": {
+        "order": 12,
+        "type": "global-value",
+        "value": "6"
+      },
+      "LWIP.Checksum.InfrastructureChecksumOptions.CHECKSUM_BY_HARDWARE.value": {
+        "order": 14,
+        "type": "global-value",
+        "value": "0"
+      },
+      "LWIP.Checksum.InfrastructureChecksumOptions.CHECKSUM_CHECK_ICMP6.value": {
+        "order": 15,
+        "type": "global-value",
+        "value": "0"
+      },
+      "LWIP.Checksum.InfrastructureChecksumOptions.CHECKSUM_GEN_ICMP6.value": {
+        "order": 16,
+        "type": "global-value",
+        "value": "0"
+      },
+      "LWIP.Checksum.InfrastructureChecksumOptions.CHECKSUM_CHECK_ICMP.value": {
+        "order": 17,
+        "type": "global-value",
+        "value": "0"
+      },
+      "LWIP.KeyOptions.InfrastructureHeapAndMemoryPoolsOptions.MEM_SIZE.value": {
+        "type": "global-value",
+        "order": 73,
+        "value": "(16*1024)"
+      },
+      "LWIP.KeyOptions.InfrastructureInternalMemoryPoolSizes.MEMP_NUM_PBUF.value": {
+        "order": 26,
+        "type": "global-value",
+        "value": "10"
+      },
+      "LWIP.KeyOptions.InfrastructureInternalMemoryPoolSizes.MEMP_NUM_TCP_PCB_LISTEN.value": {
+        "order": 27,
+        "type": "global-value",
+        "value": "6"
+      },
+      "LWIP.KeyOptions.PbufOptions.PBUF_POOL_SIZE.value": {
+        "order": 29,
+        "type": "global-value",
+        "value": "12"
+      },
+      "LWIP.KeyOptions.CallbackTCPOptions.TCP_WND.value": {
+        "type": "global-value",
+        "order": 74,
+        "value": "(2*TCP_MSS)"
+      },
+      "LWIP.KeyOptions.CallbackTCPOptions.TCP_QUEUE_OOSEQ.value": {
+        "order": 33,
+        "type": "global-value",
+        "value": "0"
+      },
+      "LWIP.KeyOptions.CallbackTCPOptions.TCP_MSS.value": {
+        "type": "global-value",
+        "order": 80,
+        "value": "(1500-40)"
+      },
+      "LWIP.KeyOptions.CallbackTCPOptions.TCP_SND_BUF.value": {
+        "type": "global-value",
+        "order": 75,
+        "value": "(4*TCP_MSS)"
+      },
+      "LWIP.GeneralSettings.IPAddressSettings.IP_ADDRESS.value": {
+        "order": 42,
+        "type": "global-value",
+        "value": "192.168.0.122"
+      },
+      "LWIP.GeneralSettings.IPAddressSettings.NETMASK_ADDRESS.value": {
+        "order": 39,
+        "type": "global-value",
+        "value": "255.255.255.0"
+      },
+      "LWIP.GeneralSettings.IPAddressSettings.GATEWAY_ADDRESS.value": {
+        "order": 40,
+        "type": "global-value",
+        "value": "192.168.0.1"
+      },
+      "PB6;GPIO_Input": {
+        "order": 44,
+        "type": "pins-af"
+      },
+      "PD8;ETH_CRS_DV": {
+        "order": 47,
+        "type": "pins-af"
+      },
+      "ETH.MODE.ETHMode.value": {
+        "type": "global-value",
+        "order": 51,
+        "value": "RMII"
+      },
+      "UART1.MODE.Activated.value": {
+        "type": "global-value",
+        "order": 82,
+        "value": true
+      },
+      "LWIP.MODE.Activated.value": {
+        "order": 10.01,
+        "type": "global-value",
+        "value": true
+      },
+      "APB2_DIV": {
+        "type": "clock-value",
+        "order": 48,
+        "value": "div2"
+      },
+      "ETH.do_not_generate_function_call.value": {
+        "type": "global-other",
+        "order": 53,
+        "value": true
+      },
+      "LWIP.rank.value": {
+        "type": "global-other",
+        "order": 54,
+        "value": 8
+      },
+      "GPIO.GPIO.body.PB5.level.value": {
+        "type": "global-value",
+        "order": 56,
+        "value": "High"
+      },
+      "PC8;GPIO_Output": {
+        "type": "pins-af",
+        "order": 57
+      },
+      "GPIO.GPIO.body.PC8.pull.value": {
+        "type": "global-value",
+        "order": 58,
+        "value": "Up"
+      },
+      "GPIO.GPIO.body.PC8.speed.value": {
+        "type": "global-value",
+        "order": 59,
+        "value": "VeryHigh"
+      },
+      "GPIO.GPIO.body.PC8.level.value": {
+        "type": "global-value",
+        "order": 60,
+        "value": "NA"
+      },
+      "LWIP.do_not_generate_function_call.value": {
+        "type": "global-other",
+        "order": 62,
+        "value": true
+      },
+      "LWIP.KeyOptions.InfrastructureHeapAndMemoryPoolsOptions.MEM_SIZE.format": {
+        "type": "global-other",
+        "order": 63,
+        "value": "No check"
+      },
+      "LWIP.KeyOptions.CallbackTCPOptions.TCP_SND_BUF.format": {
+        "type": "global-other",
+        "order": 65,
+        "value": "No check"
+      },
+      "LWIP.KeyOptions.CallbackTCPOptions.TCP_SND_QUEUELEN.value": {
+        "type": "global-value",
+        "order": 77,
+        "value": "(2*TCP_SND_BUF/TCP_MSS)"
+      },
+      "LWIP.KeyOptions.CallbackTCPOptions.TCP_SND_QUEUELEN.format": {
+        "type": "global-other",
+        "order": 76,
+        "value": "No check"
+      },
+      "LWIP.KeyOptions.CallbackTCPOptions.TCP_WND.format": {
+        "type": "global-other",
+        "order": 71,
+        "value": "No check"
+      },
+      "LWIP.KeyOptions.CallbackTCPOptions.TCP_MSS.format": {
+        "type": "global-other",
+        "order": 79,
+        "value": "No check"
+      }
+    },
+    "lastTime": 1792181074426,
+    "gpioBindings": {
+      "version": 1,
+      "rows": [
+        {
+          "pinName": "PC8",
+          "locked": true,
+          "source": "manual",
+          "alternates": [
+            "GPIO_Output"
+          ],
+          "primarySignal": "GPIO_Output"
+        },
+        {
+          "pinName": "PB5",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "GPIO_Output"
+          ],
+          "primarySignal": "GPIO_Output"
+        },
+        {
+          "pinName": "PB6",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "GPIO_Input"
+          ],
+          "primarySignal": "GPIO_Input"
+        },
+        {
+          "pinName": "PD8",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "ETH_CRS_DV"
+          ],
+          "primarySignal": "ETH_CRS_DV"
+        },
+        {
+          "pinName": "PB11",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "ETH_TX_EN"
+          ],
+          "primarySignal": "ETH_TX_EN"
+        },
+        {
+          "pinName": "PB12",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "ETH_TXD0"
+          ],
+          "primarySignal": "ETH_TXD0"
+        },
+        {
+          "pinName": "PB13",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "ETH_TXD1"
+          ],
+          "primarySignal": "ETH_TXD1"
+        },
+        {
+          "pinName": "PC4",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "ETH_RXD0"
+          ],
+          "primarySignal": "ETH_RXD0"
+        },
+        {
+          "pinName": "PC5",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "ETH_RXD1"
+          ],
+          "primarySignal": "ETH_RXD1"
+        },
+        {
+          "pinName": "PC1",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "ETH_MDC"
+          ],
+          "primarySignal": "ETH_MDC"
+        },
+        {
+          "pinName": "PA2",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "ETH_MDIO"
+          ],
+          "primarySignal": "ETH_MDIO"
+        },
+        {
+          "pinName": "PA1",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "ETH_REF_CLK"
+          ],
+          "primarySignal": "ETH_REF_CLK"
+        },
+        {
+          "pinName": "PC10",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "UART1_TX"
+          ],
+          "primarySignal": "UART1_TX"
+        },
+        {
+          "pinName": "PC11",
+          "locked": false,
+          "source": "auto",
+          "alternates": [
+            "UART1_RX"
+          ],
+          "primarySignal": "UART1_RX"
+        }
+      ]
+    }
+  },
+  "series": "PY32E407",
+  "templateVersion": 3
+}

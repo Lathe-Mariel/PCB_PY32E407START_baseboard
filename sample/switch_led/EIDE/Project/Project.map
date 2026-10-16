@@ -1,0 +1,2001 @@
+Archive member included to satisfy reference by file (symbol)
+
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o (exit)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o) (_global_impure_ptr)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o (__libc_init_array)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-memset.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o (memset)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+                              Project/py32e407xx_Start_Kit.o (setvbuf)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o) (_fflush_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o) (__sinit)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o) (_fwalk)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o) (__retarget_lock_init_recursive)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o) (__swhatbuf_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o) (malloc)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o) (_free_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o) (_malloc_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o) (_sbrk_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o) (__sread)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o) (_write_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o) (_close_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o) (_fstat_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o) (_isatty_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o) (_lseek_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o) (__malloc_lock)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o) (_read_r)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o) (errno)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o) (_close)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o) (_fstat)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o) (_isatty)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o) (_lseek)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o) (_read)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o) (_sbrk)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o) (_exit)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+                              Project/py32e407_hal_uart.o (__aeabi_uldivmod)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o) (__udivmoddi4)
+h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_dvmd_tls.o)
+                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o) (__aeabi_ldiv0)
+
+Discarded input sections
+
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crti.o
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crti.o
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crti.o
+ .data          0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .rodata        0x00000000       0x24 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .text          0x00000000       0x7c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+ .ARM.extab     0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+ .ARM.exidx     0x00000000       0x10 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+ .ARM.attributes
+                0x00000000       0x1c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+ .text          0x00000000        0x0 Project/main.o
+ .data          0x00000000        0x0 Project/main.o
+ .bss           0x00000000        0x0 Project/main.o
+ .text          0x00000000        0x0 Project/py32e407_hal_msp.o
+ .data          0x00000000        0x0 Project/py32e407_hal_msp.o
+ .bss           0x00000000        0x0 Project/py32e407_hal_msp.o
+ .text          0x00000000        0x0 Project/py32e407_it.o
+ .data          0x00000000        0x0 Project/py32e407_it.o
+ .bss           0x00000000        0x0 Project/py32e407_it.o
+ .text          0x00000000        0x0 Project/system_py32e407.o
+ .data          0x00000000        0x0 Project/system_py32e407.o
+ .bss           0x00000000        0x0 Project/system_py32e407.o
+ .text.SystemCoreClockUpdate
+                0x00000000       0xd8 Project/system_py32e407.o
+ .rodata.APBPrescTable
+                0x00000000        0x8 Project/system_py32e407.o
+ .text          0x00000000        0x0 Project/py32e407xx_Start_Kit.o
+ .data          0x00000000        0x0 Project/py32e407xx_Start_Kit.o
+ .bss           0x00000000        0x0 Project/py32e407xx_Start_Kit.o
+ .text.BSP_GetVersion
+                0x00000000        0x6 Project/py32e407xx_Start_Kit.o
+ .text.BSP_LED_Init
+                0x00000000       0x58 Project/py32e407xx_Start_Kit.o
+ .text.BSP_LED_DeInit
+                0x00000000       0x34 Project/py32e407xx_Start_Kit.o
+ .text.BSP_LED_On
+                0x00000000       0x18 Project/py32e407xx_Start_Kit.o
+ .text.BSP_LED_Off
+                0x00000000       0x18 Project/py32e407xx_Start_Kit.o
+ .text.BSP_LED_Toggle
+                0x00000000       0x14 Project/py32e407xx_Start_Kit.o
+ .text.BSP_PB_Init
+                0x00000000       0x7c Project/py32e407xx_Start_Kit.o
+ .text.BSP_PB_DeInit
+                0x00000000       0x30 Project/py32e407xx_Start_Kit.o
+ .text.BSP_PB_GetState
+                0x00000000       0x14 Project/py32e407xx_Start_Kit.o
+ .text.BSP_UART_Config
+                0x00000000       0xcc Project/py32e407xx_Start_Kit.o
+ .text.__io_putchar
+                0x00000000       0x20 Project/py32e407xx_Start_Kit.o
+ .text._write   0x00000000       0x1c Project/py32e407xx_Start_Kit.o
+ .bss.DebugUartHandle
+                0x00000000       0x4c Project/py32e407xx_Start_Kit.o
+ .data.BUTTON_PORT
+                0x00000000        0x4 Project/py32e407xx_Start_Kit.o
+ .data.LED_PORT
+                0x00000000        0x4 Project/py32e407xx_Start_Kit.o
+ .rodata.BUTTON_IRQn
+                0x00000000        0x1 Project/py32e407xx_Start_Kit.o
+ .rodata.BUTTON_PIN
+                0x00000000        0x2 Project/py32e407xx_Start_Kit.o
+ .rodata.LED_PIN
+                0x00000000        0x2 Project/py32e407xx_Start_Kit.o
+ .debug_info    0x00000000     0x1faf Project/py32e407xx_Start_Kit.o
+ .debug_abbrev  0x00000000      0x34e Project/py32e407xx_Start_Kit.o
+ .debug_loc     0x00000000      0x44e Project/py32e407xx_Start_Kit.o
+ .debug_aranges
+                0x00000000       0x78 Project/py32e407xx_Start_Kit.o
+ .debug_ranges  0x00000000       0x68 Project/py32e407xx_Start_Kit.o
+ .debug_line    0x00000000      0x5cb Project/py32e407xx_Start_Kit.o
+ .debug_str     0x00000000     0x1465 Project/py32e407xx_Start_Kit.o
+ .comment       0x00000000       0x4a Project/py32e407xx_Start_Kit.o
+ .debug_frame   0x00000000      0x164 Project/py32e407xx_Start_Kit.o
+ .ARM.attributes
+                0x00000000       0x34 Project/py32e407xx_Start_Kit.o
+ .text          0x00000000        0x0 Project/py32e407_hal.o
+ .data          0x00000000        0x0 Project/py32e407_hal.o
+ .bss           0x00000000        0x0 Project/py32e407_hal.o
+ .text.HAL_MspInit
+                0x00000000        0x2 Project/py32e407_hal.o
+ .text.HAL_MspDeInit
+                0x00000000        0x2 Project/py32e407_hal.o
+ .text.HAL_DeInit
+                0x00000000       0x2c Project/py32e407_hal.o
+ .text.HAL_GetTickPrio
+                0x00000000        0xc Project/py32e407_hal.o
+ .text.HAL_SetTickFreq
+                0x00000000       0x2c Project/py32e407_hal.o
+ .text.HAL_GetTickFreq
+                0x00000000        0xc Project/py32e407_hal.o
+ .text.HAL_Delay
+                0x00000000       0x28 Project/py32e407_hal.o
+ .text.HAL_SuspendTick
+                0x00000000        0xe Project/py32e407_hal.o
+ .text.HAL_ResumeTick
+                0x00000000        0xe Project/py32e407_hal.o
+ .text.HAL_GetHalVersion
+                0x00000000        0x6 Project/py32e407_hal.o
+ .text.HAL_GetREVID
+                0x00000000        0xc Project/py32e407_hal.o
+ .text.HAL_GetDEVID
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_GetUID
+                0x00000000        0xe Project/py32e407_hal.o
+ .text.HAL_GetUIDw0
+                0x00000000        0xc Project/py32e407_hal.o
+ .text.HAL_GetUIDw1
+                0x00000000        0xc Project/py32e407_hal.o
+ .text.HAL_GetUIDw2
+                0x00000000        0xc Project/py32e407_hal.o
+ .text.HAL_DBGMCU_EnableDBGSleepMode
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_DBGMCU_DisableDBGSleepMode
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_DBGMCU_EnableDBGStopMode
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_DBGMCU_DisableDBGStopMode
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_DBGMCU_EnableDBGStandbyMode
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_DBGMCU_DisableDBGStandbyMode
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_SetRemapMemory
+                0x00000000       0x14 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_GetRemapMemory
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_SetETHPhysicalInterface
+                0x00000000       0x14 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_GetETHPhysicalInterface
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_SetRemapTIM2InternalTrigger1
+                0x00000000       0x14 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_GetRemapTIM2InternalTrigger1
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_EnableI2CAnalogFilter
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_DisableI2CAnalogFilter
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_EnableGPIONoiseFilter
+                0x00000000       0x7c Project/py32e407_hal.o
+ .text.HAL_SYSCFG_DisableGPIONoiseFilter
+                0x00000000       0x88 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_EnableGPIOAnalogMode
+                0x00000000       0x7c Project/py32e407_hal.o
+ .text.HAL_SYSCFG_DisableGPIOAnalogMode
+                0x00000000       0x88 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_CCMSRAMErase
+                0x00000000       0x18 Project/py32e407_hal.o
+ .text.HAL_SYSCFG_CCMSRAM_WriteProtectionEnable
+                0x00000000       0x10 Project/py32e407_hal.o
+ .text          0x00000000        0x0 Project/py32e407_hal_rcc.o
+ .data          0x00000000        0x0 Project/py32e407_hal_rcc.o
+ .bss           0x00000000        0x0 Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_DeInit
+                0x00000000      0x110 Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_MCOConfig
+                0x00000000       0x88 Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_EnableCSS
+                0x00000000       0x10 Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_GetHCLKFreq
+                0x00000000        0xc Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_GetPCLK1Freq
+                0x00000000       0x20 Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_GetPCLK2Freq
+                0x00000000       0x20 Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_GetOscConfig
+                0x00000000       0xe4 Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_GetClockConfig
+                0x00000000       0x3c Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_CSSCallback
+                0x00000000        0x2 Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_NMI_IRQHandler
+                0x00000000       0x20 Project/py32e407_hal_rcc.o
+ .text          0x00000000        0x0 Project/py32e407_hal_rcc_ex.o
+ .data          0x00000000        0x0 Project/py32e407_hal_rcc_ex.o
+ .bss           0x00000000        0x0 Project/py32e407_hal_rcc_ex.o
+ .text.HAL_RCCEx_PeriphCLKConfig
+                0x00000000      0x248 Project/py32e407_hal_rcc_ex.o
+ .text.HAL_RCCEx_GetPeriphCLKConfig
+                0x00000000       0xdc Project/py32e407_hal_rcc_ex.o
+ .text.HAL_RCCEx_GetPeriphCLKFreq
+                0x00000000      0x674 Project/py32e407_hal_rcc_ex.o
+ .debug_info    0x00000000      0x7ac Project/py32e407_hal_rcc_ex.o
+ .debug_abbrev  0x00000000      0x1f5 Project/py32e407_hal_rcc_ex.o
+ .debug_loc     0x00000000     0x1034 Project/py32e407_hal_rcc_ex.o
+ .debug_aranges
+                0x00000000       0x30 Project/py32e407_hal_rcc_ex.o
+ .debug_ranges  0x00000000       0x38 Project/py32e407_hal_rcc_ex.o
+ .debug_line    0x00000000      0xb80 Project/py32e407_hal_rcc_ex.o
+ .debug_str     0x00000000      0x5b6 Project/py32e407_hal_rcc_ex.o
+ .comment       0x00000000       0x4a Project/py32e407_hal_rcc_ex.o
+ .debug_frame   0x00000000       0x68 Project/py32e407_hal_rcc_ex.o
+ .ARM.attributes
+                0x00000000       0x34 Project/py32e407_hal_rcc_ex.o
+ .text          0x00000000        0x0 Project/py32e407_hal_gpio.o
+ .data          0x00000000        0x0 Project/py32e407_hal_gpio.o
+ .bss           0x00000000        0x0 Project/py32e407_hal_gpio.o
+ .text.HAL_GPIO_DeInit
+                0x00000000      0x120 Project/py32e407_hal_gpio.o
+ .text.HAL_GPIO_TogglePin
+                0x00000000        0xe Project/py32e407_hal_gpio.o
+ .text.HAL_GPIO_LockPin
+                0x00000000       0x2e Project/py32e407_hal_gpio.o
+ .text.HAL_GPIO_EXTI_Callback
+                0x00000000        0x2 Project/py32e407_hal_gpio.o
+ .text.HAL_GPIO_EXTI_IRQHandler
+                0x00000000       0x1c Project/py32e407_hal_gpio.o
+ .text.HAL_GPIO_EXTI_Rising_Callback
+                0x00000000        0x2 Project/py32e407_hal_gpio.o
+ .text.HAL_GPIO_EXTI_Falling_Callback
+                0x00000000        0x2 Project/py32e407_hal_gpio.o
+ .text          0x00000000        0x0 Project/py32e407_hal_pwr.o
+ .data          0x00000000        0x0 Project/py32e407_hal_pwr.o
+ .bss           0x00000000        0x0 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_DeInit
+                0x00000000       0x18 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_EnableBkUpAccess
+                0x00000000       0x10 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_DisableBkUpAccess
+                0x00000000       0x10 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_ConfigPVD
+                0x00000000       0x90 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_EnablePVD
+                0x00000000       0x10 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_DisablePVD
+                0x00000000       0x10 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_EnableWakeUpPin
+                0x00000000       0x20 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_DisableWakeUpPin
+                0x00000000       0x14 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_EnterSLEEPMode
+                0x00000000       0x48 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_EnterSTOPMode
+                0x00000000       0x18 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_EnterSTANDBYMode
+                0x00000000       0x24 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_EnableSleepOnExit
+                0x00000000       0x10 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_DisableSleepOnExit
+                0x00000000       0x10 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_EnableSEVOnPend
+                0x00000000       0x10 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_DisableSEVOnPend
+                0x00000000       0x10 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_PVDCallback
+                0x00000000        0x2 Project/py32e407_hal_pwr.o
+ .text.HAL_PWR_PVD_IRQHandler
+                0x00000000       0x20 Project/py32e407_hal_pwr.o
+ .debug_info    0x00000000      0x8b5 Project/py32e407_hal_pwr.o
+ .debug_abbrev  0x00000000      0x1a6 Project/py32e407_hal_pwr.o
+ .debug_loc     0x00000000      0x211 Project/py32e407_hal_pwr.o
+ .debug_aranges
+                0x00000000       0xa0 Project/py32e407_hal_pwr.o
+ .debug_ranges  0x00000000       0x90 Project/py32e407_hal_pwr.o
+ .debug_line    0x00000000      0x42e Project/py32e407_hal_pwr.o
+ .debug_str     0x00000000      0x5da Project/py32e407_hal_pwr.o
+ .comment       0x00000000       0x4a Project/py32e407_hal_pwr.o
+ .debug_frame   0x00000000      0x138 Project/py32e407_hal_pwr.o
+ .ARM.attributes
+                0x00000000       0x34 Project/py32e407_hal_pwr.o
+ .text          0x00000000        0x0 Project/py32e407_hal_pwr_ex.o
+ .data          0x00000000        0x0 Project/py32e407_hal_pwr_ex.o
+ .bss           0x00000000        0x0 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_SetWakeupFlashDelay
+                0x00000000       0x14 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_GetWakeupFlashDelay
+                0x00000000       0x10 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_SetWakeupMrReadyDelay
+                0x00000000       0x14 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_GetWakeupMrReadyDelay
+                0x00000000       0x10 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_DisableHSIWakeupWait
+                0x00000000       0x10 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_EnableHSIWakeupWait
+                0x00000000       0x10 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_ControlVoltageScaling
+                0x00000000       0x20 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_GetVoltageRange
+                0x00000000       0x10 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_ControlSRAM2VoltageScaling
+                0x00000000       0x24 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_GetSRAM2VoltageRange
+                0x00000000       0x10 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_EnableSRAM2ContentRetention
+                0x00000000       0x10 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_DisableSRAM2ContentRetention
+                0x00000000       0x10 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_EnableLowPowerRunMode
+                0x00000000       0x10 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_DisableLowPowerRunMode
+                0x00000000       0x54 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_EnterSTOP0Mode
+                0x00000000       0x38 Project/py32e407_hal_pwr_ex.o
+ .text.HAL_PWREx_EnterSTOP1Mode
+                0x00000000       0x3c Project/py32e407_hal_pwr_ex.o
+ .debug_info    0x00000000      0x588 Project/py32e407_hal_pwr_ex.o
+ .debug_abbrev  0x00000000      0x1f6 Project/py32e407_hal_pwr_ex.o
+ .debug_loc     0x00000000       0x6d Project/py32e407_hal_pwr_ex.o
+ .debug_aranges
+                0x00000000       0x98 Project/py32e407_hal_pwr_ex.o
+ .debug_ranges  0x00000000       0x88 Project/py32e407_hal_pwr_ex.o
+ .debug_line    0x00000000      0x3cb Project/py32e407_hal_pwr_ex.o
+ .debug_str     0x00000000      0x4c2 Project/py32e407_hal_pwr_ex.o
+ .comment       0x00000000       0x4a Project/py32e407_hal_pwr_ex.o
+ .debug_frame   0x00000000      0x120 Project/py32e407_hal_pwr_ex.o
+ .ARM.attributes
+                0x00000000       0x34 Project/py32e407_hal_pwr_ex.o
+ .text          0x00000000        0x0 Project/py32e407_hal_uart.o
+ .data          0x00000000        0x0 Project/py32e407_hal_uart.o
+ .bss           0x00000000        0x0 Project/py32e407_hal_uart.o
+ .text.UART_EndTxTransfer
+                0x00000000       0x12 Project/py32e407_hal_uart.o
+ .text.UART_EndRxTransfer
+                0x00000000       0x12 Project/py32e407_hal_uart.o
+ .text.UART_WaitOnFlagUntilTimeout
+                0x00000000       0x62 Project/py32e407_hal_uart.o
+ .text.HAL_UART_MspInit
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.HAL_UART_Init
+                0x00000000      0x12a Project/py32e407_hal_uart.o
+ .text.HAL_UART_MspDeInit
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.HAL_UART_DeInit
+                0x00000000       0x26 Project/py32e407_hal_uart.o
+ .text.HAL_UART_TransmitAddr
+                0x00000000       0xe6 Project/py32e407_hal_uart.o
+ .text.HAL_UART_Transmit
+                0x00000000       0xea Project/py32e407_hal_uart.o
+ .text.HAL_UART_Receive
+                0x00000000       0xd6 Project/py32e407_hal_uart.o
+ .text.HAL_UART_Transmit_IT
+                0x00000000       0x4e Project/py32e407_hal_uart.o
+ .text.HAL_UART_Receive_IT
+                0x00000000       0x4e Project/py32e407_hal_uart.o
+ .text.HAL_UART_Transmit_DMA
+                0x00000000       0xb8 Project/py32e407_hal_uart.o
+ .text.HAL_UART_Receive_DMA
+                0x00000000       0xe8 Project/py32e407_hal_uart.o
+ .text.HAL_UART_DMAPause
+                0x00000000       0x72 Project/py32e407_hal_uart.o
+ .text.HAL_UART_DMAResume
+                0x00000000       0x62 Project/py32e407_hal_uart.o
+ .text.HAL_UART_DMAStop
+                0x00000000       0x92 Project/py32e407_hal_uart.o
+ .text.HAL_UART_Abort
+                0x00000000       0x8c Project/py32e407_hal_uart.o
+ .text.HAL_UART_AbortTransmit
+                0x00000000       0x18 Project/py32e407_hal_uart.o
+ .text.HAL_UART_AbortReceive
+                0x00000000       0x18 Project/py32e407_hal_uart.o
+ .text.HAL_UART_ErrorCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.UART_DMAError
+                0x00000000       0x54 Project/py32e407_hal_uart.o
+ .text.UART_DMAAbortOnError
+                0x00000000       0x10 Project/py32e407_hal_uart.o
+ .text.HAL_UART_TxCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.UART_DMATransmitCplt
+                0x00000000       0x4e Project/py32e407_hal_uart.o
+ .text.UART_Transmit_IT
+                0x00000000       0x64 Project/py32e407_hal_uart.o
+ .text.HAL_UART_TxBlockCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.UART_DMATxBlockCplt
+                0x00000000        0xa Project/py32e407_hal_uart.o
+ .text.HAL_UART_TxHalfBlockCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.UART_DMATxHalfBlockCplt
+                0x00000000        0xa Project/py32e407_hal_uart.o
+ .text.HAL_UART_TxSrcCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.UART_DMASrcTranCplt
+                0x00000000        0xa Project/py32e407_hal_uart.o
+ .text.HAL_UART_RxCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.UART_DMAReceiveCplt
+                0x00000000       0x32 Project/py32e407_hal_uart.o
+ .text.UART_Receive_IT
+                0x00000000       0x62 Project/py32e407_hal_uart.o
+ .text.HAL_UART_RxBlockCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.UART_DMARxBlockCplt
+                0x00000000        0xa Project/py32e407_hal_uart.o
+ .text.HAL_UART_RxHalfBlockCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.UART_DMARxHalfBlockCplt
+                0x00000000        0xa Project/py32e407_hal_uart.o
+ .text.HAL_UART_RxDstCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.UART_DMADstTranCplt
+                0x00000000        0xa Project/py32e407_hal_uart.o
+ .text.HAL_UART_BreakFrameCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.HAL_UART_AddrMatchCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.HAL_UART_IRQHandler
+                0x00000000      0x170 Project/py32e407_hal_uart.o
+ .text.HAL_UART_AbortCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.HAL_UART_Abort_IT
+                0x00000000       0xc4 Project/py32e407_hal_uart.o
+ .text.UART_DMARxAbortCallback
+                0x00000000       0x30 Project/py32e407_hal_uart.o
+ .text.UART_DMATxAbortCallback
+                0x00000000       0x30 Project/py32e407_hal_uart.o
+ .text.HAL_UART_AbortTransmitCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.HAL_UART_AbortTransmit_IT
+                0x00000000       0x60 Project/py32e407_hal_uart.o
+ .text.UART_DMATxOnlyAbortCallback
+                0x00000000       0x14 Project/py32e407_hal_uart.o
+ .text.HAL_UART_AbortReceiveCpltCallback
+                0x00000000        0x2 Project/py32e407_hal_uart.o
+ .text.HAL_UART_AbortReceive_IT
+                0x00000000       0x6c Project/py32e407_hal_uart.o
+ .text.UART_DMARxOnlyAbortCallback
+                0x00000000       0x1a Project/py32e407_hal_uart.o
+ .text.HAL_UART_StartSendBreak
+                0x00000000       0x32 Project/py32e407_hal_uart.o
+ .text.HAL_UART_StopSendBreak
+                0x00000000       0x32 Project/py32e407_hal_uart.o
+ .text.HAL_UART_GetState
+                0x00000000        0xc Project/py32e407_hal_uart.o
+ .text.HAL_UART_GetError
+                0x00000000        0x4 Project/py32e407_hal_uart.o
+ .debug_info    0x00000000     0x1f40 Project/py32e407_hal_uart.o
+ .debug_abbrev  0x00000000      0x2a0 Project/py32e407_hal_uart.o
+ .debug_loc     0x00000000     0x1e39 Project/py32e407_hal_uart.o
+ .debug_aranges
+                0x00000000      0x1e8 Project/py32e407_hal_uart.o
+ .debug_ranges  0x00000000      0x1d8 Project/py32e407_hal_uart.o
+ .debug_line    0x00000000     0x1ad3 Project/py32e407_hal_uart.o
+ .debug_str     0x00000000      0xeda Project/py32e407_hal_uart.o
+ .comment       0x00000000       0x4a Project/py32e407_hal_uart.o
+ .debug_frame   0x00000000      0x54c Project/py32e407_hal_uart.o
+ .ARM.attributes
+                0x00000000       0x34 Project/py32e407_hal_uart.o
+ .text          0x00000000        0x0 Project/py32e407_hal_cortex.o
+ .data          0x00000000        0x0 Project/py32e407_hal_cortex.o
+ .bss           0x00000000        0x0 Project/py32e407_hal_cortex.o
+ .text.HAL_NVIC_EnableIRQ
+                0x00000000       0x1c Project/py32e407_hal_cortex.o
+ .text.HAL_NVIC_DisableIRQ
+                0x00000000       0x24 Project/py32e407_hal_cortex.o
+ .text.HAL_NVIC_SystemReset
+                0x00000000       0x24 Project/py32e407_hal_cortex.o
+ .text.HAL_MPU_Disable
+                0x00000000       0x1c Project/py32e407_hal_cortex.o
+ .text.HAL_MPU_Enable
+                0x00000000       0x20 Project/py32e407_hal_cortex.o
+ .text.HAL_MPU_ConfigRegion
+                0x00000000       0x60 Project/py32e407_hal_cortex.o
+ .text.HAL_NVIC_GetPriorityGrouping
+                0x00000000       0x10 Project/py32e407_hal_cortex.o
+ .text.HAL_NVIC_GetPriority
+                0x00000000       0x60 Project/py32e407_hal_cortex.o
+ .text.HAL_NVIC_SetPendingIRQ
+                0x00000000       0x1c Project/py32e407_hal_cortex.o
+ .text.HAL_NVIC_GetPendingIRQ
+                0x00000000       0x24 Project/py32e407_hal_cortex.o
+ .text.HAL_NVIC_ClearPendingIRQ
+                0x00000000       0x1c Project/py32e407_hal_cortex.o
+ .text.HAL_NVIC_GetActive
+                0x00000000       0x24 Project/py32e407_hal_cortex.o
+ .text.HAL_SYSTICK_CLKSourceConfig
+                0x00000000       0x20 Project/py32e407_hal_cortex.o
+ .text.HAL_SYSTICK_Callback
+                0x00000000        0x2 Project/py32e407_hal_cortex.o
+ .text.HAL_SYSTICK_IRQHandler
+                0x00000000        0x8 Project/py32e407_hal_cortex.o
+ .text          0x00000000        0x0 Project/py32e407_hal_dma.o
+ .data          0x00000000        0x0 Project/py32e407_hal_dma.o
+ .bss           0x00000000        0x0 Project/py32e407_hal_dma.o
+ .text.DMA_SetConfig
+                0x00000000      0x146 Project/py32e407_hal_dma.o
+ .text.DMA_BlockTransferComplete
+                0x00000000       0xec Project/py32e407_hal_dma.o
+ .text.HAL_DMA_Init
+                0x00000000      0x12c Project/py32e407_hal_dma.o
+ .text.HAL_DMA_DeInit
+                0x00000000      0x208 Project/py32e407_hal_dma.o
+ .text.HAL_DMA_Start
+                0x00000000      0x104 Project/py32e407_hal_dma.o
+ .text.HAL_DMA_Start_IT
+                0x00000000      0x178 Project/py32e407_hal_dma.o
+ .text.HAL_DMA_Abort
+                0x00000000      0x15a Project/py32e407_hal_dma.o
+ .text.HAL_DMA_Abort_IT
+                0x00000000      0x162 Project/py32e407_hal_dma.o
+ .text.HAL_DMA_PollForTransfer
+                0x00000000      0x1ea Project/py32e407_hal_dma.o
+ .text.HAL_DMA_IRQHandler
+                0x00000000      0x2b6 Project/py32e407_hal_dma.o
+ .text.HAL_DMA_RegisterCallback
+                0x00000000       0x60 Project/py32e407_hal_dma.o
+ .text.HAL_DMA_UnRegisterCallback
+                0x00000000       0x74 Project/py32e407_hal_dma.o
+ .text.HAL_DMA_ChannelReq
+                0x00000000       0x7c Project/py32e407_hal_dma.o
+ .text.HAL_DMA_GetState
+                0x00000000        0x6 Project/py32e407_hal_dma.o
+ .text.HAL_DMA_GetError
+                0x00000000        0x4 Project/py32e407_hal_dma.o
+ .debug_info    0x00000000     0x11cc Project/py32e407_hal_dma.o
+ .debug_abbrev  0x00000000      0x278 Project/py32e407_hal_dma.o
+ .debug_loc     0x00000000      0xbf7 Project/py32e407_hal_dma.o
+ .debug_aranges
+                0x00000000       0x90 Project/py32e407_hal_dma.o
+ .debug_ranges  0x00000000       0x80 Project/py32e407_hal_dma.o
+ .debug_line    0x00000000      0xfbe Project/py32e407_hal_dma.o
+ .debug_str     0x00000000      0xa7d Project/py32e407_hal_dma.o
+ .comment       0x00000000       0x4a Project/py32e407_hal_dma.o
+ .debug_frame   0x00000000      0x1b0 Project/py32e407_hal_dma.o
+ .ARM.attributes
+                0x00000000       0x34 Project/py32e407_hal_dma.o
+ .text          0x00000000       0x14 Project/startup_py32e407xx.o
+ .data          0x00000000        0x0 Project/startup_py32e407xx.o
+ .bss           0x00000000        0x0 Project/startup_py32e407xx.o
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+ .text.exit     0x00000000       0x28 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+ .debug_frame   0x00000000       0x28 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+ .data.impure_data
+                0x00000000       0x60 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-memset.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-memset.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-memset.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+ .text.setvbuf  0x00000000      0x18c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+ .debug_frame   0x00000000       0x38 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+ .text.__sflush_r
+                0x00000000      0x10c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+ .text._fflush_r
+                0x00000000       0x78 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+ .text.fflush   0x00000000       0x24 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+ .debug_frame   0x00000000       0x5c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.std      0x00000000       0x48 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text._cleanup_r
+                0x00000000        0xc h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__fp_lock
+                0x00000000       0x18 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__fp_unlock
+                0x00000000       0x18 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__sfmoreglue
+                0x00000000       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text._cleanup
+                0x00000000        0xc h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__sfp_lock_acquire
+                0x00000000        0xc h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__sfp_lock_release
+                0x00000000        0xc h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__sinit_lock_acquire
+                0x00000000        0xc h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__sinit_lock_release
+                0x00000000        0xc h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__sinit  0x00000000       0x70 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__sfp    0x00000000       0x8c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__fp_lock_all
+                0x00000000       0x1c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text.__fp_unlock_all
+                0x00000000       0x1c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .rodata.__sf_fake_stderr
+                0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .rodata.__sf_fake_stdin
+                0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .rodata.__sf_fake_stdout
+                0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .debug_frame   0x00000000      0x14c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+ .text._fwalk   0x00000000       0x3a h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+ .text._fwalk_reent
+                0x00000000       0x3e h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+ .debug_frame   0x00000000       0x54 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_init
+                0x00000000        0x2 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_init_recursive
+                0x00000000        0x2 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_close
+                0x00000000        0x2 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_close_recursive
+                0x00000000        0x2 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_acquire
+                0x00000000        0x2 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_acquire_recursive
+                0x00000000        0x2 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire
+                0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire_recursive
+                0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_release
+                0x00000000        0x2 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_release_recursive
+                0x00000000        0x2 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss.__lock___arc4random_mutex
+                0x00000000        0x1 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss.__lock___at_quick_exit_mutex
+                0x00000000        0x1 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss.__lock___atexit_recursive_mutex
+                0x00000000        0x1 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss.__lock___dd_hash_mutex
+                0x00000000        0x1 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss.__lock___env_recursive_mutex
+                0x00000000        0x1 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss.__lock___malloc_recursive_mutex
+                0x00000000        0x1 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss.__lock___sfp_recursive_mutex
+                0x00000000        0x1 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss.__lock___sinit_recursive_mutex
+                0x00000000        0x1 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .bss.__lock___tz_mutex
+                0x00000000        0x1 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .debug_frame   0x00000000       0xb0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+ .text.__swhatbuf_r
+                0x00000000       0x4a h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+ .text.__smakebuf_r
+                0x00000000       0x80 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+ .debug_frame   0x00000000       0x58 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+ .text.malloc   0x00000000       0x10 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+ .text.free     0x00000000       0x10 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+ .debug_frame   0x00000000       0x30 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .text._free_r  0x00000000       0x98 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x00000000       0x38 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .text.sbrk_aligned
+                0x00000000       0x40 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .text._malloc_r
+                0x00000000       0xe8 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .bss.__malloc_free_list
+                0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .bss.__malloc_sbrk_start
+                0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x00000000       0x4c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .text._sbrk_r  0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x00000000       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .text.__sread  0x00000000       0x22 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .text.__seofread
+                0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .text.__swrite
+                0x00000000       0x38 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .text.__sseek  0x00000000       0x24 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .text.__sclose
+                0x00000000        0x8 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .debug_frame   0x00000000       0x88 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+ .text._write_r
+                0x00000000       0x24 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+ .debug_frame   0x00000000       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+ .text._close_r
+                0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+ .debug_frame   0x00000000       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+ .text._fstat_r
+                0x00000000       0x24 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+ .debug_frame   0x00000000       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+ .text._isatty_r
+                0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+ .debug_frame   0x00000000       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+ .text._lseek_r
+                0x00000000       0x24 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+ .debug_frame   0x00000000       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+ .text.__malloc_lock
+                0x00000000        0xc h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+ .text.__malloc_unlock
+                0x00000000        0xc h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+ .debug_frame   0x00000000       0x30 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+ .text._read_r  0x00000000       0x24 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+ .debug_frame   0x00000000       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+ .text.cleanup_glue
+                0x00000000       0x1a h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+ .text._reclaim_reent
+                0x00000000       0xb8 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+ .bss.errno     0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x00000000       0x5c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+ .stab          0x00000000       0x24 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+ .text._close   0x00000000       0x10 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+ .debug_frame   0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+ .stab          0x00000000       0x18 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+                                 0x24 (size before relaxing)
+ .text._fstat   0x00000000       0x10 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+ .debug_frame   0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+ .stab          0x00000000       0x18 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+                                 0x24 (size before relaxing)
+ .text._isatty  0x00000000       0x10 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+ .debug_frame   0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+ .stab          0x00000000       0x18 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+                                 0x24 (size before relaxing)
+ .text._lseek   0x00000000       0x10 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+ .debug_frame   0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+ .stab          0x00000000       0x18 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+                                 0x24 (size before relaxing)
+ .text._read    0x00000000       0x10 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+ .debug_frame   0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+ .text._sbrk    0x00000000       0x1c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+ .bss.heap_end.0
+                0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+ .debug_frame   0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
+ .text._exit    0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
+ .debug_frame   0x00000000       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
+ .text          0x00000000       0x30 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x00000000       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+ .ARM.attributes
+                0x00000000       0x1e h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+ .text          0x00000000      0x2d0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .ARM.extab     0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x00000000        0x8 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .text          0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_dvmd_tls.o)
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_dvmd_tls.o)
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000000       0x1e h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_dvmd_tls.o)
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtend.o
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtend.o
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtend.o
+ .rodata        0x00000000       0x24 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtend.o
+ .eh_frame      0x00000000        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtend.o
+ .ARM.attributes
+                0x00000000       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtend.o
+ .text          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtn.o
+ .data          0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtn.o
+ .bss           0x00000000        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x20000000         0x00024000         xrw
+FLASH            0x08000000         0x00080000         xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crti.o
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+LOAD Project/main.o
+LOAD Project/py32e407_hal_msp.o
+LOAD Project/py32e407_it.o
+LOAD Project/system_py32e407.o
+LOAD Project/py32e407xx_Start_Kit.o
+LOAD Project/py32e407_hal.o
+LOAD Project/py32e407_hal_rcc.o
+LOAD Project/py32e407_hal_rcc_ex.o
+LOAD Project/py32e407_hal_gpio.o
+LOAD Project/py32e407_hal_pwr.o
+LOAD Project/py32e407_hal_pwr_ex.o
+LOAD Project/py32e407_hal_uart.o
+LOAD Project/py32e407_hal_cortex.o
+LOAD Project/py32e407_hal_dma.o
+LOAD Project/startup_py32e407xx.o
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a
+START GROUP
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a
+END GROUP
+START GROUP
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a
+END GROUP
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtend.o
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtn.o
+                0x20024000                _estack = (ORIGIN (RAM) + LENGTH (RAM))
+                0x00000200                _Min_Heap_Size = 0x200
+                0x00000400                _Min_Stack_Size = 0x400
+
+.isr_vector     0x08000000      0x198
+                0x08000000                . = ALIGN (0x4)
+ *(.isr_vector)
+ .isr_vector    0x08000000      0x198 Project/startup_py32e407xx.o
+                0x08000000                g_pfnVectors
+                0x08000198                . = ALIGN (0x4)
+
+.text           0x08000198      0xe38
+                0x08000198                . = ALIGN (0x4)
+ *(.text)
+ .text          0x08000198       0x40 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ *(.text*)
+ .text.APP_GpioConfig
+                0x080001d8       0xc4 Project/main.o
+ .text.APP_ErrorHandler
+                0x0800029c        0x2 Project/main.o
+                0x0800029c                APP_ErrorHandler
+ .text.APP_SystemClockConfig
+                0x0800029e       0x54 Project/main.o
+ *fill*         0x080002f2        0x2 
+ .text.main     0x080002f4       0x8c Project/main.o
+                0x080002f4                main
+ .text.HAL_MspInit
+                0x08000380       0x30 Project/py32e407_hal_msp.o
+                0x08000380                HAL_MspInit
+ .text.NMI_Handler
+                0x080003b0        0x2 Project/py32e407_it.o
+                0x080003b0                NMI_Handler
+ .text.HardFault_Handler
+                0x080003b2        0x2 Project/py32e407_it.o
+                0x080003b2                HardFault_Handler
+ .text.MemManage_Handler
+                0x080003b4        0x2 Project/py32e407_it.o
+                0x080003b4                MemManage_Handler
+ .text.BusFault_Handler
+                0x080003b6        0x2 Project/py32e407_it.o
+                0x080003b6                BusFault_Handler
+ .text.UsageFault_Handler
+                0x080003b8        0x2 Project/py32e407_it.o
+                0x080003b8                UsageFault_Handler
+ .text.SVC_Handler
+                0x080003ba        0x2 Project/py32e407_it.o
+                0x080003ba                SVC_Handler
+ .text.DebugMon_Handler
+                0x080003bc        0x2 Project/py32e407_it.o
+                0x080003bc                DebugMon_Handler
+ .text.PendSV_Handler
+                0x080003be        0x2 Project/py32e407_it.o
+                0x080003be                PendSV_Handler
+ .text.SysTick_Handler
+                0x080003c0        0x8 Project/py32e407_it.o
+                0x080003c0                SysTick_Handler
+ .text.SystemInit
+                0x080003c8       0x88 Project/system_py32e407.o
+                0x080003c8                SystemInit
+ .text.HAL_InitTick
+                0x08000450       0x4c Project/py32e407_hal.o
+                0x08000450                HAL_InitTick
+ .text.HAL_Init
+                0x0800049c       0x1e Project/py32e407_hal.o
+                0x0800049c                HAL_Init
+ *fill*         0x080004ba        0x2 
+ .text.HAL_IncTick
+                0x080004bc       0x18 Project/py32e407_hal.o
+                0x080004bc                HAL_IncTick
+ .text.HAL_GetTick
+                0x080004d4        0xc Project/py32e407_hal.o
+                0x080004d4                HAL_GetTick
+ .text.RCC_GetSysClockFreqFromPLLSource
+                0x080004e0       0x88 Project/py32e407_hal_rcc.o
+ .text.HAL_RCC_OscConfig
+                0x08000568      0x4b0 Project/py32e407_hal_rcc.o
+                0x08000568                HAL_RCC_OscConfig
+ .text.HAL_RCC_GetSysClockFreq
+                0x08000a18       0xb4 Project/py32e407_hal_rcc.o
+                0x08000a18                HAL_RCC_GetSysClockFreq
+ .text.HAL_RCC_ClockConfig
+                0x08000acc      0x1c8 Project/py32e407_hal_rcc.o
+                0x08000acc                HAL_RCC_ClockConfig
+ .text.HAL_GPIO_Init
+                0x08000c94      0x1a4 Project/py32e407_hal_gpio.o
+                0x08000c94                HAL_GPIO_Init
+ .text.HAL_GPIO_ReadPin
+                0x08000e38        0xe Project/py32e407_hal_gpio.o
+                0x08000e38                HAL_GPIO_ReadPin
+ .text.HAL_GPIO_WritePin
+                0x08000e46        0xa Project/py32e407_hal_gpio.o
+                0x08000e46                HAL_GPIO_WritePin
+ .text.HAL_NVIC_SetPriorityGrouping
+                0x08000e50       0x24 Project/py32e407_hal_cortex.o
+                0x08000e50                HAL_NVIC_SetPriorityGrouping
+ .text.HAL_NVIC_SetPriority
+                0x08000e74       0x70 Project/py32e407_hal_cortex.o
+                0x08000e74                HAL_NVIC_SetPriority
+ .text.HAL_SYSTICK_Config
+                0x08000ee4       0x28 Project/py32e407_hal_cortex.o
+                0x08000ee4                HAL_SYSTICK_Config
+ .text.Reset_Handler
+                0x08000f0c       0x50 Project/startup_py32e407xx.o
+                0x08000f0c                Reset_Handler
+ .text.Default_Handler
+                0x08000f5c        0x2 Project/startup_py32e407xx.o
+                0x08000f5c                RTC_Alarm_IRQHandler
+                0x08000f5c                EXTI2_IRQHandler
+                0x08000f5c                TIM8_CC_IRQHandler
+                0x08000f5c                TIM1_CC_IRQHandler
+                0x08000f5c                TIM6_IRQHandler
+                0x08000f5c                CORDIC_IRQHandler
+                0x08000f5c                PVD_IRQHandler
+                0x08000f5c                SDIO_IRQHandler
+                0x08000f5c                EXTI3_IRQHandler
+                0x08000f5c                UART1_IRQHandler
+                0x08000f5c                TIM8_TRG_COM_TIM14_IRQHandler
+                0x08000f5c                TIM1_UP_TIM10_IRQHandler
+                0x08000f5c                ESMC_IRQHandler
+                0x08000f5c                TIM8_UP_TIM13_IRQHandler
+                0x08000f5c                I2C3_ER_IRQHandler
+                0x08000f5c                EXTI0_IRQHandler
+                0x08000f5c                I2C2_EV_IRQHandler
+                0x08000f5c                LPTIM_IRQHandler
+                0x08000f5c                ADC1_2_IRQHandler
+                0x08000f5c                SPI1_IRQHandler
+                0x08000f5c                TAMPER_IRQHandler
+                0x08000f5c                TIM1_BRK_TIM9_IRQHandler
+                0x08000f5c                OTG2_FS_WKUP_IRQHandler
+                0x08000f5c                DMA2_Channel2_IRQHandler
+                0x08000f5c                DMA1_Channel4_IRQHandler
+                0x08000f5c                TIM17_IRQHandler
+                0x08000f5c                USART3_IRQHandler
+                0x08000f5c                RTC_IRQHandler
+                0x08000f5c                LPUART_IRQHandler
+                0x08000f5c                ADC3_IRQHandler
+                0x08000f5c                TIM4_IRQHandler
+                0x08000f5c                DMA2_Channel1_IRQHandler
+                0x08000f5c                I2C1_EV_IRQHandler
+                0x08000f5c                UART2_IRQHandler
+                0x08000f5c                OTG1_FS_IRQHandler
+                0x08000f5c                DMA1_Channel6_IRQHandler
+                0x08000f5c                TIM16_IRQHandler
+                0x08000f5c                TIM3_IRQHandler
+                0x08000f5c                TIM8_BRK_TIM12_IRQHandler
+                0x08000f5c                DMA1_Channel1_IRQHandler
+                0x08000f5c                Default_Handler
+                0x08000f5c                EXTI15_10_IRQHandler
+                0x08000f5c                TIM18_IRQHandler
+                0x08000f5c                COMP2_IRQHandler
+                0x08000f5c                TIM7_IRQHandler
+                0x08000f5c                TIM5_IRQHandler
+                0x08000f5c                CAN2_INT1_IRQHandler
+                0x08000f5c                TIM15_IRQHandler
+                0x08000f5c                I2C3_EV_IRQHandler
+                0x08000f5c                EXTI9_5_IRQHandler
+                0x08000f5c                OTG1_FS_WKUP_IRQHandler
+                0x08000f5c                ETH_WKUP_IRQHandler
+                0x08000f5c                SPI2_IRQHandler
+                0x08000f5c                OTG2_FS_IRQHandler
+                0x08000f5c                DMA1_Channel5_IRQHandler
+                0x08000f5c                EXTI4_IRQHandler
+                0x08000f5c                RNG_IRQHandler
+                0x08000f5c                DMA1_Channel3_IRQHandler
+                0x08000f5c                ETH_IRQHandler
+                0x08000f5c                WWDG_IRQHandler
+                0x08000f5c                I2C4_EV_IRQHandler
+                0x08000f5c                DMA2_Channel6_IRQHandler
+                0x08000f5c                TIM2_IRQHandler
+                0x08000f5c                CAN1_INT1_IRQHandler
+                0x08000f5c                TIM1_TRG_COM_TIM11_IRQHandler
+                0x08000f5c                DAC_IRQHandler
+                0x08000f5c                CAN2_INT0_IRQHandler
+                0x08000f5c                EXTI1_IRQHandler
+                0x08000f5c                AES_IRQHandler
+                0x08000f5c                RCC_CTC_IRQHandler
+                0x08000f5c                DMA2_Channel4_5_IRQHandler
+                0x08000f5c                USART2_IRQHandler
+                0x08000f5c                TIM19_IRQHandler
+                0x08000f5c                CAN1_INT0_IRQHandler
+                0x08000f5c                I2C2_ER_IRQHandler
+                0x08000f5c                DMA1_Channel2_IRQHandler
+                0x08000f5c                FLASH_IRQHandler
+                0x08000f5c                COMP3_IRQHandler
+                0x08000f5c                USART1_IRQHandler
+                0x08000f5c                SPI3_IRQHandler
+                0x08000f5c                UART3_IRQHandler
+                0x08000f5c                I2C1_ER_IRQHandler
+                0x08000f5c                COMP1_IRQHandler
+                0x08000f5c                I2C4_ER_IRQHandler
+                0x08000f5c                DMA2_Channel3_IRQHandler
+                0x08000f5c                COMP4_IRQHandler
+ *fill*         0x08000f5e        0x2 
+ .text.__libc_init_array
+                0x08000f60       0x48 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+                0x08000f60                __libc_init_array
+ .text.memset   0x08000fa8       0x10 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-memset.o)
+                0x08000fa8                memset
+ *(.glue_7)
+ .glue_7        0x08000fb8        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x08000fb8        0x0 linker stubs
+ *(.eh_frame)
+ .eh_frame      0x08000fb8        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ *(.init)
+ .init          0x08000fb8        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x08000fb8                _init
+ .init          0x08000fbc        0x8 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtn.o
+ *(.fini)
+ .fini          0x08000fc4        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x08000fc4                _fini
+ .fini          0x08000fc8        0x8 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtn.o
+                0x08000fd0                . = ALIGN (0x4)
+                0x08000fd0                _etext = .
+
+.vfp11_veneer   0x08000fd0        0x0
+ .vfp11_veneer  0x08000fd0        0x0 linker stubs
+
+.v4_bx          0x08000fd0        0x0
+ .v4_bx         0x08000fd0        0x0 linker stubs
+
+.iplt           0x08000fd0        0x0
+ .iplt          0x08000fd0        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+
+.rodata         0x08000fd0       0x10
+                0x08000fd0                . = ALIGN (0x4)
+ *(.rodata)
+ *(.rodata*)
+ .rodata.AHBPrescTable
+                0x08000fd0       0x10 Project/system_py32e407.o
+                0x08000fd0                AHBPrescTable
+                0x08000fe0                . = ALIGN (0x4)
+
+.rel.dyn        0x08000fe0        0x0
+ .rel.iplt      0x08000fe0        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+
+.ARM            0x08000fe0        0x0
+                0x08000fe0                __exidx_start = .
+ *(.ARM.exidx*)
+                0x08000fe0                __exidx_end = .
+
+.preinit_array  0x08000fe0        0x0
+                0x08000fe0                PROVIDE (__preinit_array_start = .)
+ *(.preinit_array*)
+                0x08000fe0                PROVIDE (__preinit_array_end = .)
+
+.init_array     0x08000fe0        0x4
+                0x08000fe0                PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array*)
+ .init_array    0x08000fe0        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x08000fe4                PROVIDE (__init_array_end = .)
+
+.fini_array     0x08000fe4        0x4
+                [!provide]                PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array*)
+ .fini_array    0x08000fe4        0x4 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                [!provide]                PROVIDE (__fini_array_end = .)
+                0x08000fe8                _sidata = LOADADDR (.data)
+
+.data           0x20000000        0xc load address 0x08000fe8
+                0x20000000                . = ALIGN (0x4)
+                0x20000000                _sdata = .
+ *(.data)
+ *(.data*)
+ .data.SystemCoreClock
+                0x20000000        0x4 Project/system_py32e407.o
+                0x20000000                SystemCoreClock
+ .data.uwTickFreq
+                0x20000004        0x4 Project/py32e407_hal.o
+                0x20000004                uwTickFreq
+ .data.uwTickPrio
+                0x20000008        0x4 Project/py32e407_hal.o
+                0x20000008                uwTickPrio
+                0x2000000c                . = ALIGN (0x4)
+                0x2000000c                _edata = .
+
+.igot.plt       0x2000000c        0x0 load address 0x08000ff4
+ .igot.plt      0x2000000c        0x0 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x2000000c                . = ALIGN (0x4)
+
+.bss            0x2000000c       0x20 load address 0x08000ff4
+                0x2000000c                _sbss = .
+                0x2000000c                __bss_start__ = _sbss
+ *(.bss)
+ .bss           0x2000000c       0x1c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ *(.bss*)
+ .bss.uwTick    0x20000028        0x4 Project/py32e407_hal.o
+                0x20000028                uwTick
+ *(COMMON)
+                0x2000002c                . = ALIGN (0x4)
+                0x2000002c                _ebss = .
+                0x2000002c                __bss_end__ = _ebss
+
+._user_heap_stack
+                0x2000002c      0x604 load address 0x08000ff4
+                0x20000030                . = ALIGN (0x8)
+ *fill*         0x2000002c        0x4 
+                0x20000030                PROVIDE (end = .)
+                [!provide]                PROVIDE (_end = .)
+                0x20000230                . = (. + _Min_Heap_Size)
+ *fill*         0x20000030      0x200 
+                0x20000630                . = (. + _Min_Stack_Size)
+ *fill*         0x20000230      0x400 
+                0x20000630                . = ALIGN (0x8)
+
+/DISCARD/
+ libc.a(*)
+ libm.a(*)
+ libgcc.a(*)
+
+.ARM.attributes
+                0x00000000       0x30
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x1e h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crti.o
+ .ARM.attributes
+                0x0000001e       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .ARM.attributes
+                0x00000052       0x34 Project/main.o
+ .ARM.attributes
+                0x00000086       0x34 Project/py32e407_hal_msp.o
+ .ARM.attributes
+                0x000000ba       0x34 Project/py32e407_it.o
+ .ARM.attributes
+                0x000000ee       0x34 Project/system_py32e407.o
+ .ARM.attributes
+                0x00000122       0x34 Project/py32e407_hal.o
+ .ARM.attributes
+                0x00000156       0x34 Project/py32e407_hal_rcc.o
+ .ARM.attributes
+                0x0000018a       0x34 Project/py32e407_hal_gpio.o
+ .ARM.attributes
+                0x000001be       0x34 Project/py32e407_hal_cortex.o
+ .ARM.attributes
+                0x000001f2       0x21 Project/startup_py32e407xx.o
+ .ARM.attributes
+                0x00000213       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+ .ARM.attributes
+                0x00000247       0x34 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000027b       0x1e h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtn.o
+OUTPUT(Project/Project.elf elf32-littlearm)
+LOAD linker stubs
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc.a
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
+LOAD h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a
+
+.debug_info     0x00000000     0x4d90
+ .debug_info    0x00000000      0x939 Project/main.o
+ .debug_info    0x00000939      0x2bb Project/py32e407_hal_msp.o
+ .debug_info    0x00000bf4      0x162 Project/py32e407_it.o
+ .debug_info    0x00000d56      0x85c Project/system_py32e407.o
+ .debug_info    0x000015b2      0xecb Project/py32e407_hal.o
+ .debug_info    0x0000247d      0xe42 Project/py32e407_hal_rcc.o
+ .debug_info    0x000032bf      0x916 Project/py32e407_hal_gpio.o
+ .debug_info    0x00003bd5     0x1199 Project/py32e407_hal_cortex.o
+ .debug_info    0x00004d6e       0x22 Project/startup_py32e407xx.o
+
+.debug_abbrev   0x00000000      0xf1f
+ .debug_abbrev  0x00000000      0x1b8 Project/main.o
+ .debug_abbrev  0x000001b8       0xd3 Project/py32e407_hal_msp.o
+ .debug_abbrev  0x0000028b       0x81 Project/py32e407_it.o
+ .debug_abbrev  0x0000030c      0x151 Project/system_py32e407.o
+ .debug_abbrev  0x0000045d      0x284 Project/py32e407_hal.o
+ .debug_abbrev  0x000006e1      0x288 Project/py32e407_hal_rcc.o
+ .debug_abbrev  0x00000969      0x222 Project/py32e407_hal_gpio.o
+ .debug_abbrev  0x00000b8b      0x382 Project/py32e407_hal_cortex.o
+ .debug_abbrev  0x00000f0d       0x12 Project/startup_py32e407xx.o
+
+.debug_loc      0x00000000     0x1f65
+ .debug_loc     0x00000000      0x10a Project/main.o
+ .debug_loc     0x0000010a       0x2c Project/py32e407_hal_msp.o
+ .debug_loc     0x00000136       0x20 Project/py32e407_it.o
+ .debug_loc     0x00000156      0x1e6 Project/system_py32e407.o
+ .debug_loc     0x0000033c      0x583 Project/py32e407_hal.o
+ .debug_loc     0x000008bf      0xaca Project/py32e407_hal_rcc.o
+ .debug_loc     0x00001389      0x438 Project/py32e407_hal_gpio.o
+ .debug_loc     0x000017c1      0x7a4 Project/py32e407_hal_cortex.o
+
+.debug_aranges  0x00000000      0x3f8
+ .debug_aranges
+                0x00000000       0x38 Project/main.o
+ .debug_aranges
+                0x00000038       0x20 Project/py32e407_hal_msp.o
+ .debug_aranges
+                0x00000058       0x60 Project/py32e407_it.o
+ .debug_aranges
+                0x000000b8       0x28 Project/system_py32e407.o
+ .debug_aranges
+                0x000000e0      0x158 Project/py32e407_hal.o
+ .debug_aranges
+                0x00000238       0x88 Project/py32e407_hal_rcc.o
+ .debug_aranges
+                0x000002c0       0x68 Project/py32e407_hal_gpio.o
+ .debug_aranges
+                0x00000328       0xa8 Project/py32e407_hal_cortex.o
+ .debug_aranges
+                0x000003d0       0x28 Project/startup_py32e407xx.o
+
+.debug_ranges   0x00000000      0x3e8
+ .debug_ranges  0x00000000       0x28 Project/main.o
+ .debug_ranges  0x00000028       0x10 Project/py32e407_hal_msp.o
+ .debug_ranges  0x00000038       0x50 Project/py32e407_it.o
+ .debug_ranges  0x00000088       0x18 Project/system_py32e407.o
+ .debug_ranges  0x000000a0      0x148 Project/py32e407_hal.o
+ .debug_ranges  0x000001e8       0x90 Project/py32e407_hal_rcc.o
+ .debug_ranges  0x00000278       0x58 Project/py32e407_hal_gpio.o
+ .debug_ranges  0x000002d0       0xf8 Project/py32e407_hal_cortex.o
+ .debug_ranges  0x000003c8       0x20 Project/startup_py32e407xx.o
+
+.debug_line     0x00000000     0x2cca
+ .debug_line    0x00000000      0x35b Project/main.o
+ .debug_line    0x0000035b      0x13c Project/py32e407_hal_msp.o
+ .debug_line    0x00000497      0x161 Project/py32e407_it.o
+ .debug_line    0x000005f8      0x2a7 Project/system_py32e407.o
+ .debug_line    0x0000089f      0x7fa Project/py32e407_hal.o
+ .debug_line    0x00001099      0xdb7 Project/py32e407_hal_rcc.o
+ .debug_line    0x00001e50      0x690 Project/py32e407_hal_gpio.o
+ .debug_line    0x000024e0      0x773 Project/py32e407_hal_cortex.o
+ .debug_line    0x00002c53       0x77 Project/startup_py32e407xx.o
+
+.debug_str      0x00000000     0x18f8
+ .debug_str     0x00000000      0x4c3 Project/main.o
+                                0x52c (size before relaxing)
+ .debug_str     0x000004c3       0x26 Project/py32e407_hal_msp.o
+                                0x278 (size before relaxing)
+ .debug_str     0x000004e9       0xb1 Project/py32e407_it.o
+                                0x225 (size before relaxing)
+ .debug_str     0x0000059a      0x169 Project/system_py32e407.o
+                                0x41e (size before relaxing)
+ .debug_str     0x00000703      0xa34 Project/py32e407_hal.o
+                                0xd61 (size before relaxing)
+ .debug_str     0x00001137      0x1f0 Project/py32e407_hal_rcc.o
+                                0x750 (size before relaxing)
+ .debug_str     0x00001327      0x145 Project/py32e407_hal_gpio.o
+                                0x52f (size before relaxing)
+ .debug_str     0x0000146c      0x469 Project/py32e407_hal_cortex.o
+                                0xc42 (size before relaxing)
+ .debug_str     0x000018d5       0x23 Project/startup_py32e407xx.o
+                                 0x5d (size before relaxing)
+
+.comment        0x00000000       0x49
+ .comment       0x00000000       0x49 Project/main.o
+                                 0x4a (size before relaxing)
+ .comment       0x00000049       0x4a Project/py32e407_hal_msp.o
+ .comment       0x00000049       0x4a Project/py32e407_it.o
+ .comment       0x00000049       0x4a Project/system_py32e407.o
+ .comment       0x00000049       0x4a Project/py32e407_hal.o
+ .comment       0x00000049       0x4a Project/py32e407_hal_rcc.o
+ .comment       0x00000049       0x4a Project/py32e407_hal_gpio.o
+ .comment       0x00000049       0x4a Project/py32e407_hal_cortex.o
+
+.debug_frame    0x00000000      0x858
+ .debug_frame   0x00000000       0x80 Project/main.o
+ .debug_frame   0x00000080       0x28 Project/py32e407_hal_msp.o
+ .debug_frame   0x000000a8       0xa8 Project/py32e407_it.o
+ .debug_frame   0x00000150       0x3c Project/system_py32e407.o
+ .debug_frame   0x0000018c      0x2bc Project/py32e407_hal.o
+ .debug_frame   0x00000448      0x18c Project/py32e407_hal_rcc.o
+ .debug_frame   0x000005d4       0xf0 Project/py32e407_hal_gpio.o
+ .debug_frame   0x000006c4      0x148 Project/py32e407_hal_cortex.o
+ .debug_frame   0x0000080c       0x2c h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00000838       0x20 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-memset.o)
+
+.stabstr        0x00000000      0x117
+ .stabstr       0x00000000      0x117 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+
+Cross Reference Table
+
+Symbol                                            File
+ADC1_2_IRQHandler                                 Project/startup_py32e407xx.o
+ADC3_IRQHandler                                   Project/startup_py32e407xx.o
+AES_IRQHandler                                    Project/startup_py32e407xx.o
+AHBPrescTable                                     Project/system_py32e407.o
+                                                  Project/py32e407_hal_rcc.o
+APBPrescTable                                     Project/system_py32e407.o
+                                                  Project/py32e407_hal_rcc.o
+APP_ErrorHandler                                  Project/main.o
+BSP_GetVersion                                    Project/py32e407xx_Start_Kit.o
+BSP_LED_DeInit                                    Project/py32e407xx_Start_Kit.o
+BSP_LED_Init                                      Project/py32e407xx_Start_Kit.o
+BSP_LED_Off                                       Project/py32e407xx_Start_Kit.o
+BSP_LED_On                                        Project/py32e407xx_Start_Kit.o
+BSP_LED_Toggle                                    Project/py32e407xx_Start_Kit.o
+BSP_PB_DeInit                                     Project/py32e407xx_Start_Kit.o
+BSP_PB_GetState                                   Project/py32e407xx_Start_Kit.o
+BSP_PB_Init                                       Project/py32e407xx_Start_Kit.o
+BSP_UART_Config                                   Project/py32e407xx_Start_Kit.o
+BUTTON_IRQn                                       Project/py32e407xx_Start_Kit.o
+BUTTON_PIN                                        Project/py32e407xx_Start_Kit.o
+BUTTON_PORT                                       Project/py32e407xx_Start_Kit.o
+BusFault_Handler                                  Project/py32e407_it.o
+CAN1_INT0_IRQHandler                              Project/startup_py32e407xx.o
+CAN1_INT1_IRQHandler                              Project/startup_py32e407xx.o
+CAN2_INT0_IRQHandler                              Project/startup_py32e407xx.o
+CAN2_INT1_IRQHandler                              Project/startup_py32e407xx.o
+COMP1_IRQHandler                                  Project/startup_py32e407xx.o
+COMP2_IRQHandler                                  Project/startup_py32e407xx.o
+COMP3_IRQHandler                                  Project/startup_py32e407xx.o
+COMP4_IRQHandler                                  Project/startup_py32e407xx.o
+CORDIC_IRQHandler                                 Project/startup_py32e407xx.o
+DAC_IRQHandler                                    Project/startup_py32e407xx.o
+DMA1_Channel1_IRQHandler                          Project/startup_py32e407xx.o
+DMA1_Channel2_IRQHandler                          Project/startup_py32e407xx.o
+DMA1_Channel3_IRQHandler                          Project/startup_py32e407xx.o
+DMA1_Channel4_IRQHandler                          Project/startup_py32e407xx.o
+DMA1_Channel5_IRQHandler                          Project/startup_py32e407xx.o
+DMA1_Channel6_IRQHandler                          Project/startup_py32e407xx.o
+DMA2_Channel1_IRQHandler                          Project/startup_py32e407xx.o
+DMA2_Channel2_IRQHandler                          Project/startup_py32e407xx.o
+DMA2_Channel3_IRQHandler                          Project/startup_py32e407xx.o
+DMA2_Channel4_5_IRQHandler                        Project/startup_py32e407xx.o
+DMA2_Channel6_IRQHandler                          Project/startup_py32e407xx.o
+DebugMon_Handler                                  Project/py32e407_it.o
+DebugUartHandle                                   Project/py32e407xx_Start_Kit.o
+Default_Handler                                   Project/startup_py32e407xx.o
+ESMC_IRQHandler                                   Project/startup_py32e407xx.o
+ETH_IRQHandler                                    Project/startup_py32e407xx.o
+ETH_WKUP_IRQHandler                               Project/startup_py32e407xx.o
+EXTI0_IRQHandler                                  Project/startup_py32e407xx.o
+EXTI15_10_IRQHandler                              Project/startup_py32e407xx.o
+EXTI1_IRQHandler                                  Project/startup_py32e407xx.o
+EXTI2_IRQHandler                                  Project/startup_py32e407xx.o
+EXTI3_IRQHandler                                  Project/startup_py32e407xx.o
+EXTI4_IRQHandler                                  Project/startup_py32e407xx.o
+EXTI9_5_IRQHandler                                Project/startup_py32e407xx.o
+FLASH_IRQHandler                                  Project/startup_py32e407xx.o
+HAL_DBGMCU_DisableDBGSleepMode                    Project/py32e407_hal.o
+HAL_DBGMCU_DisableDBGStandbyMode                  Project/py32e407_hal.o
+HAL_DBGMCU_DisableDBGStopMode                     Project/py32e407_hal.o
+HAL_DBGMCU_EnableDBGSleepMode                     Project/py32e407_hal.o
+HAL_DBGMCU_EnableDBGStandbyMode                   Project/py32e407_hal.o
+HAL_DBGMCU_EnableDBGStopMode                      Project/py32e407_hal.o
+HAL_DMA_Abort                                     Project/py32e407_hal_dma.o
+                                                  Project/py32e407_hal_uart.o
+HAL_DMA_Abort_IT                                  Project/py32e407_hal_dma.o
+                                                  Project/py32e407_hal_uart.o
+HAL_DMA_ChannelReq                                Project/py32e407_hal_dma.o
+HAL_DMA_DeInit                                    Project/py32e407_hal_dma.o
+HAL_DMA_GetError                                  Project/py32e407_hal_dma.o
+                                                  Project/py32e407_hal_uart.o
+HAL_DMA_GetState                                  Project/py32e407_hal_dma.o
+HAL_DMA_IRQHandler                                Project/py32e407_hal_dma.o
+HAL_DMA_Init                                      Project/py32e407_hal_dma.o
+HAL_DMA_PollForTransfer                           Project/py32e407_hal_dma.o
+HAL_DMA_RegisterCallback                          Project/py32e407_hal_dma.o
+HAL_DMA_Start                                     Project/py32e407_hal_dma.o
+HAL_DMA_Start_IT                                  Project/py32e407_hal_dma.o
+                                                  Project/py32e407_hal_uart.o
+HAL_DMA_UnRegisterCallback                        Project/py32e407_hal_dma.o
+HAL_DeInit                                        Project/py32e407_hal.o
+HAL_Delay                                         Project/py32e407_hal.o
+HAL_GPIO_DeInit                                   Project/py32e407_hal_gpio.o
+                                                  Project/py32e407xx_Start_Kit.o
+HAL_GPIO_EXTI_Callback                            Project/py32e407_hal_gpio.o
+HAL_GPIO_EXTI_Falling_Callback                    Project/py32e407_hal_gpio.o
+HAL_GPIO_EXTI_IRQHandler                          Project/py32e407_hal_gpio.o
+HAL_GPIO_EXTI_Rising_Callback                     Project/py32e407_hal_gpio.o
+HAL_GPIO_Init                                     Project/py32e407_hal_gpio.o
+                                                  Project/py32e407_hal_rcc.o
+                                                  Project/py32e407xx_Start_Kit.o
+                                                  Project/main.o
+HAL_GPIO_LockPin                                  Project/py32e407_hal_gpio.o
+HAL_GPIO_ReadPin                                  Project/py32e407_hal_gpio.o
+                                                  Project/py32e407xx_Start_Kit.o
+                                                  Project/main.o
+HAL_GPIO_TogglePin                                Project/py32e407_hal_gpio.o
+                                                  Project/py32e407xx_Start_Kit.o
+HAL_GPIO_WritePin                                 Project/py32e407_hal_gpio.o
+                                                  Project/py32e407xx_Start_Kit.o
+                                                  Project/main.o
+HAL_GetDEVID                                      Project/py32e407_hal.o
+HAL_GetHalVersion                                 Project/py32e407_hal.o
+HAL_GetREVID                                      Project/py32e407_hal.o
+HAL_GetTick                                       Project/py32e407_hal.o
+                                                  Project/py32e407_hal_dma.o
+                                                  Project/py32e407_hal_uart.o
+                                                  Project/py32e407_hal_rcc_ex.o
+                                                  Project/py32e407_hal_rcc.o
+HAL_GetTickFreq                                   Project/py32e407_hal.o
+HAL_GetTickPrio                                   Project/py32e407_hal.o
+HAL_GetUID                                        Project/py32e407_hal.o
+HAL_GetUIDw0                                      Project/py32e407_hal.o
+HAL_GetUIDw1                                      Project/py32e407_hal.o
+HAL_GetUIDw2                                      Project/py32e407_hal.o
+HAL_IncTick                                       Project/py32e407_hal.o
+                                                  Project/py32e407_it.o
+HAL_Init                                          Project/py32e407_hal.o
+                                                  Project/main.o
+HAL_InitTick                                      Project/py32e407_hal.o
+                                                  Project/py32e407_hal_rcc.o
+HAL_MPU_ConfigRegion                              Project/py32e407_hal_cortex.o
+HAL_MPU_Disable                                   Project/py32e407_hal_cortex.o
+HAL_MPU_Enable                                    Project/py32e407_hal_cortex.o
+HAL_MspDeInit                                     Project/py32e407_hal.o
+HAL_MspInit                                       Project/py32e407_hal_msp.o
+HAL_NVIC_ClearPendingIRQ                          Project/py32e407_hal_cortex.o
+HAL_NVIC_DisableIRQ                               Project/py32e407_hal_cortex.o
+                                                  Project/py32e407xx_Start_Kit.o
+HAL_NVIC_EnableIRQ                                Project/py32e407_hal_cortex.o
+                                                  Project/py32e407xx_Start_Kit.o
+HAL_NVIC_GetActive                                Project/py32e407_hal_cortex.o
+HAL_NVIC_GetPendingIRQ                            Project/py32e407_hal_cortex.o
+HAL_NVIC_GetPriority                              Project/py32e407_hal_cortex.o
+HAL_NVIC_GetPriorityGrouping                      Project/py32e407_hal_cortex.o
+HAL_NVIC_SetPendingIRQ                            Project/py32e407_hal_cortex.o
+HAL_NVIC_SetPriority                              Project/py32e407_hal_cortex.o
+                                                  Project/py32e407_hal.o
+                                                  Project/py32e407xx_Start_Kit.o
+HAL_NVIC_SetPriorityGrouping                      Project/py32e407_hal_cortex.o
+                                                  Project/py32e407_hal.o
+HAL_NVIC_SystemReset                              Project/py32e407_hal_cortex.o
+HAL_PWREx_ControlSRAM2VoltageScaling              Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_ControlVoltageScaling                   Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_DisableHSIWakeupWait                    Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_DisableLowPowerRunMode                  Project/py32e407_hal_pwr_ex.o
+                                                  Project/py32e407_hal_pwr.o
+HAL_PWREx_DisableSRAM2ContentRetention            Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_EnableHSIWakeupWait                     Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_EnableLowPowerRunMode                   Project/py32e407_hal_pwr_ex.o
+                                                  Project/py32e407_hal_pwr.o
+HAL_PWREx_EnableSRAM2ContentRetention             Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_EnterSTOP0Mode                          Project/py32e407_hal_pwr_ex.o
+                                                  Project/py32e407_hal_pwr.o
+HAL_PWREx_EnterSTOP1Mode                          Project/py32e407_hal_pwr_ex.o
+                                                  Project/py32e407_hal_pwr.o
+HAL_PWREx_GetSRAM2VoltageRange                    Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_GetVoltageRange                         Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_GetWakeupFlashDelay                     Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_GetWakeupMrReadyDelay                   Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_SetWakeupFlashDelay                     Project/py32e407_hal_pwr_ex.o
+HAL_PWREx_SetWakeupMrReadyDelay                   Project/py32e407_hal_pwr_ex.o
+HAL_PWR_ConfigPVD                                 Project/py32e407_hal_pwr.o
+HAL_PWR_DeInit                                    Project/py32e407_hal_pwr.o
+HAL_PWR_DisableBkUpAccess                         Project/py32e407_hal_pwr.o
+HAL_PWR_DisablePVD                                Project/py32e407_hal_pwr.o
+HAL_PWR_DisableSEVOnPend                          Project/py32e407_hal_pwr.o
+HAL_PWR_DisableSleepOnExit                        Project/py32e407_hal_pwr.o
+HAL_PWR_DisableWakeUpPin                          Project/py32e407_hal_pwr.o
+HAL_PWR_EnableBkUpAccess                          Project/py32e407_hal_pwr.o
+HAL_PWR_EnablePVD                                 Project/py32e407_hal_pwr.o
+HAL_PWR_EnableSEVOnPend                           Project/py32e407_hal_pwr.o
+HAL_PWR_EnableSleepOnExit                         Project/py32e407_hal_pwr.o
+HAL_PWR_EnableWakeUpPin                           Project/py32e407_hal_pwr.o
+HAL_PWR_EnterSLEEPMode                            Project/py32e407_hal_pwr.o
+HAL_PWR_EnterSTANDBYMode                          Project/py32e407_hal_pwr.o
+HAL_PWR_EnterSTOPMode                             Project/py32e407_hal_pwr.o
+HAL_PWR_PVDCallback                               Project/py32e407_hal_pwr.o
+HAL_PWR_PVD_IRQHandler                            Project/py32e407_hal_pwr.o
+HAL_RCCEx_GetPeriphCLKConfig                      Project/py32e407_hal_rcc_ex.o
+HAL_RCCEx_GetPeriphCLKFreq                        Project/py32e407_hal_rcc_ex.o
+HAL_RCCEx_PeriphCLKConfig                         Project/py32e407_hal_rcc_ex.o
+HAL_RCC_CSSCallback                               Project/py32e407_hal_rcc.o
+HAL_RCC_ClockConfig                               Project/py32e407_hal_rcc.o
+                                                  Project/main.o
+HAL_RCC_DeInit                                    Project/py32e407_hal_rcc.o
+HAL_RCC_EnableCSS                                 Project/py32e407_hal_rcc.o
+HAL_RCC_GetClockConfig                            Project/py32e407_hal_rcc.o
+HAL_RCC_GetHCLKFreq                               Project/py32e407_hal_rcc.o
+                                                  Project/py32e407_hal_rcc_ex.o
+HAL_RCC_GetOscConfig                              Project/py32e407_hal_rcc.o
+HAL_RCC_GetPCLK1Freq                              Project/py32e407_hal_rcc.o
+                                                  Project/py32e407_hal_uart.o
+                                                  Project/py32e407_hal_rcc_ex.o
+HAL_RCC_GetPCLK2Freq                              Project/py32e407_hal_rcc.o
+                                                  Project/py32e407_hal_rcc_ex.o
+HAL_RCC_GetSysClockFreq                           Project/py32e407_hal_rcc.o
+                                                  Project/py32e407_hal_rcc_ex.o
+HAL_RCC_MCOConfig                                 Project/py32e407_hal_rcc.o
+HAL_RCC_NMI_IRQHandler                            Project/py32e407_hal_rcc.o
+HAL_RCC_OscConfig                                 Project/py32e407_hal_rcc.o
+                                                  Project/main.o
+HAL_ResumeTick                                    Project/py32e407_hal.o
+HAL_SYSCFG_CCMSRAMErase                           Project/py32e407_hal.o
+HAL_SYSCFG_CCMSRAM_WriteProtectionEnable          Project/py32e407_hal.o
+HAL_SYSCFG_DisableGPIOAnalogMode                  Project/py32e407_hal.o
+HAL_SYSCFG_DisableGPIONoiseFilter                 Project/py32e407_hal.o
+HAL_SYSCFG_DisableI2CAnalogFilter                 Project/py32e407_hal.o
+HAL_SYSCFG_EnableGPIOAnalogMode                   Project/py32e407_hal.o
+HAL_SYSCFG_EnableGPIONoiseFilter                  Project/py32e407_hal.o
+HAL_SYSCFG_EnableI2CAnalogFilter                  Project/py32e407_hal.o
+HAL_SYSCFG_GetETHPhysicalInterface                Project/py32e407_hal.o
+HAL_SYSCFG_GetRemapMemory                         Project/py32e407_hal.o
+HAL_SYSCFG_GetRemapTIM2InternalTrigger1           Project/py32e407_hal.o
+HAL_SYSCFG_SetETHPhysicalInterface                Project/py32e407_hal.o
+HAL_SYSCFG_SetRemapMemory                         Project/py32e407_hal.o
+HAL_SYSCFG_SetRemapTIM2InternalTrigger1           Project/py32e407_hal.o
+HAL_SYSTICK_CLKSourceConfig                       Project/py32e407_hal_cortex.o
+HAL_SYSTICK_Callback                              Project/py32e407_hal_cortex.o
+HAL_SYSTICK_Config                                Project/py32e407_hal_cortex.o
+                                                  Project/py32e407_hal.o
+HAL_SYSTICK_IRQHandler                            Project/py32e407_hal_cortex.o
+HAL_SetTickFreq                                   Project/py32e407_hal.o
+HAL_SuspendTick                                   Project/py32e407_hal.o
+HAL_UART_Abort                                    Project/py32e407_hal_uart.o
+HAL_UART_AbortCpltCallback                        Project/py32e407_hal_uart.o
+HAL_UART_AbortReceive                             Project/py32e407_hal_uart.o
+HAL_UART_AbortReceiveCpltCallback                 Project/py32e407_hal_uart.o
+HAL_UART_AbortReceive_IT                          Project/py32e407_hal_uart.o
+HAL_UART_AbortTransmit                            Project/py32e407_hal_uart.o
+HAL_UART_AbortTransmitCpltCallback                Project/py32e407_hal_uart.o
+HAL_UART_AbortTransmit_IT                         Project/py32e407_hal_uart.o
+HAL_UART_Abort_IT                                 Project/py32e407_hal_uart.o
+HAL_UART_AddrMatchCallback                        Project/py32e407_hal_uart.o
+HAL_UART_BreakFrameCallback                       Project/py32e407_hal_uart.o
+HAL_UART_DMAPause                                 Project/py32e407_hal_uart.o
+HAL_UART_DMAResume                                Project/py32e407_hal_uart.o
+HAL_UART_DMAStop                                  Project/py32e407_hal_uart.o
+HAL_UART_DeInit                                   Project/py32e407_hal_uart.o
+HAL_UART_ErrorCallback                            Project/py32e407_hal_uart.o
+HAL_UART_GetError                                 Project/py32e407_hal_uart.o
+HAL_UART_GetState                                 Project/py32e407_hal_uart.o
+HAL_UART_IRQHandler                               Project/py32e407_hal_uart.o
+HAL_UART_Init                                     Project/py32e407_hal_uart.o
+                                                  Project/py32e407xx_Start_Kit.o
+HAL_UART_MspDeInit                                Project/py32e407_hal_uart.o
+HAL_UART_MspInit                                  Project/py32e407_hal_uart.o
+HAL_UART_Receive                                  Project/py32e407_hal_uart.o
+HAL_UART_Receive_DMA                              Project/py32e407_hal_uart.o
+HAL_UART_Receive_IT                               Project/py32e407_hal_uart.o
+HAL_UART_RxBlockCpltCallback                      Project/py32e407_hal_uart.o
+HAL_UART_RxCpltCallback                           Project/py32e407_hal_uart.o
+HAL_UART_RxDstCpltCallback                        Project/py32e407_hal_uart.o
+HAL_UART_RxHalfBlockCpltCallback                  Project/py32e407_hal_uart.o
+HAL_UART_StartSendBreak                           Project/py32e407_hal_uart.o
+HAL_UART_StopSendBreak                            Project/py32e407_hal_uart.o
+HAL_UART_Transmit                                 Project/py32e407_hal_uart.o
+                                                  Project/py32e407xx_Start_Kit.o
+HAL_UART_TransmitAddr                             Project/py32e407_hal_uart.o
+HAL_UART_Transmit_DMA                             Project/py32e407_hal_uart.o
+HAL_UART_Transmit_IT                              Project/py32e407_hal_uart.o
+HAL_UART_TxBlockCpltCallback                      Project/py32e407_hal_uart.o
+HAL_UART_TxCpltCallback                           Project/py32e407_hal_uart.o
+HAL_UART_TxHalfBlockCpltCallback                  Project/py32e407_hal_uart.o
+HAL_UART_TxSrcCpltCallback                        Project/py32e407_hal_uart.o
+HardFault_Handler                                 Project/py32e407_it.o
+I2C1_ER_IRQHandler                                Project/startup_py32e407xx.o
+I2C1_EV_IRQHandler                                Project/startup_py32e407xx.o
+I2C2_ER_IRQHandler                                Project/startup_py32e407xx.o
+I2C2_EV_IRQHandler                                Project/startup_py32e407xx.o
+I2C3_ER_IRQHandler                                Project/startup_py32e407xx.o
+I2C3_EV_IRQHandler                                Project/startup_py32e407xx.o
+I2C4_ER_IRQHandler                                Project/startup_py32e407xx.o
+I2C4_EV_IRQHandler                                Project/startup_py32e407xx.o
+LED_PIN                                           Project/py32e407xx_Start_Kit.o
+LED_PORT                                          Project/py32e407xx_Start_Kit.o
+LPTIM_IRQHandler                                  Project/startup_py32e407xx.o
+LPUART_IRQHandler                                 Project/startup_py32e407xx.o
+MemManage_Handler                                 Project/py32e407_it.o
+NMI_Handler                                       Project/py32e407_it.o
+OTG1_FS_IRQHandler                                Project/startup_py32e407xx.o
+OTG1_FS_WKUP_IRQHandler                           Project/startup_py32e407xx.o
+OTG2_FS_IRQHandler                                Project/startup_py32e407xx.o
+OTG2_FS_WKUP_IRQHandler                           Project/startup_py32e407xx.o
+PVD_IRQHandler                                    Project/startup_py32e407xx.o
+PendSV_Handler                                    Project/py32e407_it.o
+RCC_CTC_IRQHandler                                Project/startup_py32e407xx.o
+RNG_IRQHandler                                    Project/startup_py32e407xx.o
+RTC_Alarm_IRQHandler                              Project/startup_py32e407xx.o
+RTC_IRQHandler                                    Project/startup_py32e407xx.o
+Reset_Handler                                     Project/startup_py32e407xx.o
+SDIO_IRQHandler                                   Project/startup_py32e407xx.o
+SPI1_IRQHandler                                   Project/startup_py32e407xx.o
+SPI2_IRQHandler                                   Project/startup_py32e407xx.o
+SPI3_IRQHandler                                   Project/startup_py32e407xx.o
+SVC_Handler                                       Project/py32e407_it.o
+SysTick_Handler                                   Project/py32e407_it.o
+SystemCoreClock                                   Project/system_py32e407.o
+                                                  Project/py32e407_hal_pwr_ex.o
+                                                  Project/py32e407_hal_rcc.o
+                                                  Project/py32e407_hal.o
+SystemCoreClockUpdate                             Project/system_py32e407.o
+SystemInit                                        Project/system_py32e407.o
+                                                  Project/startup_py32e407xx.o
+TAMPER_IRQHandler                                 Project/startup_py32e407xx.o
+TIM15_IRQHandler                                  Project/startup_py32e407xx.o
+TIM16_IRQHandler                                  Project/startup_py32e407xx.o
+TIM17_IRQHandler                                  Project/startup_py32e407xx.o
+TIM18_IRQHandler                                  Project/startup_py32e407xx.o
+TIM19_IRQHandler                                  Project/startup_py32e407xx.o
+TIM1_BRK_TIM9_IRQHandler                          Project/startup_py32e407xx.o
+TIM1_CC_IRQHandler                                Project/startup_py32e407xx.o
+TIM1_TRG_COM_TIM11_IRQHandler                     Project/startup_py32e407xx.o
+TIM1_UP_TIM10_IRQHandler                          Project/startup_py32e407xx.o
+TIM2_IRQHandler                                   Project/startup_py32e407xx.o
+TIM3_IRQHandler                                   Project/startup_py32e407xx.o
+TIM4_IRQHandler                                   Project/startup_py32e407xx.o
+TIM5_IRQHandler                                   Project/startup_py32e407xx.o
+TIM6_IRQHandler                                   Project/startup_py32e407xx.o
+TIM7_IRQHandler                                   Project/startup_py32e407xx.o
+TIM8_BRK_TIM12_IRQHandler                         Project/startup_py32e407xx.o
+TIM8_CC_IRQHandler                                Project/startup_py32e407xx.o
+TIM8_TRG_COM_TIM14_IRQHandler                     Project/startup_py32e407xx.o
+TIM8_UP_TIM13_IRQHandler                          Project/startup_py32e407xx.o
+UART1_IRQHandler                                  Project/startup_py32e407xx.o
+UART2_IRQHandler                                  Project/startup_py32e407xx.o
+UART3_IRQHandler                                  Project/startup_py32e407xx.o
+USART1_IRQHandler                                 Project/startup_py32e407xx.o
+USART2_IRQHandler                                 Project/startup_py32e407xx.o
+USART3_IRQHandler                                 Project/startup_py32e407xx.o
+UsageFault_Handler                                Project/py32e407_it.o
+WWDG_IRQHandler                                   Project/startup_py32e407xx.o
+__aeabi_idiv0                                     h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_dvmd_tls.o)
+__aeabi_ldiv0                                     h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_dvmd_tls.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+__aeabi_uldivmod                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+                                                  Project/py32e407_hal_uart.o
+__bss_end__                                       h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+__bss_start__                                     h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+__call_exitprocs                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+__deregister_frame_info                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+__dso_handle                                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+__fp_lock_all                                     h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__fp_unlock_all                                   h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__init_array_end                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+__init_array_start                                h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+__io_putchar                                      Project/py32e407xx_Start_Kit.o
+__libc_fini_array                                 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+__libc_init_array                                 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+                                                  Project/startup_py32e407xx.o
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+__lock___arc4random_mutex                         h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__lock___at_quick_exit_mutex                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__lock___atexit_recursive_mutex                   h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__lock___dd_hash_mutex                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__lock___env_recursive_mutex                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__lock___malloc_recursive_mutex                   h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+__lock___sfp_recursive_mutex                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__lock___sinit_recursive_mutex                    h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__lock___tz_mutex                                 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__malloc_free_list                                h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+__malloc_lock                                     h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+__malloc_sbrk_start                               h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+__malloc_unlock                                   h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+__preinit_array_end                               h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+__preinit_array_start                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+__register_frame_info                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+__retarget_lock_acquire                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__retarget_lock_acquire_recursive                 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+__retarget_lock_close                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__retarget_lock_close_recursive                   h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__retarget_lock_init                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__retarget_lock_init_recursive                    h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__retarget_lock_release                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__retarget_lock_release_recursive                 h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-mlock.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+__retarget_lock_try_acquire                       h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__retarget_lock_try_acquire_recursive             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lock.o)
+__sclose                                          h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__seofread                                        h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+__sf_fake_stderr                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+__sf_fake_stdin                                   h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+__sf_fake_stdout                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+__sflush_r                                        h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+__sfmoreglue                                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__sfp                                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__sfp_lock_acquire                                h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__sfp_lock_release                                h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__sinit                                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+__sinit_lock_acquire                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__sinit_lock_release                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__smakebuf_r                                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+__sread                                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__sseek                                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__stack                                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+__swhatbuf_r                                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+__swrite                                          h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+__udivmoddi4                                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+_cleanup                                          h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+_cleanup_r                                        h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+_close                                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+_close_r                                          h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+_ebss                                             Project/startup_py32e407xx.o
+_edata                                            Project/startup_py32e407xx.o
+_estack                                           Project/startup_py32e407xx.o
+_exit                                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(_exit.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+_fflush_r                                         h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+_fini                                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crti.o
+_free_r                                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-freer.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+_fstat                                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+_fstat_r                                          h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+_fwalk                                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+_fwalk_reent                                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fwalk.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+_global_impure_ptr                                h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+_impure_ptr                                       h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-impure.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+                                                  Project/py32e407xx_Start_Kit.o
+_init                                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crti.o
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-init.o)
+_isatty                                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+_isatty_r                                         h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+_lseek                                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+_lseek_r                                          h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+_mainCRTStartup                                   h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+_malloc_r                                         h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-makebuf.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+_read                                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+_read_r                                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+_reclaim_reent                                    h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+_sbrk                                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+_sbrk_r                                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-nano-mallocr.o)
+_sbss                                             Project/startup_py32e407xx.o
+_sdata                                            Project/startup_py32e407xx.o
+_sidata                                           Project/startup_py32e407xx.o
+_stack_init                                       h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+_start                                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+_write                                            Project/py32e407xx_Start_Kit.o
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+_write_r                                          h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-stdio.o)
+atexit                                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+cleanup_glue                                      h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+end                                               h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(sbrk.o)
+errno                                             h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-reent.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(read.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(lseek.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(isatty.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(fstat.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libnosys.a(close.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-readr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-lseekr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-isattyr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fstatr.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-closer.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-writer.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-sbrkr.o)
+exit                                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-exit.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+fflush                                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-fflush.o)
+free                                              h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+g_pfnVectors                                      Project/startup_py32e407xx.o
+hardware_init_hook                                h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+main                                              Project/main.o
+                                                  Project/startup_py32e407xx.o
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+malloc                                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-malloc.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+memset                                            h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-memset.o)
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-findfp.o)
+                                                  Project/main.o
+                                                  h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+setvbuf                                           h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(lib_a-setvbuf.o)
+                                                  Project/py32e407xx_Start_Kit.o
+software_init_hook                                h:/program files (x86)/puyasde/tool/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
+uwTick                                            Project/py32e407_hal.o
+uwTickFreq                                        Project/py32e407_hal.o
+uwTickPrio                                        Project/py32e407_hal.o
+                                                  Project/py32e407_hal_rcc.o

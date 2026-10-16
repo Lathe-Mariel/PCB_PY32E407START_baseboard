@@ -17,9 +17,9 @@
 #define LCD_CS_PORT                 GPIOD
 #define LCD_CS_PIN                  GPIO_PIN_3
 #define LCD_MOSI_PORT               GPIOD
-#define LCD_MOSI_PIN                GPIO_PIN_5
+#define LCD_MOSI_PIN                GPIO_PIN_4
 #define LCD_CLK_PORT                GPIOD
-#define LCD_CLK_PIN                 GPIO_PIN_4
+#define LCD_CLK_PIN                 GPIO_PIN_6
 #define LCD_RS_PORT                 GPIOC
 #define LCD_RS_PIN                  GPIO_PIN_8
 

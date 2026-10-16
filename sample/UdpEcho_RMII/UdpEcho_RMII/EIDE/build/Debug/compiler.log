@@ -1,0 +1,26 @@
+>>> info
+
+Compiler Full Name: arm-none-eabi-gcc.exe (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)
+Compiler Version: 10.3.1
+Builder Mode: Incremental
+The amount of C files: 57
+The amount of C++ files: 0
+The amount of Asm files: 1
+
+>>> prebuild
+
+
+
+>>> cc
+
+
+
+>>> ld
+
+Memory region         Used Size  Region Size  %age Used
+             RAM:       53504 B       144 KB     36.28%
+           FLASH:       45728 B       512 KB      8.72%
+
+
+>>> postbuild
+

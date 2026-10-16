@@ -22844,7 +22844,7 @@
 				)
 			)
 		)
-		(property "Value" "220"
+		(property "Value" "390"
 			(at 309.88 172.085 90)
 			(effects
 				(font
@@ -27658,7 +27658,7 @@
 				)
 			)
 		)
-		(property "Footprint" "CB3LV3C50M0000"
+		(property "Footprint" "kicad9_samacsys:CB3LV3C50M0000"
 			(at 443.23 46.66 0)
 			(effects
 				(font

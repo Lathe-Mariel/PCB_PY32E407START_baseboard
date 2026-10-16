@@ -1,0 +1,150 @@
+[2026-10-17 04:37:30]	[info] incremental build: 15 source files changed
+These source files will be recompiled
+---
+'h:\Drivers\BSP\PY32E407xx_Start_Kit\py32e407xx_Start_Kit.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_cortex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_dma.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_gpio.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc_ex.c': object (.o) file not exist
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_uart.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_hal_msp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_it.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\system_py32e407.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\startup_py32e407xx.s': object (.o) file not exist
+
+[2026-10-17 04:37:31]	[done]
+	build successfully !
+
+[2026-10-17 04:38:41]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_hal_msp.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_it.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+
+[2026-10-17 04:38:42]	[done]
+	build successfully !
+
+[2026-10-17 04:40:58]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c': source file has been changed.
+
+[2026-10-17 04:40:58]	compilation failed at : "h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c", exit code: 1
+command: 
+  "H:\Program Files (x86)\PuyaSDE\tool\bin\arm-none-eabi-gcc.exe" -c -xc -std=c11 -I../../../../../Drivers/BSP/PY32E407xx_Start_Kit -I../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include -I../../../../../Drivers/CMSIS/Include -I../../../../../Drivers/PY32E407_HAL_Driver/Inc -I../Inc -D"USE_HAL_DRIVER" -D"PY32E407xE" -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Og -Wall -g -ffunction-sections -fdata-sections -funsigned-char --specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16 -o ./Project/.obj/__/Src/main.o -MMD ./../Src/main.c
+   at unify_builder.Program.Main(String[] args_)
+---
+./../Src/main.c: In function 'main':
+./../Src/main.c:67:36: error: 'SW_PC6_PORT' undeclared (first use in this function); did you mean 'SW_PC7_PORT'?
+   67 |     sw1Pressed = (HAL_GPIO_ReadPin(SW_PC6_PORT,  SW_PC6_PIN)  == GPIO_PIN_RESET);
+      |                                    ^~~~~~~~~~~
+      |                                    SW_PC7_PORT
+./../Src/main.c:67:36: note: each undeclared identifier is reported only once for each function it appears in
+./../Src/main.c:67:50: error: 'SW_PC6_PIN' undeclared (first use in this function); did you mean 'SW_PC7_PIN'?
+   67 |     sw1Pressed = (HAL_GPIO_ReadPin(SW_PC6_PORT,  SW_PC6_PIN)  == GPIO_PIN_RESET);
+      |                                                  ^~~~~~~~~~
+      |                                                  SW_PC7_PIN
+./../Src/main.c:73:33: error: 'LED_PA3_PIN' undeclared (first use in this function); did you mean 'LED_PD3_PIN'?
+   73 |     HAL_GPIO_WritePin(LED_PORT, LED_PA3_PIN, sw1Pressed ? GPIO_PIN_RESET : GPIO_PIN_SET);
+      |                                 ^~~~~~~~~~~
+      |                                 LED_PD3_PIN
+./../Src/main.c:74:33: error: 'LED_PA4_PIN' undeclared (first use in this function); did you mean 'LED_PD4_PIN'?
+   74 |     HAL_GPIO_WritePin(LED_PORT, LED_PA4_PIN, sw2Pressed ? GPIO_PIN_RESET : GPIO_PIN_SET);
+      |                                 ^~~~~~~~~~~
+      |                                 LED_PD4_PIN
+./../Src/main.c:75:33: error: 'LED_PA5_PIN' undeclared (first use in this function); did you mean 'LED_PD5_PIN'?
+   75 |     HAL_GPIO_WritePin(LED_PORT, LED_PA5_PIN, sw3Pressed ? GPIO_PIN_RESET : GPIO_PIN_SET);
+      |                                 ^~~~~~~~~~~
+      |                                 LED_PD5_PIN
+./../Src/main.c:76:33: error: 'LED_PA6_PIN' undeclared (first use in this function); did you mean 'LED_PD4_PIN'?
+   76 |     HAL_GPIO_WritePin(LED_PORT, LED_PA6_PIN, sw4Pressed ? GPIO_PIN_RESET : GPIO_PIN_SET);
+      |                                 ^~~~~~~~~~~
+      |                                 LED_PD4_PIN
+
+[2026-10-17 04:44:11]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_hal_msp.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_it.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+
+[2026-10-17 04:44:11]	compilation failed at : "h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c", exit code: 1
+command: 
+  "H:\Program Files (x86)\PuyaSDE\tool\bin\arm-none-eabi-gcc.exe" -c -xc -std=c11 -I../../../../../Drivers/BSP/PY32E407xx_Start_Kit -I../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include -I../../../../../Drivers/CMSIS/Include -I../../../../../Drivers/PY32E407_HAL_Driver/Inc -I../Inc -D"USE_HAL_DRIVER" -D"PY32E407xE" -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Og -Wall -g -ffunction-sections -fdata-sections -funsigned-char --specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16 -o ./Project/.obj/__/Src/main.o -MMD ./../Src/main.c
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../Src/main.c:32:
+./../Src/main.c: In function 'APP_GpioConfig':
+../Inc/main.h:64:41: error: 'SW_PC1_PIN' undeclared (first use in this function); did you mean 'SW_PC7_PIN'?
+   64 | #define SW_PC_PINS                     (SW_PC1_PIN | SW_PC7_PIN)
+      |                                         ^~~~~~~~~~
+./../Src/main.c:95:25: note: in expansion of macro 'SW_PC_PINS'
+   95 |   GPIO_InitStruct.Pin = SW_PC_PINS;                      /* PC1  (SW1), PC7  (SW2) */
+      |                         ^~~~~~~~~~
+../Inc/main.h:64:41: note: each undeclared identifier is reported only once for each function it appears in
+   64 | #define SW_PC_PINS                     (SW_PC1_PIN | SW_PC7_PIN)
+      |                                         ^~~~~~~~~~
+./../Src/main.c:95:25: note: in expansion of macro 'SW_PC_PINS'
+   95 |   GPIO_InitStruct.Pin = SW_PC_PINS;                      /* PC1  (SW1), PC7  (SW2) */
+      |                         ^~~~~~~~~~
+./../Src/main.c:98:17: error: 'SW_PC1_PORT' undeclared (first use in this function); did you mean 'SW_PC7_PORT'?
+   98 |   HAL_GPIO_Init(SW_PC1_PORT, &GPIO_InitStruct);
+      |                 ^~~~~~~~~~~
+      |                 SW_PC7_PORT
+
+[2026-10-17 04:45:27]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_hal_msp.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_it.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+
+[2026-10-17 04:45:27]	compilation failed at : "h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c", exit code: 1
+command: 
+  "H:\Program Files (x86)\PuyaSDE\tool\bin\arm-none-eabi-gcc.exe" -c -xc -std=c11 -I../../../../../Drivers/BSP/PY32E407xx_Start_Kit -I../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include -I../../../../../Drivers/CMSIS/Include -I../../../../../Drivers/PY32E407_HAL_Driver/Inc -I../Inc -D"USE_HAL_DRIVER" -D"PY32E407xE" -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Og -Wall -g -ffunction-sections -fdata-sections -funsigned-char --specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16 -o ./Project/.obj/__/Src/main.o -MMD ./../Src/main.c
+   at unify_builder.Program.Main(String[] args_)
+---
+In file included from ./../Src/main.c:32:
+./../Src/main.c: In function 'APP_GpioConfig':
+../Inc/main.h:64:41: error: 'SW_PC1_PIN' undeclared (first use in this function); did you mean 'SW_PC7_PIN'?
+   64 | #define SW_PC_PINS                     (SW_PC1_PIN | SW_PC7_PIN)
+      |                                         ^~~~~~~~~~
+./../Src/main.c:95:25: note: in expansion of macro 'SW_PC_PINS'
+   95 |   GPIO_InitStruct.Pin = SW_PC_PINS;                      /* PC1  (SW1), PC7  (SW2) */
+      |                         ^~~~~~~~~~
+../Inc/main.h:64:41: note: each undeclared identifier is reported only once for each function it appears in
+   64 | #define SW_PC_PINS                     (SW_PC1_PIN | SW_PC7_PIN)
+      |                                         ^~~~~~~~~~
+./../Src/main.c:95:25: note: in expansion of macro 'SW_PC_PINS'
+   95 |   GPIO_InitStruct.Pin = SW_PC_PINS;                      /* PC1  (SW1), PC7  (SW2) */
+      |                         ^~~~~~~~~~
+
+[2026-10-17 04:46:33]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_hal_msp.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_it.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+
+[2026-10-17 04:46:34]	[done]
+	build successfully !
+
+[2026-10-17 04:48:35]	[done]
+	build successfully !
+
+[2026-10-17 04:52:29]	[info] incremental build: 3 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\main.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_hal_msp.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\Src\py32e407_it.c': dependence 'h:\git\PCB_PY32E407START_baseboard\sample\switch_led\EIDE\..\Inc\main.h' has been changed.
+
+[2026-10-17 04:52:30]	[done]
+	build successfully !
+

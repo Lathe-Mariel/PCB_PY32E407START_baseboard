@@ -309,3 +309,25 @@ These source files will be recompiled
 [2026-10-02 04:09:31]	[done]
 	build successfully !
 
+[2026-10-17 03:59:53]	[info] incremental build: 15 source files changed
+These source files will be recompiled
+---
+'h:\Drivers\BSP\PY32E407xx_Start_Kit\py32e407xx_Start_Kit.c': compiler options has been changed.
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal.c': compiler options has been changed.
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_cortex.c': compiler options has been changed.
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_dma.c': compiler options has been changed.
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_gpio.c': compiler options has been changed.
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr.c': compiler options has been changed.
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr_ex.c': compiler options has been changed.
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc.c': compiler options has been changed.
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc_ex.c': compiler options has been changed.
+'h:\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_uart.c': compiler options has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd\GPIO_IOToggle\Src\main.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd\GPIO_IOToggle\Src\py32e407_hal_msp.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd\GPIO_IOToggle\Src\py32e407_it.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd\GPIO_IOToggle\Src\system_py32e407.c': source file has been changed.
+'h:\git\PCB_PY32E407START_baseboard\sample\lcd\GPIO_IOToggle\EIDE\startup_py32e407xx.s': source file has been changed.
+
+[2026-10-17 03:59:56]	[done]
+	build successfully !
+

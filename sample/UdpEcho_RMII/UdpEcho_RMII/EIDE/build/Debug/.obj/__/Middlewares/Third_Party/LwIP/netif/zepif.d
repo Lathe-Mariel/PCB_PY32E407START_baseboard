@@ -1,0 +1,36 @@
+build/Debug/.obj/__/Middlewares/Third_Party/LwIP/netif/zepif.o: \
+ ../Middlewares/Third_Party/LwIP/netif/zepif.c \
+ ../Middlewares/Third_Party/LwIP/include/netif/zepif.h \
+ ../Middlewares/Third_Party/LwIP/include/lwip/opt.h \
+ ../Core/INC/lwipopts.h \
+ ../Middlewares/Third_Party/LwIP/include/lwip/debug.h \
+ ../Middlewares/Third_Party/LwIP/include/lwip/arch.h \
+ ../Middlewares/Third_Party/LwIP/arch/cc.h ../Core/INC/main.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e4xx_hal.h \
+ ../Core/INC/py32e407_hal_conf.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_rcc.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_def.h \
+ ../Drivers/CMSIS/Device/PY32E407/Include/py32e4xx.h \
+ ../Drivers/CMSIS/Device/PY32E407/Include/py32e407xE.h \
+ ../Drivers/CMSIS/Include/core_cm4.h \
+ ../Drivers/CMSIS/Include/cmsis_version.h \
+ ../Drivers/CMSIS/Include/cmsis_compiler.h \
+ ../Drivers/CMSIS/Include/cmsis_gcc.h \
+ ../Drivers/CMSIS/Include/mpu_armv7.h \
+ ../Drivers/CMSIS/Device/PY32E407/Include/system_py32e4xx.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e4xx_hal.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_rcc_ex.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_cortex.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_dma.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_dma_ex.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_flash.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_flash_ex.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_gpio.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_gpio_ex.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_pwr.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_pwr_ex.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_exti.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_uart.h \
+ ../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_eth.h \
+ ../Middlewares/Third_Party/LwIP/include/netif/lowpan6.h \
+ ../Middlewares/Third_Party/LwIP/include/netif/lowpan6_opts.h

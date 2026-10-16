@@ -1,0 +1,65 @@
+[2026-10-17 05:06:24]	[info] incremental build: 58 source files changed
+These source files will be recompiled
+---
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Core\SRC\gpio.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Core\SRC\lwip.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Core\SRC\main.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Core\SRC\py32e407_hal_msp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Core\SRC\py32e407_it.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Core\SRC\rcc.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Core\SRC\system_py32e407.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Core\SRC\uart.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Core\Src\ethernetif.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_cortex.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_dma.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_eth.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_exti.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_flash.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_flash_ex.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_gpio.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr_ex.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc_ex.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_uart.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\altcp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\altcp_alloc.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\altcp_tcp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\def.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\dns.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\inet_chksum.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\init.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\ip.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\autoip.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\dhcp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\etharp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\icmp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\igmp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\ip4.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\ip4_addr.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\ip4_frag.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\mem.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\memp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\netif.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\pbuf.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\raw.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\stats.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\sys.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\tcp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\tcp_in.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\tcp_out.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\timeouts.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\core\udp.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\netif\bridgeif.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\netif\bridgeif_fdb.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\netif\ethernet.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\netif\lowpan6.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\netif\lowpan6_ble.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\netif\lowpan6_common.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\Middlewares\Third_Party\LwIP\netif\zepif.c': object (.o) file not exist
+'h:\git\PCB_PY32E407START_baseboard\sample\UdpEcho_RMII\UdpEcho_RMII\EIDE\startup_py32e407xx.s': object (.o) file not exist
+
+[2026-10-17 05:06:26]	[done]
+	build successfully !
+
