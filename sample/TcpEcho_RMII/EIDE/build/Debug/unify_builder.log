@@ -1,0 +1,231 @@
+[2026-10-18 17:48:51]	[info] incremental build: 58 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\gpio.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\lwip.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\main.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\py32e407_hal_msp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\py32e407_it.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\rcc.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\system_py32e407.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\uart.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\Src\ethernetif.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_cortex.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_dma.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_eth.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_exti.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_flash.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_flash_ex.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_gpio.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_pwr_ex.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_rcc_ex.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Drivers\PY32E407_HAL_Driver\Src\py32e407_hal_uart.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\altcp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\altcp_alloc.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\altcp_tcp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\def.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\dns.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\inet_chksum.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\init.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ip.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\autoip.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\dhcp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\etharp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\icmp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\igmp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\ip4.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\ip4_addr.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\ip4_frag.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\mem.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\memp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\netif.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\pbuf.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\raw.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\stats.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\sys.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\tcp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\tcp_in.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\tcp_out.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\timeouts.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\udp.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\bridgeif.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\bridgeif_fdb.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\ethernet.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\lowpan6.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\lowpan6_ble.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\lowpan6_common.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\zepif.c': object (.o) file not exist
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\startup_py32e407xx.s': object (.o) file not exist
+
+[2026-10-18 17:48:53]	[done]
+	build successfully !
+
+[2026-10-18 17:53:22]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\lwip.c': source file has been changed.
+
+[2026-10-18 17:53:23]	[done]
+	build successfully !
+
+[2026-10-18 18:01:56]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\main.c': source file has been changed.
+
+[2026-10-18 18:01:57]	[done]
+	build successfully !
+
+[2026-10-18 18:02:17]	[done]
+	build successfully !
+
+[2026-10-18 18:11:19]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\main.c': source file has been changed.
+
+[2026-10-18 18:11:20]	[done]
+	build successfully !
+
+[2026-10-18 21:30:17]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\gpio.c': source file has been changed.
+
+[2026-10-18 21:30:20]	[done]
+	build successfully !
+
+[2026-10-18 21:41:44]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\main.c': source file has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\py32e407_it.c': source file has been changed.
+
+[2026-10-18 21:41:45]	[done]
+	build successfully !
+
+[2026-10-18 21:53:55]	[info] incremental build: 38 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\lwip.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\main.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\Src\ethernetif.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\altcp.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\altcp_alloc.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\altcp_tcp.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\def.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\dns.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\inet_chksum.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\init.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ip.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\autoip.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\dhcp.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\etharp.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\icmp.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\igmp.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\ip4.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\ip4_addr.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\ipv4\ip4_frag.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\mem.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\memp.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\netif.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\pbuf.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\raw.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\stats.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\sys.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\tcp.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\tcp_in.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\tcp_out.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\timeouts.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\core\udp.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\bridgeif.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\bridgeif_fdb.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\ethernet.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\lowpan6.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\lowpan6_ble.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\lowpan6_common.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Middlewares\Third_Party\LwIP\netif\zepif.c': dependence 'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\EIDE\..\Core\INC\lwipopts.h' has been changed.
+
+[2026-10-18 21:53:56]	[done]
+	build successfully !
+
+[2026-10-18 22:01:09]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\lwip.c': source file has been changed.
+
+[2026-10-18 22:01:10]	[done]
+	build successfully !
+
+[2026-10-18 22:06:08]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\main.c': source file has been changed.
+
+[2026-10-18 22:06:09]	[done]
+	build successfully !
+
+[2026-10-18 22:10:47]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\main.c': source file has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\Src\ethernetif.c': source file has been changed.
+
+[2026-10-18 22:10:48]	[done]
+	build successfully !
+
+[2026-10-18 22:23:04]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\Src\ethernetif.c': source file has been changed.
+
+[2026-10-18 22:23:05]	[done]
+	build successfully !
+
+[2026-10-18 22:33:34]	[info] incremental build: 2 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\SRC\main.c': source file has been changed.
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\Src\ethernetif.c': source file has been changed.
+
+[2026-10-18 22:33:35]	[done]
+	build successfully !
+
+[2026-10-18 22:48:07]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\Src\ethernetif.c': source file has been changed.
+
+[2026-10-18 22:48:08]	[done]
+	build successfully !
+
+[2026-10-18 22:55:06]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\Src\ethernetif.c': source file has been changed.
+
+[2026-10-18 22:55:06]	[done]
+	build successfully !
+
+[2026-10-18 23:02:26]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\Src\ethernetif.c': source file has been changed.
+
+[2026-10-18 23:02:26]	[done]
+	build successfully !
+
+[2026-10-18 23:09:00]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'c:\Users\n11ak\Desktop\TcpEcho_RMII\TcpEcho_RMII\Core\Src\ethernetif.c': source file has been changed.
+
+[2026-10-18 23:09:00]	[done]
+	build successfully !
+
+[2026-10-19 00:48:20]	[done]
+	build successfully !
+

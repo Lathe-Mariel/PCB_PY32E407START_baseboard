@@ -1,0 +1,47 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "build/Debug/Project.elf",
+            "name": "pyocd",
+            "request": "launch",
+            "type": "cortex-debug",
+            "targetId":  "PY32E407xE",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "servertype": "pyocd",
+            "overrideGDBServerStartedRegex": "GDB server listening on port",
+            "cmsisPack": "${env:PYSDEPATH}/packs/PY32E4xx_DFP.pack",
+            "svdFile": "${env:PYSDEPATH}/svd/PY32E407xx.svd"
+        },
+        {
+            "cwd": "${workspaceRoot}",
+            "type": "cortex-debug",
+            "request": "launch",
+            "name": "openocd",
+            "servertype": "openocd",
+            "executable": "build/Debug/Project.elf",
+            "runToEntryPoint": "main",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/py32e407.cfg"
+            ],
+            "toolchainPrefix": "arm-none-eabi",
+            "svdFile": "${env:PYSDEPATH}/svd/PY32E407xx.svd"
+        },
+        {
+            "cwd": "${workspaceRoot}",
+            "type": "cortex-debug",
+            "request": "launch",
+            "name": "jlink",
+            "servertype": "jlink",
+            "interface": "swd",
+            "executable": "build/Debug/Project.elf",
+            "runToEntryPoint": "main",
+            "device": "PY32E407xE",
+            "toolchainPrefix": "arm-none-eabi",
+            "svdFile": "${env:PYSDEPATH}/svd/PY32E407xx.svd"
+        }
+    ]
+}
