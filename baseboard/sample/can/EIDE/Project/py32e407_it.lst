@@ -1,0 +1,650 @@
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"py32e407_it.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.NMI_Handler,"ax",%progbits
+  20              		.align	1
+  21              		.global	NMI_Handler
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	NMI_Handler:
+  27              	.LFB136:
+  28              		.file 1 "../Src/py32e407_it.c"
+   1:../Src/py32e407_it.c **** /**
+   2:../Src/py32e407_it.c ****   ******************************************************************************
+   3:../Src/py32e407_it.c ****   * @file    py32e407_it.c
+   4:../Src/py32e407_it.c ****   * @author  MCU Application Team
+   5:../Src/py32e407_it.c ****   * @brief   Interrupt Service Routines.
+   6:../Src/py32e407_it.c ****   ******************************************************************************
+   7:../Src/py32e407_it.c ****   * @attention
+   8:../Src/py32e407_it.c ****   *
+   9:../Src/py32e407_it.c ****   * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  10:../Src/py32e407_it.c ****   * All rights reserved.</center></h2>
+  11:../Src/py32e407_it.c ****   *
+  12:../Src/py32e407_it.c ****   * This software component is licensed by Puya under BSD 3-Clause license,
+  13:../Src/py32e407_it.c ****   * the "License"; You may not use this file except in compliance with the
+  14:../Src/py32e407_it.c ****   * License. You may obtain a copy of the License at:
+  15:../Src/py32e407_it.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  16:../Src/py32e407_it.c ****   *
+  17:../Src/py32e407_it.c ****   ******************************************************************************
+  18:../Src/py32e407_it.c ****   * @attention
+  19:../Src/py32e407_it.c ****   *
+  20:../Src/py32e407_it.c ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  21:../Src/py32e407_it.c ****   * All rights reserved.</center></h2>
+  22:../Src/py32e407_it.c ****   *
+  23:../Src/py32e407_it.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  24:../Src/py32e407_it.c ****   * the "License"; You may not use this file except in compliance with the
+  25:../Src/py32e407_it.c ****   * License. You may obtain a copy of the License at:
+  26:../Src/py32e407_it.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  27:../Src/py32e407_it.c ****   *
+  28:../Src/py32e407_it.c ****   ******************************************************************************
+  29:../Src/py32e407_it.c ****   */
+  30:../Src/py32e407_it.c **** 
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 2
+
+
+  31:../Src/py32e407_it.c **** /* Includes ------------------------------------------------------------------*/
+  32:../Src/py32e407_it.c **** #include "main.h"
+  33:../Src/py32e407_it.c **** #include "py32e407_it.h"
+  34:../Src/py32e407_it.c **** 
+  35:../Src/py32e407_it.c **** /* Private includes ----------------------------------------------------------*/
+  36:../Src/py32e407_it.c **** /* Private typedef -----------------------------------------------------------*/
+  37:../Src/py32e407_it.c **** /* Private define ------------------------------------------------------------*/
+  38:../Src/py32e407_it.c **** /* Private macro -------------------------------------------------------------*/
+  39:../Src/py32e407_it.c **** /* Private variables ---------------------------------------------------------*/
+  40:../Src/py32e407_it.c **** /* Private function prototypes -----------------------------------------------*/
+  41:../Src/py32e407_it.c **** /* Private user code ---------------------------------------------------------*/
+  42:../Src/py32e407_it.c **** /* External variables --------------------------------------------------------*/
+  43:../Src/py32e407_it.c **** extern uint8_t CanRxData[8];
+  44:../Src/py32e407_it.c **** extern __IO uint32_t CanRxCounter;
+  45:../Src/py32e407_it.c **** 
+  46:../Src/py32e407_it.c **** /******************************************************************************/
+  47:../Src/py32e407_it.c **** /*          Cortex-M4 Processor Interruption and Exception Handlers           */
+  48:../Src/py32e407_it.c **** /******************************************************************************/
+  49:../Src/py32e407_it.c **** /**
+  50:../Src/py32e407_it.c ****   * @brief   This function handles NMI exception.
+  51:../Src/py32e407_it.c ****   * @param  None
+  52:../Src/py32e407_it.c ****   * @retval None
+  53:../Src/py32e407_it.c ****   */
+  54:../Src/py32e407_it.c **** void NMI_Handler(void)
+  55:../Src/py32e407_it.c **** {
+  29              		.loc 1 55 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  56:../Src/py32e407_it.c **** }
+  34              		.loc 1 56 1 view .LVU1
+  35 0000 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE136:
+  39              		.section	.text.HardFault_Handler,"ax",%progbits
+  40              		.align	1
+  41              		.global	HardFault_Handler
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  46              	HardFault_Handler:
+  47              	.LFB137:
+  57:../Src/py32e407_it.c **** 
+  58:../Src/py32e407_it.c **** /**
+  59:../Src/py32e407_it.c ****   * @brief  This function handles Hard Fault exception.
+  60:../Src/py32e407_it.c ****   * @param  None
+  61:../Src/py32e407_it.c ****   * @retval None
+  62:../Src/py32e407_it.c ****   */
+  63:../Src/py32e407_it.c **** void HardFault_Handler(void)
+  64:../Src/py32e407_it.c **** {
+  48              		.loc 1 64 1 view -0
+  49              		.cfi_startproc
+  50              		@ Volatile: function does not return.
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53              		@ link register save eliminated.
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 3
+
+
+  54              	.L3:
+  65:../Src/py32e407_it.c ****   /* Go to infinite loop when Hard Fault exception occurs */
+  66:../Src/py32e407_it.c ****   while (1)
+  55              		.loc 1 66 3 discriminator 1 view .LVU3
+  67:../Src/py32e407_it.c ****   {
+  68:../Src/py32e407_it.c ****   }
+  56              		.loc 1 68 3 discriminator 1 view .LVU4
+  66:../Src/py32e407_it.c ****   {
+  57              		.loc 1 66 9 discriminator 1 view .LVU5
+  58 0000 FEE7     		b	.L3
+  59              		.cfi_endproc
+  60              	.LFE137:
+  62              		.section	.text.MemManage_Handler,"ax",%progbits
+  63              		.align	1
+  64              		.global	MemManage_Handler
+  65              		.syntax unified
+  66              		.thumb
+  67              		.thumb_func
+  69              	MemManage_Handler:
+  70              	.LFB138:
+  69:../Src/py32e407_it.c **** }
+  70:../Src/py32e407_it.c **** 
+  71:../Src/py32e407_it.c **** /**
+  72:../Src/py32e407_it.c ****   * @brief  This function handles Memory Manage exception.
+  73:../Src/py32e407_it.c ****   * @param  None
+  74:../Src/py32e407_it.c ****   * @retval None
+  75:../Src/py32e407_it.c ****   */
+  76:../Src/py32e407_it.c **** void MemManage_Handler(void)
+  77:../Src/py32e407_it.c **** {
+  71              		.loc 1 77 1 view -0
+  72              		.cfi_startproc
+  73              		@ Volatile: function does not return.
+  74              		@ args = 0, pretend = 0, frame = 0
+  75              		@ frame_needed = 0, uses_anonymous_args = 0
+  76              		@ link register save eliminated.
+  77              	.L5:
+  78:../Src/py32e407_it.c ****   /* Go to infinite loop when Memory Manage exception occurs */
+  79:../Src/py32e407_it.c ****   while (1)
+  78              		.loc 1 79 3 discriminator 1 view .LVU7
+  80:../Src/py32e407_it.c ****   {
+  81:../Src/py32e407_it.c ****   }
+  79              		.loc 1 81 3 discriminator 1 view .LVU8
+  79:../Src/py32e407_it.c ****   {
+  80              		.loc 1 79 9 discriminator 1 view .LVU9
+  81 0000 FEE7     		b	.L5
+  82              		.cfi_endproc
+  83              	.LFE138:
+  85              		.section	.text.BusFault_Handler,"ax",%progbits
+  86              		.align	1
+  87              		.global	BusFault_Handler
+  88              		.syntax unified
+  89              		.thumb
+  90              		.thumb_func
+  92              	BusFault_Handler:
+  93              	.LFB139:
+  82:../Src/py32e407_it.c **** }
+  83:../Src/py32e407_it.c **** 
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 4
+
+
+  84:../Src/py32e407_it.c **** /**
+  85:../Src/py32e407_it.c ****   * @brief  This function handles Bus Fault exception.
+  86:../Src/py32e407_it.c ****   * @param  None
+  87:../Src/py32e407_it.c ****   * @retval None
+  88:../Src/py32e407_it.c ****   */
+  89:../Src/py32e407_it.c **** void BusFault_Handler(void)
+  90:../Src/py32e407_it.c **** {
+  94              		.loc 1 90 1 view -0
+  95              		.cfi_startproc
+  96              		@ Volatile: function does not return.
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99              		@ link register save eliminated.
+ 100              	.L7:
+  91:../Src/py32e407_it.c ****   /* Go to infinite loop when Bus Fault exception occurs */
+  92:../Src/py32e407_it.c ****   while (1)
+ 101              		.loc 1 92 3 discriminator 1 view .LVU11
+  93:../Src/py32e407_it.c ****   {
+  94:../Src/py32e407_it.c ****   }
+ 102              		.loc 1 94 3 discriminator 1 view .LVU12
+  92:../Src/py32e407_it.c ****   {
+ 103              		.loc 1 92 9 discriminator 1 view .LVU13
+ 104 0000 FEE7     		b	.L7
+ 105              		.cfi_endproc
+ 106              	.LFE139:
+ 108              		.section	.text.UsageFault_Handler,"ax",%progbits
+ 109              		.align	1
+ 110              		.global	UsageFault_Handler
+ 111              		.syntax unified
+ 112              		.thumb
+ 113              		.thumb_func
+ 115              	UsageFault_Handler:
+ 116              	.LFB140:
+  95:../Src/py32e407_it.c **** }
+  96:../Src/py32e407_it.c **** 
+  97:../Src/py32e407_it.c **** /**
+  98:../Src/py32e407_it.c ****   * @brief  This function handles Usage Fault exception.
+  99:../Src/py32e407_it.c ****   * @param  None
+ 100:../Src/py32e407_it.c ****   * @retval None
+ 101:../Src/py32e407_it.c ****   */
+ 102:../Src/py32e407_it.c **** void UsageFault_Handler(void)
+ 103:../Src/py32e407_it.c **** {
+ 117              		.loc 1 103 1 view -0
+ 118              		.cfi_startproc
+ 119              		@ Volatile: function does not return.
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123              	.L9:
+ 104:../Src/py32e407_it.c ****   /* Go to infinite loop when Usage Fault exception occurs */
+ 105:../Src/py32e407_it.c ****   while (1)
+ 124              		.loc 1 105 3 discriminator 1 view .LVU15
+ 106:../Src/py32e407_it.c ****   {
+ 107:../Src/py32e407_it.c ****   }
+ 125              		.loc 1 107 3 discriminator 1 view .LVU16
+ 105:../Src/py32e407_it.c ****   {
+ 126              		.loc 1 105 9 discriminator 1 view .LVU17
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 5
+
+
+ 127 0000 FEE7     		b	.L9
+ 128              		.cfi_endproc
+ 129              	.LFE140:
+ 131              		.section	.text.SVC_Handler,"ax",%progbits
+ 132              		.align	1
+ 133              		.global	SVC_Handler
+ 134              		.syntax unified
+ 135              		.thumb
+ 136              		.thumb_func
+ 138              	SVC_Handler:
+ 139              	.LFB141:
+ 108:../Src/py32e407_it.c **** }
+ 109:../Src/py32e407_it.c **** 
+ 110:../Src/py32e407_it.c **** /**
+ 111:../Src/py32e407_it.c ****   * @brief  This function handles SVCall exception.
+ 112:../Src/py32e407_it.c ****   * @param  None
+ 113:../Src/py32e407_it.c ****   * @retval None
+ 114:../Src/py32e407_it.c ****   */
+ 115:../Src/py32e407_it.c **** void SVC_Handler(void)
+ 116:../Src/py32e407_it.c **** {
+ 140              		.loc 1 116 1 view -0
+ 141              		.cfi_startproc
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144              		@ link register save eliminated.
+ 117:../Src/py32e407_it.c **** }
+ 145              		.loc 1 117 1 view .LVU19
+ 146 0000 7047     		bx	lr
+ 147              		.cfi_endproc
+ 148              	.LFE141:
+ 150              		.section	.text.DebugMon_Handler,"ax",%progbits
+ 151              		.align	1
+ 152              		.global	DebugMon_Handler
+ 153              		.syntax unified
+ 154              		.thumb
+ 155              		.thumb_func
+ 157              	DebugMon_Handler:
+ 158              	.LFB142:
+ 118:../Src/py32e407_it.c **** 
+ 119:../Src/py32e407_it.c **** /**
+ 120:../Src/py32e407_it.c ****   * @brief  This function handles Debug Monitor exception.
+ 121:../Src/py32e407_it.c ****   * @param  None
+ 122:../Src/py32e407_it.c ****   * @retval None
+ 123:../Src/py32e407_it.c ****   */
+ 124:../Src/py32e407_it.c **** void DebugMon_Handler(void)
+ 125:../Src/py32e407_it.c **** {
+ 159              		.loc 1 125 1 view -0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163              		@ link register save eliminated.
+ 126:../Src/py32e407_it.c **** }
+ 164              		.loc 1 126 1 view .LVU21
+ 165 0000 7047     		bx	lr
+ 166              		.cfi_endproc
+ 167              	.LFE142:
+ 169              		.section	.text.PendSV_Handler,"ax",%progbits
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 6
+
+
+ 170              		.align	1
+ 171              		.global	PendSV_Handler
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	PendSV_Handler:
+ 177              	.LFB143:
+ 127:../Src/py32e407_it.c **** 
+ 128:../Src/py32e407_it.c **** /**
+ 129:../Src/py32e407_it.c ****   * @brief  This function handles PendSVC exception.
+ 130:../Src/py32e407_it.c ****   * @param  None
+ 131:../Src/py32e407_it.c ****   * @retval None
+ 132:../Src/py32e407_it.c ****   */
+ 133:../Src/py32e407_it.c **** void PendSV_Handler(void)
+ 134:../Src/py32e407_it.c **** {
+ 178              		.loc 1 134 1 view -0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182              		@ link register save eliminated.
+ 135:../Src/py32e407_it.c **** }
+ 183              		.loc 1 135 1 view .LVU23
+ 184 0000 7047     		bx	lr
+ 185              		.cfi_endproc
+ 186              	.LFE143:
+ 188              		.section	.text.SysTick_Handler,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	SysTick_Handler
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	SysTick_Handler:
+ 196              	.LFB144:
+ 136:../Src/py32e407_it.c **** 
+ 137:../Src/py32e407_it.c **** /**
+ 138:../Src/py32e407_it.c ****   * @brief  This function handles SysTick Handler.
+ 139:../Src/py32e407_it.c ****   * @param  None
+ 140:../Src/py32e407_it.c ****   * @retval None
+ 141:../Src/py32e407_it.c ****   */
+ 142:../Src/py32e407_it.c **** void SysTick_Handler(void)
+ 143:../Src/py32e407_it.c **** {
+ 197              		.loc 1 143 1 view -0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 0
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201 0000 08B5     		push	{r3, lr}
+ 202              	.LCFI0:
+ 203              		.cfi_def_cfa_offset 8
+ 204              		.cfi_offset 3, -8
+ 205              		.cfi_offset 14, -4
+ 144:../Src/py32e407_it.c ****   HAL_IncTick();
+ 206              		.loc 1 144 3 view .LVU25
+ 207 0002 FFF7FEFF 		bl	HAL_IncTick
+ 208              	.LVL0:
+ 145:../Src/py32e407_it.c **** }
+ 209              		.loc 1 145 1 is_stmt 0 view .LVU26
+ 210 0006 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 7
+
+
+ 211              		.cfi_endproc
+ 212              	.LFE144:
+ 214              		.section	.text.CAN1_INT0_IRQHandler,"ax",%progbits
+ 215              		.align	1
+ 216              		.global	CAN1_INT0_IRQHandler
+ 217              		.syntax unified
+ 218              		.thumb
+ 219              		.thumb_func
+ 221              	CAN1_INT0_IRQHandler:
+ 222              	.LFB145:
+ 146:../Src/py32e407_it.c **** 
+ 147:../Src/py32e407_it.c **** /******************************************************************************/
+ 148:../Src/py32e407_it.c **** /* PY32E407 Peripheral Interrupt Handlers                                     */
+ 149:../Src/py32e407_it.c **** /* Add here the Interrupt Handlers for the used peripherals.                  */
+ 150:../Src/py32e407_it.c **** /* For the available peripheral interrupt handler names,                      */
+ 151:../Src/py32e407_it.c **** /* please refer to the startup file.                                          */
+ 152:../Src/py32e407_it.c **** /******************************************************************************/
+ 153:../Src/py32e407_it.c **** 
+ 154:../Src/py32e407_it.c **** /**
+ 155:../Src/py32e407_it.c ****   * @brief This function handles FDCAN1 interrupt 0 (FDCAN_INT0).
+ 156:../Src/py32e407_it.c ****   */
+ 157:../Src/py32e407_it.c **** void CAN1_INT0_IRQHandler(void)
+ 158:../Src/py32e407_it.c **** {
+ 223              		.loc 1 158 1 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227 0000 08B5     		push	{r3, lr}
+ 228              	.LCFI1:
+ 229              		.cfi_def_cfa_offset 8
+ 230              		.cfi_offset 3, -8
+ 231              		.cfi_offset 14, -4
+ 159:../Src/py32e407_it.c ****   HAL_FDCAN_IRQHandler(&FdcanHandle);
+ 232              		.loc 1 159 3 view .LVU28
+ 233 0002 0248     		ldr	r0, .L17
+ 234 0004 FFF7FEFF 		bl	HAL_FDCAN_IRQHandler
+ 235              	.LVL1:
+ 160:../Src/py32e407_it.c **** }
+ 236              		.loc 1 160 1 is_stmt 0 view .LVU29
+ 237 0008 08BD     		pop	{r3, pc}
+ 238              	.L18:
+ 239 000a 00BF     		.align	2
+ 240              	.L17:
+ 241 000c 00000000 		.word	FdcanHandle
+ 242              		.cfi_endproc
+ 243              	.LFE145:
+ 245              		.section	.text.HAL_FDCAN_RxFifo0Callback,"ax",%progbits
+ 246              		.align	1
+ 247              		.global	HAL_FDCAN_RxFifo0Callback
+ 248              		.syntax unified
+ 249              		.thumb
+ 250              		.thumb_func
+ 252              	HAL_FDCAN_RxFifo0Callback:
+ 253              	.LVL2:
+ 254              	.LFB146:
+ 161:../Src/py32e407_it.c **** 
+ 162:../Src/py32e407_it.c **** /**
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 8
+
+
+ 163:../Src/py32e407_it.c ****   * @brief  Rx FIFO 0 new message callback.
+ 164:../Src/py32e407_it.c ****   *         Echoes every received frame back with the same identifier.
+ 165:../Src/py32e407_it.c ****   * @param  hfdcan: FDCAN handle pointer
+ 166:../Src/py32e407_it.c ****   * @param  RxFifo0ITs: the enabled Rx FIFO 0 interrupts
+ 167:../Src/py32e407_it.c ****   * @retval None
+ 168:../Src/py32e407_it.c ****   */
+ 169:../Src/py32e407_it.c **** void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
+ 170:../Src/py32e407_it.c **** {
+ 255              		.loc 1 170 1 is_stmt 1 view -0
+ 256              		.cfi_startproc
+ 257              		@ args = 0, pretend = 0, frame = 80
+ 258              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171:../Src/py32e407_it.c ****   FDCAN_RxHeaderTypeDef RxHeader;
+ 259              		.loc 1 171 3 view .LVU31
+ 172:../Src/py32e407_it.c ****   FDCAN_TxHeaderTypeDef TxHeader;
+ 260              		.loc 1 172 3 view .LVU32
+ 173:../Src/py32e407_it.c **** 
+ 174:../Src/py32e407_it.c ****   if ((RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) != 0U)
+ 261              		.loc 1 174 3 view .LVU33
+ 262              		.loc 1 174 6 is_stmt 0 view .LVU34
+ 263 0000 11F0010F 		tst	r1, #1
+ 264 0004 00D1     		bne	.L25
+ 265 0006 7047     		bx	lr
+ 266              	.L25:
+ 170:../Src/py32e407_it.c ****   FDCAN_RxHeaderTypeDef RxHeader;
+ 267              		.loc 1 170 1 view .LVU35
+ 268 0008 10B5     		push	{r4, lr}
+ 269              	.LCFI2:
+ 270              		.cfi_def_cfa_offset 8
+ 271              		.cfi_offset 4, -8
+ 272              		.cfi_offset 14, -4
+ 273 000a 94B0     		sub	sp, sp, #80
+ 274              	.LCFI3:
+ 275              		.cfi_def_cfa_offset 88
+ 276 000c 0446     		mov	r4, r0
+ 175:../Src/py32e407_it.c ****   {
+ 176:../Src/py32e407_it.c ****     /* Read the pending message out of Rx FIFO 0 */
+ 177:../Src/py32e407_it.c ****     if (HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader, CanRxData) == HAL_OK)
+ 277              		.loc 1 177 5 is_stmt 1 view .LVU36
+ 278              		.loc 1 177 9 is_stmt 0 view .LVU37
+ 279 000e 124B     		ldr	r3, .L27
+ 280 0010 0AAA     		add	r2, sp, #40
+ 281 0012 4021     		movs	r1, #64
+ 282              	.LVL3:
+ 283              		.loc 1 177 9 view .LVU38
+ 284 0014 FFF7FEFF 		bl	HAL_FDCAN_GetRxMessage
+ 285              	.LVL4:
+ 286              		.loc 1 177 8 view .LVU39
+ 287 0018 08B1     		cbz	r0, .L26
+ 288              	.L19:
+ 178:../Src/py32e407_it.c ****     {
+ 179:../Src/py32e407_it.c ****       CanRxCounter++;
+ 180:../Src/py32e407_it.c **** 
+ 181:../Src/py32e407_it.c ****       /* Echo the frame back with the same identifier and payload */
+ 182:../Src/py32e407_it.c ****       TxHeader.Identifier          = RxHeader.Identifier;
+ 183:../Src/py32e407_it.c ****       TxHeader.IdType              = RxHeader.IdType;
+ 184:../Src/py32e407_it.c ****       TxHeader.TxFrameType         = FDCAN_DATA_FRAME;
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 9
+
+
+ 185:../Src/py32e407_it.c ****       TxHeader.DataLength          = RxHeader.DataLength;
+ 186:../Src/py32e407_it.c ****       TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
+ 187:../Src/py32e407_it.c ****       TxHeader.BitRateSwitch       = FDCAN_BRS_OFF;
+ 188:../Src/py32e407_it.c ****       TxHeader.FDFormat            = FDCAN_CLASSIC_CAN;
+ 189:../Src/py32e407_it.c ****       TxHeader.TxEventFifoControl  = FDCAN_NO_TX_EVENTS;
+ 190:../Src/py32e407_it.c ****       TxHeader.MessageMarker       = 0U;
+ 191:../Src/py32e407_it.c ****       (void)HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxHeader, CanRxData);
+ 192:../Src/py32e407_it.c **** 
+ 193:../Src/py32e407_it.c ****       /* Signal the reception on LED2 */
+ 194:../Src/py32e407_it.c ****       HAL_GPIO_TogglePin(LED_PORT, LED_D2_PIN);
+ 195:../Src/py32e407_it.c ****     }
+ 196:../Src/py32e407_it.c ****   }
+ 197:../Src/py32e407_it.c **** }
+ 289              		.loc 1 197 1 view .LVU40
+ 290 001a 14B0     		add	sp, sp, #80
+ 291              	.LCFI4:
+ 292              		.cfi_remember_state
+ 293              		.cfi_def_cfa_offset 8
+ 294              		@ sp needed
+ 295 001c 10BD     		pop	{r4, pc}
+ 296              	.LVL5:
+ 297              	.L26:
+ 298              	.LCFI5:
+ 299              		.cfi_restore_state
+ 179:../Src/py32e407_it.c **** 
+ 300              		.loc 1 179 7 is_stmt 1 view .LVU41
+ 179:../Src/py32e407_it.c **** 
+ 301              		.loc 1 179 19 is_stmt 0 view .LVU42
+ 302 001e 0F4A     		ldr	r2, .L27+4
+ 303 0020 1368     		ldr	r3, [r2]
+ 304 0022 0133     		adds	r3, r3, #1
+ 305 0024 1360     		str	r3, [r2]
+ 182:../Src/py32e407_it.c ****       TxHeader.IdType              = RxHeader.IdType;
+ 306              		.loc 1 182 7 is_stmt 1 view .LVU43
+ 182:../Src/py32e407_it.c ****       TxHeader.IdType              = RxHeader.IdType;
+ 307              		.loc 1 182 46 is_stmt 0 view .LVU44
+ 308 0026 0A9B     		ldr	r3, [sp, #40]
+ 182:../Src/py32e407_it.c ****       TxHeader.IdType              = RxHeader.IdType;
+ 309              		.loc 1 182 36 view .LVU45
+ 310 0028 0193     		str	r3, [sp, #4]
+ 183:../Src/py32e407_it.c ****       TxHeader.TxFrameType         = FDCAN_DATA_FRAME;
+ 311              		.loc 1 183 7 is_stmt 1 view .LVU46
+ 183:../Src/py32e407_it.c ****       TxHeader.TxFrameType         = FDCAN_DATA_FRAME;
+ 312              		.loc 1 183 46 is_stmt 0 view .LVU47
+ 313 002a 0B9B     		ldr	r3, [sp, #44]
+ 183:../Src/py32e407_it.c ****       TxHeader.TxFrameType         = FDCAN_DATA_FRAME;
+ 314              		.loc 1 183 36 view .LVU48
+ 315 002c 0293     		str	r3, [sp, #8]
+ 184:../Src/py32e407_it.c ****       TxHeader.DataLength          = RxHeader.DataLength;
+ 316              		.loc 1 184 7 is_stmt 1 view .LVU49
+ 184:../Src/py32e407_it.c ****       TxHeader.DataLength          = RxHeader.DataLength;
+ 317              		.loc 1 184 36 is_stmt 0 view .LVU50
+ 318 002e 0023     		movs	r3, #0
+ 319 0030 0393     		str	r3, [sp, #12]
+ 185:../Src/py32e407_it.c ****       TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
+ 320              		.loc 1 185 7 is_stmt 1 view .LVU51
+ 185:../Src/py32e407_it.c ****       TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 10
+
+
+ 321              		.loc 1 185 46 is_stmt 0 view .LVU52
+ 322 0032 0D9A     		ldr	r2, [sp, #52]
+ 185:../Src/py32e407_it.c ****       TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
+ 323              		.loc 1 185 36 view .LVU53
+ 324 0034 0492     		str	r2, [sp, #16]
+ 186:../Src/py32e407_it.c ****       TxHeader.BitRateSwitch       = FDCAN_BRS_OFF;
+ 325              		.loc 1 186 7 is_stmt 1 view .LVU54
+ 186:../Src/py32e407_it.c ****       TxHeader.BitRateSwitch       = FDCAN_BRS_OFF;
+ 326              		.loc 1 186 36 is_stmt 0 view .LVU55
+ 327 0036 0593     		str	r3, [sp, #20]
+ 187:../Src/py32e407_it.c ****       TxHeader.FDFormat            = FDCAN_CLASSIC_CAN;
+ 328              		.loc 1 187 7 is_stmt 1 view .LVU56
+ 187:../Src/py32e407_it.c ****       TxHeader.FDFormat            = FDCAN_CLASSIC_CAN;
+ 329              		.loc 1 187 36 is_stmt 0 view .LVU57
+ 330 0038 0693     		str	r3, [sp, #24]
+ 188:../Src/py32e407_it.c ****       TxHeader.TxEventFifoControl  = FDCAN_NO_TX_EVENTS;
+ 331              		.loc 1 188 7 is_stmt 1 view .LVU58
+ 188:../Src/py32e407_it.c ****       TxHeader.TxEventFifoControl  = FDCAN_NO_TX_EVENTS;
+ 332              		.loc 1 188 36 is_stmt 0 view .LVU59
+ 333 003a 0793     		str	r3, [sp, #28]
+ 189:../Src/py32e407_it.c ****       TxHeader.MessageMarker       = 0U;
+ 334              		.loc 1 189 7 is_stmt 1 view .LVU60
+ 189:../Src/py32e407_it.c ****       TxHeader.MessageMarker       = 0U;
+ 335              		.loc 1 189 36 is_stmt 0 view .LVU61
+ 336 003c 0893     		str	r3, [sp, #32]
+ 190:../Src/py32e407_it.c ****       (void)HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxHeader, CanRxData);
+ 337              		.loc 1 190 7 is_stmt 1 view .LVU62
+ 190:../Src/py32e407_it.c ****       (void)HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxHeader, CanRxData);
+ 338              		.loc 1 190 36 is_stmt 0 view .LVU63
+ 339 003e 0993     		str	r3, [sp, #36]
+ 191:../Src/py32e407_it.c **** 
+ 340              		.loc 1 191 7 is_stmt 1 view .LVU64
+ 191:../Src/py32e407_it.c **** 
+ 341              		.loc 1 191 13 is_stmt 0 view .LVU65
+ 342 0040 054A     		ldr	r2, .L27
+ 343 0042 01A9     		add	r1, sp, #4
+ 344 0044 2046     		mov	r0, r4
+ 345 0046 FFF7FEFF 		bl	HAL_FDCAN_AddMessageToTxFifoQ
+ 346              	.LVL6:
+ 194:../Src/py32e407_it.c ****     }
+ 347              		.loc 1 194 7 is_stmt 1 view .LVU66
+ 348 004a 1021     		movs	r1, #16
+ 349 004c 4FF09040 		mov	r0, #1207959552
+ 350 0050 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 351              	.LVL7:
+ 352              		.loc 1 197 1 is_stmt 0 view .LVU67
+ 353 0054 E1E7     		b	.L19
+ 354              	.L28:
+ 355 0056 00BF     		.align	2
+ 356              	.L27:
+ 357 0058 00000000 		.word	CanRxData
+ 358 005c 00000000 		.word	CanRxCounter
+ 359              		.cfi_endproc
+ 360              	.LFE146:
+ 362              		.text
+ 363              	.Letext0:
+ 364              		.file 2 "c:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 11
+
+
+ 365              		.file 3 "c:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 366              		.file 4 "../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include/py32e407xE.h"
+ 367              		.file 5 "../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include/py32e4xx.h"
+ 368              		.file 6 "../../../../../../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_def.h"
+ 369              		.file 7 "../../../../../../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_fdcan.h"
+ 370              		.file 8 "../Inc/main.h"
+ 371              		.file 9 "../../../../../../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_gpio.h"
+ 372              		.file 10 "../../../../../../Drivers/PY32E407_HAL_Driver/Inc/py32e4xx_hal.h"
+ARM GAS  C:\Users\user\AppData\Local\Temp\cc7aoEyh.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 py32e407_it.c
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:20     .text.NMI_Handler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:26     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:40     .text.HardFault_Handler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:46     .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:63     .text.MemManage_Handler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:69     .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:86     .text.BusFault_Handler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:92     .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:109    .text.UsageFault_Handler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:115    .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:132    .text.SVC_Handler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:138    .text.SVC_Handler:00000000 SVC_Handler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:151    .text.DebugMon_Handler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:157    .text.DebugMon_Handler:00000000 DebugMon_Handler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:170    .text.PendSV_Handler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:176    .text.PendSV_Handler:00000000 PendSV_Handler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:189    .text.SysTick_Handler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:195    .text.SysTick_Handler:00000000 SysTick_Handler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:215    .text.CAN1_INT0_IRQHandler:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:221    .text.CAN1_INT0_IRQHandler:00000000 CAN1_INT0_IRQHandler
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:241    .text.CAN1_INT0_IRQHandler:0000000c $d
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:246    .text.HAL_FDCAN_RxFifo0Callback:00000000 $t
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:252    .text.HAL_FDCAN_RxFifo0Callback:00000000 HAL_FDCAN_RxFifo0Callback
+C:\Users\user\AppData\Local\Temp\cc7aoEyh.s:357    .text.HAL_FDCAN_RxFifo0Callback:00000058 $d
+
+UNDEFINED SYMBOLS
+HAL_IncTick
+HAL_FDCAN_IRQHandler
+FdcanHandle
+HAL_FDCAN_GetRxMessage
+HAL_FDCAN_AddMessageToTxFifoQ
+HAL_GPIO_TogglePin
+CanRxData
+CanRxCounter
