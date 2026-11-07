@@ -26,6 +26,9 @@ virtualFolder:
         - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c
         - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c
         - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_uart.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_sci.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_sci_ex.c
+        - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_fdcan.c
         - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_cortex.c
         - path: ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_dma.c
       folders: []
@@ -34,6 +37,7 @@ virtualFolder:
         - path: ../Src/main.c
         - path: ../Src/py32e407_hal_msp.c
         - path: ../Src/py32e407_it.c
+        - path: ../Src/slcan.c
       folders: []
     - name: BSP
       files:

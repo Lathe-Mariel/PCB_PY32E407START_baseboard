@@ -40,8 +40,7 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private user code ---------------------------------------------------------*/
 /* External variables --------------------------------------------------------*/
-extern uint8_t CanRxData[8];
-extern __IO uint32_t CanRxCounter;
+extern SCI_HandleTypeDef hSlcanUart;
 
 /******************************************************************************/
 /*          Cortex-M4 Processor Interruption and Exception Handlers           */
@@ -160,40 +159,11 @@ void CAN1_INT0_IRQHandler(void)
 }
 
 /**
-  * @brief  Rx FIFO 0 new message callback.
-  *         Echoes every received frame back with the same identifier.
-  * @param  hfdcan: FDCAN handle pointer
-  * @param  RxFifo0ITs: the enabled Rx FIFO 0 interrupts
-  * @retval None
+  * @brief This function handles USART1 global interrupt, used for SLCAN I/O.
   */
-void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
+void USART1_IRQHandler(void)
 {
-  FDCAN_RxHeaderTypeDef RxHeader;
-  FDCAN_TxHeaderTypeDef TxHeader;
-
-  if ((RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) != 0U)
-  {
-    /* Read the pending message out of Rx FIFO 0 */
-    if (HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader, CanRxData) == HAL_OK)
-    {
-      CanRxCounter++;
-
-      /* Echo the frame back with the same identifier and payload */
-      TxHeader.Identifier          = RxHeader.Identifier;
-      TxHeader.IdType              = RxHeader.IdType;
-      TxHeader.TxFrameType         = FDCAN_DATA_FRAME;
-      TxHeader.DataLength          = RxHeader.DataLength;
-      TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
-      TxHeader.BitRateSwitch       = FDCAN_BRS_OFF;
-      TxHeader.FDFormat            = FDCAN_CLASSIC_CAN;
-      TxHeader.TxEventFifoControl  = FDCAN_NO_TX_EVENTS;
-      TxHeader.MessageMarker       = 0U;
-      (void)HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &TxHeader, CanRxData);
-
-      /* Signal the reception on LED2 */
-      HAL_GPIO_TogglePin(LED_PORT, LED_D2_PIN);
-    }
-  }
+  HAL_SCI_IRQHandler(&hSlcanUart);
 }
 
 /************************ (C) COPYRIGHT Puya *****END OF FILE******************/

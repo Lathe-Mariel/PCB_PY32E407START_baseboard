@@ -2,7 +2,13 @@
   ******************************************************************************
   * @file    main.c
   * @author  MCU Application Team
-  * @brief   Main program body
+  * @brief   SLCAN (LAWICEL) CAN adapter bridge.
+  *
+  *          PC --UART(SLCAN ASCII)--> USART1 --FDCAN1--> ATA6561 --> CAN bus
+  *
+  *          The board behaves like a CANable / CANUSB style adapter: the host
+  *          opens the virtual COM port, sends the SLCAN command set and the
+  *          firmware forwards the frames to the on-board CAN transceiver.
   ******************************************************************************
   * @attention
   *
@@ -15,40 +21,18 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
   */
-  
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "slcan.h"
 
-/* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 FDCAN_HandleTypeDef FdcanHandle = {0};
 
-/* Data counters used by the demo */
-__IO uint32_t CanTxCounter = 0;
-__IO uint32_t CanRxCounter = 0;
-
-/* Data to be transmitted */
-uint8_t CanTxData[8] = {0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88};
-uint8_t CanRxData[8] = {0};
-
-/* Private user code ---------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void APP_SystemClockConfig(void);
 static void APP_GpioInit(void);
-static void APP_FdcanInit(void);
 
 /**
   * @brief  Main program
@@ -56,8 +40,6 @@ static void APP_FdcanInit(void);
   */
 int main(void)
 {
-  FDCAN_TxHeaderTypeDef TxHeader;
-
   /* Reset of all peripherals, Initializes the Systick */
   HAL_Init();
 
@@ -67,38 +49,13 @@ int main(void)
   /* Initialize the board LEDs and the CAN transceiver standby pin */
   APP_GpioInit();
 
-  /* Initialize FDCAN1 and the message RAM layout */
-  APP_FdcanInit();
-
-  /* Build the transmit header once, it is reused for every frame */
-  TxHeader.Identifier          = CAN_TX_ID_STD;
-  TxHeader.IdType              = FDCAN_STANDARD_ID;
-  TxHeader.TxFrameType         = FDCAN_DATA_FRAME;
-  TxHeader.DataLength          = FDCAN_DLC_BYTES_8;
-  TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
-  TxHeader.BitRateSwitch       = FDCAN_BRS_OFF;
-  TxHeader.FDFormat            = FDCAN_CLASSIC_CAN;
-  TxHeader.TxEventFifoControl  = FDCAN_NO_TX_EVENTS;
-  TxHeader.MessageMarker       = 0U;
+  /* Initialize the SLCAN link (USART1) and FDCAN1, CAN stays closed until
+     the host sends 'O' or 'L' */
+  SLCAN_Init();
 
   while (1)
   {
-    /* Update the payload so every frame is distinguishable on the bus */
-    CanTxData[0] = (uint8_t)(CanTxCounter & 0xFFU);
-    CanTxData[1] = (uint8_t)((CanTxCounter >> 8) & 0xFFU);
-
-    /* Transmit one classic CAN frame -------------------------------------- */
-    if (HAL_FDCAN_AddMessageToTxFifoQ(&FdcanHandle, &TxHeader, CanTxData) != HAL_OK)
-    {
-      APP_ErrorHandler();
-    }
-    CanTxCounter++;
-
-    /* Toggle LED D1 so the transmit loop is visible without an analyser */
-    HAL_GPIO_TogglePin(LED_PORT, LED_D1_PIN);
-
-    /* Wait ~1 s before sending the next frame */
-    HAL_Delay(1000);
+    SLCAN_Poll();
   }
 }
 
@@ -136,7 +93,7 @@ static void APP_GpioInit(void)
   * @brief  System clock configuration function.
   *         HSI(16 MHz)/2 * 20 = 160 MHz VCO, then /2 -> 80 MHz SYSCLK.
   *         80 MHz is used so the CAN kernel clock (PLL/1 = 80 MHz) divides
-  *         cleanly into a 500 kbit/s CAN bit time.
+  *         cleanly into the supported CAN bit times.
   * @param  None
   * @retval None
   */
@@ -144,6 +101,7 @@ static void APP_SystemClockConfig(void)
 {
   RCC_OscInitTypeDef  OscInitstruct = {0};
   RCC_ClkInitTypeDef  ClkInitstruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   OscInitstruct.OscillatorType  = RCC_OSCILLATORTYPE_HSI;
   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
@@ -171,99 +129,10 @@ static void APP_SystemClockConfig(void)
     APP_ErrorHandler();
   }
 
-  /* Select the CAN kernel clock: PLL / 1 = 80 MHz.
-     The APB (control logic) clock must be >= the CAN kernel clock, the
-     configuration above keeps both at 80 MHz. */
-  {
-    RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_CAN;
-    PeriphClkInit.CanClockSelection    = RCC_CANCLKSOURCE_PLL;
-    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
-    {
-      APP_ErrorHandler();
-    }
-  }
-}
-
-/**
-  * @brief FDCAN1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void APP_FdcanInit(void)
-{
-  FDCAN_FilterTypeDef sFilterConfig;
-
-  /* Configure the FDCAN1 instance and its bit timing */
-  FdcanHandle.Instance                        = FDCAN1;
-  FdcanHandle.Init.FrameFormat                = FDCAN_FRAME_CLASSIC;
-  FdcanHandle.Init.Mode                       = FDCAN_MODE_NORMAL;
-  FdcanHandle.Init.AutoRetransmission         = ENABLE;
-  FdcanHandle.Init.TransmitPause              = DISABLE;
-  FdcanHandle.Init.ProtocolException          = DISABLE;
-  FdcanHandle.Init.NominalPrescaler           = CAN_PRESCALER;
-  FdcanHandle.Init.NominalSyncJumpWidth       = CAN_SYNC_JUMP_WIDTH;
-  FdcanHandle.Init.NominalTimeSeg1            = CAN_TIME_SEG1;
-  FdcanHandle.Init.NominalTimeSeg2            = CAN_TIME_SEG2;
-  FdcanHandle.Init.DataPrescaler              = 0U;
-  FdcanHandle.Init.DataSyncJumpWidth          = 0U;
-  FdcanHandle.Init.DataTimeSeg1               = 0U;
-  FdcanHandle.Init.DataTimeSeg2               = 0U;
-  FdcanHandle.Init.MessageRAMOffset           = 0U;
-  FdcanHandle.Init.StdFiltersNbr              = 1U;
-  FdcanHandle.Init.ExtFiltersNbr              = 0U;
-  FdcanHandle.Init.RxFifo0ElmtsNbr            = 1U;
-  FdcanHandle.Init.RxFifo0ElmtSize            = FDCAN_DATA_BYTES_8;
-  FdcanHandle.Init.RxFifo1ElmtsNbr            = 0U;
-  FdcanHandle.Init.RxFifo1ElmtSize            = FDCAN_DATA_BYTES_8;
-  FdcanHandle.Init.RxBuffersNbr               = 0U;
-  FdcanHandle.Init.RxBufferSize               = FDCAN_DATA_BYTES_8;
-  FdcanHandle.Init.TxEventsNbr                = 0U;
-  FdcanHandle.Init.TxBuffersNbr               = 0U;
-  FdcanHandle.Init.TxFifoQueueElmtsNbr        = 1U;
-  FdcanHandle.Init.TxFifoQueueMode            = FDCAN_TX_FIFO_OPERATION;
-  FdcanHandle.Init.TxElmtSize                 = FDCAN_DATA_BYTES_8;
-  if (HAL_FDCAN_Init(&FdcanHandle) != HAL_OK)
-  {
-    APP_ErrorHandler();
-  }
-
-  /* Accept only the demo RX identifier into Rx FIFO 0 */
-  sFilterConfig.IdType       = FDCAN_STANDARD_ID;
-  sFilterConfig.FilterIndex  = 0U;
-  sFilterConfig.FilterType   = FDCAN_FILTER_MASK;
-  sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
-  sFilterConfig.FilterID1    = CAN_RX_ID_STD;
-  sFilterConfig.FilterID2    = 0x7FFU;   /* Mask: compare all 11 ID bits */
-  if (HAL_FDCAN_ConfigFilter(&FdcanHandle, &sFilterConfig) != HAL_OK)
-  {
-    APP_ErrorHandler();
-  }
-
-  /* Drop every non-matching frame and reject remote frames */
-  if (HAL_FDCAN_ConfigGlobalFilter(&FdcanHandle, FDCAN_REJECT, FDCAN_REJECT,
-                                   FDCAN_REJECT_REMOTE, FDCAN_REJECT_REMOTE) != HAL_OK)
-  {
-    APP_ErrorHandler();
-  }
-
-  /* Route the Rx FIFO 0 "new message" interrupt to interrupt line 0 */
-  if (HAL_FDCAN_ConfigInterruptLines(&FdcanHandle,
-                                     FDCAN_IT_RX_FIFO0_NEW_MESSAGE,
-                                     FDCAN_INTERRUPT_LINE0) != HAL_OK)
-  {
-    APP_ErrorHandler();
-  }
-
-  /* Enable the Rx FIFO 0 new message notification */
-  if (HAL_FDCAN_ActivateNotification(&FdcanHandle,
-                                     FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0U) != HAL_OK)
-  {
-    APP_ErrorHandler();
-  }
-
-  /* Start the FDCAN peripheral, it leaves initialization mode */
-  if (HAL_FDCAN_Start(&FdcanHandle) != HAL_OK)
+  /* CAN kernel clock = PLL / 1 = 80 MHz, USART1 stays on PCLK2 = 80 MHz */
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_CAN;
+  PeriphClkInit.CanClockSelection    = RCC_CANCLKSOURCE_PLL;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     APP_ErrorHandler();
   }

@@ -1,0 +1,38 @@
+>>> info
+
+Compiler Full Name: arm-none-eabi-gcc.exe (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)
+Compiler Version: 10.3.1
+Builder Mode: Incremental
+The amount of C files: 4
+The amount of C++ files: 0
+The amount of Asm files: 0
+
+>>> prebuild
+
+
+
+>>> cc
+
+
+In file included from ../Inc/py32e407_hal_conf.h:311,
+                 from h:\drivers\py32e407_hal_driver\inc\py32e4xx_hal.h:41,
+                 from ./../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_sci.c:38:
+./../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_sci.c: In function 'SCI_SetConfig':
+h:\drivers\py32e407_hal_driver\inc\py32e407_hal_sci.h:1415:65: warning: 'clockfreq' may be used uninitialized in this function [-Wmaybe-uninitialized]
+ 1415 | #define SCI_DIV_SAMPLING8(_PCLK_, _BAUD_)             (((_PCLK_)*25U)/(2U*(_BAUD_)))
+      |                                                                 ^
+./../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_sci.c:2833:12: note: 'clockfreq' was declared here
+ 2833 |   uint64_t clockfreq;
+      |            ^~~~~~~~~
+
+
+
+>>> ld
+
+Memory region         Used Size  Region Size  %age Used
+             RAM:        3648 B       144 KB      2.47%
+           FLASH:       17228 B       512 KB      3.29%
+
+
+>>> postbuild
+

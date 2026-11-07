@@ -58,6 +58,22 @@ extern "C" {
 #define CAN_GPIO_AF                    GPIO_AF9_FDCAN1
 #define CAN_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOD_CLK_ENABLE()
 
+/*
+ * SLCAN link (UART) pin assignment
+ *   PA9  ------> USART1_TX (AF7) --> PC RX (PY-LINK virtual COM port)
+ *   PA10 ------> USART1_RX (AF7) <-- PC TX
+ * PA9 is routed to J6 pin 20, PA10 to J6 pin 21 (also Pmod2 pin 2) on the
+ * baseboard, and to the PY-LINK VCP on the PY32E407V1xT-START module.
+ */
+#define SLCAN_UART                     USART1
+#define SLCAN_UART_BAUDRATE            921600U
+#define SLCAN_UART_TX_PIN              GPIO_PIN_9
+#define SLCAN_UART_RX_PIN              GPIO_PIN_10
+#define SLCAN_UART_GPIO_PORT           GPIOA
+#define SLCAN_UART_GPIO_AF             GPIO_AF7_USART1
+#define SLCAN_UART_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOA_CLK_ENABLE()
+#define SLCAN_UART_IT_PRIORITY         2U
+
 /* ATA6561 standby control (active high: 1 = standby, 0 = normal) */
 #define CAN_STBY_PIN                   GPIO_PIN_14
 #define CAN_STBY_PORT                  GPIOB
@@ -71,18 +87,6 @@ extern "C" {
 #define LED_PORT                       GPIOA
 #define LED_ALL_PINS                   (LED_D1_PIN | LED_D2_PIN | LED_D3_PIN | LED_D4_PIN)
 #define LED_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOA_CLK_ENABLE()
-
-/* CAN bit timing: 500 kbit/s from an 80 MHz CAN kernel clock */
-#define CAN_CLOCK_HZ                   80000000U
-#define CAN_BITRATE                    500000U
-#define CAN_PRESCALER                  10U    /* 80 MHz / 10 = 8 MHz tq clock, 16 tq/bit */
-#define CAN_TIME_SEG1                  13U    /* Sync(1) + Seg1(13) + Seg2(2) = 16 tq */
-#define CAN_TIME_SEG2                  2U
-#define CAN_SYNC_JUMP_WIDTH            2U
-
-/* Message IDs used by this demo */
-#define CAN_TX_ID_STD                  0x123U
-#define CAN_RX_ID_STD                  0x321U
 
 /* Interrupt priority for FDCAN_INT0 */
 #define CAN_IT_PRIORITY                1U

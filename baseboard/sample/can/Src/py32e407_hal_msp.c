@@ -106,4 +106,60 @@ void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef* hfdcan)
   }
 }
 
+/**
+* @brief SCI (USART1) MSP Initialization
+* This function configures the hardware resources used by the SLCAN link
+* @param hsci: SCI handle pointer
+* @retval None
+*/
+void HAL_SCI_MspInit(SCI_HandleTypeDef* hsci)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  if(hsci->Instance == SLCAN_UART)
+  {
+    /* Peripheral clock enable */
+    __HAL_RCC_USART1_CLK_ENABLE();
+
+    SLCAN_UART_GPIO_CLK_ENABLE();
+
+    /**USART1 GPIO Configuration
+    PA9     ------> USART1_TX
+    PA10    ------> USART1_RX
+    */
+    GPIO_InitStruct.Pin       = SLCAN_UART_TX_PIN | SLCAN_UART_RX_PIN;
+    GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull      = GPIO_PULLUP;
+    GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStruct.Alternate = SLCAN_UART_GPIO_AF;
+    HAL_GPIO_Init(SLCAN_UART_GPIO_PORT, &GPIO_InitStruct);
+
+    /* USART1 interrupt Init */
+    HAL_NVIC_SetPriority(USART1_IRQn, SLCAN_UART_IT_PRIORITY, 0);
+    HAL_NVIC_EnableIRQ(USART1_IRQn);
+  }
+}
+
+/**
+* @brief SCI (USART1) MSP De-Initialization
+* @param hsci: SCI handle pointer
+* @retval None
+*/
+void HAL_SCI_MspDeInit(SCI_HandleTypeDef* hsci)
+{
+  if(hsci->Instance == SLCAN_UART)
+  {
+    /* Peripheral clock disable */
+    __HAL_RCC_USART1_CLK_DISABLE();
+
+    /**USART1 GPIO Configuration
+    PA9     ------> USART1_TX
+    PA10    ------> USART1_RX
+    */
+    HAL_GPIO_DeInit(SLCAN_UART_GPIO_PORT, SLCAN_UART_TX_PIN | SLCAN_UART_RX_PIN);
+
+    /* USART1 interrupt DeInit */
+    HAL_NVIC_DisableIRQ(USART1_IRQn);
+  }
+}
+
 /************************ (C) COPYRIGHT Puya *****END OF FILE******************/

@@ -39,6 +39,7 @@ C_SOURCES =  \
 ../Src/main.c \
 ../Src/py32e407_hal_msp.c \
 ../Src/py32e407_it.c \
+../Src/slcan.c \
 ../Src/system_py32e407.c \
 ../../../../../../Drivers/BSP/PY32E407xx_Start_Kit/py32e407xx_Start_Kit.c \
 ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal.c \
@@ -48,6 +49,8 @@ C_SOURCES =  \
 ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr.c \
 ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_pwr_ex.c \
 ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_uart.c \
+../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_sci.c \
+../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_sci_ex.c \
 ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_fdcan.c \
 ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_cortex.c \
 ../../../../../../Drivers/PY32E407_HAL_Driver/Src/py32e407_hal_dma.c

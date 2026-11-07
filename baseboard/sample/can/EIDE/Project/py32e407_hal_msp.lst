@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 1
   28:../Src/py32e407_hal_msp.c ****   *
   29:../Src/py32e407_hal_msp.c ****   ******************************************************************************
   30:../Src/py32e407_hal_msp.c ****   */
-ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 2
 
 
   31:../Src/py32e407_hal_msp.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 1
   65 0026 019B     		ldr	r3, [sp, #4]
   66              	.LBE3:
   67              		.loc 1 48 3 view .LVU12
-ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 3
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 3
 
 
   49:../Src/py32e407_hal_msp.c **** }
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 1
   61:../Src/py32e407_hal_msp.c ****   if(hfdcan->Instance == FDCAN1)
  112              		.loc 1 61 3 is_stmt 1 view .LVU18
  113              		.loc 1 61 12 is_stmt 0 view .LVU19
-ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 4
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 4
 
 
  114 0010 0268     		ldr	r2, [r0]
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 1
  142 002a 02F00072 		and	r2, r2, #33554432
  143 002e 0192     		str	r2, [sp, #4]
   64:../Src/py32e407_hal_msp.c **** 
-ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 5
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 5
 
 
  144              		.loc 1 64 5 view .LVU26
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 1
  181 0054 0793     		str	r3, [sp, #28]
   77:../Src/py32e407_hal_msp.c **** 
  182              		.loc 1 77 5 is_stmt 1 view .LVU44
-ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 6
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 6
 
 
  183 0056 03A9     		add	r1, sp, #12
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 1
  227              		.cfi_offset 3, -8
  228              		.cfi_offset 14, -4
   93:../Src/py32e407_hal_msp.c ****   if(hfdcan->Instance == FDCAN1)
-ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 7
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 7
 
 
  229              		.loc 1 93 3 is_stmt 1 view .LVU51
@@ -418,33 +418,321 @@ ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 1
  265 0030 000C0048 		.word	1207962624
  266              		.cfi_endproc
  267              	.LFE138:
-ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 8
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 8
 
 
- 269              		.text
- 270              	.Letext0:
- 271              		.file 2 "c:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
- 272              		.file 3 "c:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
- 273              		.file 4 "../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include/py32e407xE.h"
- 274              		.file 5 "../../../../../../Drivers/CMSIS/Device/PUYA/PY32E407/Include/py32e4xx.h"
- 275              		.file 6 "../../../../../../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_def.h"
- 276              		.file 7 "../../../../../../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_gpio.h"
- 277              		.file 8 "../../../../../../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_fdcan.h"
- 278              		.file 9 "../../../../../../Drivers/PY32E407_HAL_Driver/Inc/py32e407_hal_cortex.h"
-ARM GAS  C:\Users\user\AppData\Local\Temp\ccWTCvbe.s 			page 9
+ 269              		.section	.text.HAL_SCI_MspInit,"ax",%progbits
+ 270              		.align	1
+ 271              		.global	HAL_SCI_MspInit
+ 272              		.syntax unified
+ 273              		.thumb
+ 274              		.thumb_func
+ 276              	HAL_SCI_MspInit:
+ 277              	.LVL13:
+ 278              	.LFB139:
+ 108:../Src/py32e407_hal_msp.c **** 
+ 109:../Src/py32e407_hal_msp.c **** /**
+ 110:../Src/py32e407_hal_msp.c **** * @brief SCI (USART1) MSP Initialization
+ 111:../Src/py32e407_hal_msp.c **** * This function configures the hardware resources used by the SLCAN link
+ 112:../Src/py32e407_hal_msp.c **** * @param hsci: SCI handle pointer
+ 113:../Src/py32e407_hal_msp.c **** * @retval None
+ 114:../Src/py32e407_hal_msp.c **** */
+ 115:../Src/py32e407_hal_msp.c **** void HAL_SCI_MspInit(SCI_HandleTypeDef* hsci)
+ 116:../Src/py32e407_hal_msp.c **** {
+ 279              		.loc 1 116 1 is_stmt 1 view -0
+ 280              		.cfi_startproc
+ 281              		@ args = 0, pretend = 0, frame = 32
+ 282              		@ frame_needed = 0, uses_anonymous_args = 0
+ 283              		.loc 1 116 1 is_stmt 0 view .LVU61
+ 284 0000 10B5     		push	{r4, lr}
+ 285              	.LCFI7:
+ 286              		.cfi_def_cfa_offset 8
+ 287              		.cfi_offset 4, -8
+ 288              		.cfi_offset 14, -4
+ 289 0002 88B0     		sub	sp, sp, #32
+ 290              	.LCFI8:
+ 291              		.cfi_def_cfa_offset 40
+ 117:../Src/py32e407_hal_msp.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 292              		.loc 1 117 3 is_stmt 1 view .LVU62
+ 293              		.loc 1 117 20 is_stmt 0 view .LVU63
+ 294 0004 0023     		movs	r3, #0
+ 295 0006 0393     		str	r3, [sp, #12]
+ 296 0008 0493     		str	r3, [sp, #16]
+ 297 000a 0593     		str	r3, [sp, #20]
+ 298 000c 0693     		str	r3, [sp, #24]
+ 299 000e 0793     		str	r3, [sp, #28]
+ 118:../Src/py32e407_hal_msp.c ****   if(hsci->Instance == SLCAN_UART)
+ 300              		.loc 1 118 3 is_stmt 1 view .LVU64
+ 301              		.loc 1 118 10 is_stmt 0 view .LVU65
+ 302 0010 0268     		ldr	r2, [r0]
+ 303              		.loc 1 118 5 view .LVU66
+ 304 0012 184B     		ldr	r3, .L21
+ 305 0014 9A42     		cmp	r2, r3
+ 306 0016 01D0     		beq	.L20
+ 307              	.LVL14:
+ 308              	.L17:
+ 119:../Src/py32e407_hal_msp.c ****   {
+ 120:../Src/py32e407_hal_msp.c ****     /* Peripheral clock enable */
+ 121:../Src/py32e407_hal_msp.c ****     __HAL_RCC_USART1_CLK_ENABLE();
+ 122:../Src/py32e407_hal_msp.c **** 
+ 123:../Src/py32e407_hal_msp.c ****     SLCAN_UART_GPIO_CLK_ENABLE();
+ 124:../Src/py32e407_hal_msp.c **** 
+ 125:../Src/py32e407_hal_msp.c ****     /**USART1 GPIO Configuration
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 9
+
+
+ 126:../Src/py32e407_hal_msp.c ****     PA9     ------> USART1_TX
+ 127:../Src/py32e407_hal_msp.c ****     PA10    ------> USART1_RX
+ 128:../Src/py32e407_hal_msp.c ****     */
+ 129:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Pin       = SLCAN_UART_TX_PIN | SLCAN_UART_RX_PIN;
+ 130:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+ 131:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Pull      = GPIO_PULLUP;
+ 132:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
+ 133:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Alternate = SLCAN_UART_GPIO_AF;
+ 134:../Src/py32e407_hal_msp.c ****     HAL_GPIO_Init(SLCAN_UART_GPIO_PORT, &GPIO_InitStruct);
+ 135:../Src/py32e407_hal_msp.c **** 
+ 136:../Src/py32e407_hal_msp.c ****     /* USART1 interrupt Init */
+ 137:../Src/py32e407_hal_msp.c ****     HAL_NVIC_SetPriority(USART1_IRQn, SLCAN_UART_IT_PRIORITY, 0);
+ 138:../Src/py32e407_hal_msp.c ****     HAL_NVIC_EnableIRQ(USART1_IRQn);
+ 139:../Src/py32e407_hal_msp.c ****   }
+ 140:../Src/py32e407_hal_msp.c **** }
+ 309              		.loc 1 140 1 view .LVU67
+ 310 0018 08B0     		add	sp, sp, #32
+ 311              	.LCFI9:
+ 312              		.cfi_remember_state
+ 313              		.cfi_def_cfa_offset 8
+ 314              		@ sp needed
+ 315 001a 10BD     		pop	{r4, pc}
+ 316              	.LVL15:
+ 317              	.L20:
+ 318              	.LCFI10:
+ 319              		.cfi_restore_state
+ 121:../Src/py32e407_hal_msp.c **** 
+ 320              		.loc 1 121 5 is_stmt 1 view .LVU68
+ 321              	.LBB6:
+ 121:../Src/py32e407_hal_msp.c **** 
+ 322              		.loc 1 121 5 view .LVU69
+ 121:../Src/py32e407_hal_msp.c **** 
+ 323              		.loc 1 121 5 view .LVU70
+ 324 001c 03F55843 		add	r3, r3, #55296
+ 325 0020 1A6E     		ldr	r2, [r3, #96]
+ 326 0022 42F48042 		orr	r2, r2, #16384
+ 327 0026 1A66     		str	r2, [r3, #96]
+ 121:../Src/py32e407_hal_msp.c **** 
+ 328              		.loc 1 121 5 view .LVU71
+ 329 0028 1A6E     		ldr	r2, [r3, #96]
+ 330 002a 02F48042 		and	r2, r2, #16384
+ 331 002e 0192     		str	r2, [sp, #4]
+ 121:../Src/py32e407_hal_msp.c **** 
+ 332              		.loc 1 121 5 view .LVU72
+ 333 0030 019A     		ldr	r2, [sp, #4]
+ 334              	.LBE6:
+ 121:../Src/py32e407_hal_msp.c **** 
+ 335              		.loc 1 121 5 view .LVU73
+ 123:../Src/py32e407_hal_msp.c **** 
+ 336              		.loc 1 123 5 view .LVU74
+ 337              	.LBB7:
+ 123:../Src/py32e407_hal_msp.c **** 
+ 338              		.loc 1 123 5 view .LVU75
+ 123:../Src/py32e407_hal_msp.c **** 
+ 339              		.loc 1 123 5 view .LVU76
+ 340 0032 DA6C     		ldr	r2, [r3, #76]
+ 341 0034 42F00402 		orr	r2, r2, #4
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 10
+
+
+ 342 0038 DA64     		str	r2, [r3, #76]
+ 123:../Src/py32e407_hal_msp.c **** 
+ 343              		.loc 1 123 5 view .LVU77
+ 344 003a DB6C     		ldr	r3, [r3, #76]
+ 345 003c 03F00403 		and	r3, r3, #4
+ 346 0040 0293     		str	r3, [sp, #8]
+ 123:../Src/py32e407_hal_msp.c **** 
+ 347              		.loc 1 123 5 view .LVU78
+ 348 0042 029B     		ldr	r3, [sp, #8]
+ 349              	.LBE7:
+ 123:../Src/py32e407_hal_msp.c **** 
+ 350              		.loc 1 123 5 view .LVU79
+ 129:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+ 351              		.loc 1 129 5 view .LVU80
+ 129:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+ 352              		.loc 1 129 31 is_stmt 0 view .LVU81
+ 353 0044 4FF4C063 		mov	r3, #1536
+ 354 0048 0393     		str	r3, [sp, #12]
+ 130:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Pull      = GPIO_PULLUP;
+ 355              		.loc 1 130 5 is_stmt 1 view .LVU82
+ 130:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Pull      = GPIO_PULLUP;
+ 356              		.loc 1 130 31 is_stmt 0 view .LVU83
+ 357 004a 0224     		movs	r4, #2
+ 358 004c 0494     		str	r4, [sp, #16]
+ 131:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
+ 359              		.loc 1 131 5 is_stmt 1 view .LVU84
+ 131:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_HIGH;
+ 360              		.loc 1 131 31 is_stmt 0 view .LVU85
+ 361 004e 0123     		movs	r3, #1
+ 362 0050 0593     		str	r3, [sp, #20]
+ 132:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Alternate = SLCAN_UART_GPIO_AF;
+ 363              		.loc 1 132 5 is_stmt 1 view .LVU86
+ 132:../Src/py32e407_hal_msp.c ****     GPIO_InitStruct.Alternate = SLCAN_UART_GPIO_AF;
+ 364              		.loc 1 132 31 is_stmt 0 view .LVU87
+ 365 0052 0694     		str	r4, [sp, #24]
+ 133:../Src/py32e407_hal_msp.c ****     HAL_GPIO_Init(SLCAN_UART_GPIO_PORT, &GPIO_InitStruct);
+ 366              		.loc 1 133 5 is_stmt 1 view .LVU88
+ 133:../Src/py32e407_hal_msp.c ****     HAL_GPIO_Init(SLCAN_UART_GPIO_PORT, &GPIO_InitStruct);
+ 367              		.loc 1 133 31 is_stmt 0 view .LVU89
+ 368 0054 0723     		movs	r3, #7
+ 369 0056 0793     		str	r3, [sp, #28]
+ 134:../Src/py32e407_hal_msp.c **** 
+ 370              		.loc 1 134 5 is_stmt 1 view .LVU90
+ 371 0058 03A9     		add	r1, sp, #12
+ 372 005a 4FF09040 		mov	r0, #1207959552
+ 373              	.LVL16:
+ 134:../Src/py32e407_hal_msp.c **** 
+ 374              		.loc 1 134 5 is_stmt 0 view .LVU91
+ 375 005e FFF7FEFF 		bl	HAL_GPIO_Init
+ 376              	.LVL17:
+ 137:../Src/py32e407_hal_msp.c ****     HAL_NVIC_EnableIRQ(USART1_IRQn);
+ 377              		.loc 1 137 5 is_stmt 1 view .LVU92
+ 378 0062 0022     		movs	r2, #0
+ 379 0064 2146     		mov	r1, r4
+ 380 0066 2520     		movs	r0, #37
+ 381 0068 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 382              	.LVL18:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 11
+
+
+ 138:../Src/py32e407_hal_msp.c ****   }
+ 383              		.loc 1 138 5 view .LVU93
+ 384 006c 2520     		movs	r0, #37
+ 385 006e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 386              	.LVL19:
+ 387              		.loc 1 140 1 is_stmt 0 view .LVU94
+ 388 0072 D1E7     		b	.L17
+ 389              	.L22:
+ 390              		.align	2
+ 391              	.L21:
+ 392 0074 00380140 		.word	1073821696
+ 393              		.cfi_endproc
+ 394              	.LFE139:
+ 396              		.section	.text.HAL_SCI_MspDeInit,"ax",%progbits
+ 397              		.align	1
+ 398              		.global	HAL_SCI_MspDeInit
+ 399              		.syntax unified
+ 400              		.thumb
+ 401              		.thumb_func
+ 403              	HAL_SCI_MspDeInit:
+ 404              	.LVL20:
+ 405              	.LFB140:
+ 141:../Src/py32e407_hal_msp.c **** 
+ 142:../Src/py32e407_hal_msp.c **** /**
+ 143:../Src/py32e407_hal_msp.c **** * @brief SCI (USART1) MSP De-Initialization
+ 144:../Src/py32e407_hal_msp.c **** * @param hsci: SCI handle pointer
+ 145:../Src/py32e407_hal_msp.c **** * @retval None
+ 146:../Src/py32e407_hal_msp.c **** */
+ 147:../Src/py32e407_hal_msp.c **** void HAL_SCI_MspDeInit(SCI_HandleTypeDef* hsci)
+ 148:../Src/py32e407_hal_msp.c **** {
+ 406              		.loc 1 148 1 is_stmt 1 view -0
+ 407              		.cfi_startproc
+ 408              		@ args = 0, pretend = 0, frame = 0
+ 409              		@ frame_needed = 0, uses_anonymous_args = 0
+ 410              		.loc 1 148 1 is_stmt 0 view .LVU96
+ 411 0000 08B5     		push	{r3, lr}
+ 412              	.LCFI11:
+ 413              		.cfi_def_cfa_offset 8
+ 414              		.cfi_offset 3, -8
+ 415              		.cfi_offset 14, -4
+ 149:../Src/py32e407_hal_msp.c ****   if(hsci->Instance == SLCAN_UART)
+ 416              		.loc 1 149 3 is_stmt 1 view .LVU97
+ 417              		.loc 1 149 10 is_stmt 0 view .LVU98
+ 418 0002 0268     		ldr	r2, [r0]
+ 419              		.loc 1 149 5 view .LVU99
+ 420 0004 094B     		ldr	r3, .L27
+ 421 0006 9A42     		cmp	r2, r3
+ 422 0008 00D0     		beq	.L26
+ 423              	.LVL21:
+ 424              	.L23:
+ 150:../Src/py32e407_hal_msp.c ****   {
+ 151:../Src/py32e407_hal_msp.c ****     /* Peripheral clock disable */
+ 152:../Src/py32e407_hal_msp.c ****     __HAL_RCC_USART1_CLK_DISABLE();
+ 153:../Src/py32e407_hal_msp.c **** 
+ 154:../Src/py32e407_hal_msp.c ****     /**USART1 GPIO Configuration
+ 155:../Src/py32e407_hal_msp.c ****     PA9     ------> USART1_TX
+ 156:../Src/py32e407_hal_msp.c ****     PA10    ------> USART1_RX
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 12
+
+
+ 157:../Src/py32e407_hal_msp.c ****     */
+ 158:../Src/py32e407_hal_msp.c ****     HAL_GPIO_DeInit(SLCAN_UART_GPIO_PORT, SLCAN_UART_TX_PIN | SLCAN_UART_RX_PIN);
+ 159:../Src/py32e407_hal_msp.c **** 
+ 160:../Src/py32e407_hal_msp.c ****     /* USART1 interrupt DeInit */
+ 161:../Src/py32e407_hal_msp.c ****     HAL_NVIC_DisableIRQ(USART1_IRQn);
+ 162:../Src/py32e407_hal_msp.c ****   }
+ 163:../Src/py32e407_hal_msp.c **** }
+ 425              		.loc 1 163 1 view .LVU100
+ 426 000a 08BD     		pop	{r3, pc}
+ 427              	.LVL22:
+ 428              	.L26:
+ 152:../Src/py32e407_hal_msp.c **** 
+ 429              		.loc 1 152 5 is_stmt 1 view .LVU101
+ 430 000c 084A     		ldr	r2, .L27+4
+ 431 000e 136E     		ldr	r3, [r2, #96]
+ 432 0010 23F48043 		bic	r3, r3, #16384
+ 433 0014 1366     		str	r3, [r2, #96]
+ 158:../Src/py32e407_hal_msp.c **** 
+ 434              		.loc 1 158 5 view .LVU102
+ 435 0016 4FF4C061 		mov	r1, #1536
+ 436 001a 4FF09040 		mov	r0, #1207959552
+ 437              	.LVL23:
+ 158:../Src/py32e407_hal_msp.c **** 
+ 438              		.loc 1 158 5 is_stmt 0 view .LVU103
+ 439 001e FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 440              	.LVL24:
+ 161:../Src/py32e407_hal_msp.c ****   }
+ 441              		.loc 1 161 5 is_stmt 1 view .LVU104
+ 442 0022 2520     		movs	r0, #37
+ 443 0024 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 444              	.LVL25:
+ 445              		.loc 1 163 1 is_stmt 0 view .LVU105
+ 446 0028 EFE7     		b	.L23
+ 447              	.L28:
+ 448 002a 00BF     		.align	2
+ 449              	.L27:
+ 450 002c 00380140 		.word	1073821696
+ 451 0030 00100240 		.word	1073876992
+ 452              		.cfi_endproc
+ 453              	.LFE140:
+ 455              		.text
+ 456              	.Letext0:
+ 457              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 458              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 459              		.file 4 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 460              		.file 5 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e4xx.h"
+ 461              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 462              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_gpio.h"
+ 463              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_dma.h"
+ 464              		.file 9 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_fdcan.h"
+ 465              		.file 10 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_sci.h"
+ 466              		.file 11 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_cortex.h"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 py32e407_hal_msp.c
-C:\Users\user\AppData\Local\Temp\ccWTCvbe.s:20     .text.HAL_MspInit:00000000 $t
-C:\Users\user\AppData\Local\Temp\ccWTCvbe.s:26     .text.HAL_MspInit:00000000 HAL_MspInit
-C:\Users\user\AppData\Local\Temp\ccWTCvbe.s:77     .text.HAL_MspInit:0000002c $d
-C:\Users\user\AppData\Local\Temp\ccWTCvbe.s:82     .text.HAL_FDCAN_MspInit:00000000 $t
-C:\Users\user\AppData\Local\Temp\ccWTCvbe.s:88     .text.HAL_FDCAN_MspInit:00000000 HAL_FDCAN_MspInit
-C:\Users\user\AppData\Local\Temp\ccWTCvbe.s:204    .text.HAL_FDCAN_MspInit:00000070 $d
-C:\Users\user\AppData\Local\Temp\ccWTCvbe.s:210    .text.HAL_FDCAN_MspDeInit:00000000 $t
-C:\Users\user\AppData\Local\Temp\ccWTCvbe.s:216    .text.HAL_FDCAN_MspDeInit:00000000 HAL_FDCAN_MspDeInit
-C:\Users\user\AppData\Local\Temp\ccWTCvbe.s:263    .text.HAL_FDCAN_MspDeInit:00000028 $d
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:20     .text.HAL_MspInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:26     .text.HAL_MspInit:00000000 HAL_MspInit
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:77     .text.HAL_MspInit:0000002c $d
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:82     .text.HAL_FDCAN_MspInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:88     .text.HAL_FDCAN_MspInit:00000000 HAL_FDCAN_MspInit
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:204    .text.HAL_FDCAN_MspInit:00000070 $d
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:210    .text.HAL_FDCAN_MspDeInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:216    .text.HAL_FDCAN_MspDeInit:00000000 HAL_FDCAN_MspDeInit
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:263    .text.HAL_FDCAN_MspDeInit:00000028 $d
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:270    .text.HAL_SCI_MspInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:276    .text.HAL_SCI_MspInit:00000000 HAL_SCI_MspInit
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:392    .text.HAL_SCI_MspInit:00000074 $d
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:397    .text.HAL_SCI_MspDeInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:403    .text.HAL_SCI_MspDeInit:00000000 HAL_SCI_MspDeInit
+C:\Users\n11ak\AppData\Local\Temp\ccqG28lx.s:450    .text.HAL_SCI_MspDeInit:0000002c $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_Init

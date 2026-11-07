@@ -1,82 +1,112 @@
 ================================================================================
-                                样例使用说明
-                             Sample Description
+                                サンプル使用説明
 ================================================================================
-功能描述：
-此样例演示使用FDCAN1以经典CAN(Classic CAN)格式收发数据。CAN参数为500kbit/s，
-每1秒周期性发送一帧标准ID 0x123的数据，同时在中断中接收标准ID 0x321的数据，
-接收到的数据会通过ID原样回发到总线上。收到一帧时LED D2(PA4)翻转一次，
-发送时LED D1(PA3)每秒翻转一次。
+機能説明：
+本サンプルは、PY32E407ベースボードをSLCAN(LAWICEL)プロトコルのCANアダプタ
+として使用します。CANable / CANUSB と同等の動作をします。PCはシリアルポート
+経由でASCIIコマンドによりCANチャネルを制御し、MCUはそれをFDCAN1フレームに
+変換して基板上のATA6561トランシーバからCANバスへ送出します。バス上で受信した
+フレームはASCII行に変換してPCへ返します。
 
-Function descriptions:
-This example demonstrates how to transmit and receive data with FDCAN1 in
-Classic CAN format. The CAN bit rate is 500 kbit/s. A standard-ID 0x123 frame is
-sent every second, and standard-ID 0x321 frames are received by interrupt and
-echoed back onto the bus with the same identifier. LED D2 (PA4) toggles on each
-received frame, LED D1 (PA3) toggles every transmit period.
+        PC  <-- UART 921600 8N1 -->  USART1 (PA9/PA10)
+                                        |
+                                     FDCAN1 (PD0/PD1)
+                                        |
+                                    ATA6561 (STBY = PB14)
+                                        |
+                                    CANH / CANL
 ================================================================================
-硬件连接：
-MCU引脚        功能          ATA6561引脚
+ハードウェア接続：
+MCUピン        機能          ATA6561ピン
 PD0 --------- FDCAN1_RX ---- RXD
 PD1 --------- FDCAN1_TX ---- TXD
-PB14 -------- GPIO(输出低) - STBY
-                             CANH/CANL --> CAN总线
+PB14 -------- GPIO(出力Low)  STBY
+                             CANH/CANL --> CANバス
 
-注意：ATA6561的STBY引脚由PB14控制，STBY为高有效。
-      程序启动后会将PB14输出低电平，使收发器进入正常工作模式。
+PCシリアル(PY-LINK仮想COMポート)：
+PA9  (USART1_TX) --> PC RXD
+PA10 (USART1_RX) <-- PC TXD
+GND              --- GND
 
-Hardware connection:
-MCU pin        Function             ATA6561 pin
-PD0 --------- FDCAN1_RX ----------- RXD
-PD1 --------- FDCAN1_TX ----------- TXD
-PB14 -------- GPIO output low ----- STBY
-                                    CANH/CANL --> CAN bus
-
-Note: the ATA6561 STBY pin is driven by PB14 and is active high. The program
-      drives PB14 low at startup so the transceiver runs in normal mode.
+注意：ATA6561のSTBYピンはPB14で制御しており、STBYはHigh有効です。
+      プログラム起動後にPB14をLow出力にして、トランシーバを通常動作モード
+      にします。
+      PA9/PA10はJ6ピンヘッダ(20/21番ピン)にも引き出されているため、
+      USB-TTLモジュールを直接接続することもできます。
 ================================================================================
-时钟说明：
-CAN内核时钟由RCC_CFGR2.CANCKSEL选择，本样例配置为PLL/1 = 80 MHz。
-系统时钟为 HSIDIV2(8MHz) x20 /2 = 80 MHz，APB1与CAN内核时钟同为80 MHz，
-满足"控制逻辑时钟频率必须大于等于通信时钟频率"的要求。
-位时序：80 MHz / 10 = 8 MHz tq，16 tq/bit => 500 kbit/s
-
-Clock notes:
-The CAN kernel clock is selected by RCC_CFGR2.CANCKSEL; this example uses
-PLL/1 = 80 MHz. SYSCLK is HSI/2 (8 MHz) x20 /2 = 80 MHz, so APB1 and the CAN
-kernel clock are both 80 MHz, satisfying the requirement that the control logic
-clock be >= the communication clock.
-Bit timing: 80 MHz / 10 = 8 MHz tq clock, 16 tq per bit => 500 kbit/s
+シリアル設定：
+ボーレート 921600、データ8ビット、パリティなし、ストップ1ビット、
+フロー制御なし。
+PuTTY、Tera Term、minicom、python-can など任意のシリアルツールで接続できます。
 ================================================================================
-测试环境：
-测试用板：PY32E407_STK
-GCC版本：GNU Arm Embedded Toolchain 10.3-2021.10
+サポートするSLCANコマンド：
+O              CANチャネルを開く(通常モード)
+L              CANチャネルを開く(リッスンオンリーモード、ACKを返さない)
+C              CANチャネルを閉じる
+S0..S9         ボーレート設定(閉じている状態でのみ有効)
+                S0=10k S1=20k S2=50k S3=100k S4=125k S5=250k
+                S6=500k S7=750k S8=1M  S9=83.3k
+sXXYY          SJA1000のBTR0/BTR1(8MHzクロック)でボーレートを直接指定
+F              ステータスフラグ読み出し(16進2桁)
+V / v          ハードウェア/ソフトウェアバージョン読み出し(例 "V1013")
+N              シリアル番号読み出し(例 "NPY407")
+Z0 / Z1        受信タイムスタンプ オフ/オン(16進4桁、ミリ秒)
+tIIILDD..      標準データフレーム送信 III=11ビットID、L=DLC、DD=データ
+TIIIIIIIILDD.. 拡張データフレーム送信 IIIIIIII=29ビットID
+rIIIL          標準リモートフレーム送信
+RIIIIIIIIL     拡張リモートフレーム送信
 
-Test environment:
-Test board: PY32E407_STK
-GCC Version: GNU Arm Embedded Toolchain 10.3-2021.10
+コマンドは'\r'で終端します。成功時は'\r'(0x0D)、失敗時は'\a'(0x07)を
+返します。バス上で受信したフレームは t/T/r/R の行としてPCへ返します。
 ================================================================================
-使用步骤：
-1. 编译并下载程序到MCU；
-2. 将CAN分析仪或另一个CAN节点连接到板的CAN接口(CANH/CANL)，终端电阻120Ω；
-3. 上电后，MCU每1秒发送一帧ID=0x123、8字节数据(前两字节为发送计数)，
-   同时LED D1(PA3)每秒翻转一次；
-4. 向总线发送ID=0x321的数据帧，MCU会以相同ID回发相同数据，LED D2(PA4)翻转。
-
-Example execution steps:
-1. compile and download the program to MCU and run it;
-2. Connect a CAN analyser or another CAN node to the board CAN connector
-   (CANH/CANL) with a 120 ohm termination;
-3. After power-up the MCU sends an ID=0x123, 8-byte frame every second
-   (the first two bytes hold the transmit counter) and toggles LED D1 (PA3);
-4. Send an ID=0x321 frame on the bus; the MCU echoes the same data with the
-   same ID and toggles LED D2 (PA4).
+クロック説明：
+CANカーネルクロックはRCC_CFGR2.CANCKSELで選択し、本サンプルでは
+PLL/1 = 80 MHz に設定しています。
+システムクロックは HSIDIV2(8MHz) x20 /2 = 80 MHz で、APB1とCANカーネル
+クロックはともに80 MHzとなり、「制御ロジックのクロック周波数は通信クロック
+周波数以上であること」という要件を満たします。
+ビットタイミングはコマンドにより実行時に計算され、サンプルポイントは
+約87.5%になります。例えば500 kbit/sの場合、80 MHz / 10 = 8 MHz tq で
+16 tq/bit となります。
+USART1はPCLK2 = 80 MHzをクロック源として使用します。
 ================================================================================
-注意事项：
-1. 本板的CAN时钟源使用PLL，如需使用HSE请相应修改APP_SystemClockConfig()。
+テスト環境：
+テスト用ボード：PY32E407_STK
+GCCバージョン：GNU Arm Embedded Toolchain 10.3-2021.10
+================================================================================
+使用手順：
+1. プログラムをビルドしてMCUに書き込む；
+2. PY-LINKのUSBポートをPCに接続し、"USART&USB_Selection"ジャンパがUSART側
+   になっていることを確認して、PC側で対応する仮想COMポートを確認する；
+3. 921600 8N1でシリアルポートを開く；
+4. "C\r" を送ってチャネルを閉じ、"S6\r" で500 kbit/sを選択し、
+   最後に "O\r" でチャネルを開く；
+5. "t1232AABB\r" を送ると、ID=0x123、データAABBのフレームがバス上に
+   送出される。バス上のフレームは "t1232AABB\r" の形式で返ってくる。
+================================================================================
+python-canを使用する例：
+    import can
+    bus = can.Bus(interface="slcan", channel="COM5", bitrate=500000)
+    bus.send(can.Message(arbitration_id=0x123, data=[0xAA, 0xBB],
+                         is_extended_id=False))
+    print(bus.recv(timeout=1.0))
+    bus.shutdown()
 
-Notes:
-1. This example uses the PLL as CAN clock source; adapt APP_SystemClockConfig()
-   if HSE is preferred.
+cantools / cangaroo / SAE J2534 などのツールを使用する場合は、
+SLCAN(LAWICEL)インタフェースを選択してください。
+LinuxではslcandによりSocketCANデバイスとしてバインドできます：
+    slcand -o -s6 -t hw -S 921600 /dev/ttyACM0 can0
+    ip link set up can0
+================================================================================
+注意事項：
+1. 本ボードのCANクロック源はPLLを使用しています。HSEを使用する場合は
+   APP_SystemClockConfig() を適宜変更してください。
+2. S7(750 kbit/s)は80 MHzでは割り切れず、実際は747.66 kbit/s(誤差0.31%)
+   となります。CANの許容範囲内ですが、このレートで通信する相手側が
+   この偏差を許容できる必要があります。
+3. ボーレートを変更(Sコマンド)する前に、必ずチャネルを閉じる(Cコマンド)
+   必要があります。閉じていない場合は'\a'を返します。
+4. コード構成：Src/slcan.c がプロトコル解析とCAN/UARTの送受信処理、
+   Src/main.c は初期化とポーリングのみを担当します。
 
 ================================================================================
