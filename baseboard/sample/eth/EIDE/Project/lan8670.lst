@@ -1,0 +1,2368 @@
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"lan8670.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.LAN8670_ReadReg,"ax",%progbits
+  20              		.align	1
+  21              		.global	LAN8670_ReadReg
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	LAN8670_ReadReg:
+  27              	.LVL0:
+  28              	.LFB136:
+  29              		.file 1 "../Src/lan8670.c"
+   1:../Src/lan8670.c **** /**
+   2:../Src/lan8670.c ****   ******************************************************************************
+   3:../Src/lan8670.c ****   * @file    lan8670.c
+   4:../Src/lan8670.c ****   * @brief   LAN8670 10BASE-T1S PHY bring-up and PY32E407 ETH (RMII) driver.
+   5:../Src/lan8670.c ****   *
+   6:../Src/lan8670.c ****   *          The LAN8670 is connected to the PY32E407 ETH RMII pin set, so the
+   7:../Src/lan8670.c ****   *          MAC side is driven by the on-chip ETH peripheral while the PHY is
+   8:../Src/lan8670.c ****   *          configured through the MDIO management interface.
+   9:../Src/lan8670.c ****   *
+  10:../Src/lan8670.c ****   *            MDIO/MDC  -> Clause 22 registers 0x00..0x1F
+  11:../Src/lan8670.c ****   *                         MMD registers through 0x0D/0x0E (DEVAD 1, 3, 31)
+  12:../Src/lan8670.c ****   *
+  13:../Src/lan8670.c ****   *          PLCA (Physical Layer Collision Avoidance) is the 10BASE-T1S
+  14:../Src/lan8670.c ****   *          mechanism that makes a multidrop mixing segment deterministic.
+  15:../Src/lan8670.c ****   *          One node must act as coordinator (PLCA ID 0) and periodically send
+  16:../Src/lan8670.c ****   *          the BEACON; the other nodes are followers with IDs 1..N.
+  17:../Src/lan8670.c ****   ******************************************************************************
+  18:../Src/lan8670.c ****   */
+  19:../Src/lan8670.c **** 
+  20:../Src/lan8670.c **** /* Includes ------------------------------------------------------------------*/
+  21:../Src/lan8670.c **** #include "lan8670.h"
+  22:../Src/lan8670.c **** 
+  23:../Src/lan8670.c **** /* Private define ------------------------------------------------------------*/
+  24:../Src/lan8670.c **** #define ETH_RX_BUF_SIZE               ETH_MAX_PACKET_SIZE
+  25:../Src/lan8670.c **** #define ETH_TX_BUF_SIZE               ETH_MAX_PACKET_SIZE
+  26:../Src/lan8670.c **** 
+  27:../Src/lan8670.c **** #define LAN8670_RESET_POLL_MS         100U
+  28:../Src/lan8670.c **** #define LAN8670_LINK_POLL_MS         1000U
+  29:../Src/lan8670.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 2
+
+
+  30:../Src/lan8670.c **** /* Private variables ---------------------------------------------------------*/
+  31:../Src/lan8670.c **** ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT];
+  32:../Src/lan8670.c **** ETH_DMADescTypeDef DMARxDscrTab[ETH_RX_DESC_CNT];
+  33:../Src/lan8670.c **** 
+  34:../Src/lan8670.c **** static uint8_t Rx_Buff[ETH_RX_DESC_CNT][ETH_RX_BUF_SIZE];
+  35:../Src/lan8670.c **** static uint8_t Tx_Buff[ETH_TX_DESC_CNT][ETH_TX_BUF_SIZE];
+  36:../Src/lan8670.c **** 
+  37:../Src/lan8670.c **** /* Private functions ---------------------------------------------------------*/
+  38:../Src/lan8670.c **** 
+  39:../Src/lan8670.c **** /**
+  40:../Src/lan8670.c ****   * @brief  Read a Clause 22 register through the ETH MDIO interface.
+  41:../Src/lan8670.c ****   *         HAL_ETH_ReadPHYRegister() returns the 16 data bits in RegValue.
+  42:../Src/lan8670.c ****   */
+  43:../Src/lan8670.c **** HAL_StatusTypeDef LAN8670_ReadReg(uint16_t Reg, uint16_t *Value)
+  44:../Src/lan8670.c **** {
+  30              		.loc 1 44 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 44 1 is_stmt 0 view .LVU1
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  40 0002 82B0     		sub	sp, sp, #8
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 16
+  43 0004 0C46     		mov	r4, r1
+  45:../Src/lan8670.c ****   uint32_t data = 0U;
+  44              		.loc 1 45 3 is_stmt 1 view .LVU2
+  45              		.loc 1 45 12 is_stmt 0 view .LVU3
+  46 0006 0023     		movs	r3, #0
+  47 0008 0193     		str	r3, [sp, #4]
+  46:../Src/lan8670.c ****   HAL_StatusTypeDef status;
+  48              		.loc 1 46 3 is_stmt 1 view .LVU4
+  47:../Src/lan8670.c **** 
+  48:../Src/lan8670.c ****   status = HAL_ETH_ReadPHYRegister(&heth, Reg, &data);
+  49              		.loc 1 48 3 view .LVU5
+  50              		.loc 1 48 12 is_stmt 0 view .LVU6
+  51 000a 01AA     		add	r2, sp, #4
+  52 000c 0146     		mov	r1, r0
+  53              	.LVL1:
+  54              		.loc 1 48 12 view .LVU7
+  55 000e 0448     		ldr	r0, .L4
+  56              	.LVL2:
+  57              		.loc 1 48 12 view .LVU8
+  58 0010 FFF7FEFF 		bl	HAL_ETH_ReadPHYRegister
+  59              	.LVL3:
+  49:../Src/lan8670.c ****   if (status == HAL_OK)
+  60              		.loc 1 49 3 is_stmt 1 view .LVU9
+  61              		.loc 1 49 6 is_stmt 0 view .LVU10
+  62 0014 10B9     		cbnz	r0, .L2
+  50:../Src/lan8670.c ****   {
+  51:../Src/lan8670.c ****     *Value = (uint16_t)(data & 0xFFFFU);
+  63              		.loc 1 51 5 is_stmt 1 view .LVU11
+  64              		.loc 1 51 14 is_stmt 0 view .LVU12
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 3
+
+
+  65 0016 BDF80430 		ldrh	r3, [sp, #4]
+  66              		.loc 1 51 12 view .LVU13
+  67 001a 2380     		strh	r3, [r4]	@ movhi
+  68              	.L2:
+  52:../Src/lan8670.c ****   }
+  53:../Src/lan8670.c **** 
+  54:../Src/lan8670.c ****   return status;
+  69              		.loc 1 54 3 is_stmt 1 view .LVU14
+  55:../Src/lan8670.c **** }
+  70              		.loc 1 55 1 is_stmt 0 view .LVU15
+  71 001c 02B0     		add	sp, sp, #8
+  72              	.LCFI2:
+  73              		.cfi_def_cfa_offset 8
+  74              		@ sp needed
+  75 001e 10BD     		pop	{r4, pc}
+  76              	.LVL4:
+  77              	.L5:
+  78              		.loc 1 55 1 view .LVU16
+  79              		.align	2
+  80              	.L4:
+  81 0020 00000000 		.word	heth
+  82              		.cfi_endproc
+  83              	.LFE136:
+  85              		.section	.text.LAN8670_WriteReg,"ax",%progbits
+  86              		.align	1
+  87              		.global	LAN8670_WriteReg
+  88              		.syntax unified
+  89              		.thumb
+  90              		.thumb_func
+  92              	LAN8670_WriteReg:
+  93              	.LVL5:
+  94              	.LFB137:
+  56:../Src/lan8670.c **** 
+  57:../Src/lan8670.c **** /**
+  58:../Src/lan8670.c ****   * @brief  Write a Clause 22 register.
+  59:../Src/lan8670.c ****   */
+  60:../Src/lan8670.c **** HAL_StatusTypeDef LAN8670_WriteReg(uint16_t Reg, uint16_t Value)
+  61:../Src/lan8670.c **** {
+  95              		.loc 1 61 1 is_stmt 1 view -0
+  96              		.cfi_startproc
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99              		.loc 1 61 1 is_stmt 0 view .LVU18
+ 100 0000 08B5     		push	{r3, lr}
+ 101              	.LCFI3:
+ 102              		.cfi_def_cfa_offset 8
+ 103              		.cfi_offset 3, -8
+ 104              		.cfi_offset 14, -4
+ 105 0002 0A46     		mov	r2, r1
+  62:../Src/lan8670.c ****   return HAL_ETH_WritePHYRegister(&heth, Reg, (uint32_t)Value);
+ 106              		.loc 1 62 3 is_stmt 1 view .LVU19
+ 107              		.loc 1 62 10 is_stmt 0 view .LVU20
+ 108 0004 0146     		mov	r1, r0
+ 109              	.LVL6:
+ 110              		.loc 1 62 10 view .LVU21
+ 111 0006 0248     		ldr	r0, .L8
+ 112              	.LVL7:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 4
+
+
+ 113              		.loc 1 62 10 view .LVU22
+ 114 0008 FFF7FEFF 		bl	HAL_ETH_WritePHYRegister
+ 115              	.LVL8:
+  63:../Src/lan8670.c **** }
+ 116              		.loc 1 63 1 view .LVU23
+ 117 000c 08BD     		pop	{r3, pc}
+ 118              	.L9:
+ 119 000e 00BF     		.align	2
+ 120              	.L8:
+ 121 0010 00000000 		.word	heth
+ 122              		.cfi_endproc
+ 123              	.LFE137:
+ 125              		.section	.text.LAN8670_MMDSetAddress,"ax",%progbits
+ 126              		.align	1
+ 127              		.syntax unified
+ 128              		.thumb
+ 129              		.thumb_func
+ 131              	LAN8670_MMDSetAddress:
+ 132              	.LVL9:
+ 133              	.LFB138:
+  64:../Src/lan8670.c **** 
+  65:../Src/lan8670.c **** /**
+  66:../Src/lan8670.c ****   * @brief  Write the MMD register address.
+  67:../Src/lan8670.c ****   *         MMDCTRL.FNCTN = 00b (address), MMDAD = register address.
+  68:../Src/lan8670.c ****   */
+  69:../Src/lan8670.c **** static HAL_StatusTypeDef LAN8670_MMDSetAddress(uint8_t DevAd, uint16_t Addr)
+  70:../Src/lan8670.c **** {
+ 134              		.loc 1 70 1 is_stmt 1 view -0
+ 135              		.cfi_startproc
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138              		.loc 1 70 1 is_stmt 0 view .LVU25
+ 139 0000 10B5     		push	{r4, lr}
+ 140              	.LCFI4:
+ 141              		.cfi_def_cfa_offset 8
+ 142              		.cfi_offset 4, -8
+ 143              		.cfi_offset 14, -4
+ 144 0002 0C46     		mov	r4, r1
+  71:../Src/lan8670.c ****   HAL_StatusTypeDef status;
+ 145              		.loc 1 71 3 is_stmt 1 view .LVU26
+  72:../Src/lan8670.c **** 
+  73:../Src/lan8670.c ****   status = LAN8670_WriteReg(LAN8670_REG_MMDCTRL,
+ 146              		.loc 1 73 3 view .LVU27
+ 147              		.loc 1 73 12 is_stmt 0 view .LVU28
+ 148 0004 0146     		mov	r1, r0
+ 149              	.LVL10:
+ 150              		.loc 1 73 12 view .LVU29
+ 151 0006 0D20     		movs	r0, #13
+ 152              	.LVL11:
+ 153              		.loc 1 73 12 view .LVU30
+ 154 0008 FFF7FEFF 		bl	LAN8670_WriteReg
+ 155              	.LVL12:
+  74:../Src/lan8670.c ****                             (uint16_t)(LAN8670_MMD_FUNC_ADDR | (uint16_t)DevAd));
+  75:../Src/lan8670.c ****   if (status != HAL_OK)
+ 156              		.loc 1 75 3 is_stmt 1 view .LVU31
+ 157              		.loc 1 75 6 is_stmt 0 view .LVU32
+ 158 000c 00B1     		cbz	r0, .L13
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 5
+
+
+ 159              	.L11:
+  76:../Src/lan8670.c ****   {
+  77:../Src/lan8670.c ****     return status;
+  78:../Src/lan8670.c ****   }
+  79:../Src/lan8670.c **** 
+  80:../Src/lan8670.c ****   return LAN8670_WriteReg(LAN8670_REG_MMDAD, Addr);
+  81:../Src/lan8670.c **** }
+ 160              		.loc 1 81 1 view .LVU33
+ 161 000e 10BD     		pop	{r4, pc}
+ 162              	.L13:
+  80:../Src/lan8670.c **** }
+ 163              		.loc 1 80 3 is_stmt 1 view .LVU34
+  80:../Src/lan8670.c **** }
+ 164              		.loc 1 80 10 is_stmt 0 view .LVU35
+ 165 0010 2146     		mov	r1, r4
+ 166 0012 0E20     		movs	r0, #14
+ 167 0014 FFF7FEFF 		bl	LAN8670_WriteReg
+ 168              	.LVL13:
+ 169 0018 F9E7     		b	.L11
+ 170              		.cfi_endproc
+ 171              	.LFE138:
+ 173              		.section	.text.LAN8670_ReadMMD,"ax",%progbits
+ 174              		.align	1
+ 175              		.global	LAN8670_ReadMMD
+ 176              		.syntax unified
+ 177              		.thumb
+ 178              		.thumb_func
+ 180              	LAN8670_ReadMMD:
+ 181              	.LVL14:
+ 182              	.LFB139:
+  82:../Src/lan8670.c **** 
+  83:../Src/lan8670.c **** /**
+  84:../Src/lan8670.c ****   * @brief  Read an MMD register (indirect addressing through 0x0D / 0x0E).
+  85:../Src/lan8670.c ****   */
+  86:../Src/lan8670.c **** HAL_StatusTypeDef LAN8670_ReadMMD(uint8_t DevAd, uint16_t Addr, uint16_t *Value)
+  87:../Src/lan8670.c **** {
+ 183              		.loc 1 87 1 is_stmt 1 view -0
+ 184              		.cfi_startproc
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 187              		.loc 1 87 1 is_stmt 0 view .LVU37
+ 188 0000 38B5     		push	{r3, r4, r5, lr}
+ 189              	.LCFI5:
+ 190              		.cfi_def_cfa_offset 16
+ 191              		.cfi_offset 3, -16
+ 192              		.cfi_offset 4, -12
+ 193              		.cfi_offset 5, -8
+ 194              		.cfi_offset 14, -4
+ 195 0002 0446     		mov	r4, r0
+ 196 0004 1546     		mov	r5, r2
+  88:../Src/lan8670.c ****   HAL_StatusTypeDef status;
+ 197              		.loc 1 88 3 is_stmt 1 view .LVU38
+  89:../Src/lan8670.c **** 
+  90:../Src/lan8670.c ****   status = LAN8670_MMDSetAddress(DevAd, Addr);
+ 198              		.loc 1 90 3 view .LVU39
+ 199              		.loc 1 90 12 is_stmt 0 view .LVU40
+ 200 0006 FFF7FEFF 		bl	LAN8670_MMDSetAddress
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 6
+
+
+ 201              	.LVL15:
+  91:../Src/lan8670.c ****   if (status != HAL_OK)
+ 202              		.loc 1 91 3 is_stmt 1 view .LVU41
+ 203              		.loc 1 91 6 is_stmt 0 view .LVU42
+ 204 000a 0346     		mov	r3, r0
+ 205 000c 08B1     		cbz	r0, .L17
+ 206              	.LVL16:
+ 207              	.L15:
+  92:../Src/lan8670.c ****   {
+  93:../Src/lan8670.c ****     return status;
+  94:../Src/lan8670.c ****   }
+  95:../Src/lan8670.c **** 
+  96:../Src/lan8670.c ****   status = LAN8670_WriteReg(LAN8670_REG_MMDCTRL,
+  97:../Src/lan8670.c ****                             (uint16_t)(LAN8670_MMD_FUNC_DATA | (uint16_t)DevAd));
+  98:../Src/lan8670.c ****   if (status != HAL_OK)
+  99:../Src/lan8670.c ****   {
+ 100:../Src/lan8670.c ****     return status;
+ 101:../Src/lan8670.c ****   }
+ 102:../Src/lan8670.c **** 
+ 103:../Src/lan8670.c ****   return LAN8670_ReadReg(LAN8670_REG_MMDAD, Value);
+ 104:../Src/lan8670.c **** }
+ 208              		.loc 1 104 1 view .LVU43
+ 209 000e 1846     		mov	r0, r3
+ 210 0010 38BD     		pop	{r3, r4, r5, pc}
+ 211              	.LVL17:
+ 212              	.L17:
+  96:../Src/lan8670.c ****                             (uint16_t)(LAN8670_MMD_FUNC_DATA | (uint16_t)DevAd));
+ 213              		.loc 1 96 3 is_stmt 1 view .LVU44
+  96:../Src/lan8670.c ****                             (uint16_t)(LAN8670_MMD_FUNC_DATA | (uint16_t)DevAd));
+ 214              		.loc 1 96 12 is_stmt 0 view .LVU45
+ 215 0012 44F48041 		orr	r1, r4, #16384
+ 216 0016 0D20     		movs	r0, #13
+ 217              	.LVL18:
+  96:../Src/lan8670.c ****                             (uint16_t)(LAN8670_MMD_FUNC_DATA | (uint16_t)DevAd));
+ 218              		.loc 1 96 12 view .LVU46
+ 219 0018 FFF7FEFF 		bl	LAN8670_WriteReg
+ 220              	.LVL19:
+  98:../Src/lan8670.c ****   {
+ 221              		.loc 1 98 3 is_stmt 1 view .LVU47
+  98:../Src/lan8670.c ****   {
+ 222              		.loc 1 98 6 is_stmt 0 view .LVU48
+ 223 001c 0346     		mov	r3, r0
+ 224 001e 0028     		cmp	r0, #0
+ 225 0020 F5D1     		bne	.L15
+ 103:../Src/lan8670.c **** }
+ 226              		.loc 1 103 3 is_stmt 1 view .LVU49
+ 103:../Src/lan8670.c **** }
+ 227              		.loc 1 103 10 is_stmt 0 view .LVU50
+ 228 0022 2946     		mov	r1, r5
+ 229 0024 0E20     		movs	r0, #14
+ 230              	.LVL20:
+ 103:../Src/lan8670.c **** }
+ 231              		.loc 1 103 10 view .LVU51
+ 232 0026 FFF7FEFF 		bl	LAN8670_ReadReg
+ 233              	.LVL21:
+ 234 002a 0346     		mov	r3, r0
+ 235 002c EFE7     		b	.L15
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 7
+
+
+ 236              		.cfi_endproc
+ 237              	.LFE139:
+ 239              		.section	.text.LAN8670_WriteMMD,"ax",%progbits
+ 240              		.align	1
+ 241              		.global	LAN8670_WriteMMD
+ 242              		.syntax unified
+ 243              		.thumb
+ 244              		.thumb_func
+ 246              	LAN8670_WriteMMD:
+ 247              	.LVL22:
+ 248              	.LFB140:
+ 105:../Src/lan8670.c **** 
+ 106:../Src/lan8670.c **** /**
+ 107:../Src/lan8670.c ****   * @brief  Write an MMD register.
+ 108:../Src/lan8670.c ****   */
+ 109:../Src/lan8670.c **** HAL_StatusTypeDef LAN8670_WriteMMD(uint8_t DevAd, uint16_t Addr, uint16_t Value)
+ 110:../Src/lan8670.c **** {
+ 249              		.loc 1 110 1 is_stmt 1 view -0
+ 250              		.cfi_startproc
+ 251              		@ args = 0, pretend = 0, frame = 0
+ 252              		@ frame_needed = 0, uses_anonymous_args = 0
+ 253              		.loc 1 110 1 is_stmt 0 view .LVU53
+ 254 0000 38B5     		push	{r3, r4, r5, lr}
+ 255              	.LCFI6:
+ 256              		.cfi_def_cfa_offset 16
+ 257              		.cfi_offset 3, -16
+ 258              		.cfi_offset 4, -12
+ 259              		.cfi_offset 5, -8
+ 260              		.cfi_offset 14, -4
+ 261 0002 0446     		mov	r4, r0
+ 262 0004 1546     		mov	r5, r2
+ 111:../Src/lan8670.c ****   HAL_StatusTypeDef status;
+ 263              		.loc 1 111 3 is_stmt 1 view .LVU54
+ 112:../Src/lan8670.c **** 
+ 113:../Src/lan8670.c ****   status = LAN8670_MMDSetAddress(DevAd, Addr);
+ 264              		.loc 1 113 3 view .LVU55
+ 265              		.loc 1 113 12 is_stmt 0 view .LVU56
+ 266 0006 FFF7FEFF 		bl	LAN8670_MMDSetAddress
+ 267              	.LVL23:
+ 114:../Src/lan8670.c ****   if (status != HAL_OK)
+ 268              		.loc 1 114 3 is_stmt 1 view .LVU57
+ 269              		.loc 1 114 6 is_stmt 0 view .LVU58
+ 270 000a 0346     		mov	r3, r0
+ 271 000c 08B1     		cbz	r0, .L21
+ 272              	.LVL24:
+ 273              	.L19:
+ 115:../Src/lan8670.c ****   {
+ 116:../Src/lan8670.c ****     return status;
+ 117:../Src/lan8670.c ****   }
+ 118:../Src/lan8670.c **** 
+ 119:../Src/lan8670.c ****   /* FNCTN must select the data function before MMDAD carries the payload */
+ 120:../Src/lan8670.c ****   status = LAN8670_WriteReg(LAN8670_REG_MMDCTRL,
+ 121:../Src/lan8670.c ****                             (uint16_t)(LAN8670_MMD_FUNC_DATA | (uint16_t)DevAd));
+ 122:../Src/lan8670.c ****   if (status != HAL_OK)
+ 123:../Src/lan8670.c ****   {
+ 124:../Src/lan8670.c ****     return status;
+ 125:../Src/lan8670.c ****   }
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 8
+
+
+ 126:../Src/lan8670.c **** 
+ 127:../Src/lan8670.c ****   return LAN8670_WriteReg(LAN8670_REG_MMDAD, Value);
+ 128:../Src/lan8670.c **** }
+ 274              		.loc 1 128 1 view .LVU59
+ 275 000e 1846     		mov	r0, r3
+ 276 0010 38BD     		pop	{r3, r4, r5, pc}
+ 277              	.LVL25:
+ 278              	.L21:
+ 120:../Src/lan8670.c ****                             (uint16_t)(LAN8670_MMD_FUNC_DATA | (uint16_t)DevAd));
+ 279              		.loc 1 120 3 is_stmt 1 view .LVU60
+ 120:../Src/lan8670.c ****                             (uint16_t)(LAN8670_MMD_FUNC_DATA | (uint16_t)DevAd));
+ 280              		.loc 1 120 12 is_stmt 0 view .LVU61
+ 281 0012 44F48041 		orr	r1, r4, #16384
+ 282 0016 0D20     		movs	r0, #13
+ 283              	.LVL26:
+ 120:../Src/lan8670.c ****                             (uint16_t)(LAN8670_MMD_FUNC_DATA | (uint16_t)DevAd));
+ 284              		.loc 1 120 12 view .LVU62
+ 285 0018 FFF7FEFF 		bl	LAN8670_WriteReg
+ 286              	.LVL27:
+ 122:../Src/lan8670.c ****   {
+ 287              		.loc 1 122 3 is_stmt 1 view .LVU63
+ 122:../Src/lan8670.c ****   {
+ 288              		.loc 1 122 6 is_stmt 0 view .LVU64
+ 289 001c 0346     		mov	r3, r0
+ 290 001e 0028     		cmp	r0, #0
+ 291 0020 F5D1     		bne	.L19
+ 127:../Src/lan8670.c **** }
+ 292              		.loc 1 127 3 is_stmt 1 view .LVU65
+ 127:../Src/lan8670.c **** }
+ 293              		.loc 1 127 10 is_stmt 0 view .LVU66
+ 294 0022 2946     		mov	r1, r5
+ 295 0024 0E20     		movs	r0, #14
+ 296              	.LVL28:
+ 127:../Src/lan8670.c **** }
+ 297              		.loc 1 127 10 view .LVU67
+ 298 0026 FFF7FEFF 		bl	LAN8670_WriteReg
+ 299              	.LVL29:
+ 300 002a 0346     		mov	r3, r0
+ 301 002c EFE7     		b	.L19
+ 302              		.cfi_endproc
+ 303              	.LFE140:
+ 305              		.section	.text.LAN8670_Probe,"ax",%progbits
+ 306              		.align	1
+ 307              		.global	LAN8670_Probe
+ 308              		.syntax unified
+ 309              		.thumb
+ 310              		.thumb_func
+ 312              	LAN8670_Probe:
+ 313              	.LVL30:
+ 314              	.LFB141:
+ 129:../Src/lan8670.c **** 
+ 130:../Src/lan8670.c **** /**
+ 131:../Src/lan8670.c ****   * @brief  Read the PHY identifier and the basic status registers.
+ 132:../Src/lan8670.c ****   * @param  Info: filled with what could be read, may be NULL
+ 133:../Src/lan8670.c ****   * @retval LAN8670_OK when the device answers and the OUI matches
+ 134:../Src/lan8670.c ****   */
+ 135:../Src/lan8670.c **** LAN8670_Status LAN8670_Probe(LAN8670_Info *Info)
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 9
+
+
+ 136:../Src/lan8670.c **** {
+ 315              		.loc 1 136 1 is_stmt 1 view -0
+ 316              		.cfi_startproc
+ 317              		@ args = 0, pretend = 0, frame = 24
+ 318              		@ frame_needed = 0, uses_anonymous_args = 0
+ 319              		.loc 1 136 1 is_stmt 0 view .LVU69
+ 320 0000 30B5     		push	{r4, r5, lr}
+ 321              	.LCFI7:
+ 322              		.cfi_def_cfa_offset 12
+ 323              		.cfi_offset 4, -12
+ 324              		.cfi_offset 5, -8
+ 325              		.cfi_offset 14, -4
+ 326 0002 87B0     		sub	sp, sp, #28
+ 327              	.LCFI8:
+ 328              		.cfi_def_cfa_offset 40
+ 137:../Src/lan8670.c ****   LAN8670_Info local;
+ 329              		.loc 1 137 3 is_stmt 1 view .LVU70
+ 138:../Src/lan8670.c ****   uint16_t phyid1 = 0U;
+ 330              		.loc 1 138 3 view .LVU71
+ 331              		.loc 1 138 12 is_stmt 0 view .LVU72
+ 332 0004 0023     		movs	r3, #0
+ 333 0006 ADF80A30 		strh	r3, [sp, #10]	@ movhi
+ 139:../Src/lan8670.c ****   uint16_t phyid2 = 0U;
+ 334              		.loc 1 139 3 is_stmt 1 view .LVU73
+ 335              		.loc 1 139 12 is_stmt 0 view .LVU74
+ 336 000a ADF80830 		strh	r3, [sp, #8]	@ movhi
+ 140:../Src/lan8670.c ****   uint16_t bmsr = 0U;
+ 337              		.loc 1 140 3 is_stmt 1 view .LVU75
+ 338              		.loc 1 140 12 is_stmt 0 view .LVU76
+ 339 000e ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 141:../Src/lan8670.c ****   uint16_t bmcr = 0U;
+ 340              		.loc 1 141 3 is_stmt 1 view .LVU77
+ 341              		.loc 1 141 12 is_stmt 0 view .LVU78
+ 342 0012 ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 142:../Src/lan8670.c ****   uint16_t plca = 0U;
+ 343              		.loc 1 142 3 is_stmt 1 view .LVU79
+ 344              		.loc 1 142 12 is_stmt 0 view .LVU80
+ 345 0016 ADF80230 		strh	r3, [sp, #2]	@ movhi
+ 143:../Src/lan8670.c **** 
+ 144:../Src/lan8670.c ****   local.PhyId1        = 0U;
+ 346              		.loc 1 144 3 is_stmt 1 view .LVU81
+ 347              		.loc 1 144 23 is_stmt 0 view .LVU82
+ 348 001a ADF80C30 		strh	r3, [sp, #12]	@ movhi
+ 145:../Src/lan8670.c ****   local.PhyId2        = 0U;
+ 349              		.loc 1 145 3 is_stmt 1 view .LVU83
+ 350              		.loc 1 145 23 is_stmt 0 view .LVU84
+ 351 001e ADF80E30 		strh	r3, [sp, #14]	@ movhi
+ 146:../Src/lan8670.c ****   local.Bmsr          = 0U;
+ 352              		.loc 1 146 3 is_stmt 1 view .LVU85
+ 353              		.loc 1 146 23 is_stmt 0 view .LVU86
+ 354 0022 ADF81030 		strh	r3, [sp, #16]	@ movhi
+ 147:../Src/lan8670.c ****   local.Bmcr          = 0U;
+ 355              		.loc 1 147 3 is_stmt 1 view .LVU87
+ 356              		.loc 1 147 23 is_stmt 0 view .LVU88
+ 357 0026 ADF81230 		strh	r3, [sp, #18]	@ movhi
+ 148:../Src/lan8670.c ****   local.LinkUp        = 0U;
+ 358              		.loc 1 148 3 is_stmt 1 view .LVU89
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 10
+
+
+ 359              		.loc 1 148 23 is_stmt 0 view .LVU90
+ 360 002a 8DF81430 		strb	r3, [sp, #20]
+ 149:../Src/lan8670.c ****   local.PlcaSupported = 0U;
+ 361              		.loc 1 149 3 is_stmt 1 view .LVU91
+ 362              		.loc 1 149 23 is_stmt 0 view .LVU92
+ 363 002e 8DF81530 		strb	r3, [sp, #21]
+ 150:../Src/lan8670.c ****   local.PlcaStatus    = 0U;
+ 364              		.loc 1 150 3 is_stmt 1 view .LVU93
+ 365              		.loc 1 150 23 is_stmt 0 view .LVU94
+ 366 0032 ADF81630 		strh	r3, [sp, #22]	@ movhi
+ 151:../Src/lan8670.c **** 
+ 152:../Src/lan8670.c ****   /* Always hand back a fully initialised block, the caller prints it even
+ 153:../Src/lan8670.c ****      when the probe fails. */
+ 154:../Src/lan8670.c ****   if (Info != NULL)
+ 367              		.loc 1 154 3 is_stmt 1 view .LVU95
+ 368              		.loc 1 154 6 is_stmt 0 view .LVU96
+ 369 0036 0446     		mov	r4, r0
+ 370 0038 20B1     		cbz	r0, .L23
+ 155:../Src/lan8670.c ****   {
+ 156:../Src/lan8670.c ****     *Info = local;
+ 371              		.loc 1 156 5 is_stmt 1 view .LVU97
+ 372              		.loc 1 156 11 is_stmt 0 view .LVU98
+ 373 003a 03AB     		add	r3, sp, #12
+ 374 003c 07CB     		ldmia	r3!, {r0, r1, r2}
+ 375              	.LVL31:
+ 376              		.loc 1 156 11 view .LVU99
+ 377 003e 2060     		str	r0, [r4]	@ unaligned
+ 378 0040 6160     		str	r1, [r4, #4]	@ unaligned
+ 379 0042 A260     		str	r2, [r4, #8]	@ unaligned
+ 380              	.L23:
+ 157:../Src/lan8670.c ****   }
+ 158:../Src/lan8670.c **** 
+ 159:../Src/lan8670.c ****   if (LAN8670_ReadReg(LAN8670_REG_PHYID1, &phyid1) != HAL_OK)
+ 381              		.loc 1 159 3 is_stmt 1 view .LVU100
+ 382              		.loc 1 159 7 is_stmt 0 view .LVU101
+ 383 0044 0DF10A01 		add	r1, sp, #10
+ 384 0048 0220     		movs	r0, #2
+ 385 004a FFF7FEFF 		bl	LAN8670_ReadReg
+ 386              	.LVL32:
+ 387              		.loc 1 159 6 view .LVU102
+ 388 004e 18B1     		cbz	r0, .L33
+ 160:../Src/lan8670.c ****   {
+ 161:../Src/lan8670.c ****     return LAN8670_ERR_MDIO;
+ 389              		.loc 1 161 12 view .LVU103
+ 390 0050 0125     		movs	r5, #1
+ 391              	.L24:
+ 162:../Src/lan8670.c ****   }
+ 163:../Src/lan8670.c ****   if (LAN8670_ReadReg(LAN8670_REG_PHYID2, &phyid2) != HAL_OK)
+ 164:../Src/lan8670.c ****   {
+ 165:../Src/lan8670.c ****     return LAN8670_ERR_MDIO;
+ 166:../Src/lan8670.c ****   }
+ 167:../Src/lan8670.c **** 
+ 168:../Src/lan8670.c ****   local.PhyId1 = phyid1;
+ 169:../Src/lan8670.c ****   local.PhyId2 = phyid2;
+ 170:../Src/lan8670.c **** 
+ 171:../Src/lan8670.c ****   /* An all-zero or all-one answer means nothing is driving MDIO */
+ 172:../Src/lan8670.c ****   if (((phyid1 == 0x0000U) || (phyid1 == 0xFFFFU)) &&
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 11
+
+
+ 173:../Src/lan8670.c ****       ((phyid2 == 0x0000U) || (phyid2 == 0xFFFFU)))
+ 174:../Src/lan8670.c ****   {
+ 175:../Src/lan8670.c ****     if (Info != NULL)
+ 176:../Src/lan8670.c ****     {
+ 177:../Src/lan8670.c ****       *Info = local;
+ 178:../Src/lan8670.c ****     }
+ 179:../Src/lan8670.c ****     return LAN8670_ERR_MDIO;
+ 180:../Src/lan8670.c ****   }
+ 181:../Src/lan8670.c **** 
+ 182:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMSR, &bmsr);
+ 183:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMSR, &bmsr); /* link bit is latched low */
+ 184:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMCR, &bmcr);
+ 185:../Src/lan8670.c ****   local.Bmsr    = bmsr;
+ 186:../Src/lan8670.c ****   local.Bmcr    = bmcr;
+ 187:../Src/lan8670.c ****   local.LinkUp  = ((bmsr & LAN8670_BMSR_LINK) != 0U) ? 1U : 0U;
+ 188:../Src/lan8670.c **** 
+ 189:../Src/lan8670.c ****   /* The OPEN Alliance map tells us the PLCA registers exist */
+ 190:../Src/lan8670.c ****   if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_PLCA_STS, &plca) == HAL_OK)
+ 191:../Src/lan8670.c ****   {
+ 192:../Src/lan8670.c ****     local.PlcaSupported = 1U;
+ 193:../Src/lan8670.c ****     local.PlcaStatus    = plca;
+ 194:../Src/lan8670.c ****   }
+ 195:../Src/lan8670.c **** 
+ 196:../Src/lan8670.c ****   if (Info != NULL)
+ 197:../Src/lan8670.c ****   {
+ 198:../Src/lan8670.c ****     *Info = local;
+ 199:../Src/lan8670.c ****   }
+ 200:../Src/lan8670.c **** 
+ 201:../Src/lan8670.c ****   /* Verify the manufacturer model number, not the OUI: the OUI depends on the
+ 202:../Src/lan8670.c ****      exact ordering code while MODEL[5:0] is fixed for the LAN8670/1/2 family. */
+ 203:../Src/lan8670.c ****   if (((phyid2 & LAN8670_PHYID2_MODEL_MASK) >> LAN8670_PHYID2_MODEL_SHIFT) !=
+ 204:../Src/lan8670.c ****       LAN8670_PHYID2_MODEL_LAN86xx)
+ 205:../Src/lan8670.c ****   {
+ 206:../Src/lan8670.c ****     return LAN8670_ERR_ID;
+ 207:../Src/lan8670.c ****   }
+ 208:../Src/lan8670.c **** 
+ 209:../Src/lan8670.c ****   return LAN8670_OK;
+ 210:../Src/lan8670.c **** }
+ 392              		.loc 1 210 1 view .LVU104
+ 393 0052 2846     		mov	r0, r5
+ 394 0054 07B0     		add	sp, sp, #28
+ 395              	.LCFI9:
+ 396              		.cfi_remember_state
+ 397              		.cfi_def_cfa_offset 12
+ 398              		@ sp needed
+ 399 0056 30BD     		pop	{r4, r5, pc}
+ 400              	.LVL33:
+ 401              	.L33:
+ 402              	.LCFI10:
+ 403              		.cfi_restore_state
+ 163:../Src/lan8670.c ****   {
+ 404              		.loc 1 163 3 is_stmt 1 view .LVU105
+ 163:../Src/lan8670.c ****   {
+ 405              		.loc 1 163 7 is_stmt 0 view .LVU106
+ 406 0058 02A9     		add	r1, sp, #8
+ 407 005a 0320     		movs	r0, #3
+ 408 005c FFF7FEFF 		bl	LAN8670_ReadReg
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 12
+
+
+ 409              	.LVL34:
+ 163:../Src/lan8670.c ****   {
+ 410              		.loc 1 163 6 view .LVU107
+ 411 0060 0546     		mov	r5, r0
+ 412 0062 0028     		cmp	r0, #0
+ 413 0064 50D1     		bne	.L30
+ 168:../Src/lan8670.c ****   local.PhyId2 = phyid2;
+ 414              		.loc 1 168 3 is_stmt 1 view .LVU108
+ 168:../Src/lan8670.c ****   local.PhyId2 = phyid2;
+ 415              		.loc 1 168 16 is_stmt 0 view .LVU109
+ 416 0066 BDF80A30 		ldrh	r3, [sp, #10]
+ 417 006a ADF80C30 		strh	r3, [sp, #12]	@ movhi
+ 169:../Src/lan8670.c **** 
+ 418              		.loc 1 169 3 is_stmt 1 view .LVU110
+ 169:../Src/lan8670.c **** 
+ 419              		.loc 1 169 16 is_stmt 0 view .LVU111
+ 420 006e BDF80820 		ldrh	r2, [sp, #8]
+ 421 0072 ADF80E20 		strh	r2, [sp, #14]	@ movhi
+ 172:../Src/lan8670.c ****       ((phyid2 == 0x0000U) || (phyid2 == 0xFFFFU)))
+ 422              		.loc 1 172 3 is_stmt 1 view .LVU112
+ 172:../Src/lan8670.c ****       ((phyid2 == 0x0000U) || (phyid2 == 0xFFFFU)))
+ 423              		.loc 1 172 28 is_stmt 0 view .LVU113
+ 424 0076 013B     		subs	r3, r3, #1
+ 425 0078 9BB2     		uxth	r3, r3
+ 172:../Src/lan8670.c ****       ((phyid2 == 0x0000U) || (phyid2 == 0xFFFFU)))
+ 426              		.loc 1 172 6 view .LVU114
+ 427 007a 4FF6FD71 		movw	r1, #65533
+ 428 007e 8B42     		cmp	r3, r1
+ 429 0080 03D9     		bls	.L25
+ 173:../Src/lan8670.c ****   {
+ 430              		.loc 1 173 28 discriminator 1 view .LVU115
+ 431 0082 013A     		subs	r2, r2, #1
+ 432 0084 92B2     		uxth	r2, r2
+ 172:../Src/lan8670.c ****       ((phyid2 == 0x0000U) || (phyid2 == 0xFFFFU)))
+ 433              		.loc 1 172 52 discriminator 1 view .LVU116
+ 434 0086 8A42     		cmp	r2, r1
+ 435 0088 36D8     		bhi	.L34
+ 436              	.L25:
+ 182:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMSR, &bmsr); /* link bit is latched low */
+ 437              		.loc 1 182 3 is_stmt 1 view .LVU117
+ 182:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMSR, &bmsr); /* link bit is latched low */
+ 438              		.loc 1 182 9 is_stmt 0 view .LVU118
+ 439 008a 0DF10601 		add	r1, sp, #6
+ 440 008e 0120     		movs	r0, #1
+ 441 0090 FFF7FEFF 		bl	LAN8670_ReadReg
+ 442              	.LVL35:
+ 183:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMCR, &bmcr);
+ 443              		.loc 1 183 3 is_stmt 1 view .LVU119
+ 183:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMCR, &bmcr);
+ 444              		.loc 1 183 9 is_stmt 0 view .LVU120
+ 445 0094 0DF10601 		add	r1, sp, #6
+ 446 0098 0120     		movs	r0, #1
+ 447 009a FFF7FEFF 		bl	LAN8670_ReadReg
+ 448              	.LVL36:
+ 184:../Src/lan8670.c ****   local.Bmsr    = bmsr;
+ 449              		.loc 1 184 3 is_stmt 1 view .LVU121
+ 184:../Src/lan8670.c ****   local.Bmsr    = bmsr;
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 13
+
+
+ 450              		.loc 1 184 9 is_stmt 0 view .LVU122
+ 451 009e 01A9     		add	r1, sp, #4
+ 452 00a0 0020     		movs	r0, #0
+ 453 00a2 FFF7FEFF 		bl	LAN8670_ReadReg
+ 454              	.LVL37:
+ 185:../Src/lan8670.c ****   local.Bmcr    = bmcr;
+ 455              		.loc 1 185 3 is_stmt 1 view .LVU123
+ 185:../Src/lan8670.c ****   local.Bmcr    = bmcr;
+ 456              		.loc 1 185 17 is_stmt 0 view .LVU124
+ 457 00a6 BDF80630 		ldrh	r3, [sp, #6]
+ 458 00aa ADF81030 		strh	r3, [sp, #16]	@ movhi
+ 186:../Src/lan8670.c ****   local.LinkUp  = ((bmsr & LAN8670_BMSR_LINK) != 0U) ? 1U : 0U;
+ 459              		.loc 1 186 3 is_stmt 1 view .LVU125
+ 186:../Src/lan8670.c ****   local.LinkUp  = ((bmsr & LAN8670_BMSR_LINK) != 0U) ? 1U : 0U;
+ 460              		.loc 1 186 17 is_stmt 0 view .LVU126
+ 461 00ae BDF80420 		ldrh	r2, [sp, #4]
+ 462 00b2 ADF81220 		strh	r2, [sp, #18]	@ movhi
+ 187:../Src/lan8670.c **** 
+ 463              		.loc 1 187 3 is_stmt 1 view .LVU127
+ 187:../Src/lan8670.c **** 
+ 464              		.loc 1 187 59 is_stmt 0 view .LVU128
+ 465 00b6 C3F38003 		ubfx	r3, r3, #2, #1
+ 187:../Src/lan8670.c **** 
+ 466              		.loc 1 187 17 view .LVU129
+ 467 00ba 8DF81430 		strb	r3, [sp, #20]
+ 190:../Src/lan8670.c ****   {
+ 468              		.loc 1 190 3 is_stmt 1 view .LVU130
+ 190:../Src/lan8670.c ****   {
+ 469              		.loc 1 190 7 is_stmt 0 view .LVU131
+ 470 00be 0DF10202 		add	r2, sp, #2
+ 471 00c2 4CF60321 		movw	r1, #51715
+ 472 00c6 1F20     		movs	r0, #31
+ 473 00c8 FFF7FEFF 		bl	LAN8670_ReadMMD
+ 474              	.LVL38:
+ 190:../Src/lan8670.c ****   {
+ 475              		.loc 1 190 6 view .LVU132
+ 476 00cc 30B9     		cbnz	r0, .L27
+ 192:../Src/lan8670.c ****     local.PlcaStatus    = plca;
+ 477              		.loc 1 192 5 is_stmt 1 view .LVU133
+ 192:../Src/lan8670.c ****     local.PlcaStatus    = plca;
+ 478              		.loc 1 192 25 is_stmt 0 view .LVU134
+ 479 00ce 0123     		movs	r3, #1
+ 480 00d0 8DF81530 		strb	r3, [sp, #21]
+ 193:../Src/lan8670.c ****   }
+ 481              		.loc 1 193 5 is_stmt 1 view .LVU135
+ 193:../Src/lan8670.c ****   }
+ 482              		.loc 1 193 25 is_stmt 0 view .LVU136
+ 483 00d4 BDF80230 		ldrh	r3, [sp, #2]
+ 484 00d8 ADF81630 		strh	r3, [sp, #22]	@ movhi
+ 485              	.L27:
+ 196:../Src/lan8670.c ****   {
+ 486              		.loc 1 196 3 is_stmt 1 view .LVU137
+ 196:../Src/lan8670.c ****   {
+ 487              		.loc 1 196 6 is_stmt 0 view .LVU138
+ 488 00dc 24B1     		cbz	r4, .L28
+ 198:../Src/lan8670.c ****   }
+ 489              		.loc 1 198 5 is_stmt 1 view .LVU139
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 14
+
+
+ 198:../Src/lan8670.c ****   }
+ 490              		.loc 1 198 11 is_stmt 0 view .LVU140
+ 491 00de 03AB     		add	r3, sp, #12
+ 492 00e0 07CB     		ldmia	r3!, {r0, r1, r2}
+ 493 00e2 2060     		str	r0, [r4]	@ unaligned
+ 494 00e4 6160     		str	r1, [r4, #4]	@ unaligned
+ 495 00e6 A260     		str	r2, [r4, #8]	@ unaligned
+ 496              	.L28:
+ 203:../Src/lan8670.c ****       LAN8670_PHYID2_MODEL_LAN86xx)
+ 497              		.loc 1 203 3 is_stmt 1 view .LVU141
+ 203:../Src/lan8670.c ****       LAN8670_PHYID2_MODEL_LAN86xx)
+ 498              		.loc 1 203 45 is_stmt 0 view .LVU142
+ 499 00e8 BDF80830 		ldrh	r3, [sp, #8]
+ 500 00ec C3F30513 		ubfx	r3, r3, #4, #6
+ 203:../Src/lan8670.c ****       LAN8670_PHYID2_MODEL_LAN86xx)
+ 501              		.loc 1 203 6 view .LVU143
+ 502 00f0 162B     		cmp	r3, #22
+ 503 00f2 AED0     		beq	.L24
+ 206:../Src/lan8670.c ****   }
+ 504              		.loc 1 206 12 view .LVU144
+ 505 00f4 0225     		movs	r5, #2
+ 506 00f6 ACE7     		b	.L24
+ 507              	.L34:
+ 175:../Src/lan8670.c ****     {
+ 508              		.loc 1 175 5 is_stmt 1 view .LVU145
+ 175:../Src/lan8670.c ****     {
+ 509              		.loc 1 175 8 is_stmt 0 view .LVU146
+ 510 00f8 24B1     		cbz	r4, .L26
+ 177:../Src/lan8670.c ****     }
+ 511              		.loc 1 177 7 is_stmt 1 view .LVU147
+ 177:../Src/lan8670.c ****     }
+ 512              		.loc 1 177 13 is_stmt 0 view .LVU148
+ 513 00fa 03AB     		add	r3, sp, #12
+ 514 00fc 07CB     		ldmia	r3!, {r0, r1, r2}
+ 515 00fe 2060     		str	r0, [r4]	@ unaligned
+ 516 0100 6160     		str	r1, [r4, #4]	@ unaligned
+ 517 0102 A260     		str	r2, [r4, #8]	@ unaligned
+ 518              	.L26:
+ 179:../Src/lan8670.c ****   }
+ 519              		.loc 1 179 5 is_stmt 1 view .LVU149
+ 179:../Src/lan8670.c ****   }
+ 520              		.loc 1 179 12 is_stmt 0 view .LVU150
+ 521 0104 0125     		movs	r5, #1
+ 522 0106 A4E7     		b	.L24
+ 523              	.L30:
+ 165:../Src/lan8670.c ****   }
+ 524              		.loc 1 165 12 view .LVU151
+ 525 0108 0125     		movs	r5, #1
+ 526 010a A2E7     		b	.L24
+ 527              		.cfi_endproc
+ 528              	.LFE141:
+ 530              		.section	.text.LAN8670_SoftReset,"ax",%progbits
+ 531              		.align	1
+ 532              		.global	LAN8670_SoftReset
+ 533              		.syntax unified
+ 534              		.thumb
+ 535              		.thumb_func
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 15
+
+
+ 537              	LAN8670_SoftReset:
+ 538              	.LFB142:
+ 211:../Src/lan8670.c **** 
+ 212:../Src/lan8670.c **** /**
+ 213:../Src/lan8670.c ****   * @brief  Issue a PHY software reset, then put the PHY in a known state:
+ 214:../Src/lan8670.c ****   *         10BASE-T1S is always 10 Mbit/s full duplex and there is no
+ 215:../Src/lan8670.c ****   *         auto-negotiation, so BMCR is programmed explicitly.
+ 216:../Src/lan8670.c ****   */
+ 217:../Src/lan8670.c **** LAN8670_Status LAN8670_SoftReset(void)
+ 218:../Src/lan8670.c **** {
+ 539              		.loc 1 218 1 is_stmt 1 view -0
+ 540              		.cfi_startproc
+ 541              		@ args = 0, pretend = 0, frame = 8
+ 542              		@ frame_needed = 0, uses_anonymous_args = 0
+ 543 0000 10B5     		push	{r4, lr}
+ 544              	.LCFI11:
+ 545              		.cfi_def_cfa_offset 8
+ 546              		.cfi_offset 4, -8
+ 547              		.cfi_offset 14, -4
+ 548 0002 82B0     		sub	sp, sp, #8
+ 549              	.LCFI12:
+ 550              		.cfi_def_cfa_offset 16
+ 219:../Src/lan8670.c ****   uint16_t bmcr = 0U;
+ 551              		.loc 1 219 3 view .LVU153
+ 552              		.loc 1 219 12 is_stmt 0 view .LVU154
+ 553 0004 0020     		movs	r0, #0
+ 554 0006 ADF80600 		strh	r0, [sp, #6]	@ movhi
+ 220:../Src/lan8670.c ****   uint16_t dummy = 0U;
+ 555              		.loc 1 220 3 is_stmt 1 view .LVU155
+ 556              		.loc 1 220 12 is_stmt 0 view .LVU156
+ 557 000a ADF80400 		strh	r0, [sp, #4]	@ movhi
+ 221:../Src/lan8670.c ****   uint32_t start;
+ 558              		.loc 1 221 3 is_stmt 1 view .LVU157
+ 222:../Src/lan8670.c **** 
+ 223:../Src/lan8670.c ****   if (LAN8670_WriteReg(LAN8670_REG_BMCR, LAN8670_BMCR_RESET) != HAL_OK)
+ 559              		.loc 1 223 3 view .LVU158
+ 560              		.loc 1 223 7 is_stmt 0 view .LVU159
+ 561 000e 4FF40041 		mov	r1, #32768
+ 562 0012 FFF7FEFF 		bl	LAN8670_WriteReg
+ 563              	.LVL39:
+ 564              		.loc 1 223 6 view .LVU160
+ 565 0016 18B1     		cbz	r0, .L44
+ 224:../Src/lan8670.c ****   {
+ 225:../Src/lan8670.c ****     return LAN8670_ERR_MDIO;
+ 566              		.loc 1 225 12 view .LVU161
+ 567 0018 0124     		movs	r4, #1
+ 568              	.L36:
+ 226:../Src/lan8670.c ****   }
+ 227:../Src/lan8670.c **** 
+ 228:../Src/lan8670.c ****   start = HAL_GetTick();
+ 229:../Src/lan8670.c ****   do
+ 230:../Src/lan8670.c ****   {
+ 231:../Src/lan8670.c ****     if (LAN8670_ReadReg(LAN8670_REG_BMCR, &bmcr) != HAL_OK)
+ 232:../Src/lan8670.c ****     {
+ 233:../Src/lan8670.c ****       return LAN8670_ERR_MDIO;
+ 234:../Src/lan8670.c ****     }
+ 235:../Src/lan8670.c ****     if ((bmcr & LAN8670_BMCR_RESET) == 0U)
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 16
+
+
+ 236:../Src/lan8670.c ****     {
+ 237:../Src/lan8670.c ****       break;
+ 238:../Src/lan8670.c ****     }
+ 239:../Src/lan8670.c ****   } while ((HAL_GetTick() - start) < LAN8670_RESET_POLL_MS);
+ 240:../Src/lan8670.c **** 
+ 241:../Src/lan8670.c ****   if ((bmcr & LAN8670_BMCR_RESET) != 0U)
+ 242:../Src/lan8670.c ****   {
+ 243:../Src/lan8670.c ****     return LAN8670_ERR_TIMEOUT;
+ 244:../Src/lan8670.c ****   }
+ 245:../Src/lan8670.c **** 
+ 246:../Src/lan8670.c ****   /* Post-reset configuration: 10 Mbit/s, full duplex, no auto-negotiation */
+ 247:../Src/lan8670.c ****   if (LAN8670_WriteReg(LAN8670_REG_BMCR,
+ 248:../Src/lan8670.c ****                        LAN8670_BMCR_DUPLEX | LAN8670_BMCR_SPEED_LSB) != HAL_OK)
+ 249:../Src/lan8670.c ****   {
+ 250:../Src/lan8670.c ****     return LAN8670_ERR_MDIO;
+ 251:../Src/lan8670.c ****   }
+ 252:../Src/lan8670.c **** 
+ 253:../Src/lan8670.c ****   /* Let the PHY settle before the first data transfer */
+ 254:../Src/lan8670.c ****   HAL_Delay(PHY_RESET_DELAY);
+ 255:../Src/lan8670.c **** 
+ 256:../Src/lan8670.c ****   /* Clear the latched status bits */
+ 257:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMSR, &dummy);
+ 258:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMSR, &dummy);
+ 259:../Src/lan8670.c **** 
+ 260:../Src/lan8670.c ****   return LAN8670_OK;
+ 261:../Src/lan8670.c **** }
+ 569              		.loc 1 261 1 view .LVU162
+ 570 001a 2046     		mov	r0, r4
+ 571 001c 02B0     		add	sp, sp, #8
+ 572              	.LCFI13:
+ 573              		.cfi_remember_state
+ 574              		.cfi_def_cfa_offset 8
+ 575              		@ sp needed
+ 576 001e 10BD     		pop	{r4, pc}
+ 577              	.L44:
+ 578              	.LCFI14:
+ 579              		.cfi_restore_state
+ 228:../Src/lan8670.c ****   do
+ 580              		.loc 1 228 3 is_stmt 1 view .LVU163
+ 228:../Src/lan8670.c ****   do
+ 581              		.loc 1 228 11 is_stmt 0 view .LVU164
+ 582 0020 FFF7FEFF 		bl	HAL_GetTick
+ 583              	.LVL40:
+ 584 0024 0446     		mov	r4, r0
+ 585              	.LVL41:
+ 586              	.L38:
+ 229:../Src/lan8670.c ****   {
+ 587              		.loc 1 229 3 is_stmt 1 view .LVU165
+ 231:../Src/lan8670.c ****     {
+ 588              		.loc 1 231 5 view .LVU166
+ 231:../Src/lan8670.c ****     {
+ 589              		.loc 1 231 9 is_stmt 0 view .LVU167
+ 590 0026 0DF10601 		add	r1, sp, #6
+ 591 002a 0020     		movs	r0, #0
+ 592 002c FFF7FEFF 		bl	LAN8670_ReadReg
+ 593              	.LVL42:
+ 231:../Src/lan8670.c ****     {
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 17
+
+
+ 594              		.loc 1 231 8 view .LVU168
+ 595 0030 08BB     		cbnz	r0, .L40
+ 235:../Src/lan8670.c ****     {
+ 596              		.loc 1 235 5 is_stmt 1 view .LVU169
+ 235:../Src/lan8670.c ****     {
+ 597              		.loc 1 235 37 is_stmt 0 view .LVU170
+ 598 0032 BDF90630 		ldrsh	r3, [sp, #6]
+ 235:../Src/lan8670.c ****     {
+ 599              		.loc 1 235 8 view .LVU171
+ 600 0036 002B     		cmp	r3, #0
+ 601 0038 04DA     		bge	.L37
+ 239:../Src/lan8670.c **** 
+ 602              		.loc 1 239 11 is_stmt 1 view .LVU172
+ 239:../Src/lan8670.c **** 
+ 603              		.loc 1 239 13 is_stmt 0 view .LVU173
+ 604 003a FFF7FEFF 		bl	HAL_GetTick
+ 605              	.LVL43:
+ 239:../Src/lan8670.c **** 
+ 606              		.loc 1 239 27 view .LVU174
+ 607 003e 001B     		subs	r0, r0, r4
+ 239:../Src/lan8670.c **** 
+ 608              		.loc 1 239 3 view .LVU175
+ 609 0040 6328     		cmp	r0, #99
+ 610 0042 F0D9     		bls	.L38
+ 611              	.L37:
+ 241:../Src/lan8670.c ****   {
+ 612              		.loc 1 241 3 is_stmt 1 view .LVU176
+ 241:../Src/lan8670.c ****   {
+ 613              		.loc 1 241 35 is_stmt 0 view .LVU177
+ 614 0044 BDF90630 		ldrsh	r3, [sp, #6]
+ 241:../Src/lan8670.c ****   {
+ 615              		.loc 1 241 6 view .LVU178
+ 616 0048 002B     		cmp	r3, #0
+ 617 004a 16DB     		blt	.L41
+ 247:../Src/lan8670.c ****                        LAN8670_BMCR_DUPLEX | LAN8670_BMCR_SPEED_LSB) != HAL_OK)
+ 618              		.loc 1 247 3 is_stmt 1 view .LVU179
+ 247:../Src/lan8670.c ****                        LAN8670_BMCR_DUPLEX | LAN8670_BMCR_SPEED_LSB) != HAL_OK)
+ 619              		.loc 1 247 7 is_stmt 0 view .LVU180
+ 620 004c 4FF40451 		mov	r1, #8448
+ 621 0050 0020     		movs	r0, #0
+ 622 0052 FFF7FEFF 		bl	LAN8670_WriteReg
+ 623              	.LVL44:
+ 247:../Src/lan8670.c ****                        LAN8670_BMCR_DUPLEX | LAN8670_BMCR_SPEED_LSB) != HAL_OK)
+ 624              		.loc 1 247 6 view .LVU181
+ 625 0056 0446     		mov	r4, r0
+ 626              	.LVL45:
+ 247:../Src/lan8670.c ****                        LAN8670_BMCR_DUPLEX | LAN8670_BMCR_SPEED_LSB) != HAL_OK)
+ 627              		.loc 1 247 6 view .LVU182
+ 628 0058 08B1     		cbz	r0, .L45
+ 250:../Src/lan8670.c ****   }
+ 629              		.loc 1 250 12 view .LVU183
+ 630 005a 0124     		movs	r4, #1
+ 631 005c DDE7     		b	.L36
+ 632              	.L45:
+ 254:../Src/lan8670.c **** 
+ 633              		.loc 1 254 3 is_stmt 1 view .LVU184
+ 634 005e 0520     		movs	r0, #5
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 18
+
+
+ 635 0060 FFF7FEFF 		bl	HAL_Delay
+ 636              	.LVL46:
+ 257:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMSR, &dummy);
+ 637              		.loc 1 257 3 view .LVU185
+ 257:../Src/lan8670.c ****   (void)LAN8670_ReadReg(LAN8670_REG_BMSR, &dummy);
+ 638              		.loc 1 257 9 is_stmt 0 view .LVU186
+ 639 0064 01A9     		add	r1, sp, #4
+ 640 0066 0120     		movs	r0, #1
+ 641 0068 FFF7FEFF 		bl	LAN8670_ReadReg
+ 642              	.LVL47:
+ 258:../Src/lan8670.c **** 
+ 643              		.loc 1 258 3 is_stmt 1 view .LVU187
+ 258:../Src/lan8670.c **** 
+ 644              		.loc 1 258 9 is_stmt 0 view .LVU188
+ 645 006c 01A9     		add	r1, sp, #4
+ 646 006e 0120     		movs	r0, #1
+ 647 0070 FFF7FEFF 		bl	LAN8670_ReadReg
+ 648              	.LVL48:
+ 260:../Src/lan8670.c **** }
+ 649              		.loc 1 260 3 is_stmt 1 view .LVU189
+ 260:../Src/lan8670.c **** }
+ 650              		.loc 1 260 10 is_stmt 0 view .LVU190
+ 651 0074 D1E7     		b	.L36
+ 652              	.LVL49:
+ 653              	.L40:
+ 233:../Src/lan8670.c ****     }
+ 654              		.loc 1 233 14 view .LVU191
+ 655 0076 0124     		movs	r4, #1
+ 656              	.LVL50:
+ 233:../Src/lan8670.c ****     }
+ 657              		.loc 1 233 14 view .LVU192
+ 658 0078 CFE7     		b	.L36
+ 659              	.LVL51:
+ 660              	.L41:
+ 243:../Src/lan8670.c ****   }
+ 661              		.loc 1 243 12 view .LVU193
+ 662 007a 0324     		movs	r4, #3
+ 663              	.LVL52:
+ 243:../Src/lan8670.c ****   }
+ 664              		.loc 1 243 12 view .LVU194
+ 665 007c CDE7     		b	.L36
+ 666              		.cfi_endproc
+ 667              	.LFE142:
+ 669              		.section	.text.LAN8670_ConfigurePLCA,"ax",%progbits
+ 670              		.align	1
+ 671              		.global	LAN8670_ConfigurePLCA
+ 672              		.syntax unified
+ 673              		.thumb
+ 674              		.thumb_func
+ 676              	LAN8670_ConfigurePLCA:
+ 677              	.LVL53:
+ 678              	.LFB143:
+ 262:../Src/lan8670.c **** 
+ 263:../Src/lan8670.c **** /**
+ 264:../Src/lan8670.c ****   * @brief  Configure the PLCA reconciliation sublayer.
+ 265:../Src/lan8670.c ****   * @param  NodeId 0 = coordinator (sends the BEACON), 1..254 = follower ID,
+ 266:../Src/lan8670.c ****   *                 0xFF = disable PLCA and use plain CSMA/CD
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 19
+
+
+ 267:../Src/lan8670.c ****   * @param  NodeCount number of transmit opportunities in one PLCA cycle
+ 268:../Src/lan8670.c ****   * @param  TransmitOpportunityTimer TOTMR value, 0 keeps the default
+ 269:../Src/lan8670.c ****   */
+ 270:../Src/lan8670.c **** LAN8670_Status LAN8670_ConfigurePLCA(uint8_t NodeId, uint8_t NodeCount,
+ 271:../Src/lan8670.c ****                                      uint8_t TransmitOpportunityTimer)
+ 272:../Src/lan8670.c **** {
+ 679              		.loc 1 272 1 is_stmt 1 view -0
+ 680              		.cfi_startproc
+ 681              		@ args = 0, pretend = 0, frame = 0
+ 682              		@ frame_needed = 0, uses_anonymous_args = 0
+ 683              		.loc 1 272 1 is_stmt 0 view .LVU196
+ 684 0000 38B5     		push	{r3, r4, r5, lr}
+ 685              	.LCFI15:
+ 686              		.cfi_def_cfa_offset 16
+ 687              		.cfi_offset 3, -16
+ 688              		.cfi_offset 4, -12
+ 689              		.cfi_offset 5, -8
+ 690              		.cfi_offset 14, -4
+ 691 0002 0446     		mov	r4, r0
+ 692 0004 0D46     		mov	r5, r1
+ 273:../Src/lan8670.c ****   uint16_t ctrl1;
+ 693              		.loc 1 273 3 is_stmt 1 view .LVU197
+ 274:../Src/lan8670.c **** 
+ 275:../Src/lan8670.c ****   if (TransmitOpportunityTimer != 0U)
+ 694              		.loc 1 275 3 view .LVU198
+ 695              		.loc 1 275 6 is_stmt 0 view .LVU199
+ 696 0006 2AB1     		cbz	r2, .L47
+ 276:../Src/lan8670.c ****   {
+ 277:../Src/lan8670.c ****     if (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_PLCA_TOTMR,
+ 697              		.loc 1 277 5 is_stmt 1 view .LVU200
+ 698              		.loc 1 277 9 is_stmt 0 view .LVU201
+ 699 0008 4CF60421 		movw	r1, #51716
+ 700              	.LVL54:
+ 701              		.loc 1 277 9 view .LVU202
+ 702 000c 1F20     		movs	r0, #31
+ 703              	.LVL55:
+ 704              		.loc 1 277 9 view .LVU203
+ 705 000e FFF7FEFF 		bl	LAN8670_WriteMMD
+ 706              	.LVL56:
+ 707              		.loc 1 277 8 view .LVU204
+ 708 0012 E0B9     		cbnz	r0, .L50
+ 709              	.L47:
+ 278:../Src/lan8670.c ****                          (uint16_t)TransmitOpportunityTimer) != HAL_OK)
+ 279:../Src/lan8670.c ****     {
+ 280:../Src/lan8670.c ****       return LAN8670_ERR_MDIO;
+ 281:../Src/lan8670.c ****     }
+ 282:../Src/lan8670.c ****   }
+ 283:../Src/lan8670.c **** 
+ 284:../Src/lan8670.c ****   ctrl1 = (uint16_t)(((uint16_t)(NodeCount & 0xFFU) << LAN8670_PLCA_NCNT_SHIFT) |
+ 710              		.loc 1 284 3 is_stmt 1 view .LVU205
+ 711              	.LVL57:
+ 285:../Src/lan8670.c ****                      (uint16_t)(NodeId & LAN8670_PLCA_ID_MASK));
+ 286:../Src/lan8670.c ****   if (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_PLCA_CTRL1, ctrl1) != HAL_OK)
+ 712              		.loc 1 286 3 view .LVU206
+ 713              		.loc 1 286 7 is_stmt 0 view .LVU207
+ 714 0014 44EA0522 		orr	r2, r4, r5, lsl #8
+ 715              	.LVL58:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 20
+
+
+ 716              		.loc 1 286 7 view .LVU208
+ 717 0018 4CF60221 		movw	r1, #51714
+ 718 001c 1F20     		movs	r0, #31
+ 719 001e FFF7FEFF 		bl	LAN8670_WriteMMD
+ 720              	.LVL59:
+ 721              		.loc 1 286 6 view .LVU209
+ 722 0022 B0B9     		cbnz	r0, .L51
+ 287:../Src/lan8670.c ****   {
+ 288:../Src/lan8670.c ****     return LAN8670_ERR_MDIO;
+ 289:../Src/lan8670.c ****   }
+ 290:../Src/lan8670.c **** 
+ 291:../Src/lan8670.c ****   if (NodeId == 0xFFU)
+ 723              		.loc 1 291 3 is_stmt 1 view .LVU210
+ 724              		.loc 1 291 6 is_stmt 0 view .LVU211
+ 725 0024 FF2C     		cmp	r4, #255
+ 726 0026 09D0     		beq	.L55
+ 292:../Src/lan8670.c ****   {
+ 293:../Src/lan8670.c ****     /* Clear the enable bit: back to CSMA/CD */
+ 294:../Src/lan8670.c ****     if (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_PLCA_CTRL0, 0x0000U) != HAL_OK)
+ 295:../Src/lan8670.c ****     {
+ 296:../Src/lan8670.c ****       return LAN8670_ERR_MDIO;
+ 297:../Src/lan8670.c ****     }
+ 298:../Src/lan8670.c ****   }
+ 299:../Src/lan8670.c ****   else
+ 300:../Src/lan8670.c ****   {
+ 301:../Src/lan8670.c ****     if (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_PLCA_CTRL0,
+ 727              		.loc 1 301 5 is_stmt 1 view .LVU212
+ 728              		.loc 1 301 9 is_stmt 0 view .LVU213
+ 729 0028 4FF40042 		mov	r2, #32768
+ 730 002c 4CF60121 		movw	r1, #51713
+ 731 0030 1F20     		movs	r0, #31
+ 732 0032 FFF7FEFF 		bl	LAN8670_WriteMMD
+ 733              	.LVL60:
+ 734              		.loc 1 301 8 view .LVU214
+ 735 0036 68B1     		cbz	r0, .L48
+ 302:../Src/lan8670.c ****                          LAN8670_PLCA_EN) != HAL_OK)
+ 303:../Src/lan8670.c ****     {
+ 304:../Src/lan8670.c ****       return LAN8670_ERR_MDIO;
+ 736              		.loc 1 304 14 view .LVU215
+ 737 0038 0120     		movs	r0, #1
+ 738 003a 0BE0     		b	.L48
+ 739              	.L55:
+ 294:../Src/lan8670.c ****     {
+ 740              		.loc 1 294 5 is_stmt 1 view .LVU216
+ 294:../Src/lan8670.c ****     {
+ 741              		.loc 1 294 9 is_stmt 0 view .LVU217
+ 742 003c 0022     		movs	r2, #0
+ 743 003e 4CF60121 		movw	r1, #51713
+ 744 0042 1F20     		movs	r0, #31
+ 745 0044 FFF7FEFF 		bl	LAN8670_WriteMMD
+ 746              	.LVL61:
+ 294:../Src/lan8670.c ****     {
+ 747              		.loc 1 294 8 view .LVU218
+ 748 0048 20B1     		cbz	r0, .L48
+ 296:../Src/lan8670.c ****     }
+ 749              		.loc 1 296 14 view .LVU219
+ 750 004a 0120     		movs	r0, #1
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 21
+
+
+ 751 004c 02E0     		b	.L48
+ 752              	.LVL62:
+ 753              	.L50:
+ 280:../Src/lan8670.c ****     }
+ 754              		.loc 1 280 14 view .LVU220
+ 755 004e 0120     		movs	r0, #1
+ 756 0050 00E0     		b	.L48
+ 757              	.LVL63:
+ 758              	.L51:
+ 288:../Src/lan8670.c ****   }
+ 759              		.loc 1 288 12 view .LVU221
+ 760 0052 0120     		movs	r0, #1
+ 761              	.LVL64:
+ 762              	.L48:
+ 305:../Src/lan8670.c ****     }
+ 306:../Src/lan8670.c ****   }
+ 307:../Src/lan8670.c **** 
+ 308:../Src/lan8670.c ****   return LAN8670_OK;
+ 309:../Src/lan8670.c **** }
+ 763              		.loc 1 309 1 view .LVU222
+ 764 0054 38BD     		pop	{r3, r4, r5, pc}
+ 765              		.cfi_endproc
+ 766              	.LFE143:
+ 768              		.section	.text.LAN8670_WaitForLink,"ax",%progbits
+ 769              		.align	1
+ 770              		.global	LAN8670_WaitForLink
+ 771              		.syntax unified
+ 772              		.thumb
+ 773              		.thumb_func
+ 775              	LAN8670_WaitForLink:
+ 776              	.LVL65:
+ 777              	.LFB144:
+ 310:../Src/lan8670.c **** 
+ 311:../Src/lan8670.c **** /**
+ 312:../Src/lan8670.c ****   * @brief  Wait until the PHY reports a valid link.
+ 313:../Src/lan8670.c ****   */
+ 314:../Src/lan8670.c **** LAN8670_Status LAN8670_WaitForLink(uint32_t TimeoutMs)
+ 315:../Src/lan8670.c **** {
+ 778              		.loc 1 315 1 is_stmt 1 view -0
+ 779              		.cfi_startproc
+ 780              		@ args = 0, pretend = 0, frame = 8
+ 781              		@ frame_needed = 0, uses_anonymous_args = 0
+ 782              		.loc 1 315 1 is_stmt 0 view .LVU224
+ 783 0000 30B5     		push	{r4, r5, lr}
+ 784              	.LCFI16:
+ 785              		.cfi_def_cfa_offset 12
+ 786              		.cfi_offset 4, -12
+ 787              		.cfi_offset 5, -8
+ 788              		.cfi_offset 14, -4
+ 789 0002 83B0     		sub	sp, sp, #12
+ 790              	.LCFI17:
+ 791              		.cfi_def_cfa_offset 24
+ 792 0004 0546     		mov	r5, r0
+ 316:../Src/lan8670.c ****   uint32_t start = HAL_GetTick();
+ 793              		.loc 1 316 3 is_stmt 1 view .LVU225
+ 794              		.loc 1 316 20 is_stmt 0 view .LVU226
+ 795 0006 FFF7FEFF 		bl	HAL_GetTick
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 22
+
+
+ 796              	.LVL66:
+ 797              		.loc 1 316 20 view .LVU227
+ 798 000a 0446     		mov	r4, r0
+ 799              	.LVL67:
+ 317:../Src/lan8670.c ****   uint16_t bmsr = 0U;
+ 800              		.loc 1 317 3 is_stmt 1 view .LVU228
+ 801              		.loc 1 317 12 is_stmt 0 view .LVU229
+ 802 000c 0023     		movs	r3, #0
+ 803 000e ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 804              	.LVL68:
+ 805              	.L58:
+ 318:../Src/lan8670.c **** 
+ 319:../Src/lan8670.c ****   do
+ 806              		.loc 1 319 3 is_stmt 1 view .LVU230
+ 320:../Src/lan8670.c ****   {
+ 321:../Src/lan8670.c ****     /* BMSR link status is latched low: read twice to obtain the live state */
+ 322:../Src/lan8670.c ****     if (LAN8670_ReadReg(LAN8670_REG_BMSR, &bmsr) != HAL_OK)
+ 807              		.loc 1 322 5 view .LVU231
+ 808              		.loc 1 322 9 is_stmt 0 view .LVU232
+ 809 0012 0DF10601 		add	r1, sp, #6
+ 810 0016 0120     		movs	r0, #1
+ 811 0018 FFF7FEFF 		bl	LAN8670_ReadReg
+ 812              	.LVL69:
+ 813              		.loc 1 322 8 view .LVU233
+ 814 001c A8B9     		cbnz	r0, .L59
+ 323:../Src/lan8670.c ****     {
+ 324:../Src/lan8670.c ****       return LAN8670_ERR_MDIO;
+ 325:../Src/lan8670.c ****     }
+ 326:../Src/lan8670.c ****     if (LAN8670_ReadReg(LAN8670_REG_BMSR, &bmsr) != HAL_OK)
+ 815              		.loc 1 326 5 is_stmt 1 view .LVU234
+ 816              		.loc 1 326 9 is_stmt 0 view .LVU235
+ 817 001e 0DF10601 		add	r1, sp, #6
+ 818 0022 0120     		movs	r0, #1
+ 819 0024 FFF7FEFF 		bl	LAN8670_ReadReg
+ 820              	.LVL70:
+ 821              		.loc 1 326 8 view .LVU236
+ 822 0028 0246     		mov	r2, r0
+ 823 002a 90B9     		cbnz	r0, .L60
+ 327:../Src/lan8670.c ****     {
+ 328:../Src/lan8670.c ****       return LAN8670_ERR_MDIO;
+ 329:../Src/lan8670.c ****     }
+ 330:../Src/lan8670.c ****     if ((bmsr & LAN8670_BMSR_LINK) != 0U)
+ 824              		.loc 1 330 5 is_stmt 1 view .LVU237
+ 825              		.loc 1 330 15 is_stmt 0 view .LVU238
+ 826 002c BDF80630 		ldrh	r3, [sp, #6]
+ 827              		.loc 1 330 8 view .LVU239
+ 828 0030 13F0040F 		tst	r3, #4
+ 829 0034 0AD1     		bne	.L57
+ 331:../Src/lan8670.c ****     {
+ 332:../Src/lan8670.c ****       return LAN8670_OK;
+ 333:../Src/lan8670.c ****     }
+ 334:../Src/lan8670.c ****     HAL_Delay(10U);
+ 830              		.loc 1 334 5 is_stmt 1 view .LVU240
+ 831 0036 0A20     		movs	r0, #10
+ 832 0038 FFF7FEFF 		bl	HAL_Delay
+ 833              	.LVL71:
+ 335:../Src/lan8670.c ****   } while ((HAL_GetTick() - start) < TimeoutMs);
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 23
+
+
+ 834              		.loc 1 335 11 view .LVU241
+ 835              		.loc 1 335 13 is_stmt 0 view .LVU242
+ 836 003c FFF7FEFF 		bl	HAL_GetTick
+ 837              	.LVL72:
+ 838              		.loc 1 335 27 view .LVU243
+ 839 0040 001B     		subs	r0, r0, r4
+ 840              		.loc 1 335 3 view .LVU244
+ 841 0042 A842     		cmp	r0, r5
+ 842 0044 E5D3     		bcc	.L58
+ 336:../Src/lan8670.c **** 
+ 337:../Src/lan8670.c ****   return LAN8670_ERR_TIMEOUT;
+ 843              		.loc 1 337 10 view .LVU245
+ 844 0046 0322     		movs	r2, #3
+ 845 0048 00E0     		b	.L57
+ 846              	.L59:
+ 324:../Src/lan8670.c ****     }
+ 847              		.loc 1 324 14 view .LVU246
+ 848 004a 0122     		movs	r2, #1
+ 849              	.L57:
+ 338:../Src/lan8670.c **** }
+ 850              		.loc 1 338 1 view .LVU247
+ 851 004c 1046     		mov	r0, r2
+ 852 004e 03B0     		add	sp, sp, #12
+ 853              	.LCFI18:
+ 854              		.cfi_remember_state
+ 855              		.cfi_def_cfa_offset 12
+ 856              		@ sp needed
+ 857 0050 30BD     		pop	{r4, r5, pc}
+ 858              	.LVL73:
+ 859              	.L60:
+ 860              	.LCFI19:
+ 861              		.cfi_restore_state
+ 328:../Src/lan8670.c ****     }
+ 862              		.loc 1 328 14 view .LVU248
+ 863 0052 0122     		movs	r2, #1
+ 864 0054 FAE7     		b	.L57
+ 865              		.cfi_endproc
+ 866              	.LFE144:
+ 868              		.section	.text.LAN8670_EthInit,"ax",%progbits
+ 869              		.align	1
+ 870              		.global	LAN8670_EthInit
+ 871              		.syntax unified
+ 872              		.thumb
+ 873              		.thumb_func
+ 875              	LAN8670_EthInit:
+ 876              	.LFB145:
+ 339:../Src/lan8670.c **** 
+ 340:../Src/lan8670.c **** /**
+ 341:../Src/lan8670.c ****   * @brief  Configure the ETH MAC/DMA for 10BASE-T1S. Does not start the MAC.
+ 342:../Src/lan8670.c ****   *         This must run before any MDIO access because it enables the ETH
+ 343:../Src/lan8670.c ****   *         clock, configures the RMII pin set and sets the MDIO clock range.
+ 344:../Src/lan8670.c ****   *         Auto-negotiation is disabled: 10BASE-T1S is always 10 Mbit/s and the
+ 345:../Src/lan8670.c ****   *         LAN8670 has no Clause 37 negotiation.
+ 346:../Src/lan8670.c ****   */
+ 347:../Src/lan8670.c **** HAL_StatusTypeDef LAN8670_EthInit(void)
+ 348:../Src/lan8670.c **** {
+ 877              		.loc 1 348 1 is_stmt 1 view -0
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 24
+
+
+ 878              		.cfi_startproc
+ 879              		@ args = 0, pretend = 0, frame = 0
+ 880              		@ frame_needed = 0, uses_anonymous_args = 0
+ 881 0000 08B5     		push	{r3, lr}
+ 882              	.LCFI20:
+ 883              		.cfi_def_cfa_offset 8
+ 884              		.cfi_offset 3, -8
+ 885              		.cfi_offset 14, -4
+ 349:../Src/lan8670.c ****   static uint8_t macAddr[6] = {0x02U, 0x00U, 0x00U, 0x00U, 0x00U, 0x01U};
+ 886              		.loc 1 349 3 view .LVU250
+ 350:../Src/lan8670.c **** 
+ 351:../Src/lan8670.c ****   heth.Instance = ETH;
+ 887              		.loc 1 351 3 view .LVU251
+ 888              		.loc 1 351 17 is_stmt 0 view .LVU252
+ 889 0002 1348     		ldr	r0, .L69
+ 890 0004 134B     		ldr	r3, .L69+4
+ 891 0006 0360     		str	r3, [r0]
+ 352:../Src/lan8670.c ****   heth.Init.AutoNegotiation = ETH_AUTONEGOTIATION_DISABLE;
+ 892              		.loc 1 352 3 is_stmt 1 view .LVU253
+ 893              		.loc 1 352 29 is_stmt 0 view .LVU254
+ 894 0008 0023     		movs	r3, #0
+ 895 000a 4360     		str	r3, [r0, #4]
+ 353:../Src/lan8670.c ****   heth.Init.Speed           = LAN8670_ETH_SPEED;
+ 896              		.loc 1 353 3 is_stmt 1 view .LVU255
+ 897              		.loc 1 353 29 is_stmt 0 view .LVU256
+ 898 000c 8360     		str	r3, [r0, #8]
+ 354:../Src/lan8670.c ****   heth.Init.DuplexMode      = LAN8670_ETH_DUPLEX;
+ 899              		.loc 1 354 3 is_stmt 1 view .LVU257
+ 900              		.loc 1 354 29 is_stmt 0 view .LVU258
+ 901 000e 4FF40062 		mov	r2, #2048
+ 902 0012 C260     		str	r2, [r0, #12]
+ 355:../Src/lan8670.c ****   heth.Init.PhyAddress      = LAN8670_PHY_ADDR;
+ 903              		.loc 1 355 3 is_stmt 1 view .LVU259
+ 904              		.loc 1 355 29 is_stmt 0 view .LVU260
+ 905 0014 0382     		strh	r3, [r0, #16]	@ movhi
+ 356:../Src/lan8670.c ****   heth.Init.MACAddr         = macAddr;
+ 906              		.loc 1 356 3 is_stmt 1 view .LVU261
+ 907              		.loc 1 356 29 is_stmt 0 view .LVU262
+ 908 0016 104A     		ldr	r2, .L69+8
+ 909 0018 4261     		str	r2, [r0, #20]
+ 357:../Src/lan8670.c ****   heth.Init.RxMode          = ETH_RXPOLLING_MODE;
+ 910              		.loc 1 357 3 is_stmt 1 view .LVU263
+ 911              		.loc 1 357 29 is_stmt 0 view .LVU264
+ 912 001a 8361     		str	r3, [r0, #24]
+ 358:../Src/lan8670.c ****   heth.Init.ChecksumMode    = ETH_CHECKSUM_BY_SOFTWARE;
+ 913              		.loc 1 358 3 is_stmt 1 view .LVU265
+ 914              		.loc 1 358 29 is_stmt 0 view .LVU266
+ 915 001c 0123     		movs	r3, #1
+ 916 001e C361     		str	r3, [r0, #28]
+ 359:../Src/lan8670.c ****   heth.Init.MediaInterface  = ETH_MEDIA_INTERFACE_RMII;
+ 917              		.loc 1 359 3 is_stmt 1 view .LVU267
+ 918              		.loc 1 359 29 is_stmt 0 view .LVU268
+ 919 0020 0423     		movs	r3, #4
+ 920 0022 0362     		str	r3, [r0, #32]
+ 360:../Src/lan8670.c **** 
+ 361:../Src/lan8670.c ****   if (HAL_ETH_Init(&heth) != HAL_OK)
+ 921              		.loc 1 361 3 is_stmt 1 view .LVU269
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 25
+
+
+ 922              		.loc 1 361 7 is_stmt 0 view .LVU270
+ 923 0024 FFF7FEFF 		bl	HAL_ETH_Init
+ 924              	.LVL74:
+ 925              		.loc 1 361 6 view .LVU271
+ 926 0028 08B1     		cbz	r0, .L67
+ 362:../Src/lan8670.c ****   {
+ 363:../Src/lan8670.c ****     return HAL_ERROR;
+ 927              		.loc 1 363 12 view .LVU272
+ 928 002a 0120     		movs	r0, #1
+ 929              	.L63:
+ 364:../Src/lan8670.c ****   }
+ 365:../Src/lan8670.c **** 
+ 366:../Src/lan8670.c ****   if (HAL_ETH_DMATxDescListInit(&heth, DMATxDscrTab, &Tx_Buff[0][0],
+ 367:../Src/lan8670.c ****                                 ETH_TX_DESC_CNT) != HAL_OK)
+ 368:../Src/lan8670.c ****   {
+ 369:../Src/lan8670.c ****     return HAL_ERROR;
+ 370:../Src/lan8670.c ****   }
+ 371:../Src/lan8670.c **** 
+ 372:../Src/lan8670.c ****   return HAL_ETH_DMARxDescListInit(&heth, DMARxDscrTab, &Rx_Buff[0][0],
+ 373:../Src/lan8670.c ****                                    ETH_RX_DESC_CNT);
+ 374:../Src/lan8670.c **** }
+ 930              		.loc 1 374 1 view .LVU273
+ 931 002c 08BD     		pop	{r3, pc}
+ 932              	.L67:
+ 366:../Src/lan8670.c ****                                 ETH_TX_DESC_CNT) != HAL_OK)
+ 933              		.loc 1 366 3 is_stmt 1 view .LVU274
+ 366:../Src/lan8670.c ****                                 ETH_TX_DESC_CNT) != HAL_OK)
+ 934              		.loc 1 366 7 is_stmt 0 view .LVU275
+ 935 002e 0423     		movs	r3, #4
+ 936 0030 0A4A     		ldr	r2, .L69+12
+ 937 0032 0B49     		ldr	r1, .L69+16
+ 938 0034 0648     		ldr	r0, .L69
+ 939 0036 FFF7FEFF 		bl	HAL_ETH_DMATxDescListInit
+ 940              	.LVL75:
+ 366:../Src/lan8670.c ****                                 ETH_TX_DESC_CNT) != HAL_OK)
+ 941              		.loc 1 366 6 view .LVU276
+ 942 003a 08B1     		cbz	r0, .L68
+ 369:../Src/lan8670.c ****   }
+ 943              		.loc 1 369 12 view .LVU277
+ 944 003c 0120     		movs	r0, #1
+ 945 003e F5E7     		b	.L63
+ 946              	.L68:
+ 372:../Src/lan8670.c ****                                    ETH_RX_DESC_CNT);
+ 947              		.loc 1 372 3 is_stmt 1 view .LVU278
+ 372:../Src/lan8670.c ****                                    ETH_RX_DESC_CNT);
+ 948              		.loc 1 372 10 is_stmt 0 view .LVU279
+ 949 0040 0423     		movs	r3, #4
+ 950 0042 084A     		ldr	r2, .L69+20
+ 951 0044 0849     		ldr	r1, .L69+24
+ 952 0046 0248     		ldr	r0, .L69
+ 953 0048 FFF7FEFF 		bl	HAL_ETH_DMARxDescListInit
+ 954              	.LVL76:
+ 955 004c EEE7     		b	.L63
+ 956              	.L70:
+ 957 004e 00BF     		.align	2
+ 958              	.L69:
+ 959 0050 00000000 		.word	heth
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 26
+
+
+ 960 0054 00000C48 		.word	1208745984
+ 961 0058 00000000 		.word	.LANCHOR0
+ 962 005c 00000000 		.word	Tx_Buff
+ 963 0060 00000000 		.word	.LANCHOR1
+ 964 0064 00000000 		.word	Rx_Buff
+ 965 0068 00000000 		.word	.LANCHOR2
+ 966              		.cfi_endproc
+ 967              	.LFE145:
+ 969              		.section	.text.LAN8670_EthStart,"ax",%progbits
+ 970              		.align	1
+ 971              		.global	LAN8670_EthStart
+ 972              		.syntax unified
+ 973              		.thumb
+ 974              		.thumb_func
+ 976              	LAN8670_EthStart:
+ 977              	.LFB146:
+ 375:../Src/lan8670.c **** 
+ 376:../Src/lan8670.c **** /**
+ 377:../Src/lan8670.c ****   * @brief  Enable the MAC/DMA transmitter and receiver.
+ 378:../Src/lan8670.c ****   */
+ 379:../Src/lan8670.c **** HAL_StatusTypeDef LAN8670_EthStart(void)
+ 380:../Src/lan8670.c **** {
+ 978              		.loc 1 380 1 is_stmt 1 view -0
+ 979              		.cfi_startproc
+ 980              		@ args = 0, pretend = 0, frame = 0
+ 981              		@ frame_needed = 0, uses_anonymous_args = 0
+ 982 0000 08B5     		push	{r3, lr}
+ 983              	.LCFI21:
+ 984              		.cfi_def_cfa_offset 8
+ 985              		.cfi_offset 3, -8
+ 986              		.cfi_offset 14, -4
+ 381:../Src/lan8670.c ****   return HAL_ETH_Start(&heth);
+ 987              		.loc 1 381 3 view .LVU281
+ 988              		.loc 1 381 10 is_stmt 0 view .LVU282
+ 989 0002 0248     		ldr	r0, .L73
+ 990 0004 FFF7FEFF 		bl	HAL_ETH_Start
+ 991              	.LVL77:
+ 382:../Src/lan8670.c **** }
+ 992              		.loc 1 382 1 view .LVU283
+ 993 0008 08BD     		pop	{r3, pc}
+ 994              	.L74:
+ 995 000a 00BF     		.align	2
+ 996              	.L73:
+ 997 000c 00000000 		.word	heth
+ 998              		.cfi_endproc
+ 999              	.LFE146:
+ 1001              		.section	.text.LAN8670_SendFrame,"ax",%progbits
+ 1002              		.align	1
+ 1003              		.global	LAN8670_SendFrame
+ 1004              		.syntax unified
+ 1005              		.thumb
+ 1006              		.thumb_func
+ 1008              	LAN8670_SendFrame:
+ 1009              	.LVL78:
+ 1010              	.LFB147:
+ 383:../Src/lan8670.c **** 
+ 384:../Src/lan8670.c **** /**
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 27
+
+
+ 385:../Src/lan8670.c ****   * @brief  Queue one Ethernet frame for transmission.
+ 386:../Src/lan8670.c ****   * @param  Frame  complete frame including the 14 byte header
+ 387:../Src/lan8670.c ****   * @param  Length frame length, 14..ETH_MAX_PACKET_SIZE
+ 388:../Src/lan8670.c ****   */
+ 389:../Src/lan8670.c **** HAL_StatusTypeDef LAN8670_SendFrame(const uint8_t *Frame, uint32_t Length)
+ 390:../Src/lan8670.c **** {
+ 1011              		.loc 1 390 1 is_stmt 1 view -0
+ 1012              		.cfi_startproc
+ 1013              		@ args = 0, pretend = 0, frame = 0
+ 1014              		@ frame_needed = 0, uses_anonymous_args = 0
+ 391:../Src/lan8670.c ****   uint32_t i;
+ 1015              		.loc 1 391 3 view .LVU285
+ 392:../Src/lan8670.c **** 
+ 393:../Src/lan8670.c ****   if ((Frame == NULL) || (Length == 0U) || (Length > ETH_MAX_PACKET_SIZE))
+ 1016              		.loc 1 393 3 view .LVU286
+ 1017              		.loc 1 393 6 is_stmt 0 view .LVU287
+ 1018 0000 D8B1     		cbz	r0, .L79
+ 1019 0002 8446     		mov	ip, r0
+ 1020              		.loc 1 393 23 discriminator 1 view .LVU288
+ 1021 0004 D9B1     		cbz	r1, .L80
+ 390:../Src/lan8670.c ****   uint32_t i;
+ 1022              		.loc 1 390 1 discriminator 2 view .LVU289
+ 1023 0006 08B5     		push	{r3, lr}
+ 1024              	.LCFI22:
+ 1025              		.cfi_def_cfa_offset 8
+ 1026              		.cfi_offset 3, -8
+ 1027              		.cfi_offset 14, -4
+ 1028              		.loc 1 393 41 discriminator 2 view .LVU290
+ 1029 0008 40F2F453 		movw	r3, #1524
+ 1030 000c 9942     		cmp	r1, r3
+ 1031 000e 18D8     		bhi	.L81
+ 394:../Src/lan8670.c ****   {
+ 395:../Src/lan8670.c ****     return HAL_ERROR;
+ 396:../Src/lan8670.c ****   }
+ 397:../Src/lan8670.c **** 
+ 398:../Src/lan8670.c ****   if ((heth.TxDesc->Status & ETH_DMATXDESC_OWN) != 0U)
+ 1032              		.loc 1 398 3 is_stmt 1 view .LVU291
+ 1033              		.loc 1 398 12 is_stmt 0 view .LVU292
+ 1034 0010 0F4B     		ldr	r3, .L89
+ 1035 0012 DB6A     		ldr	r3, [r3, #44]
+ 1036              		.loc 1 398 19 view .LVU293
+ 1037 0014 1B68     		ldr	r3, [r3]
+ 1038              		.loc 1 398 6 view .LVU294
+ 1039 0016 002B     		cmp	r3, #0
+ 1040 0018 15DB     		blt	.L82
+ 399:../Src/lan8670.c ****   {
+ 400:../Src/lan8670.c ****     /* The DMA still owns the descriptor, the previous frame is in flight */
+ 401:../Src/lan8670.c ****     return HAL_BUSY;
+ 402:../Src/lan8670.c ****   }
+ 403:../Src/lan8670.c **** 
+ 404:../Src/lan8670.c ****   /* Copy the frame into the buffer attached to the current Tx descriptor */
+ 405:../Src/lan8670.c ****   for (i = 0U; i < Length; i++)
+ 1041              		.loc 1 405 10 view .LVU295
+ 1042 001a 0023     		movs	r3, #0
+ 1043 001c 06E0     		b	.L77
+ 1044              	.LVL79:
+ 1045              	.L78:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 28
+
+
+ 406:../Src/lan8670.c ****   {
+ 407:../Src/lan8670.c ****     ((uint8_t *)(uint32_t)heth.TxDesc->Buffer1Addr)[i] = Frame[i];
+ 1046              		.loc 1 407 5 is_stmt 1 discriminator 3 view .LVU296
+ 1047              		.loc 1 407 31 is_stmt 0 discriminator 3 view .LVU297
+ 1048 001e 0C4A     		ldr	r2, .L89
+ 1049 0020 D26A     		ldr	r2, [r2, #44]
+ 1050              		.loc 1 407 38 discriminator 3 view .LVU298
+ 1051 0022 9268     		ldr	r2, [r2, #8]
+ 1052              		.loc 1 407 63 discriminator 3 view .LVU299
+ 1053 0024 1CF80300 		ldrb	r0, [ip, r3]	@ zero_extendqisi2
+ 1054              		.loc 1 407 56 discriminator 3 view .LVU300
+ 1055 0028 D054     		strb	r0, [r2, r3]
+ 405:../Src/lan8670.c ****   {
+ 1056              		.loc 1 405 28 is_stmt 1 discriminator 3 view .LVU301
+ 405:../Src/lan8670.c ****   {
+ 1057              		.loc 1 405 29 is_stmt 0 discriminator 3 view .LVU302
+ 1058 002a 0133     		adds	r3, r3, #1
+ 1059              	.LVL80:
+ 1060              	.L77:
+ 405:../Src/lan8670.c ****   {
+ 1061              		.loc 1 405 16 is_stmt 1 discriminator 1 view .LVU303
+ 405:../Src/lan8670.c ****   {
+ 1062              		.loc 1 405 3 is_stmt 0 discriminator 1 view .LVU304
+ 1063 002c 8B42     		cmp	r3, r1
+ 1064 002e F6D3     		bcc	.L78
+ 408:../Src/lan8670.c ****   }
+ 409:../Src/lan8670.c **** 
+ 410:../Src/lan8670.c ****   /* ControlBufferSize (TCH, FS, LS and TBS1) is programmed by
+ 411:../Src/lan8670.c ****      HAL_ETH_TransmitFrame(), do not overwrite it here. */
+ 412:../Src/lan8670.c **** 
+ 413:../Src/lan8670.c ****   if (HAL_ETH_TransmitFrame(&heth, Length) != HAL_OK)
+ 1065              		.loc 1 413 3 is_stmt 1 view .LVU305
+ 1066              		.loc 1 413 7 is_stmt 0 view .LVU306
+ 1067 0030 0748     		ldr	r0, .L89
+ 1068 0032 FFF7FEFF 		bl	HAL_ETH_TransmitFrame
+ 1069              	.LVL81:
+ 1070              		.loc 1 413 6 view .LVU307
+ 1071 0036 40B9     		cbnz	r0, .L88
+ 1072              	.L76:
+ 414:../Src/lan8670.c ****   {
+ 415:../Src/lan8670.c ****     return HAL_ERROR;
+ 416:../Src/lan8670.c ****   }
+ 417:../Src/lan8670.c **** 
+ 418:../Src/lan8670.c ****   return HAL_OK;
+ 419:../Src/lan8670.c **** }
+ 1073              		.loc 1 419 1 view .LVU308
+ 1074 0038 08BD     		pop	{r3, pc}
+ 1075              	.LVL82:
+ 1076              	.L79:
+ 1077              	.LCFI23:
+ 1078              		.cfi_def_cfa_offset 0
+ 1079              		.cfi_restore 3
+ 1080              		.cfi_restore 14
+ 395:../Src/lan8670.c ****   }
+ 1081              		.loc 1 395 12 view .LVU309
+ 1082 003a 0120     		movs	r0, #1
+ 1083              	.LVL83:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 29
+
+
+ 395:../Src/lan8670.c ****   }
+ 1084              		.loc 1 395 12 view .LVU310
+ 1085 003c 7047     		bx	lr
+ 1086              	.LVL84:
+ 1087              	.L80:
+ 395:../Src/lan8670.c ****   }
+ 1088              		.loc 1 395 12 view .LVU311
+ 1089 003e 0120     		movs	r0, #1
+ 1090              	.LVL85:
+ 1091              		.loc 1 419 1 view .LVU312
+ 1092 0040 7047     		bx	lr
+ 1093              	.LVL86:
+ 1094              	.L81:
+ 1095              	.LCFI24:
+ 1096              		.cfi_def_cfa_offset 8
+ 1097              		.cfi_offset 3, -8
+ 1098              		.cfi_offset 14, -4
+ 395:../Src/lan8670.c ****   }
+ 1099              		.loc 1 395 12 view .LVU313
+ 1100 0042 0120     		movs	r0, #1
+ 1101              	.LVL87:
+ 395:../Src/lan8670.c ****   }
+ 1102              		.loc 1 395 12 view .LVU314
+ 1103 0044 F8E7     		b	.L76
+ 1104              	.LVL88:
+ 1105              	.L82:
+ 401:../Src/lan8670.c ****   }
+ 1106              		.loc 1 401 12 view .LVU315
+ 1107 0046 0220     		movs	r0, #2
+ 1108              	.LVL89:
+ 401:../Src/lan8670.c ****   }
+ 1109              		.loc 1 401 12 view .LVU316
+ 1110 0048 F6E7     		b	.L76
+ 1111              	.LVL90:
+ 1112              	.L88:
+ 415:../Src/lan8670.c ****   }
+ 1113              		.loc 1 415 12 view .LVU317
+ 1114 004a 0120     		movs	r0, #1
+ 1115 004c F4E7     		b	.L76
+ 1116              	.L90:
+ 1117 004e 00BF     		.align	2
+ 1118              	.L89:
+ 1119 0050 00000000 		.word	heth
+ 1120              		.cfi_endproc
+ 1121              	.LFE147:
+ 1123              		.section	.text.LAN8670_GetFrame,"ax",%progbits
+ 1124              		.align	1
+ 1125              		.global	LAN8670_GetFrame
+ 1126              		.syntax unified
+ 1127              		.thumb
+ 1128              		.thumb_func
+ 1130              	LAN8670_GetFrame:
+ 1131              	.LVL91:
+ 1132              	.LFB148:
+ 420:../Src/lan8670.c **** 
+ 421:../Src/lan8670.c **** /**
+ 422:../Src/lan8670.c ****   * @brief  Poll for one received frame.
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 30
+
+
+ 423:../Src/lan8670.c ****   *         The descriptors are handed back to the DMA once the frame has been
+ 424:../Src/lan8670.c ****   *         copied out, otherwise reception stalls after the first segment.
+ 425:../Src/lan8670.c ****   * @param  Buffer     destination buffer
+ 426:../Src/lan8670.c ****   * @param  BufferSize size of the destination buffer
+ 427:../Src/lan8670.c ****   * @param  Length     received frame length, may be NULL
+ 428:../Src/lan8670.c ****   * @retval HAL_OK when a frame was copied, HAL_TIMEOUT when none is pending
+ 429:../Src/lan8670.c ****   */
+ 430:../Src/lan8670.c **** HAL_StatusTypeDef LAN8670_GetFrame(uint8_t *Buffer, uint32_t BufferSize,
+ 431:../Src/lan8670.c ****                                    uint32_t *Length)
+ 432:../Src/lan8670.c **** {
+ 1133              		.loc 1 432 1 is_stmt 1 view -0
+ 1134              		.cfi_startproc
+ 1135              		@ args = 0, pretend = 0, frame = 0
+ 1136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 433:../Src/lan8670.c ****   ETH_DMADescTypeDef *desc;
+ 1137              		.loc 1 433 3 view .LVU319
+ 434:../Src/lan8670.c ****   uint8_t *src;
+ 1138              		.loc 1 434 3 view .LVU320
+ 435:../Src/lan8670.c ****   uint32_t len;
+ 1139              		.loc 1 435 3 view .LVU321
+ 436:../Src/lan8670.c ****   uint32_t offset = 0U;
+ 1140              		.loc 1 436 3 view .LVU322
+ 437:../Src/lan8670.c ****   uint32_t copied = 0U;
+ 1141              		.loc 1 437 3 view .LVU323
+ 438:../Src/lan8670.c ****   uint32_t segment;
+ 1142              		.loc 1 438 3 view .LVU324
+ 439:../Src/lan8670.c ****   uint32_t i;
+ 1143              		.loc 1 439 3 view .LVU325
+ 440:../Src/lan8670.c **** 
+ 441:../Src/lan8670.c ****   if ((Buffer == NULL) || (BufferSize == 0U))
+ 1144              		.loc 1 441 3 view .LVU326
+ 1145              		.loc 1 441 6 is_stmt 0 view .LVU327
+ 1146 0000 0028     		cmp	r0, #0
+ 1147 0002 70D0     		beq	.L107
+ 432:../Src/lan8670.c ****   ETH_DMADescTypeDef *desc;
+ 1148              		.loc 1 432 1 discriminator 1 view .LVU328
+ 1149 0004 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 1150              	.LCFI25:
+ 1151              		.cfi_def_cfa_offset 32
+ 1152              		.cfi_offset 3, -32
+ 1153              		.cfi_offset 4, -28
+ 1154              		.cfi_offset 5, -24
+ 1155              		.cfi_offset 6, -20
+ 1156              		.cfi_offset 7, -16
+ 1157              		.cfi_offset 8, -12
+ 1158              		.cfi_offset 9, -8
+ 1159              		.cfi_offset 14, -4
+ 1160 0008 0E46     		mov	r6, r1
+ 1161 000a 9146     		mov	r9, r2
+ 1162 000c 0546     		mov	r5, r0
+ 1163              		.loc 1 441 24 discriminator 1 view .LVU329
+ 1164 000e 11B9     		cbnz	r1, .L113
+ 442:../Src/lan8670.c ****   {
+ 443:../Src/lan8670.c ****     return HAL_ERROR;
+ 1165              		.loc 1 443 12 view .LVU330
+ 1166 0010 0120     		movs	r0, #1
+ 1167              	.LVL92:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 31
+
+
+ 1168              	.L92:
+ 444:../Src/lan8670.c ****   }
+ 445:../Src/lan8670.c **** 
+ 446:../Src/lan8670.c ****   if (HAL_ETH_GetReceivedFrame(&heth) != HAL_OK)
+ 447:../Src/lan8670.c ****   {
+ 448:../Src/lan8670.c ****     /* Clear a possible Rx buffer unavailable condition and resume the DMA */
+ 449:../Src/lan8670.c ****     if ((heth.Instance->DMASR & ETH_DMASR_RBUS) != 0U)
+ 450:../Src/lan8670.c ****     {
+ 451:../Src/lan8670.c ****       heth.Instance->DMASR   = ETH_DMASR_RBUS;
+ 452:../Src/lan8670.c ****       heth.Instance->DMARPDR = 0U;
+ 453:../Src/lan8670.c ****     }
+ 454:../Src/lan8670.c ****     return HAL_TIMEOUT;
+ 455:../Src/lan8670.c ****   }
+ 456:../Src/lan8670.c **** 
+ 457:../Src/lan8670.c ****   len = heth.RxFrameInfos.length;
+ 458:../Src/lan8670.c **** 
+ 459:../Src/lan8670.c ****   if (len > BufferSize)
+ 460:../Src/lan8670.c ****   {
+ 461:../Src/lan8670.c ****     len = BufferSize;
+ 462:../Src/lan8670.c ****   }
+ 463:../Src/lan8670.c **** 
+ 464:../Src/lan8670.c ****   /* A frame may span several descriptors of ETH_RX_BUF_SIZE bytes each */
+ 465:../Src/lan8670.c ****   desc  = heth.RxFrameInfos.FSRxDesc;
+ 466:../Src/lan8670.c ****   src   = (uint8_t *)(uint32_t)desc->Buffer1Addr;
+ 467:../Src/lan8670.c **** 
+ 468:../Src/lan8670.c ****   while ((copied < len) && (desc != NULL))
+ 469:../Src/lan8670.c ****   {
+ 470:../Src/lan8670.c ****     uint32_t chunk = ETH_RX_BUF_SIZE - offset;
+ 471:../Src/lan8670.c **** 
+ 472:../Src/lan8670.c ****     if (chunk > (len - copied))
+ 473:../Src/lan8670.c ****     {
+ 474:../Src/lan8670.c ****       chunk = len - copied;
+ 475:../Src/lan8670.c ****     }
+ 476:../Src/lan8670.c **** 
+ 477:../Src/lan8670.c ****     for (i = 0U; i < chunk; i++)
+ 478:../Src/lan8670.c ****     {
+ 479:../Src/lan8670.c ****       Buffer[copied + i] = src[offset + i];
+ 480:../Src/lan8670.c ****     }
+ 481:../Src/lan8670.c **** 
+ 482:../Src/lan8670.c ****     copied += chunk;
+ 483:../Src/lan8670.c ****     offset += chunk;
+ 484:../Src/lan8670.c **** 
+ 485:../Src/lan8670.c ****     if (offset >= ETH_RX_BUF_SIZE)
+ 486:../Src/lan8670.c ****     {
+ 487:../Src/lan8670.c ****       offset = 0U;
+ 488:../Src/lan8670.c ****       desc = (ETH_DMADescTypeDef *)(uint32_t)desc->Buffer2NextDescAddr;
+ 489:../Src/lan8670.c ****       if (desc != NULL)
+ 490:../Src/lan8670.c ****       {
+ 491:../Src/lan8670.c ****         src = (uint8_t *)(uint32_t)desc->Buffer1Addr;
+ 492:../Src/lan8670.c ****       }
+ 493:../Src/lan8670.c ****     }
+ 494:../Src/lan8670.c ****   }
+ 495:../Src/lan8670.c **** 
+ 496:../Src/lan8670.c ****   /* Give the segment chain back to the DMA and reset the segment counter */
+ 497:../Src/lan8670.c ****   desc = heth.RxFrameInfos.FSRxDesc;
+ 498:../Src/lan8670.c ****   for (segment = 0U; segment < heth.RxFrameInfos.SegCount; segment++)
+ 499:../Src/lan8670.c ****   {
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 32
+
+
+ 500:../Src/lan8670.c ****     desc->Status |= ETH_DMARXDESC_OWN;
+ 501:../Src/lan8670.c ****     desc = (ETH_DMADescTypeDef *)(uint32_t)desc->Buffer2NextDescAddr;
+ 502:../Src/lan8670.c ****     if (desc == NULL)
+ 503:../Src/lan8670.c ****     {
+ 504:../Src/lan8670.c ****       break;
+ 505:../Src/lan8670.c ****     }
+ 506:../Src/lan8670.c ****   }
+ 507:../Src/lan8670.c ****   heth.RxFrameInfos.SegCount = 0U;
+ 508:../Src/lan8670.c **** 
+ 509:../Src/lan8670.c ****   /* Resume reception when the Rx buffer unavailable flag was raised */
+ 510:../Src/lan8670.c ****   if ((heth.Instance->DMASR & ETH_DMASR_RBUS) != 0U)
+ 511:../Src/lan8670.c ****   {
+ 512:../Src/lan8670.c ****     heth.Instance->DMASR   = ETH_DMASR_RBUS;
+ 513:../Src/lan8670.c ****     heth.Instance->DMARPDR = 0U;
+ 514:../Src/lan8670.c ****   }
+ 515:../Src/lan8670.c **** 
+ 516:../Src/lan8670.c ****   if (Length != NULL)
+ 517:../Src/lan8670.c ****   {
+ 518:../Src/lan8670.c ****     *Length = len;
+ 519:../Src/lan8670.c ****   }
+ 520:../Src/lan8670.c **** 
+ 521:../Src/lan8670.c ****   return HAL_OK;
+ 522:../Src/lan8670.c **** }
+ 1169              		.loc 1 522 1 view .LVU331
+ 1170 0012 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 1171              	.LVL93:
+ 1172              	.L113:
+ 446:../Src/lan8670.c ****   {
+ 1173              		.loc 1 446 3 is_stmt 1 view .LVU332
+ 446:../Src/lan8670.c ****   {
+ 1174              		.loc 1 446 7 is_stmt 0 view .LVU333
+ 1175 0016 3548     		ldr	r0, .L115
+ 1176              	.LVL94:
+ 446:../Src/lan8670.c ****   {
+ 1177              		.loc 1 446 7 view .LVU334
+ 1178 0018 FFF7FEFF 		bl	HAL_ETH_GetReceivedFrame
+ 1179              	.LVL95:
+ 446:../Src/lan8670.c ****   {
+ 1180              		.loc 1 446 6 view .LVU335
+ 1181 001c 58B9     		cbnz	r0, .L114
+ 457:../Src/lan8670.c **** 
+ 1182              		.loc 1 457 3 is_stmt 1 view .LVU336
+ 457:../Src/lan8670.c **** 
+ 1183              		.loc 1 457 7 is_stmt 0 view .LVU337
+ 1184 001e 334B     		ldr	r3, .L115
+ 1185 0020 DB6B     		ldr	r3, [r3, #60]
+ 1186              	.LVL96:
+ 459:../Src/lan8670.c ****   {
+ 1187              		.loc 1 459 3 is_stmt 1 view .LVU338
+ 459:../Src/lan8670.c ****   {
+ 1188              		.loc 1 459 6 is_stmt 0 view .LVU339
+ 1189 0022 9E42     		cmp	r6, r3
+ 1190 0024 00D3     		bcc	.L95
+ 457:../Src/lan8670.c **** 
+ 1191              		.loc 1 457 7 view .LVU340
+ 1192 0026 1E46     		mov	r6, r3
+ 1193              	.LVL97:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 33
+
+
+ 1194              	.L95:
+ 465:../Src/lan8670.c ****   src   = (uint8_t *)(uint32_t)desc->Buffer1Addr;
+ 1195              		.loc 1 465 3 is_stmt 1 view .LVU341
+ 465:../Src/lan8670.c ****   src   = (uint8_t *)(uint32_t)desc->Buffer1Addr;
+ 1196              		.loc 1 465 9 is_stmt 0 view .LVU342
+ 1197 0028 304B     		ldr	r3, .L115
+ 1198 002a 1F6B     		ldr	r7, [r3, #48]
+ 1199              	.LVL98:
+ 466:../Src/lan8670.c **** 
+ 1200              		.loc 1 466 3 is_stmt 1 view .LVU343
+ 466:../Src/lan8670.c **** 
+ 1201              		.loc 1 466 36 is_stmt 0 view .LVU344
+ 1202 002c D7F80880 		ldr	r8, [r7, #8]
+ 1203              	.LVL99:
+ 468:../Src/lan8670.c ****   {
+ 1204              		.loc 1 468 3 is_stmt 1 view .LVU345
+ 437:../Src/lan8670.c ****   uint32_t segment;
+ 1205              		.loc 1 437 12 is_stmt 0 view .LVU346
+ 1206 0030 0021     		movs	r1, #0
+ 436:../Src/lan8670.c ****   uint32_t copied = 0U;
+ 1207              		.loc 1 436 12 view .LVU347
+ 1208 0032 0A46     		mov	r2, r1
+ 468:../Src/lan8670.c ****   {
+ 1209              		.loc 1 468 9 view .LVU348
+ 1210 0034 26E0     		b	.L96
+ 1211              	.LVL100:
+ 1212              	.L114:
+ 449:../Src/lan8670.c ****     {
+ 1213              		.loc 1 449 5 is_stmt 1 view .LVU349
+ 449:../Src/lan8670.c ****     {
+ 1214              		.loc 1 449 14 is_stmt 0 view .LVU350
+ 1215 0036 2D4B     		ldr	r3, .L115
+ 1216 0038 1B68     		ldr	r3, [r3]
+ 449:../Src/lan8670.c ****     {
+ 1217              		.loc 1 449 23 view .LVU351
+ 1218 003a 03F58052 		add	r2, r3, #4096
+ 1219 003e 5269     		ldr	r2, [r2, #20]
+ 449:../Src/lan8670.c ****     {
+ 1220              		.loc 1 449 8 view .LVU352
+ 1221 0040 12F0800F 		tst	r2, #128
+ 1222 0044 05D0     		beq	.L94
+ 451:../Src/lan8670.c ****       heth.Instance->DMARPDR = 0U;
+ 1223              		.loc 1 451 7 is_stmt 1 view .LVU353
+ 451:../Src/lan8670.c ****       heth.Instance->DMARPDR = 0U;
+ 1224              		.loc 1 451 30 is_stmt 0 view .LVU354
+ 1225 0046 03F58053 		add	r3, r3, #4096
+ 1226 004a 8022     		movs	r2, #128
+ 1227 004c 5A61     		str	r2, [r3, #20]
+ 452:../Src/lan8670.c ****     }
+ 1228              		.loc 1 452 7 is_stmt 1 view .LVU355
+ 452:../Src/lan8670.c ****     }
+ 1229              		.loc 1 452 30 is_stmt 0 view .LVU356
+ 1230 004e 0022     		movs	r2, #0
+ 1231 0050 9A60     		str	r2, [r3, #8]
+ 1232              	.L94:
+ 454:../Src/lan8670.c ****   }
+ 1233              		.loc 1 454 5 is_stmt 1 view .LVU357
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 34
+
+
+ 454:../Src/lan8670.c ****   }
+ 1234              		.loc 1 454 12 is_stmt 0 view .LVU358
+ 1235 0052 0320     		movs	r0, #3
+ 1236 0054 DDE7     		b	.L92
+ 1237              	.LVL101:
+ 1238              	.L99:
+ 1239              	.LBB2:
+ 479:../Src/lan8670.c ****     }
+ 1240              		.loc 1 479 7 is_stmt 1 discriminator 3 view .LVU359
+ 479:../Src/lan8670.c ****     }
+ 1241              		.loc 1 479 39 is_stmt 0 discriminator 3 view .LVU360
+ 1242 0056 02EB030E 		add	lr, r2, r3
+ 479:../Src/lan8670.c ****     }
+ 1243              		.loc 1 479 21 discriminator 3 view .LVU361
+ 1244 005a 01EB030C 		add	ip, r1, r3
+ 479:../Src/lan8670.c ****     }
+ 1245              		.loc 1 479 31 discriminator 3 view .LVU362
+ 1246 005e 18F80EE0 		ldrb	lr, [r8, lr]	@ zero_extendqisi2
+ 479:../Src/lan8670.c ****     }
+ 1247              		.loc 1 479 26 discriminator 3 view .LVU363
+ 1248 0062 05F80CE0 		strb	lr, [r5, ip]
+ 477:../Src/lan8670.c ****     {
+ 1249              		.loc 1 477 29 is_stmt 1 discriminator 3 view .LVU364
+ 477:../Src/lan8670.c ****     {
+ 1250              		.loc 1 477 30 is_stmt 0 discriminator 3 view .LVU365
+ 1251 0066 0133     		adds	r3, r3, #1
+ 1252              	.LVL102:
+ 1253              	.L98:
+ 477:../Src/lan8670.c ****     {
+ 1254              		.loc 1 477 18 is_stmt 1 discriminator 1 view .LVU366
+ 477:../Src/lan8670.c ****     {
+ 1255              		.loc 1 477 5 is_stmt 0 discriminator 1 view .LVU367
+ 1256 0068 A342     		cmp	r3, r4
+ 1257 006a F4D3     		bcc	.L99
+ 482:../Src/lan8670.c ****     offset += chunk;
+ 1258              		.loc 1 482 5 is_stmt 1 view .LVU368
+ 482:../Src/lan8670.c ****     offset += chunk;
+ 1259              		.loc 1 482 12 is_stmt 0 view .LVU369
+ 1260 006c 2144     		add	r1, r1, r4
+ 1261              	.LVL103:
+ 483:../Src/lan8670.c **** 
+ 1262              		.loc 1 483 5 is_stmt 1 view .LVU370
+ 483:../Src/lan8670.c **** 
+ 1263              		.loc 1 483 12 is_stmt 0 view .LVU371
+ 1264 006e 2244     		add	r2, r2, r4
+ 1265              	.LVL104:
+ 485:../Src/lan8670.c ****     {
+ 1266              		.loc 1 485 5 is_stmt 1 view .LVU372
+ 485:../Src/lan8670.c ****     {
+ 1267              		.loc 1 485 8 is_stmt 0 view .LVU373
+ 1268 0070 40F2F353 		movw	r3, #1523
+ 1269              	.LVL105:
+ 485:../Src/lan8670.c ****     {
+ 1270              		.loc 1 485 8 view .LVU374
+ 1271 0074 9A42     		cmp	r2, r3
+ 1272 0076 05D9     		bls	.L96
+ 487:../Src/lan8670.c ****       desc = (ETH_DMADescTypeDef *)(uint32_t)desc->Buffer2NextDescAddr;
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 35
+
+
+ 1273              		.loc 1 487 7 is_stmt 1 view .LVU375
+ 1274              	.LVL106:
+ 488:../Src/lan8670.c ****       if (desc != NULL)
+ 1275              		.loc 1 488 7 view .LVU376
+ 488:../Src/lan8670.c ****       if (desc != NULL)
+ 1276              		.loc 1 488 50 is_stmt 0 view .LVU377
+ 1277 0078 FF68     		ldr	r7, [r7, #12]
+ 1278              	.LVL107:
+ 488:../Src/lan8670.c ****       if (desc != NULL)
+ 1279              		.loc 1 488 12 view .LVU378
+ 1280 007a 3A46     		mov	r2, r7
+ 1281              	.LVL108:
+ 489:../Src/lan8670.c ****       {
+ 1282              		.loc 1 489 7 is_stmt 1 view .LVU379
+ 489:../Src/lan8670.c ****       {
+ 1283              		.loc 1 489 10 is_stmt 0 view .LVU380
+ 1284 007c 17B1     		cbz	r7, .L96
+ 491:../Src/lan8670.c ****       }
+ 1285              		.loc 1 491 9 is_stmt 1 view .LVU381
+ 491:../Src/lan8670.c ****       }
+ 1286              		.loc 1 491 40 is_stmt 0 view .LVU382
+ 1287 007e D7F80880 		ldr	r8, [r7, #8]
+ 1288              	.LVL109:
+ 487:../Src/lan8670.c ****       desc = (ETH_DMADescTypeDef *)(uint32_t)desc->Buffer2NextDescAddr;
+ 1289              		.loc 1 487 14 view .LVU383
+ 1290 0082 0022     		movs	r2, #0
+ 1291              	.LVL110:
+ 1292              	.L96:
+ 487:../Src/lan8670.c ****       desc = (ETH_DMADescTypeDef *)(uint32_t)desc->Buffer2NextDescAddr;
+ 1293              		.loc 1 487 14 view .LVU384
+ 1294              	.LBE2:
+ 468:../Src/lan8670.c ****   {
+ 1295              		.loc 1 468 9 is_stmt 1 view .LVU385
+ 1296 0084 8E42     		cmp	r6, r1
+ 1297 0086 09D9     		bls	.L101
+ 468:../Src/lan8670.c ****   {
+ 1298              		.loc 1 468 25 is_stmt 0 discriminator 1 view .LVU386
+ 1299 0088 47B1     		cbz	r7, .L101
+ 1300              	.LBB3:
+ 470:../Src/lan8670.c **** 
+ 1301              		.loc 1 470 5 is_stmt 1 view .LVU387
+ 470:../Src/lan8670.c **** 
+ 1302              		.loc 1 470 14 is_stmt 0 view .LVU388
+ 1303 008a C2F5BE63 		rsb	r3, r2, #1520
+ 1304 008e 0433     		adds	r3, r3, #4
+ 1305              	.LVL111:
+ 472:../Src/lan8670.c ****     {
+ 1306              		.loc 1 472 5 is_stmt 1 view .LVU389
+ 472:../Src/lan8670.c ****     {
+ 1307              		.loc 1 472 22 is_stmt 0 view .LVU390
+ 1308 0090 741A     		subs	r4, r6, r1
+ 472:../Src/lan8670.c ****     {
+ 1309              		.loc 1 472 8 view .LVU391
+ 1310 0092 9C42     		cmp	r4, r3
+ 1311 0094 00D3     		bcc	.L97
+ 470:../Src/lan8670.c **** 
+ 1312              		.loc 1 470 14 view .LVU392
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 36
+
+
+ 1313 0096 1C46     		mov	r4, r3
+ 1314              	.L97:
+ 1315              	.LVL112:
+ 477:../Src/lan8670.c ****     {
+ 1316              		.loc 1 477 5 is_stmt 1 view .LVU393
+ 477:../Src/lan8670.c ****     {
+ 1317              		.loc 1 477 12 is_stmt 0 view .LVU394
+ 1318 0098 0023     		movs	r3, #0
+ 477:../Src/lan8670.c ****     {
+ 1319              		.loc 1 477 5 view .LVU395
+ 1320 009a E5E7     		b	.L98
+ 1321              	.LVL113:
+ 1322              	.L101:
+ 477:../Src/lan8670.c ****     {
+ 1323              		.loc 1 477 5 view .LVU396
+ 1324              	.LBE3:
+ 497:../Src/lan8670.c ****   for (segment = 0U; segment < heth.RxFrameInfos.SegCount; segment++)
+ 1325              		.loc 1 497 3 is_stmt 1 view .LVU397
+ 497:../Src/lan8670.c ****   for (segment = 0U; segment < heth.RxFrameInfos.SegCount; segment++)
+ 1326              		.loc 1 497 8 is_stmt 0 view .LVU398
+ 1327 009c 134B     		ldr	r3, .L115
+ 1328 009e 1B6B     		ldr	r3, [r3, #48]
+ 1329              	.LVL114:
+ 498:../Src/lan8670.c ****   {
+ 1330              		.loc 1 498 3 is_stmt 1 view .LVU399
+ 498:../Src/lan8670.c ****   {
+ 1331              		.loc 1 498 16 is_stmt 0 view .LVU400
+ 1332 00a0 0021     		movs	r1, #0
+ 1333              	.LVL115:
+ 1334              	.L103:
+ 498:../Src/lan8670.c ****   {
+ 1335              		.loc 1 498 22 is_stmt 1 discriminator 1 view .LVU401
+ 498:../Src/lan8670.c ****   {
+ 1336              		.loc 1 498 49 is_stmt 0 discriminator 1 view .LVU402
+ 1337 00a2 124A     		ldr	r2, .L115
+ 1338 00a4 926B     		ldr	r2, [r2, #56]
+ 498:../Src/lan8670.c ****   {
+ 1339              		.loc 1 498 3 discriminator 1 view .LVU403
+ 1340 00a6 8A42     		cmp	r2, r1
+ 1341 00a8 07D9     		bls	.L104
+ 500:../Src/lan8670.c ****     desc = (ETH_DMADescTypeDef *)(uint32_t)desc->Buffer2NextDescAddr;
+ 1342              		.loc 1 500 5 is_stmt 1 view .LVU404
+ 500:../Src/lan8670.c ****     desc = (ETH_DMADescTypeDef *)(uint32_t)desc->Buffer2NextDescAddr;
+ 1343              		.loc 1 500 18 is_stmt 0 view .LVU405
+ 1344 00aa 1A68     		ldr	r2, [r3]
+ 1345 00ac 42F00042 		orr	r2, r2, #-2147483648
+ 1346 00b0 1A60     		str	r2, [r3]
+ 501:../Src/lan8670.c ****     if (desc == NULL)
+ 1347              		.loc 1 501 5 is_stmt 1 view .LVU406
+ 501:../Src/lan8670.c ****     if (desc == NULL)
+ 1348              		.loc 1 501 48 is_stmt 0 view .LVU407
+ 1349 00b2 DB68     		ldr	r3, [r3, #12]
+ 1350              	.LVL116:
+ 502:../Src/lan8670.c ****     {
+ 1351              		.loc 1 502 5 is_stmt 1 view .LVU408
+ 502:../Src/lan8670.c ****     {
+ 1352              		.loc 1 502 8 is_stmt 0 view .LVU409
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 37
+
+
+ 1353 00b4 0BB1     		cbz	r3, .L104
+ 498:../Src/lan8670.c ****   {
+ 1354              		.loc 1 498 60 is_stmt 1 discriminator 2 view .LVU410
+ 498:../Src/lan8670.c ****   {
+ 1355              		.loc 1 498 67 is_stmt 0 discriminator 2 view .LVU411
+ 1356 00b6 0131     		adds	r1, r1, #1
+ 1357              	.LVL117:
+ 498:../Src/lan8670.c ****   {
+ 1358              		.loc 1 498 67 discriminator 2 view .LVU412
+ 1359 00b8 F3E7     		b	.L103
+ 1360              	.L104:
+ 507:../Src/lan8670.c **** 
+ 1361              		.loc 1 507 3 is_stmt 1 view .LVU413
+ 507:../Src/lan8670.c **** 
+ 1362              		.loc 1 507 30 is_stmt 0 view .LVU414
+ 1363 00ba 0C4B     		ldr	r3, .L115
+ 1364              	.LVL118:
+ 507:../Src/lan8670.c **** 
+ 1365              		.loc 1 507 30 view .LVU415
+ 1366 00bc 0022     		movs	r2, #0
+ 1367 00be 9A63     		str	r2, [r3, #56]
+ 510:../Src/lan8670.c ****   {
+ 1368              		.loc 1 510 3 is_stmt 1 view .LVU416
+ 510:../Src/lan8670.c ****   {
+ 1369              		.loc 1 510 12 is_stmt 0 view .LVU417
+ 1370 00c0 1B68     		ldr	r3, [r3]
+ 510:../Src/lan8670.c ****   {
+ 1371              		.loc 1 510 21 view .LVU418
+ 1372 00c2 03F58052 		add	r2, r3, #4096
+ 1373 00c6 5269     		ldr	r2, [r2, #20]
+ 510:../Src/lan8670.c ****   {
+ 1374              		.loc 1 510 6 view .LVU419
+ 1375 00c8 12F0800F 		tst	r2, #128
+ 1376 00cc 05D0     		beq	.L106
+ 512:../Src/lan8670.c ****     heth.Instance->DMARPDR = 0U;
+ 1377              		.loc 1 512 5 is_stmt 1 view .LVU420
+ 512:../Src/lan8670.c ****     heth.Instance->DMARPDR = 0U;
+ 1378              		.loc 1 512 28 is_stmt 0 view .LVU421
+ 1379 00ce 03F58053 		add	r3, r3, #4096
+ 1380 00d2 8022     		movs	r2, #128
+ 1381 00d4 5A61     		str	r2, [r3, #20]
+ 513:../Src/lan8670.c ****   }
+ 1382              		.loc 1 513 5 is_stmt 1 view .LVU422
+ 513:../Src/lan8670.c ****   }
+ 1383              		.loc 1 513 28 is_stmt 0 view .LVU423
+ 1384 00d6 0022     		movs	r2, #0
+ 1385 00d8 9A60     		str	r2, [r3, #8]
+ 1386              	.L106:
+ 516:../Src/lan8670.c ****   {
+ 1387              		.loc 1 516 3 is_stmt 1 view .LVU424
+ 516:../Src/lan8670.c ****   {
+ 1388              		.loc 1 516 6 is_stmt 0 view .LVU425
+ 1389 00da B9F1000F 		cmp	r9, #0
+ 1390 00de 98D0     		beq	.L92
+ 518:../Src/lan8670.c ****   }
+ 1391              		.loc 1 518 5 is_stmt 1 view .LVU426
+ 518:../Src/lan8670.c ****   }
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 38
+
+
+ 1392              		.loc 1 518 13 is_stmt 0 view .LVU427
+ 1393 00e0 C9F80060 		str	r6, [r9]
+ 1394 00e4 95E7     		b	.L92
+ 1395              	.LVL119:
+ 1396              	.L107:
+ 1397              	.LCFI26:
+ 1398              		.cfi_def_cfa_offset 0
+ 1399              		.cfi_restore 3
+ 1400              		.cfi_restore 4
+ 1401              		.cfi_restore 5
+ 1402              		.cfi_restore 6
+ 1403              		.cfi_restore 7
+ 1404              		.cfi_restore 8
+ 1405              		.cfi_restore 9
+ 1406              		.cfi_restore 14
+ 443:../Src/lan8670.c ****   }
+ 1407              		.loc 1 443 12 view .LVU428
+ 1408 00e6 0120     		movs	r0, #1
+ 1409              	.LVL120:
+ 1410              		.loc 1 522 1 view .LVU429
+ 1411 00e8 7047     		bx	lr
+ 1412              	.L116:
+ 1413 00ea 00BF     		.align	2
+ 1414              	.L115:
+ 1415 00ec 00000000 		.word	heth
+ 1416              		.cfi_endproc
+ 1417              	.LFE148:
+ 1419              		.global	DMARxDscrTab
+ 1420              		.global	DMATxDscrTab
+ 1421              		.section	.bss.DMARxDscrTab,"aw",%nobits
+ 1422              		.align	2
+ 1423              		.set	.LANCHOR2,. + 0
+ 1426              	DMARxDscrTab:
+ 1427 0000 00000000 		.space	64
+ 1427      00000000 
+ 1427      00000000 
+ 1427      00000000 
+ 1427      00000000 
+ 1428              		.section	.bss.DMATxDscrTab,"aw",%nobits
+ 1429              		.align	2
+ 1430              		.set	.LANCHOR1,. + 0
+ 1433              	DMATxDscrTab:
+ 1434 0000 00000000 		.space	64
+ 1434      00000000 
+ 1434      00000000 
+ 1434      00000000 
+ 1434      00000000 
+ 1435              		.section	.bss.Rx_Buff,"aw",%nobits
+ 1436              		.align	2
+ 1439              	Rx_Buff:
+ 1440 0000 00000000 		.space	6096
+ 1440      00000000 
+ 1440      00000000 
+ 1440      00000000 
+ 1440      00000000 
+ 1441              		.section	.bss.Tx_Buff,"aw",%nobits
+ 1442              		.align	2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 39
+
+
+ 1445              	Tx_Buff:
+ 1446 0000 00000000 		.space	6096
+ 1446      00000000 
+ 1446      00000000 
+ 1446      00000000 
+ 1446      00000000 
+ 1447              		.section	.data.macAddr.0,"aw"
+ 1448              		.align	2
+ 1449              		.set	.LANCHOR0,. + 0
+ 1452              	macAddr.0:
+ 1453 0000 02000000 		.ascii	"\002\000\000\000\000\001"
+ 1453      0001
+ 1454              		.text
+ 1455              	.Letext0:
+ 1456              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 1457              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1458              		.file 4 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 1459              		.file 5 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 1460              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_eth.h"
+ 1461              		.file 7 "../Inc/lan8670.h"
+ 1462              		.file 8 "../Inc/main.h"
+ 1463              		.file 9 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e4xx_hal.h"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 40
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 lan8670.c
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:20     .text.LAN8670_ReadReg:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:26     .text.LAN8670_ReadReg:00000000 LAN8670_ReadReg
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:81     .text.LAN8670_ReadReg:00000020 $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:86     .text.LAN8670_WriteReg:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:92     .text.LAN8670_WriteReg:00000000 LAN8670_WriteReg
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:121    .text.LAN8670_WriteReg:00000010 $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:126    .text.LAN8670_MMDSetAddress:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:131    .text.LAN8670_MMDSetAddress:00000000 LAN8670_MMDSetAddress
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:174    .text.LAN8670_ReadMMD:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:180    .text.LAN8670_ReadMMD:00000000 LAN8670_ReadMMD
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:240    .text.LAN8670_WriteMMD:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:246    .text.LAN8670_WriteMMD:00000000 LAN8670_WriteMMD
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:306    .text.LAN8670_Probe:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:312    .text.LAN8670_Probe:00000000 LAN8670_Probe
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:531    .text.LAN8670_SoftReset:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:537    .text.LAN8670_SoftReset:00000000 LAN8670_SoftReset
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:670    .text.LAN8670_ConfigurePLCA:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:676    .text.LAN8670_ConfigurePLCA:00000000 LAN8670_ConfigurePLCA
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:769    .text.LAN8670_WaitForLink:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:775    .text.LAN8670_WaitForLink:00000000 LAN8670_WaitForLink
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:869    .text.LAN8670_EthInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:875    .text.LAN8670_EthInit:00000000 LAN8670_EthInit
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:959    .text.LAN8670_EthInit:00000050 $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1445   .bss.Tx_Buff:00000000 Tx_Buff
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1439   .bss.Rx_Buff:00000000 Rx_Buff
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:970    .text.LAN8670_EthStart:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:976    .text.LAN8670_EthStart:00000000 LAN8670_EthStart
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:997    .text.LAN8670_EthStart:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1002   .text.LAN8670_SendFrame:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1008   .text.LAN8670_SendFrame:00000000 LAN8670_SendFrame
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1119   .text.LAN8670_SendFrame:00000050 $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1124   .text.LAN8670_GetFrame:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1130   .text.LAN8670_GetFrame:00000000 LAN8670_GetFrame
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1415   .text.LAN8670_GetFrame:000000ec $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1426   .bss.DMARxDscrTab:00000000 DMARxDscrTab
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1433   .bss.DMATxDscrTab:00000000 DMATxDscrTab
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1422   .bss.DMARxDscrTab:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1429   .bss.DMATxDscrTab:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1436   .bss.Rx_Buff:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1442   .bss.Tx_Buff:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1448   .data.macAddr.0:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s:1452   .data.macAddr.0:00000000 macAddr.0
+
+UNDEFINED SYMBOLS
+HAL_ETH_ReadPHYRegister
+heth
+HAL_ETH_WritePHYRegister
+HAL_GetTick
+HAL_Delay
+HAL_ETH_Init
+HAL_ETH_DMATxDescListInit
+HAL_ETH_DMARxDescListInit
+HAL_ETH_Start
+HAL_ETH_TransmitFrame
+HAL_ETH_GetReceivedFrame
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cc6gwIPB.s 			page 41
+
+

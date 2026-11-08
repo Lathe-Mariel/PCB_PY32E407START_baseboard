@@ -1,0 +1,34 @@
+{
+    // 使用 IntelliSense 了解相关属性�? 
+    // 悬停以查看现有属性的描述�?
+    // 欲了解更多信息，请访�?: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "Project/Project.elf",
+            "name": "pyocd",
+            "request": "launch",
+            "type": "cortex-debug",
+            "targetId": "PY32E407xE",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "servertype": "pyocd",
+            "cmsisPack": "${env:PYSDEPATH}\\packs\\PY32E4xx_DFP.pack",
+            "svdFile": "${env:PYSDEPATH}\\svd\\PY32E407xx.svd"
+        },
+        {
+            "cwd": "${workspaceRoot}",
+            "type": "cortex-debug",
+            "request": "launch",
+            "name": "jlink",
+            "servertype": "jlink",
+            "interface": "swd",
+            "executable": "Project/Project.elf",
+            "runToEntryPoint": "main",
+            "device": "PY32E407xE",
+            "toolchainPrefix": "arm-none-eabi",
+            "svdFile": "${env:PYSDEPATH}\\svd\\PY32E407xx.svd"
+        }
+    ]
+}

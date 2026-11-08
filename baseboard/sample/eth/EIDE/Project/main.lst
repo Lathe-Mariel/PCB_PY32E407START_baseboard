@@ -1,0 +1,1827 @@
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.rodata.APP_PrintPhyInfo.str1.4,"aMS",%progbits,1
+  20              		.align	2
+  21              	.LC0:
+  22 0000 5048593A 		.ascii	"PHY: ID1=0x%04X ID2=0x%04X (OUI 0x%06lX, model %u, "
+  22      20494431 
+  22      3D307825 
+  22      30345820 
+  22      4944323D 
+  23 0033 72657620 		.ascii	"rev %u)\015\012\000"
+  23      2575290D 
+  23      0A00
+  24 003d 000000   		.align	2
+  25              	.LC1:
+  26 0040 5048593A 		.ascii	"PHY: BMSR=0x%04X BMCR=0x%04X link=%u\015\012\000"
+  26      20424D53 
+  26      523D3078 
+  26      25303458 
+  26      20424D43 
+  27 0067 00       		.align	2
+  28              	.LC2:
+  29 0068 5048593A 		.ascii	"PHY: PLCA status register = 0x%04X\015\012\000"
+  29      20504C43 
+  29      41207374 
+  29      61747573 
+  29      20726567 
+  30 008d 000000   		.align	2
+  31              	.LC3:
+  32 0090 5048593A 		.ascii	"PHY: PLCA registers not readable\015\012\000"
+  32      20504C43 
+  32      41207265 
+  32      67697374 
+  32      65727320 
+  33              		.section	.text.APP_PrintPhyInfo,"ax",%progbits
+  34              		.align	1
+  35              		.syntax unified
+  36              		.thumb
+  37              		.thumb_func
+  39              	APP_PrintPhyInfo:
+  40              	.LVL0:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 2
+
+
+  41              	.LFB139:
+  42              		.file 1 "../Src/main.c"
+   1:../Src/main.c **** /**
+   2:../Src/main.c ****   ******************************************************************************
+   3:../Src/main.c ****   * @file    main.c
+   4:../Src/main.c ****   * @author  MCU Application Team
+   5:../Src/main.c ****   * @brief   LAN8670 10BASE-T1S (RMII) bring-up demo.
+   6:../Src/main.c ****   *
+   7:../Src/main.c ****   *          Startup sequence:
+   8:../Src/main.c ****   *            1. 80 MHz system clock, ETH clocked from HCLK
+   9:../Src/main.c ****   *            2. GPIO for the LEDs and the console UART
+  10:../Src/main.c ****   *            3. PHY identification over MDIO (vendor / model / revision)
+  11:../Src/main.c ****   *            4. PHY soft reset and optional PLCA configuration
+  12:../Src/main.c ****   *            5. MAC/DMA configuration and start, link poll
+  13:../Src/main.c ****   *            6. Periodic demo frames, received frames echoed on the console
+  14:../Src/main.c ****   *
+  15:../Src/main.c ****   *          Console: USART1 (PY-LINK VCP) at 921600 8N1
+  16:../Src/main.c ****   *            PA9  -> PC RXD
+  17:../Src/main.c ****   *            PA10 <- PC TXD
+  18:../Src/main.c ****   ******************************************************************************
+  19:../Src/main.c ****   * @attention
+  20:../Src/main.c ****   *
+  21:../Src/main.c ****   * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  22:../Src/main.c ****   * All rights reserved.</center></h2>
+  23:../Src/main.c ****   *
+  24:../Src/main.c ****   * This software component is licensed by Puya under BSD 3-Clause license,
+  25:../Src/main.c ****   * the "License"; You may not use this file except in compliance with the
+  26:../Src/main.c ****   * License. You may obtain a copy of the License at:
+  27:../Src/main.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  28:../Src/main.c ****   *
+  29:../Src/main.c ****   ******************************************************************************
+  30:../Src/main.c ****   */
+  31:../Src/main.c **** 
+  32:../Src/main.c **** /* Includes ------------------------------------------------------------------*/
+  33:../Src/main.c **** #include <string.h>
+  34:../Src/main.c **** 
+  35:../Src/main.c **** #include "main.h"
+  36:../Src/main.c **** #include "lan8670.h"
+  37:../Src/main.c **** 
+  38:../Src/main.c **** /* Private define ------------------------------------------------------------*/
+  39:../Src/main.c **** 
+  40:../Src/main.c **** /*
+  41:../Src/main.c ****  * PLCA configuration.
+  42:../Src/main.c ****  * Exactly one node on the mixing segment is the coordinator (ID 0) and sends
+  43:../Src/main.c ****  * the periodic BEACON. Followers take IDs 1..NodeCount-1.
+  44:../Src/main.c ****  */
+  45:../Src/main.c **** #define PLCA_NODE_ID                  0U    /* 0 = coordinator, 1..254 = follower */
+  46:../Src/main.c **** #define PLCA_NODE_COUNT               8U
+  47:../Src/main.c **** #define PLCA_TOTMR                   32U   /* transmit opportunity timer, 0 = default */
+  48:../Src/main.c **** 
+  49:../Src/main.c **** /* Demo traffic */
+  50:../Src/main.c **** #define DEMO_FRAME_PERIOD_MS         1000U
+  51:../Src/main.c **** #define DEMO_FRAME_LEN               20U
+  52:../Src/main.c **** 
+  53:../Src/main.c **** /* Private variables ---------------------------------------------------------*/
+  54:../Src/main.c **** ETH_HandleTypeDef heth;
+  55:../Src/main.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 3
+
+
+  56:../Src/main.c **** static uint32_t DemoTxCounter;
+  57:../Src/main.c **** 
+  58:../Src/main.c **** /* Private function prototypes -----------------------------------------------*/
+  59:../Src/main.c **** static void APP_SystemClockConfig(void);
+  60:../Src/main.c **** static void APP_GpioInit(void);
+  61:../Src/main.c **** static void APP_PrintPhyInfo(const LAN8670_Info *Info);
+  62:../Src/main.c **** static void APP_SendDemoFrame(void);
+  63:../Src/main.c **** static void APP_PrintReceivedFrame(const uint8_t *Frame, uint32_t Length);
+  64:../Src/main.c **** 
+  65:../Src/main.c **** /**
+  66:../Src/main.c ****   * @brief  Main program
+  67:../Src/main.c ****   * @retval int
+  68:../Src/main.c ****   */
+  69:../Src/main.c **** int main(void)
+  70:../Src/main.c **** {
+  71:../Src/main.c ****   LAN8670_Info info = {0};
+  72:../Src/main.c ****   LAN8670_Status status;
+  73:../Src/main.c ****   uint8_t ethReady = 0U;
+  74:../Src/main.c ****   uint32_t lastTx = 0U;
+  75:../Src/main.c **** 
+  76:../Src/main.c ****   HAL_Init();
+  77:../Src/main.c ****   APP_SystemClockConfig();
+  78:../Src/main.c ****   APP_GpioInit();
+  79:../Src/main.c ****   Console_Init();
+  80:../Src/main.c **** 
+  81:../Src/main.c ****   Console_Write("\r\n=== PY32E407 + LAN8670 10BASE-T1S bring-up ===\r\n");
+  82:../Src/main.c **** 
+  83:../Src/main.c ****   /* ------------------------------------------------- MAC/DMA (no start) ---*/
+  84:../Src/main.c ****   /* This must happen first: it enables the ETH clock, configures the RMII
+  85:../Src/main.c ****      pins and programs the MDIO clock range used by every PHY access below. */
+  86:../Src/main.c ****   if (LAN8670_EthInit() != HAL_OK)
+  87:../Src/main.c ****   {
+  88:../Src/main.c ****     Console_Write("MAC: initialisation FAILED (RMII clock missing?)\r\n");
+  89:../Src/main.c ****     Console_Write("     check the 50 MHz oscillator and R6/R38/R39/R40\r\n");
+  90:../Src/main.c ****     while (1)
+  91:../Src/main.c ****     {
+  92:../Src/main.c ****       HAL_GPIO_TogglePin(LED_PORT, LED_D1_PIN);
+  93:../Src/main.c ****       HAL_Delay(200U);
+  94:../Src/main.c ****     }
+  95:../Src/main.c ****   }
+  96:../Src/main.c ****   Console_Write("MAC: ETH clock, RMII pins and MDIO ready\r\n");
+  97:../Src/main.c **** 
+  98:../Src/main.c ****   /* ---------------------------------------------------------------- PHY ---*/
+  99:../Src/main.c ****   status = LAN8670_Probe(&info);
+ 100:../Src/main.c ****   APP_PrintPhyInfo(&info);
+ 101:../Src/main.c **** 
+ 102:../Src/main.c ****   if (status == LAN8670_ERR_MDIO)
+ 103:../Src/main.c ****   {
+ 104:../Src/main.c ****     Console_Write("PHY: no answer on MDIO (check PHYAD strap / MDIO pull-up)\r\n");
+ 105:../Src/main.c ****   }
+ 106:../Src/main.c ****   else if (status == LAN8670_ERR_ID)
+ 107:../Src/main.c ****   {
+ 108:../Src/main.c ****     Console_Write("PHY: answered but the identifier is not a LAN8670\r\n");
+ 109:../Src/main.c ****   }
+ 110:../Src/main.c ****   else
+ 111:../Src/main.c ****   {
+ 112:../Src/main.c ****     Console_Write("PHY: LAN8670 detected\r\n");
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 4
+
+
+ 113:../Src/main.c ****   }
+ 114:../Src/main.c **** 
+ 115:../Src/main.c ****   if (status == LAN8670_OK)
+ 116:../Src/main.c ****   {
+ 117:../Src/main.c ****     /* ------------------------------------------------------ PHY reset ---*/
+ 118:../Src/main.c ****     status = LAN8670_SoftReset();
+ 119:../Src/main.c ****     Console_Printf("PHY: soft reset %s\r\n",
+ 120:../Src/main.c ****                    (status == LAN8670_OK) ? "OK" : "FAILED");
+ 121:../Src/main.c **** 
+ 122:../Src/main.c ****     /* ----------------------------------------------------------- PLCA ---*/
+ 123:../Src/main.c ****     status = LAN8670_ConfigurePLCA(PLCA_NODE_ID, PLCA_NODE_COUNT, PLCA_TOTMR);
+ 124:../Src/main.c ****     if (status == LAN8670_OK)
+ 125:../Src/main.c ****     {
+ 126:../Src/main.c ****       Console_Printf("PHY: PLCA enabled, ID=%u, node count=%u, TOTMR=%u\r\n",
+ 127:../Src/main.c ****                      (unsigned)PLCA_NODE_ID, (unsigned)PLCA_NODE_COUNT,
+ 128:../Src/main.c ****                      (unsigned)PLCA_TOTMR);
+ 129:../Src/main.c ****     }
+ 130:../Src/main.c ****     else
+ 131:../Src/main.c ****     {
+ 132:../Src/main.c ****       Console_Write("PHY: PLCA configuration FAILED\r\n");
+ 133:../Src/main.c ****     }
+ 134:../Src/main.c **** 
+ 135:../Src/main.c ****     /* ------------------------------------------------------- MAC start ---*/
+ 136:../Src/main.c ****     if (LAN8670_EthStart() == HAL_OK)
+ 137:../Src/main.c ****     {
+ 138:../Src/main.c ****       ethReady = 1U;
+ 139:../Src/main.c ****       Console_Write("MAC: RMII 10 Mbit/s full duplex, DMA started\r\n");
+ 140:../Src/main.c ****     }
+ 141:../Src/main.c ****     else
+ 142:../Src/main.c ****     {
+ 143:../Src/main.c ****       Console_Write("MAC: start FAILED\r\n");
+ 144:../Src/main.c ****     }
+ 145:../Src/main.c **** 
+ 146:../Src/main.c ****     /* ----------------------------------------------------------- link ---*/
+ 147:../Src/main.c ****     if (ethReady != 0U)
+ 148:../Src/main.c ****     {
+ 149:../Src/main.c ****       status = LAN8670_WaitForLink(3000U);
+ 150:../Src/main.c ****       Console_Printf("PHY: link %s\r\n",
+ 151:../Src/main.c ****                      (status == LAN8670_OK) ? "UP" : "DOWN (no partner?)");
+ 152:../Src/main.c ****     }
+ 153:../Src/main.c ****   }
+ 154:../Src/main.c **** 
+ 155:../Src/main.c ****   Console_Write("Ready. Sending a demo frame every second.\r\n\r\n");
+ 156:../Src/main.c **** 
+ 157:../Src/main.c ****   /* -------------------------------------------------------------- loop ---*/
+ 158:../Src/main.c ****   while (1)
+ 159:../Src/main.c ****   {
+ 160:../Src/main.c ****     uint8_t  frame[ETH_MAX_PACKET_SIZE];
+ 161:../Src/main.c ****     uint32_t length = 0U;
+ 162:../Src/main.c **** 
+ 163:../Src/main.c ****     /* Frames coming from the segment */
+ 164:../Src/main.c ****     while (LAN8670_GetFrame(frame, sizeof(frame), &length) == HAL_OK)
+ 165:../Src/main.c ****     {
+ 166:../Src/main.c ****       HAL_GPIO_TogglePin(LED_PORT, LED_D2_PIN);
+ 167:../Src/main.c ****       APP_PrintReceivedFrame(frame, length);
+ 168:../Src/main.c ****     }
+ 169:../Src/main.c **** 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 5
+
+
+ 170:../Src/main.c ****     /* Periodic demo frame so the segment shows traffic */
+ 171:../Src/main.c ****     if ((HAL_GetTick() - lastTx) >= DEMO_FRAME_PERIOD_MS)
+ 172:../Src/main.c ****     {
+ 173:../Src/main.c ****       lastTx = HAL_GetTick();
+ 174:../Src/main.c ****       HAL_GPIO_TogglePin(LED_PORT, LED_D4_PIN);
+ 175:../Src/main.c **** 
+ 176:../Src/main.c ****       if (ethReady != 0U)
+ 177:../Src/main.c ****       {
+ 178:../Src/main.c ****         APP_SendDemoFrame();
+ 179:../Src/main.c ****       }
+ 180:../Src/main.c ****     }
+ 181:../Src/main.c ****   }
+ 182:../Src/main.c **** }
+ 183:../Src/main.c **** 
+ 184:../Src/main.c **** /**
+ 185:../Src/main.c ****   * @brief  Build and transmit one demo frame.
+ 186:../Src/main.c ****   */
+ 187:../Src/main.c **** static void APP_SendDemoFrame(void)
+ 188:../Src/main.c **** {
+ 189:../Src/main.c ****   uint8_t frame[DEMO_FRAME_LEN];
+ 190:../Src/main.c ****   static const uint8_t src[6] = {0x02U, 0x00U, 0x00U, 0x00U, 0x00U, 0x01U};
+ 191:../Src/main.c ****   static const uint8_t dst[6] = {0xFFU, 0xFFU, 0xFFU, 0xFFU, 0xFFU, 0xFFU};
+ 192:../Src/main.c ****   uint32_t i;
+ 193:../Src/main.c **** 
+ 194:../Src/main.c ****   /* Ethernet header */
+ 195:../Src/main.c ****   for (i = 0U; i < 6U; i++)
+ 196:../Src/main.c ****   {
+ 197:../Src/main.c ****     frame[i]      = dst[i];
+ 198:../Src/main.c ****     frame[6U + i] = src[i];
+ 199:../Src/main.c ****   }
+ 200:../Src/main.c ****   frame[12] = (uint8_t)(DEMO_ETHERTYPE >> 8U);
+ 201:../Src/main.c ****   frame[13] = (uint8_t)(DEMO_ETHERTYPE & 0xFFU);
+ 202:../Src/main.c **** 
+ 203:../Src/main.c ****   /* Payload: sequence number + a few counters */
+ 204:../Src/main.c ****   DemoTxCounter++;
+ 205:../Src/main.c ****   frame[14] = (uint8_t)(DemoTxCounter >> 24U);
+ 206:../Src/main.c ****   frame[15] = (uint8_t)(DemoTxCounter >> 16U);
+ 207:../Src/main.c ****   frame[16] = (uint8_t)(DemoTxCounter >> 8U);
+ 208:../Src/main.c ****   frame[17] = (uint8_t)(DemoTxCounter);
+ 209:../Src/main.c ****   frame[18] = (uint8_t)(HAL_GetTick() >> 8U);
+ 210:../Src/main.c ****   frame[19] = (uint8_t)(HAL_GetTick());
+ 211:../Src/main.c **** 
+ 212:../Src/main.c ****   if (LAN8670_SendFrame(frame, DEMO_FRAME_LEN) == HAL_OK)
+ 213:../Src/main.c ****   {
+ 214:../Src/main.c ****     HAL_GPIO_TogglePin(LED_PORT, LED_D3_PIN);
+ 215:../Src/main.c ****     Console_Printf("TX %lu bytes, seq=%lu\r\n",
+ 216:../Src/main.c ****                     (unsigned long)DEMO_FRAME_LEN, (unsigned long)DemoTxCounter);
+ 217:../Src/main.c ****   }
+ 218:../Src/main.c ****   else
+ 219:../Src/main.c ****   {
+ 220:../Src/main.c ****     Console_Write("TX failed (descriptor busy)\r\n");
+ 221:../Src/main.c ****   }
+ 222:../Src/main.c **** }
+ 223:../Src/main.c **** 
+ 224:../Src/main.c **** /**
+ 225:../Src/main.c ****   * @brief  Print the interesting fields of a received frame.
+ 226:../Src/main.c ****   */
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 6
+
+
+ 227:../Src/main.c **** static void APP_PrintReceivedFrame(const uint8_t *Frame, uint32_t Length)
+ 228:../Src/main.c **** {
+ 229:../Src/main.c ****   uint16_t etherType;
+ 230:../Src/main.c ****   uint32_t i;
+ 231:../Src/main.c ****   uint32_t shown;
+ 232:../Src/main.c **** 
+ 233:../Src/main.c ****   if (Length < 14U)
+ 234:../Src/main.c ****   {
+ 235:../Src/main.c ****     Console_Printf("RX %lu bytes (runt)\r\n", (unsigned long)Length);
+ 236:../Src/main.c ****     return;
+ 237:../Src/main.c ****   }
+ 238:../Src/main.c **** 
+ 239:../Src/main.c ****   etherType = (uint16_t)(((uint16_t)Frame[12] << 8U) | Frame[13]);
+ 240:../Src/main.c **** 
+ 241:../Src/main.c ****   Console_Printf("RX %lu bytes type=0x%04X\r\n", (unsigned long)Length,
+ 242:../Src/main.c ****                  (unsigned)etherType);
+ 243:../Src/main.c ****   Console_Write("   ");
+ 244:../Src/main.c **** 
+ 245:../Src/main.c ****   shown = (Length - 14U < 16U) ? (Length - 14U) : 16U;
+ 246:../Src/main.c ****   for (i = 0U; i < shown; i++)
+ 247:../Src/main.c ****   {
+ 248:../Src/main.c ****     Console_Printf("%02X ", Frame[14U + i]);
+ 249:../Src/main.c ****   }
+ 250:../Src/main.c ****   Console_Write("\r\n");
+ 251:../Src/main.c **** }
+ 252:../Src/main.c **** 
+ 253:../Src/main.c **** /**
+ 254:../Src/main.c ****   * @brief  Print the PHY identification block read over MDIO.
+ 255:../Src/main.c ****   */
+ 256:../Src/main.c **** static void APP_PrintPhyInfo(const LAN8670_Info *Info)
+ 257:../Src/main.c **** {
+  43              		.loc 1 257 1 view -0
+  44              		.cfi_startproc
+  45              		@ args = 0, pretend = 0, frame = 0
+  46              		@ frame_needed = 0, uses_anonymous_args = 0
+  47              		.loc 1 257 1 is_stmt 0 view .LVU1
+  48 0000 10B5     		push	{r4, lr}
+  49              	.LCFI0:
+  50              		.cfi_def_cfa_offset 8
+  51              		.cfi_offset 4, -8
+  52              		.cfi_offset 14, -4
+  53 0002 82B0     		sub	sp, sp, #8
+  54              	.LCFI1:
+  55              		.cfi_def_cfa_offset 16
+  56 0004 0446     		mov	r4, r0
+ 258:../Src/main.c ****   Console_Printf("PHY: ID1=0x%04X ID2=0x%04X (OUI 0x%06lX, model %u, rev %u)\r\n",
+  57              		.loc 1 258 3 is_stmt 1 view .LVU2
+ 259:../Src/main.c ****                  (unsigned)Info->PhyId1, (unsigned)Info->PhyId2,
+  58              		.loc 1 259 32 is_stmt 0 view .LVU3
+  59 0006 0188     		ldrh	r1, [r0]
+  60              		.loc 1 259 56 view .LVU4
+  61 0008 4288     		ldrh	r2, [r0, #2]
+ 260:../Src/main.c ****                  (unsigned long)(((uint32_t)(Info->PhyId1 & 0xFFFFU) << 6U) |
+ 261:../Src/main.c ****                                  ((uint32_t)(Info->PhyId2 & 0xFC00U) >> 10U)),
+  62              		.loc 1 261 70 view .LVU5
+  63 000a 930A     		lsrs	r3, r2, #10
+ 258:../Src/main.c ****                  (unsigned)Info->PhyId1, (unsigned)Info->PhyId2,
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 7
+
+
+  64              		.loc 1 258 3 view .LVU6
+  65 000c 02F00F00 		and	r0, r2, #15
+  66              	.LVL1:
+ 258:../Src/main.c ****                  (unsigned)Info->PhyId1, (unsigned)Info->PhyId2,
+  67              		.loc 1 258 3 view .LVU7
+  68 0010 0190     		str	r0, [sp, #4]
+  69 0012 C2F30510 		ubfx	r0, r2, #4, #6
+  70 0016 0090     		str	r0, [sp]
+  71 0018 43EA8113 		orr	r3, r3, r1, lsl #6
+  72 001c 0A48     		ldr	r0, .L5
+  73 001e FFF7FEFF 		bl	Console_Printf
+  74              	.LVL2:
+ 262:../Src/main.c ****                  (unsigned)((Info->PhyId2 >> 4U) & 0x3FU),
+ 263:../Src/main.c ****                  (unsigned)(Info->PhyId2 & 0x0FU));
+ 264:../Src/main.c ****   Console_Printf("PHY: BMSR=0x%04X BMCR=0x%04X link=%u\r\n",
+  75              		.loc 1 264 3 is_stmt 1 view .LVU8
+  76 0022 237A     		ldrb	r3, [r4, #8]	@ zero_extendqisi2
+  77 0024 E288     		ldrh	r2, [r4, #6]
+  78 0026 A188     		ldrh	r1, [r4, #4]
+  79 0028 0848     		ldr	r0, .L5+4
+  80 002a FFF7FEFF 		bl	Console_Printf
+  81              	.LVL3:
+ 265:../Src/main.c ****                  (unsigned)Info->Bmsr, (unsigned)Info->Bmcr,
+ 266:../Src/main.c ****                  (unsigned)Info->LinkUp);
+ 267:../Src/main.c **** 
+ 268:../Src/main.c ****   if (Info->PlcaSupported != 0U)
+  82              		.loc 1 268 3 view .LVU9
+  83              		.loc 1 268 11 is_stmt 0 view .LVU10
+  84 002e 637A     		ldrb	r3, [r4, #9]	@ zero_extendqisi2
+  85              		.loc 1 268 6 view .LVU11
+  86 0030 2BB1     		cbz	r3, .L2
+ 269:../Src/main.c ****   {
+ 270:../Src/main.c ****     Console_Printf("PHY: PLCA status register = 0x%04X\r\n",
+  87              		.loc 1 270 5 is_stmt 1 view .LVU12
+  88 0032 6189     		ldrh	r1, [r4, #10]
+  89 0034 0648     		ldr	r0, .L5+8
+  90 0036 FFF7FEFF 		bl	Console_Printf
+  91              	.LVL4:
+  92              	.L1:
+ 271:../Src/main.c ****                    (unsigned)Info->PlcaStatus);
+ 272:../Src/main.c ****   }
+ 273:../Src/main.c ****   else
+ 274:../Src/main.c ****   {
+ 275:../Src/main.c ****     Console_Write("PHY: PLCA registers not readable\r\n");
+ 276:../Src/main.c ****   }
+ 277:../Src/main.c **** }
+  93              		.loc 1 277 1 is_stmt 0 view .LVU13
+  94 003a 02B0     		add	sp, sp, #8
+  95              	.LCFI2:
+  96              		.cfi_remember_state
+  97              		.cfi_def_cfa_offset 8
+  98              		@ sp needed
+  99 003c 10BD     		pop	{r4, pc}
+ 100              	.LVL5:
+ 101              	.L2:
+ 102              	.LCFI3:
+ 103              		.cfi_restore_state
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 8
+
+
+ 275:../Src/main.c ****   }
+ 104              		.loc 1 275 5 is_stmt 1 view .LVU14
+ 105 003e 0548     		ldr	r0, .L5+12
+ 106 0040 FFF7FEFF 		bl	Console_Write
+ 107              	.LVL6:
+ 108              		.loc 1 277 1 is_stmt 0 view .LVU15
+ 109 0044 F9E7     		b	.L1
+ 110              	.L6:
+ 111 0046 00BF     		.align	2
+ 112              	.L5:
+ 113 0048 00000000 		.word	.LC0
+ 114 004c 40000000 		.word	.LC1
+ 115 0050 68000000 		.word	.LC2
+ 116 0054 90000000 		.word	.LC3
+ 117              		.cfi_endproc
+ 118              	.LFE139:
+ 120              		.section	.rodata.APP_PrintReceivedFrame.str1.4,"aMS",%progbits,1
+ 121              		.align	2
+ 122              	.LC4:
+ 123 0000 52582025 		.ascii	"RX %lu bytes (runt)\015\012\000"
+ 123      6C752062 
+ 123      79746573 
+ 123      20287275 
+ 123      6E74290D 
+ 124 0016 0000     		.align	2
+ 125              	.LC5:
+ 126 0018 52582025 		.ascii	"RX %lu bytes type=0x%04X\015\012\000"
+ 126      6C752062 
+ 126      79746573 
+ 126      20747970 
+ 126      653D3078 
+ 127 0033 00       		.align	2
+ 128              	.LC6:
+ 129 0034 20202000 		.ascii	"   \000"
+ 130              		.align	2
+ 131              	.LC7:
+ 132 0038 25303258 		.ascii	"%02X \000"
+ 132      2000
+ 133 003e 0000     		.align	2
+ 134              	.LC8:
+ 135 0040 0D0A00   		.ascii	"\015\012\000"
+ 136              		.section	.text.APP_PrintReceivedFrame,"ax",%progbits
+ 137              		.align	1
+ 138              		.syntax unified
+ 139              		.thumb
+ 140              		.thumb_func
+ 142              	APP_PrintReceivedFrame:
+ 143              	.LVL7:
+ 144              	.LFB138:
+ 228:../Src/main.c ****   uint16_t etherType;
+ 145              		.loc 1 228 1 is_stmt 1 view -0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228:../Src/main.c ****   uint16_t etherType;
+ 149              		.loc 1 228 1 is_stmt 0 view .LVU17
+ 150 0000 70B5     		push	{r4, r5, r6, lr}
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 9
+
+
+ 151              	.LCFI4:
+ 152              		.cfi_def_cfa_offset 16
+ 153              		.cfi_offset 4, -16
+ 154              		.cfi_offset 5, -12
+ 155              		.cfi_offset 6, -8
+ 156              		.cfi_offset 14, -4
+ 157 0002 0D46     		mov	r5, r1
+ 229:../Src/main.c ****   uint32_t i;
+ 158              		.loc 1 229 3 is_stmt 1 view .LVU18
+ 230:../Src/main.c ****   uint32_t shown;
+ 159              		.loc 1 230 3 view .LVU19
+ 231:../Src/main.c **** 
+ 160              		.loc 1 231 3 view .LVU20
+ 233:../Src/main.c ****   {
+ 161              		.loc 1 233 3 view .LVU21
+ 233:../Src/main.c ****   {
+ 162              		.loc 1 233 6 is_stmt 0 view .LVU22
+ 163 0004 0D29     		cmp	r1, #13
+ 164 0006 10D9     		bls	.L13
+ 165 0008 0646     		mov	r6, r0
+ 239:../Src/main.c **** 
+ 166              		.loc 1 239 3 is_stmt 1 view .LVU23
+ 239:../Src/main.c **** 
+ 167              		.loc 1 239 42 is_stmt 0 view .LVU24
+ 168 000a 027B     		ldrb	r2, [r0, #12]	@ zero_extendqisi2
+ 239:../Src/main.c **** 
+ 169              		.loc 1 239 61 view .LVU25
+ 170 000c 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+ 171              	.LVL8:
+ 241:../Src/main.c ****                  (unsigned)etherType);
+ 172              		.loc 1 241 3 is_stmt 1 view .LVU26
+ 173 000e 43EA0222 		orr	r2, r3, r2, lsl #8
+ 174              	.LVL9:
+ 241:../Src/main.c ****                  (unsigned)etherType);
+ 175              		.loc 1 241 3 is_stmt 0 view .LVU27
+ 176 0012 0E48     		ldr	r0, .L14
+ 177              	.LVL10:
+ 241:../Src/main.c ****                  (unsigned)etherType);
+ 178              		.loc 1 241 3 view .LVU28
+ 179 0014 FFF7FEFF 		bl	Console_Printf
+ 180              	.LVL11:
+ 243:../Src/main.c **** 
+ 181              		.loc 1 243 3 is_stmt 1 view .LVU29
+ 182 0018 0D48     		ldr	r0, .L14+4
+ 183 001a FFF7FEFF 		bl	Console_Write
+ 184              	.LVL12:
+ 245:../Src/main.c ****   for (i = 0U; i < shown; i++)
+ 185              		.loc 1 245 3 view .LVU30
+ 245:../Src/main.c ****   for (i = 0U; i < shown; i++)
+ 186              		.loc 1 245 19 is_stmt 0 view .LVU31
+ 187 001e 0E3D     		subs	r5, r5, #14
+ 188              	.LVL13:
+ 245:../Src/main.c ****   for (i = 0U; i < shown; i++)
+ 189              		.loc 1 245 9 view .LVU32
+ 190 0020 102D     		cmp	r5, #16
+ 191 0022 28BF     		it	cs
+ 192 0024 1025     		movcs	r5, #16
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 10
+
+
+ 193              	.LVL14:
+ 246:../Src/main.c ****   {
+ 194              		.loc 1 246 3 is_stmt 1 view .LVU33
+ 246:../Src/main.c ****   {
+ 195              		.loc 1 246 10 is_stmt 0 view .LVU34
+ 196 0026 0024     		movs	r4, #0
+ 246:../Src/main.c ****   {
+ 197              		.loc 1 246 3 view .LVU35
+ 198 0028 0AE0     		b	.L10
+ 199              	.LVL15:
+ 200              	.L13:
+ 235:../Src/main.c ****     return;
+ 201              		.loc 1 235 5 is_stmt 1 view .LVU36
+ 202 002a 0A48     		ldr	r0, .L14+8
+ 203              	.LVL16:
+ 235:../Src/main.c ****     return;
+ 204              		.loc 1 235 5 is_stmt 0 view .LVU37
+ 205 002c FFF7FEFF 		bl	Console_Printf
+ 206              	.LVL17:
+ 236:../Src/main.c ****   }
+ 207              		.loc 1 236 5 is_stmt 1 view .LVU38
+ 208 0030 0BE0     		b	.L7
+ 209              	.LVL18:
+ 210              	.L11:
+ 248:../Src/main.c ****   }
+ 211              		.loc 1 248 5 discriminator 3 view .LVU39
+ 248:../Src/main.c ****   }
+ 212              		.loc 1 248 39 is_stmt 0 discriminator 3 view .LVU40
+ 213 0032 04F10E03 		add	r3, r4, #14
+ 248:../Src/main.c ****   }
+ 214              		.loc 1 248 5 discriminator 3 view .LVU41
+ 215 0036 F15C     		ldrb	r1, [r6, r3]	@ zero_extendqisi2
+ 216 0038 0748     		ldr	r0, .L14+12
+ 217 003a FFF7FEFF 		bl	Console_Printf
+ 218              	.LVL19:
+ 246:../Src/main.c ****   {
+ 219              		.loc 1 246 27 is_stmt 1 discriminator 3 view .LVU42
+ 246:../Src/main.c ****   {
+ 220              		.loc 1 246 28 is_stmt 0 discriminator 3 view .LVU43
+ 221 003e 0134     		adds	r4, r4, #1
+ 222              	.LVL20:
+ 223              	.L10:
+ 246:../Src/main.c ****   {
+ 224              		.loc 1 246 16 is_stmt 1 discriminator 1 view .LVU44
+ 246:../Src/main.c ****   {
+ 225              		.loc 1 246 3 is_stmt 0 discriminator 1 view .LVU45
+ 226 0040 AC42     		cmp	r4, r5
+ 227 0042 F6D3     		bcc	.L11
+ 250:../Src/main.c **** }
+ 228              		.loc 1 250 3 is_stmt 1 view .LVU46
+ 229 0044 0548     		ldr	r0, .L14+16
+ 230 0046 FFF7FEFF 		bl	Console_Write
+ 231              	.LVL21:
+ 232              	.L7:
+ 251:../Src/main.c **** 
+ 233              		.loc 1 251 1 is_stmt 0 view .LVU47
+ 234 004a 70BD     		pop	{r4, r5, r6, pc}
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 11
+
+
+ 235              	.L15:
+ 236              		.align	2
+ 237              	.L14:
+ 238 004c 18000000 		.word	.LC5
+ 239 0050 34000000 		.word	.LC6
+ 240 0054 00000000 		.word	.LC4
+ 241 0058 38000000 		.word	.LC7
+ 242 005c 40000000 		.word	.LC8
+ 243              		.cfi_endproc
+ 244              	.LFE138:
+ 246              		.section	.text.APP_GpioInit,"ax",%progbits
+ 247              		.align	1
+ 248              		.syntax unified
+ 249              		.thumb
+ 250              		.thumb_func
+ 252              	APP_GpioInit:
+ 253              	.LFB140:
+ 278:../Src/main.c **** 
+ 279:../Src/main.c **** /**
+ 280:../Src/main.c ****   * @brief  Configure the board LEDs.
+ 281:../Src/main.c ****   *         The four LEDs are active low.
+ 282:../Src/main.c ****   */
+ 283:../Src/main.c **** static void APP_GpioInit(void)
+ 284:../Src/main.c **** {
+ 254              		.loc 1 284 1 is_stmt 1 view -0
+ 255              		.cfi_startproc
+ 256              		@ args = 0, pretend = 0, frame = 24
+ 257              		@ frame_needed = 0, uses_anonymous_args = 0
+ 258 0000 10B5     		push	{r4, lr}
+ 259              	.LCFI5:
+ 260              		.cfi_def_cfa_offset 8
+ 261              		.cfi_offset 4, -8
+ 262              		.cfi_offset 14, -4
+ 263 0002 86B0     		sub	sp, sp, #24
+ 264              	.LCFI6:
+ 265              		.cfi_def_cfa_offset 32
+ 285:../Src/main.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 266              		.loc 1 285 3 view .LVU49
+ 267              		.loc 1 285 20 is_stmt 0 view .LVU50
+ 268 0004 0024     		movs	r4, #0
+ 269 0006 0194     		str	r4, [sp, #4]
+ 270 0008 0294     		str	r4, [sp, #8]
+ 271 000a 0394     		str	r4, [sp, #12]
+ 272 000c 0494     		str	r4, [sp, #16]
+ 273 000e 0594     		str	r4, [sp, #20]
+ 286:../Src/main.c **** 
+ 287:../Src/main.c ****   LED_GPIO_CLK_ENABLE();
+ 274              		.loc 1 287 3 is_stmt 1 view .LVU51
+ 275              	.LBB2:
+ 276              		.loc 1 287 3 view .LVU52
+ 277              		.loc 1 287 3 view .LVU53
+ 278 0010 0E4B     		ldr	r3, .L18
+ 279 0012 DA6C     		ldr	r2, [r3, #76]
+ 280 0014 42F00402 		orr	r2, r2, #4
+ 281 0018 DA64     		str	r2, [r3, #76]
+ 282              		.loc 1 287 3 view .LVU54
+ 283 001a DB6C     		ldr	r3, [r3, #76]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 12
+
+
+ 284 001c 03F00403 		and	r3, r3, #4
+ 285 0020 0093     		str	r3, [sp]
+ 286              		.loc 1 287 3 view .LVU55
+ 287 0022 009B     		ldr	r3, [sp]
+ 288              	.LBE2:
+ 289              		.loc 1 287 3 view .LVU56
+ 288:../Src/main.c **** 
+ 289:../Src/main.c ****   HAL_GPIO_WritePin(LED_PORT, LED_ALL_PINS, GPIO_PIN_SET);
+ 290              		.loc 1 289 3 view .LVU57
+ 291 0024 0122     		movs	r2, #1
+ 292 0026 7821     		movs	r1, #120
+ 293 0028 4FF09040 		mov	r0, #1207959552
+ 294 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 295              	.LVL22:
+ 290:../Src/main.c ****   GPIO_InitStruct.Pin   = LED_ALL_PINS;
+ 296              		.loc 1 290 3 view .LVU58
+ 297              		.loc 1 290 25 is_stmt 0 view .LVU59
+ 298 0030 7823     		movs	r3, #120
+ 299 0032 0193     		str	r3, [sp, #4]
+ 291:../Src/main.c ****   GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
+ 300              		.loc 1 291 3 is_stmt 1 view .LVU60
+ 301              		.loc 1 291 25 is_stmt 0 view .LVU61
+ 302 0034 0123     		movs	r3, #1
+ 303 0036 0293     		str	r3, [sp, #8]
+ 292:../Src/main.c ****   GPIO_InitStruct.Pull  = GPIO_NOPULL;
+ 304              		.loc 1 292 3 is_stmt 1 view .LVU62
+ 305              		.loc 1 292 25 is_stmt 0 view .LVU63
+ 306 0038 0394     		str	r4, [sp, #12]
+ 293:../Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 307              		.loc 1 293 3 is_stmt 1 view .LVU64
+ 308              		.loc 1 293 25 is_stmt 0 view .LVU65
+ 309 003a 0494     		str	r4, [sp, #16]
+ 294:../Src/main.c ****   HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
+ 310              		.loc 1 294 3 is_stmt 1 view .LVU66
+ 311 003c 01A9     		add	r1, sp, #4
+ 312 003e 4FF09040 		mov	r0, #1207959552
+ 313 0042 FFF7FEFF 		bl	HAL_GPIO_Init
+ 314              	.LVL23:
+ 295:../Src/main.c **** }
+ 315              		.loc 1 295 1 is_stmt 0 view .LVU67
+ 316 0046 06B0     		add	sp, sp, #24
+ 317              	.LCFI7:
+ 318              		.cfi_def_cfa_offset 8
+ 319              		@ sp needed
+ 320 0048 10BD     		pop	{r4, pc}
+ 321              	.L19:
+ 322 004a 00BF     		.align	2
+ 323              	.L18:
+ 324 004c 00100240 		.word	1073876992
+ 325              		.cfi_endproc
+ 326              	.LFE140:
+ 328              		.section	.rodata.APP_SendDemoFrame.str1.4,"aMS",%progbits,1
+ 329              		.align	2
+ 330              	.LC9:
+ 331 0000 54582025 		.ascii	"TX %lu bytes, seq=%lu\015\012\000"
+ 331      6C752062 
+ 331      79746573 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 13
+
+
+ 331      2C207365 
+ 331      713D256C 
+ 332              		.align	2
+ 333              	.LC10:
+ 334 0018 54582066 		.ascii	"TX failed (descriptor busy)\015\012\000"
+ 334      61696C65 
+ 334      64202864 
+ 334      65736372 
+ 334      6970746F 
+ 335              		.section	.text.APP_SendDemoFrame,"ax",%progbits
+ 336              		.align	1
+ 337              		.syntax unified
+ 338              		.thumb
+ 339              		.thumb_func
+ 341              	APP_SendDemoFrame:
+ 342              	.LFB137:
+ 188:../Src/main.c ****   uint8_t frame[DEMO_FRAME_LEN];
+ 343              		.loc 1 188 1 is_stmt 1 view -0
+ 344              		.cfi_startproc
+ 345              		@ args = 0, pretend = 0, frame = 24
+ 346              		@ frame_needed = 0, uses_anonymous_args = 0
+ 347 0000 00B5     		push	{lr}
+ 348              	.LCFI8:
+ 349              		.cfi_def_cfa_offset 4
+ 350              		.cfi_offset 14, -4
+ 351 0002 87B0     		sub	sp, sp, #28
+ 352              	.LCFI9:
+ 353              		.cfi_def_cfa_offset 32
+ 189:../Src/main.c ****   static const uint8_t src[6] = {0x02U, 0x00U, 0x00U, 0x00U, 0x00U, 0x01U};
+ 354              		.loc 1 189 3 view .LVU69
+ 190:../Src/main.c ****   static const uint8_t dst[6] = {0xFFU, 0xFFU, 0xFFU, 0xFFU, 0xFFU, 0xFFU};
+ 355              		.loc 1 190 3 view .LVU70
+ 191:../Src/main.c ****   uint32_t i;
+ 356              		.loc 1 191 3 view .LVU71
+ 192:../Src/main.c **** 
+ 357              		.loc 1 192 3 view .LVU72
+ 195:../Src/main.c ****   {
+ 358              		.loc 1 195 3 view .LVU73
+ 359              	.LVL24:
+ 195:../Src/main.c ****   {
+ 360              		.loc 1 195 10 is_stmt 0 view .LVU74
+ 361 0004 0023     		movs	r3, #0
+ 195:../Src/main.c ****   {
+ 362              		.loc 1 195 3 view .LVU75
+ 363 0006 0EE0     		b	.L21
+ 364              	.LVL25:
+ 365              	.L22:
+ 197:../Src/main.c ****     frame[6U + i] = src[i];
+ 366              		.loc 1 197 5 is_stmt 1 discriminator 3 view .LVU76
+ 197:../Src/main.c ****     frame[6U + i] = src[i];
+ 367              		.loc 1 197 24 is_stmt 0 discriminator 3 view .LVU77
+ 368 0008 244A     		ldr	r2, .L26
+ 369 000a D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+ 197:../Src/main.c ****     frame[6U + i] = src[i];
+ 370              		.loc 1 197 19 discriminator 3 view .LVU78
+ 371 000c 03F11802 		add	r2, r3, #24
+ 372 0010 6A44     		add	r2, sp, r2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 14
+
+
+ 373 0012 02F8141C 		strb	r1, [r2, #-20]
+ 198:../Src/main.c ****   }
+ 374              		.loc 1 198 5 is_stmt 1 discriminator 3 view .LVU79
+ 198:../Src/main.c ****   }
+ 375              		.loc 1 198 24 is_stmt 0 discriminator 3 view .LVU80
+ 376 0016 2249     		ldr	r1, .L26+4
+ 377 0018 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 198:../Src/main.c ****   }
+ 378              		.loc 1 198 19 discriminator 3 view .LVU81
+ 379 001a 03F11E02 		add	r2, r3, #30
+ 380 001e 6A44     		add	r2, sp, r2
+ 381 0020 02F8141C 		strb	r1, [r2, #-20]
+ 195:../Src/main.c ****   {
+ 382              		.loc 1 195 24 is_stmt 1 discriminator 3 view .LVU82
+ 195:../Src/main.c ****   {
+ 383              		.loc 1 195 25 is_stmt 0 discriminator 3 view .LVU83
+ 384 0024 0133     		adds	r3, r3, #1
+ 385              	.LVL26:
+ 386              	.L21:
+ 195:../Src/main.c ****   {
+ 387              		.loc 1 195 16 is_stmt 1 discriminator 1 view .LVU84
+ 195:../Src/main.c ****   {
+ 388              		.loc 1 195 3 is_stmt 0 discriminator 1 view .LVU85
+ 389 0026 052B     		cmp	r3, #5
+ 390 0028 EED9     		bls	.L22
+ 200:../Src/main.c ****   frame[13] = (uint8_t)(DEMO_ETHERTYPE & 0xFFU);
+ 391              		.loc 1 200 3 is_stmt 1 view .LVU86
+ 200:../Src/main.c ****   frame[13] = (uint8_t)(DEMO_ETHERTYPE & 0xFFU);
+ 392              		.loc 1 200 13 is_stmt 0 view .LVU87
+ 393 002a 8823     		movs	r3, #136
+ 394              	.LVL27:
+ 200:../Src/main.c ****   frame[13] = (uint8_t)(DEMO_ETHERTYPE & 0xFFU);
+ 395              		.loc 1 200 13 view .LVU88
+ 396 002c 8DF81030 		strb	r3, [sp, #16]
+ 201:../Src/main.c **** 
+ 397              		.loc 1 201 3 is_stmt 1 view .LVU89
+ 201:../Src/main.c **** 
+ 398              		.loc 1 201 13 is_stmt 0 view .LVU90
+ 399 0030 B523     		movs	r3, #181
+ 400 0032 8DF81130 		strb	r3, [sp, #17]
+ 204:../Src/main.c ****   frame[14] = (uint8_t)(DemoTxCounter >> 24U);
+ 401              		.loc 1 204 3 is_stmt 1 view .LVU91
+ 204:../Src/main.c ****   frame[14] = (uint8_t)(DemoTxCounter >> 24U);
+ 402              		.loc 1 204 16 is_stmt 0 view .LVU92
+ 403 0036 1B4A     		ldr	r2, .L26+8
+ 404 0038 1368     		ldr	r3, [r2]
+ 405 003a 0133     		adds	r3, r3, #1
+ 406 003c 1360     		str	r3, [r2]
+ 205:../Src/main.c ****   frame[15] = (uint8_t)(DemoTxCounter >> 16U);
+ 407              		.loc 1 205 3 is_stmt 1 view .LVU93
+ 205:../Src/main.c ****   frame[15] = (uint8_t)(DemoTxCounter >> 16U);
+ 408              		.loc 1 205 15 is_stmt 0 view .LVU94
+ 409 003e 1A0E     		lsrs	r2, r3, #24
+ 205:../Src/main.c ****   frame[15] = (uint8_t)(DemoTxCounter >> 16U);
+ 410              		.loc 1 205 13 view .LVU95
+ 411 0040 8DF81220 		strb	r2, [sp, #18]
+ 206:../Src/main.c ****   frame[16] = (uint8_t)(DemoTxCounter >> 8U);
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 15
+
+
+ 412              		.loc 1 206 3 is_stmt 1 view .LVU96
+ 206:../Src/main.c ****   frame[16] = (uint8_t)(DemoTxCounter >> 8U);
+ 413              		.loc 1 206 15 is_stmt 0 view .LVU97
+ 414 0044 C3F30742 		ubfx	r2, r3, #16, #8
+ 206:../Src/main.c ****   frame[16] = (uint8_t)(DemoTxCounter >> 8U);
+ 415              		.loc 1 206 13 view .LVU98
+ 416 0048 8DF81320 		strb	r2, [sp, #19]
+ 207:../Src/main.c ****   frame[17] = (uint8_t)(DemoTxCounter);
+ 417              		.loc 1 207 3 is_stmt 1 view .LVU99
+ 207:../Src/main.c ****   frame[17] = (uint8_t)(DemoTxCounter);
+ 418              		.loc 1 207 15 is_stmt 0 view .LVU100
+ 419 004c C3F30722 		ubfx	r2, r3, #8, #8
+ 207:../Src/main.c ****   frame[17] = (uint8_t)(DemoTxCounter);
+ 420              		.loc 1 207 13 view .LVU101
+ 421 0050 8DF81420 		strb	r2, [sp, #20]
+ 208:../Src/main.c ****   frame[18] = (uint8_t)(HAL_GetTick() >> 8U);
+ 422              		.loc 1 208 3 is_stmt 1 view .LVU102
+ 208:../Src/main.c ****   frame[18] = (uint8_t)(HAL_GetTick() >> 8U);
+ 423              		.loc 1 208 13 is_stmt 0 view .LVU103
+ 424 0054 8DF81530 		strb	r3, [sp, #21]
+ 209:../Src/main.c ****   frame[19] = (uint8_t)(HAL_GetTick());
+ 425              		.loc 1 209 3 is_stmt 1 view .LVU104
+ 209:../Src/main.c ****   frame[19] = (uint8_t)(HAL_GetTick());
+ 426              		.loc 1 209 25 is_stmt 0 view .LVU105
+ 427 0058 FFF7FEFF 		bl	HAL_GetTick
+ 428              	.LVL28:
+ 209:../Src/main.c ****   frame[19] = (uint8_t)(HAL_GetTick());
+ 429              		.loc 1 209 15 view .LVU106
+ 430 005c C0F30720 		ubfx	r0, r0, #8, #8
+ 209:../Src/main.c ****   frame[19] = (uint8_t)(HAL_GetTick());
+ 431              		.loc 1 209 13 view .LVU107
+ 432 0060 8DF81600 		strb	r0, [sp, #22]
+ 210:../Src/main.c **** 
+ 433              		.loc 1 210 3 is_stmt 1 view .LVU108
+ 210:../Src/main.c **** 
+ 434              		.loc 1 210 25 is_stmt 0 view .LVU109
+ 435 0064 FFF7FEFF 		bl	HAL_GetTick
+ 436              	.LVL29:
+ 210:../Src/main.c **** 
+ 437              		.loc 1 210 13 view .LVU110
+ 438 0068 8DF81700 		strb	r0, [sp, #23]
+ 212:../Src/main.c ****   {
+ 439              		.loc 1 212 3 is_stmt 1 view .LVU111
+ 212:../Src/main.c ****   {
+ 440              		.loc 1 212 7 is_stmt 0 view .LVU112
+ 441 006c 1421     		movs	r1, #20
+ 442 006e 01A8     		add	r0, sp, #4
+ 443 0070 FFF7FEFF 		bl	LAN8670_SendFrame
+ 444              	.LVL30:
+ 212:../Src/main.c ****   {
+ 445              		.loc 1 212 6 view .LVU113
+ 446 0074 68B9     		cbnz	r0, .L23
+ 214:../Src/main.c ****     Console_Printf("TX %lu bytes, seq=%lu\r\n",
+ 447              		.loc 1 214 5 is_stmt 1 view .LVU114
+ 448 0076 2021     		movs	r1, #32
+ 449 0078 4FF09040 		mov	r0, #1207959552
+ 450 007c FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 16
+
+
+ 451              	.LVL31:
+ 215:../Src/main.c ****                     (unsigned long)DEMO_FRAME_LEN, (unsigned long)DemoTxCounter);
+ 452              		.loc 1 215 5 view .LVU115
+ 453 0080 084B     		ldr	r3, .L26+8
+ 454 0082 1A68     		ldr	r2, [r3]
+ 455 0084 1421     		movs	r1, #20
+ 456 0086 0848     		ldr	r0, .L26+12
+ 457 0088 FFF7FEFF 		bl	Console_Printf
+ 458              	.LVL32:
+ 459              	.L20:
+ 222:../Src/main.c **** 
+ 460              		.loc 1 222 1 is_stmt 0 view .LVU116
+ 461 008c 07B0     		add	sp, sp, #28
+ 462              	.LCFI10:
+ 463              		.cfi_remember_state
+ 464              		.cfi_def_cfa_offset 4
+ 465              		@ sp needed
+ 466 008e 5DF804FB 		ldr	pc, [sp], #4
+ 467              	.L23:
+ 468              	.LCFI11:
+ 469              		.cfi_restore_state
+ 220:../Src/main.c ****   }
+ 470              		.loc 1 220 5 is_stmt 1 view .LVU117
+ 471 0092 0648     		ldr	r0, .L26+16
+ 472 0094 FFF7FEFF 		bl	Console_Write
+ 473              	.LVL33:
+ 222:../Src/main.c **** 
+ 474              		.loc 1 222 1 is_stmt 0 view .LVU118
+ 475 0098 F8E7     		b	.L20
+ 476              	.L27:
+ 477 009a 00BF     		.align	2
+ 478              	.L26:
+ 479 009c 00000000 		.word	.LANCHOR0
+ 480 00a0 00000000 		.word	.LANCHOR1
+ 481 00a4 00000000 		.word	.LANCHOR2
+ 482 00a8 00000000 		.word	.LC9
+ 483 00ac 18000000 		.word	.LC10
+ 484              		.cfi_endproc
+ 485              	.LFE137:
+ 487              		.section	.text.APP_ErrorHandler,"ax",%progbits
+ 488              		.align	1
+ 489              		.global	APP_ErrorHandler
+ 490              		.syntax unified
+ 491              		.thumb
+ 492              		.thumb_func
+ 494              	APP_ErrorHandler:
+ 495              	.LFB142:
+ 296:../Src/main.c **** 
+ 297:../Src/main.c **** /**
+ 298:../Src/main.c ****   * @brief  System clock configuration.
+ 299:../Src/main.c ****   *         HSI(16 MHz)/2 * 20 = 160 MHz VCO, then /2 -> 80 MHz SYSCLK.
+ 300:../Src/main.c ****   *         The ETH MAC is clocked from HCLK (80 MHz).
+ 301:../Src/main.c ****   */
+ 302:../Src/main.c **** static void APP_SystemClockConfig(void)
+ 303:../Src/main.c **** {
+ 304:../Src/main.c ****   RCC_OscInitTypeDef OscInitstruct = {0};
+ 305:../Src/main.c ****   RCC_ClkInitTypeDef ClkInitstruct = {0};
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 17
+
+
+ 306:../Src/main.c **** 
+ 307:../Src/main.c ****   OscInitstruct.OscillatorType  = RCC_OSCILLATORTYPE_HSI;
+ 308:../Src/main.c ****   OscInitstruct.HSIState        = RCC_HSI_ON;
+ 309:../Src/main.c ****   OscInitstruct.HSEState        = RCC_HSE_OFF;
+ 310:../Src/main.c ****   OscInitstruct.HSI48MState     = RCC_HSI48M_OFF;
+ 311:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;
+ 312:../Src/main.c ****   OscInitstruct.LSIState        = RCC_LSI_OFF;
+ 313:../Src/main.c ****   OscInitstruct.PLL.PLLState    = RCC_PLL_ON;
+ 314:../Src/main.c ****   OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2;
+ 315:../Src/main.c ****   OscInitstruct.PLL.PLLPrediv   = RCC_PLL_PREDIV_DIV1;
+ 316:../Src/main.c ****   OscInitstruct.PLL.PLLMUL      = 20;
+ 317:../Src/main.c ****   OscInitstruct.PLL.PLLPostdiv  = RCC_PLL_POSTDIV_DIV2;
+ 318:../Src/main.c ****   if (HAL_RCC_OscConfig(&OscInitstruct) != HAL_OK)
+ 319:../Src/main.c ****   {
+ 320:../Src/main.c ****     APP_ErrorHandler();
+ 321:../Src/main.c ****   }
+ 322:../Src/main.c **** 
+ 323:../Src/main.c ****   ClkInitstruct.ClockType      = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK |
+ 324:../Src/main.c ****                                  RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+ 325:../Src/main.c ****   ClkInitstruct.SYSCLKSource   = RCC_SYSCLKSOURCE_PLLCLK;
+ 326:../Src/main.c ****   ClkInitstruct.AHBCLKDivider  = RCC_SYSCLK_DIV1;
+ 327:../Src/main.c ****   ClkInitstruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 328:../Src/main.c ****   ClkInitstruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 329:../Src/main.c ****   if (HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_3) != HAL_OK)
+ 330:../Src/main.c ****   {
+ 331:../Src/main.c ****     APP_ErrorHandler();
+ 332:../Src/main.c ****   }
+ 333:../Src/main.c **** }
+ 334:../Src/main.c **** 
+ 335:../Src/main.c **** /**
+ 336:../Src/main.c ****   * @brief  This function is executed in case of error occurrence.
+ 337:../Src/main.c ****   */
+ 338:../Src/main.c **** void APP_ErrorHandler(void)
+ 339:../Src/main.c **** {
+ 496              		.loc 1 339 1 is_stmt 1 view -0
+ 497              		.cfi_startproc
+ 498              		@ Volatile: function does not return.
+ 499              		@ args = 0, pretend = 0, frame = 0
+ 500              		@ frame_needed = 0, uses_anonymous_args = 0
+ 501              		@ link register save eliminated.
+ 502              	.L29:
+ 340:../Src/main.c ****   while (1)
+ 503              		.loc 1 340 3 discriminator 1 view .LVU120
+ 341:../Src/main.c ****   {
+ 342:../Src/main.c ****   }
+ 504              		.loc 1 342 3 discriminator 1 view .LVU121
+ 340:../Src/main.c ****   while (1)
+ 505              		.loc 1 340 9 discriminator 1 view .LVU122
+ 506 0000 FEE7     		b	.L29
+ 507              		.cfi_endproc
+ 508              	.LFE142:
+ 510              		.section	.text.APP_SystemClockConfig,"ax",%progbits
+ 511              		.align	1
+ 512              		.syntax unified
+ 513              		.thumb
+ 514              		.thumb_func
+ 516              	APP_SystemClockConfig:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 18
+
+
+ 517              	.LFB141:
+ 303:../Src/main.c ****   RCC_OscInitTypeDef OscInitstruct = {0};
+ 518              		.loc 1 303 1 view -0
+ 519              		.cfi_startproc
+ 520              		@ args = 0, pretend = 0, frame = 72
+ 521              		@ frame_needed = 0, uses_anonymous_args = 0
+ 522 0000 00B5     		push	{lr}
+ 523              	.LCFI12:
+ 524              		.cfi_def_cfa_offset 4
+ 525              		.cfi_offset 14, -4
+ 526 0002 93B0     		sub	sp, sp, #76
+ 527              	.LCFI13:
+ 528              		.cfi_def_cfa_offset 80
+ 304:../Src/main.c ****   RCC_ClkInitTypeDef ClkInitstruct = {0};
+ 529              		.loc 1 304 3 view .LVU124
+ 304:../Src/main.c ****   RCC_ClkInitTypeDef ClkInitstruct = {0};
+ 530              		.loc 1 304 22 is_stmt 0 view .LVU125
+ 531 0004 3422     		movs	r2, #52
+ 532 0006 0021     		movs	r1, #0
+ 533 0008 05A8     		add	r0, sp, #20
+ 534 000a FFF7FEFF 		bl	memset
+ 535              	.LVL34:
+ 305:../Src/main.c **** 
+ 536              		.loc 1 305 3 is_stmt 1 view .LVU126
+ 305:../Src/main.c **** 
+ 537              		.loc 1 305 22 is_stmt 0 view .LVU127
+ 538 000e 0023     		movs	r3, #0
+ 539 0010 0093     		str	r3, [sp]
+ 540 0012 0193     		str	r3, [sp, #4]
+ 541 0014 0293     		str	r3, [sp, #8]
+ 542 0016 0393     		str	r3, [sp, #12]
+ 543 0018 0493     		str	r3, [sp, #16]
+ 307:../Src/main.c ****   OscInitstruct.HSIState        = RCC_HSI_ON;
+ 544              		.loc 1 307 3 is_stmt 1 view .LVU128
+ 307:../Src/main.c ****   OscInitstruct.HSIState        = RCC_HSI_ON;
+ 545              		.loc 1 307 33 is_stmt 0 view .LVU129
+ 546 001a 0223     		movs	r3, #2
+ 547 001c 0593     		str	r3, [sp, #20]
+ 308:../Src/main.c ****   OscInitstruct.HSEState        = RCC_HSE_OFF;
+ 548              		.loc 1 308 3 is_stmt 1 view .LVU130
+ 308:../Src/main.c ****   OscInitstruct.HSEState        = RCC_HSE_OFF;
+ 549              		.loc 1 308 33 is_stmt 0 view .LVU131
+ 550 001e 0122     		movs	r2, #1
+ 551 0020 0A92     		str	r2, [sp, #40]
+ 309:../Src/main.c ****   OscInitstruct.HSI48MState     = RCC_HSI48M_OFF;
+ 552              		.loc 1 309 3 is_stmt 1 view .LVU132
+ 310:../Src/main.c ****   OscInitstruct.LSEState        = RCC_LSE_OFF;
+ 553              		.loc 1 310 3 view .LVU133
+ 311:../Src/main.c ****   OscInitstruct.LSIState        = RCC_LSI_OFF;
+ 554              		.loc 1 311 3 view .LVU134
+ 312:../Src/main.c ****   OscInitstruct.PLL.PLLState    = RCC_PLL_ON;
+ 555              		.loc 1 312 3 view .LVU135
+ 313:../Src/main.c ****   OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2;
+ 556              		.loc 1 313 3 view .LVU136
+ 313:../Src/main.c ****   OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSI_DIV2;
+ 557              		.loc 1 313 33 is_stmt 0 view .LVU137
+ 558 0022 0D93     		str	r3, [sp, #52]
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 19
+
+
+ 314:../Src/main.c ****   OscInitstruct.PLL.PLLPrediv   = RCC_PLL_PREDIV_DIV1;
+ 559              		.loc 1 314 3 is_stmt 1 view .LVU138
+ 315:../Src/main.c ****   OscInitstruct.PLL.PLLMUL      = 20;
+ 560              		.loc 1 315 3 view .LVU139
+ 316:../Src/main.c ****   OscInitstruct.PLL.PLLPostdiv  = RCC_PLL_POSTDIV_DIV2;
+ 561              		.loc 1 316 3 view .LVU140
+ 316:../Src/main.c ****   OscInitstruct.PLL.PLLPostdiv  = RCC_PLL_POSTDIV_DIV2;
+ 562              		.loc 1 316 33 is_stmt 0 view .LVU141
+ 563 0024 1423     		movs	r3, #20
+ 564 0026 0F93     		str	r3, [sp, #60]
+ 317:../Src/main.c ****   if (HAL_RCC_OscConfig(&OscInitstruct) != HAL_OK)
+ 565              		.loc 1 317 3 is_stmt 1 view .LVU142
+ 317:../Src/main.c ****   if (HAL_RCC_OscConfig(&OscInitstruct) != HAL_OK)
+ 566              		.loc 1 317 33 is_stmt 0 view .LVU143
+ 567 0028 1023     		movs	r3, #16
+ 568 002a 1193     		str	r3, [sp, #68]
+ 318:../Src/main.c ****   {
+ 569              		.loc 1 318 3 is_stmt 1 view .LVU144
+ 318:../Src/main.c ****   {
+ 570              		.loc 1 318 7 is_stmt 0 view .LVU145
+ 571 002c 05A8     		add	r0, sp, #20
+ 572 002e FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 573              	.LVL35:
+ 318:../Src/main.c ****   {
+ 574              		.loc 1 318 6 view .LVU146
+ 575 0032 78B9     		cbnz	r0, .L34
+ 323:../Src/main.c ****                                  RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+ 576              		.loc 1 323 3 is_stmt 1 view .LVU147
+ 323:../Src/main.c ****                                  RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+ 577              		.loc 1 323 32 is_stmt 0 view .LVU148
+ 578 0034 0F23     		movs	r3, #15
+ 579 0036 0093     		str	r3, [sp]
+ 325:../Src/main.c ****   ClkInitstruct.AHBCLKDivider  = RCC_SYSCLK_DIV1;
+ 580              		.loc 1 325 3 is_stmt 1 view .LVU149
+ 325:../Src/main.c ****   ClkInitstruct.AHBCLKDivider  = RCC_SYSCLK_DIV1;
+ 581              		.loc 1 325 32 is_stmt 0 view .LVU150
+ 582 0038 0223     		movs	r3, #2
+ 583 003a 0193     		str	r3, [sp, #4]
+ 326:../Src/main.c ****   ClkInitstruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 584              		.loc 1 326 3 is_stmt 1 view .LVU151
+ 326:../Src/main.c ****   ClkInitstruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 585              		.loc 1 326 32 is_stmt 0 view .LVU152
+ 586 003c 0023     		movs	r3, #0
+ 587 003e 0293     		str	r3, [sp, #8]
+ 327:../Src/main.c ****   ClkInitstruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 588              		.loc 1 327 3 is_stmt 1 view .LVU153
+ 327:../Src/main.c ****   ClkInitstruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 589              		.loc 1 327 32 is_stmt 0 view .LVU154
+ 590 0040 0393     		str	r3, [sp, #12]
+ 328:../Src/main.c ****   if (HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_3) != HAL_OK)
+ 591              		.loc 1 328 3 is_stmt 1 view .LVU155
+ 328:../Src/main.c ****   if (HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_3) != HAL_OK)
+ 592              		.loc 1 328 32 is_stmt 0 view .LVU156
+ 593 0042 0493     		str	r3, [sp, #16]
+ 329:../Src/main.c ****   {
+ 594              		.loc 1 329 3 is_stmt 1 view .LVU157
+ 329:../Src/main.c ****   {
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 20
+
+
+ 595              		.loc 1 329 7 is_stmt 0 view .LVU158
+ 596 0044 0321     		movs	r1, #3
+ 597 0046 6846     		mov	r0, sp
+ 598 0048 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 599              	.LVL36:
+ 329:../Src/main.c ****   {
+ 600              		.loc 1 329 6 view .LVU159
+ 601 004c 20B9     		cbnz	r0, .L35
+ 333:../Src/main.c **** 
+ 602              		.loc 1 333 1 view .LVU160
+ 603 004e 13B0     		add	sp, sp, #76
+ 604              	.LCFI14:
+ 605              		.cfi_remember_state
+ 606              		.cfi_def_cfa_offset 4
+ 607              		@ sp needed
+ 608 0050 5DF804FB 		ldr	pc, [sp], #4
+ 609              	.L34:
+ 610              	.LCFI15:
+ 611              		.cfi_restore_state
+ 320:../Src/main.c ****   }
+ 612              		.loc 1 320 5 is_stmt 1 view .LVU161
+ 613 0054 FFF7FEFF 		bl	APP_ErrorHandler
+ 614              	.LVL37:
+ 615              	.L35:
+ 331:../Src/main.c ****   }
+ 616              		.loc 1 331 5 view .LVU162
+ 617 0058 FFF7FEFF 		bl	APP_ErrorHandler
+ 618              	.LVL38:
+ 619              		.cfi_endproc
+ 620              	.LFE141:
+ 622              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 623              		.align	2
+ 624              	.LC11:
+ 625 0000 4641494C 		.ascii	"FAILED\000"
+ 625      454400
+ 626 0007 00       		.align	2
+ 627              	.LC12:
+ 628 0008 4F4B00   		.ascii	"OK\000"
+ 629 000b 00       		.align	2
+ 630              	.LC13:
+ 631 000c 444F574E 		.ascii	"DOWN (no partner?)\000"
+ 631      20286E6F 
+ 631      20706172 
+ 631      746E6572 
+ 631      3F2900
+ 632 001f 00       		.align	2
+ 633              	.LC14:
+ 634 0020 555000   		.ascii	"UP\000"
+ 635 0023 00       		.align	2
+ 636              	.LC15:
+ 637 0024 0D0A3D3D 		.ascii	"\015\012=== PY32E407 + LAN8670 10BASE-T1S bring-up "
+ 637      3D205059 
+ 637      33324534 
+ 637      3037202B 
+ 637      204C414E 
+ 638 0051 3D3D3D0D 		.ascii	"===\015\012\000"
+ 638      0A00
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 21
+
+
+ 639 0057 00       		.align	2
+ 640              	.LC16:
+ 641 0058 4D41433A 		.ascii	"MAC: initialisation FAILED (RMII clock missing?)\015"
+ 641      20696E69 
+ 641      7469616C 
+ 641      69736174 
+ 641      696F6E20 
+ 642 0089 0A00     		.ascii	"\012\000"
+ 643 008b 00       		.align	2
+ 644              	.LC17:
+ 645 008c 20202020 		.ascii	"     check the 50 MHz oscillator and R6/R38/R39/R40"
+ 645      20636865 
+ 645      636B2074 
+ 645      68652035 
+ 645      30204D48 
+ 646 00bf 0D0A00   		.ascii	"\015\012\000"
+ 647 00c2 0000     		.align	2
+ 648              	.LC18:
+ 649 00c4 4D41433A 		.ascii	"MAC: ETH clock, RMII pins and MDIO ready\015\012\000"
+ 649      20455448 
+ 649      20636C6F 
+ 649      636B2C20 
+ 649      524D4949 
+ 650 00ef 00       		.align	2
+ 651              	.LC19:
+ 652 00f0 5048593A 		.ascii	"PHY: no answer on MDIO (check PHYAD strap / MDIO pu"
+ 652      206E6F20 
+ 652      616E7377 
+ 652      6572206F 
+ 652      6E204D44 
+ 653 0123 6C6C2D75 		.ascii	"ll-up)\015\012\000"
+ 653      70290D0A 
+ 653      00
+ 654              		.align	2
+ 655              	.LC20:
+ 656 012c 5048593A 		.ascii	"PHY: answered but the identifier is not a LAN8670\015"
+ 656      20616E73 
+ 656      77657265 
+ 656      64206275 
+ 656      74207468 
+ 657 015e 0A00     		.ascii	"\012\000"
+ 658              		.align	2
+ 659              	.LC21:
+ 660 0160 5048593A 		.ascii	"PHY: LAN8670 detected\015\012\000"
+ 660      204C414E 
+ 660      38363730 
+ 660      20646574 
+ 660      65637465 
+ 661              		.align	2
+ 662              	.LC22:
+ 663 0178 5048593A 		.ascii	"PHY: soft reset %s\015\012\000"
+ 663      20736F66 
+ 663      74207265 
+ 663      73657420 
+ 663      25730D0A 
+ 664 018d 000000   		.align	2
+ 665              	.LC23:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 22
+
+
+ 666 0190 5048593A 		.ascii	"PHY: PLCA enabled, ID=%u, node count=%u, TOTMR=%u\015"
+ 666      20504C43 
+ 666      4120656E 
+ 666      61626C65 
+ 666      642C2049 
+ 667 01c2 0A00     		.ascii	"\012\000"
+ 668              		.align	2
+ 669              	.LC24:
+ 670 01c4 5048593A 		.ascii	"PHY: PLCA configuration FAILED\015\012\000"
+ 670      20504C43 
+ 670      4120636F 
+ 670      6E666967 
+ 670      75726174 
+ 671 01e5 000000   		.align	2
+ 672              	.LC25:
+ 673 01e8 4D41433A 		.ascii	"MAC: RMII 10 Mbit/s full duplex, DMA started\015\012"
+ 673      20524D49 
+ 673      49203130 
+ 673      204D6269 
+ 673      742F7320 
+ 674 0216 00       		.ascii	"\000"
+ 675 0217 00       		.align	2
+ 676              	.LC26:
+ 677 0218 4D41433A 		.ascii	"MAC: start FAILED\015\012\000"
+ 677      20737461 
+ 677      72742046 
+ 677      41494C45 
+ 677      440D0A00 
+ 678              		.align	2
+ 679              	.LC27:
+ 680 022c 5048593A 		.ascii	"PHY: link %s\015\012\000"
+ 680      206C696E 
+ 680      6B202573 
+ 680      0D0A00
+ 681 023b 00       		.align	2
+ 682              	.LC28:
+ 683 023c 52656164 		.ascii	"Ready. Sending a demo frame every second.\015\012\015"
+ 683      792E2053 
+ 683      656E6469 
+ 683      6E672061 
+ 683      2064656D 
+ 684 0268 0A00     		.ascii	"\012\000"
+ 685              		.section	.text.main,"ax",%progbits
+ 686              		.align	1
+ 687              		.global	main
+ 688              		.syntax unified
+ 689              		.thumb
+ 690              		.thumb_func
+ 692              	main:
+ 693              	.LFB136:
+  70:../Src/main.c ****   LAN8670_Info info = {0};
+ 694              		.loc 1 70 1 view -0
+ 695              		.cfi_startproc
+ 696              		@ args = 0, pretend = 0, frame = 1544
+ 697              		@ frame_needed = 0, uses_anonymous_args = 0
+ 698 0000 30B5     		push	{r4, r5, lr}
+ 699              	.LCFI16:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 23
+
+
+ 700              		.cfi_def_cfa_offset 12
+ 701              		.cfi_offset 4, -12
+ 702              		.cfi_offset 5, -8
+ 703              		.cfi_offset 14, -4
+ 704 0002 ADF20C6D 		subw	sp, sp, #1548
+ 705              	.LCFI17:
+ 706              		.cfi_def_cfa_offset 1560
+  71:../Src/main.c ****   LAN8670_Status status;
+ 707              		.loc 1 71 3 view .LVU164
+  71:../Src/main.c ****   LAN8670_Status status;
+ 708              		.loc 1 71 16 is_stmt 0 view .LVU165
+ 709 0006 0023     		movs	r3, #0
+ 710 0008 CDF8FC35 		str	r3, [sp, #1532]
+ 711 000c CDF80036 		str	r3, [sp, #1536]
+ 712 0010 CDF80436 		str	r3, [sp, #1540]
+  72:../Src/main.c ****   uint8_t ethReady = 0U;
+ 713              		.loc 1 72 3 is_stmt 1 view .LVU166
+  73:../Src/main.c ****   uint32_t lastTx = 0U;
+ 714              		.loc 1 73 3 view .LVU167
+ 715              	.LVL39:
+  74:../Src/main.c **** 
+ 716              		.loc 1 74 3 view .LVU168
+  76:../Src/main.c ****   APP_SystemClockConfig();
+ 717              		.loc 1 76 3 view .LVU169
+ 718 0014 FFF7FEFF 		bl	HAL_Init
+ 719              	.LVL40:
+  77:../Src/main.c ****   APP_GpioInit();
+ 720              		.loc 1 77 3 view .LVU170
+ 721 0018 FFF7FEFF 		bl	APP_SystemClockConfig
+ 722              	.LVL41:
+  78:../Src/main.c ****   Console_Init();
+ 723              		.loc 1 78 3 view .LVU171
+ 724 001c FFF7FEFF 		bl	APP_GpioInit
+ 725              	.LVL42:
+  79:../Src/main.c **** 
+ 726              		.loc 1 79 3 view .LVU172
+ 727 0020 FFF7FEFF 		bl	Console_Init
+ 728              	.LVL43:
+  81:../Src/main.c **** 
+ 729              		.loc 1 81 3 view .LVU173
+ 730 0024 4648     		ldr	r0, .L58
+ 731 0026 FFF7FEFF 		bl	Console_Write
+ 732              	.LVL44:
+  86:../Src/main.c ****   {
+ 733              		.loc 1 86 3 view .LVU174
+  86:../Src/main.c ****   {
+ 734              		.loc 1 86 7 is_stmt 0 view .LVU175
+ 735 002a FFF7FEFF 		bl	LAN8670_EthInit
+ 736              	.LVL45:
+  86:../Src/main.c ****   {
+ 737              		.loc 1 86 6 view .LVU176
+ 738 002e 70B1     		cbz	r0, .L37
+  88:../Src/main.c ****     Console_Write("     check the 50 MHz oscillator and R6/R38/R39/R40\r\n");
+ 739              		.loc 1 88 5 is_stmt 1 view .LVU177
+ 740 0030 4448     		ldr	r0, .L58+4
+ 741 0032 FFF7FEFF 		bl	Console_Write
+ 742              	.LVL46:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 24
+
+
+  89:../Src/main.c ****     while (1)
+ 743              		.loc 1 89 5 view .LVU178
+ 744 0036 4448     		ldr	r0, .L58+8
+ 745 0038 FFF7FEFF 		bl	Console_Write
+ 746              	.LVL47:
+ 747              	.L38:
+  90:../Src/main.c ****     {
+ 748              		.loc 1 90 5 discriminator 1 view .LVU179
+  92:../Src/main.c ****       HAL_Delay(200U);
+ 749              		.loc 1 92 7 discriminator 1 view .LVU180
+ 750 003c 0821     		movs	r1, #8
+ 751 003e 4FF09040 		mov	r0, #1207959552
+ 752 0042 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 753              	.LVL48:
+  93:../Src/main.c ****     }
+ 754              		.loc 1 93 7 discriminator 1 view .LVU181
+ 755 0046 C820     		movs	r0, #200
+ 756 0048 FFF7FEFF 		bl	HAL_Delay
+ 757              	.LVL49:
+  90:../Src/main.c ****     {
+ 758              		.loc 1 90 11 discriminator 1 view .LVU182
+ 759 004c F6E7     		b	.L38
+ 760              	.L37:
+ 761 004e 0546     		mov	r5, r0
+  96:../Src/main.c **** 
+ 762              		.loc 1 96 3 view .LVU183
+ 763 0050 3E48     		ldr	r0, .L58+12
+ 764 0052 FFF7FEFF 		bl	Console_Write
+ 765              	.LVL50:
+  99:../Src/main.c ****   APP_PrintPhyInfo(&info);
+ 766              		.loc 1 99 3 view .LVU184
+  99:../Src/main.c ****   APP_PrintPhyInfo(&info);
+ 767              		.loc 1 99 12 is_stmt 0 view .LVU185
+ 768 0056 0DF2FC50 		addw	r0, sp, #1532
+ 769 005a FFF7FEFF 		bl	LAN8670_Probe
+ 770              	.LVL51:
+ 771 005e 0446     		mov	r4, r0
+ 772              	.LVL52:
+ 100:../Src/main.c **** 
+ 773              		.loc 1 100 3 is_stmt 1 view .LVU186
+ 774 0060 0DF2FC50 		addw	r0, sp, #1532
+ 775 0064 FFF7FEFF 		bl	APP_PrintPhyInfo
+ 776              	.LVL53:
+ 102:../Src/main.c ****   {
+ 777              		.loc 1 102 3 view .LVU187
+ 102:../Src/main.c ****   {
+ 778              		.loc 1 102 6 is_stmt 0 view .LVU188
+ 779 0068 012C     		cmp	r4, #1
+ 780 006a 0AD0     		beq	.L55
+ 106:../Src/main.c ****   {
+ 781              		.loc 1 106 8 is_stmt 1 view .LVU189
+ 106:../Src/main.c ****   {
+ 782              		.loc 1 106 11 is_stmt 0 view .LVU190
+ 783 006c 022C     		cmp	r4, #2
+ 784 006e 0CD0     		beq	.L56
+ 112:../Src/main.c ****   }
+ 785              		.loc 1 112 5 is_stmt 1 view .LVU191
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 25
+
+
+ 786 0070 3748     		ldr	r0, .L58+16
+ 787 0072 FFF7FEFF 		bl	Console_Write
+ 788              	.LVL54:
+ 789              	.L40:
+ 115:../Src/main.c ****   {
+ 790              		.loc 1 115 3 view .LVU192
+ 115:../Src/main.c ****   {
+ 791              		.loc 1 115 6 is_stmt 0 view .LVU193
+ 792 0076 64B1     		cbz	r4, .L57
+ 793              	.LVL55:
+ 794              	.L42:
+ 155:../Src/main.c **** 
+ 795              		.loc 1 155 3 is_stmt 1 view .LVU194
+ 796 0078 3648     		ldr	r0, .L58+20
+ 797 007a FFF7FEFF 		bl	Console_Write
+ 798              	.LVL56:
+  74:../Src/main.c **** 
+ 799              		.loc 1 74 12 is_stmt 0 view .LVU195
+ 800 007e 0024     		movs	r4, #0
+ 801 0080 5AE0     		b	.L51
+ 802              	.LVL57:
+ 803              	.L55:
+ 104:../Src/main.c ****   }
+ 804              		.loc 1 104 5 is_stmt 1 view .LVU196
+ 805 0082 3548     		ldr	r0, .L58+24
+ 806 0084 FFF7FEFF 		bl	Console_Write
+ 807              	.LVL58:
+ 808 0088 F5E7     		b	.L40
+ 809              	.L56:
+ 108:../Src/main.c ****   }
+ 810              		.loc 1 108 5 view .LVU197
+ 811 008a 3448     		ldr	r0, .L58+28
+ 812 008c FFF7FEFF 		bl	Console_Write
+ 813              	.LVL59:
+ 814 0090 F1E7     		b	.L40
+ 815              	.L57:
+ 118:../Src/main.c ****     Console_Printf("PHY: soft reset %s\r\n",
+ 816              		.loc 1 118 5 view .LVU198
+ 118:../Src/main.c ****     Console_Printf("PHY: soft reset %s\r\n",
+ 817              		.loc 1 118 14 is_stmt 0 view .LVU199
+ 818 0092 FFF7FEFF 		bl	LAN8670_SoftReset
+ 819              	.LVL60:
+ 119:../Src/main.c ****                    (status == LAN8670_OK) ? "OK" : "FAILED");
+ 820              		.loc 1 119 5 is_stmt 1 view .LVU200
+ 821 0096 00BB     		cbnz	r0, .L52
+ 822 0098 3149     		ldr	r1, .L58+32
+ 823              	.L43:
+ 119:../Src/main.c ****                    (status == LAN8670_OK) ? "OK" : "FAILED");
+ 824              		.loc 1 119 5 is_stmt 0 discriminator 4 view .LVU201
+ 825 009a 3248     		ldr	r0, .L58+36
+ 826              	.LVL61:
+ 119:../Src/main.c ****                    (status == LAN8670_OK) ? "OK" : "FAILED");
+ 827              		.loc 1 119 5 discriminator 4 view .LVU202
+ 828 009c FFF7FEFF 		bl	Console_Printf
+ 829              	.LVL62:
+ 123:../Src/main.c ****     if (status == LAN8670_OK)
+ 830              		.loc 1 123 5 is_stmt 1 discriminator 4 view .LVU203
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 26
+
+
+ 123:../Src/main.c ****     if (status == LAN8670_OK)
+ 831              		.loc 1 123 14 is_stmt 0 discriminator 4 view .LVU204
+ 832 00a0 2022     		movs	r2, #32
+ 833 00a2 0821     		movs	r1, #8
+ 834 00a4 0020     		movs	r0, #0
+ 835 00a6 FFF7FEFF 		bl	LAN8670_ConfigurePLCA
+ 836              	.LVL63:
+ 124:../Src/main.c ****     {
+ 837              		.loc 1 124 5 is_stmt 1 discriminator 4 view .LVU205
+ 124:../Src/main.c ****     {
+ 838              		.loc 1 124 8 is_stmt 0 discriminator 4 view .LVU206
+ 839 00aa C0B9     		cbnz	r0, .L44
+ 126:../Src/main.c ****                      (unsigned)PLCA_NODE_ID, (unsigned)PLCA_NODE_COUNT,
+ 840              		.loc 1 126 7 is_stmt 1 view .LVU207
+ 841 00ac 2023     		movs	r3, #32
+ 842 00ae 0822     		movs	r2, #8
+ 843 00b0 0021     		movs	r1, #0
+ 844 00b2 2D48     		ldr	r0, .L58+40
+ 845              	.LVL64:
+ 126:../Src/main.c ****                      (unsigned)PLCA_NODE_ID, (unsigned)PLCA_NODE_COUNT,
+ 846              		.loc 1 126 7 is_stmt 0 view .LVU208
+ 847 00b4 FFF7FEFF 		bl	Console_Printf
+ 848              	.LVL65:
+ 849              	.L45:
+ 136:../Src/main.c ****     {
+ 850              		.loc 1 136 5 is_stmt 1 view .LVU209
+ 136:../Src/main.c ****     {
+ 851              		.loc 1 136 9 is_stmt 0 view .LVU210
+ 852 00b8 FFF7FEFF 		bl	LAN8670_EthStart
+ 853              	.LVL66:
+ 136:../Src/main.c ****     {
+ 854              		.loc 1 136 8 view .LVU211
+ 855 00bc 98B9     		cbnz	r0, .L46
+ 138:../Src/main.c ****       Console_Write("MAC: RMII 10 Mbit/s full duplex, DMA started\r\n");
+ 856              		.loc 1 138 7 is_stmt 1 view .LVU212
+ 857              	.LVL67:
+ 139:../Src/main.c ****     }
+ 858              		.loc 1 139 7 view .LVU213
+ 859 00be 2B48     		ldr	r0, .L58+44
+ 860 00c0 FFF7FEFF 		bl	Console_Write
+ 861              	.LVL68:
+ 147:../Src/main.c ****     {
+ 862              		.loc 1 147 5 view .LVU214
+ 149:../Src/main.c ****       Console_Printf("PHY: link %s\r\n",
+ 863              		.loc 1 149 7 view .LVU215
+ 149:../Src/main.c ****       Console_Printf("PHY: link %s\r\n",
+ 864              		.loc 1 149 16 is_stmt 0 view .LVU216
+ 865 00c4 40F6B830 		movw	r0, #3000
+ 866 00c8 FFF7FEFF 		bl	LAN8670_WaitForLink
+ 867              	.LVL69:
+ 150:../Src/main.c ****                      (status == LAN8670_OK) ? "UP" : "DOWN (no partner?)");
+ 868              		.loc 1 150 7 is_stmt 1 view .LVU217
+ 869 00cc 80B9     		cbnz	r0, .L53
+ 870 00ce 2849     		ldr	r1, .L58+48
+ 871              	.L47:
+ 150:../Src/main.c ****                      (status == LAN8670_OK) ? "UP" : "DOWN (no partner?)");
+ 872              		.loc 1 150 7 is_stmt 0 discriminator 4 view .LVU218
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 27
+
+
+ 873 00d0 2848     		ldr	r0, .L58+52
+ 874              	.LVL70:
+ 150:../Src/main.c ****                      (status == LAN8670_OK) ? "UP" : "DOWN (no partner?)");
+ 875              		.loc 1 150 7 discriminator 4 view .LVU219
+ 876 00d2 FFF7FEFF 		bl	Console_Printf
+ 877              	.LVL71:
+ 138:../Src/main.c ****       Console_Write("MAC: RMII 10 Mbit/s full duplex, DMA started\r\n");
+ 878              		.loc 1 138 16 discriminator 4 view .LVU220
+ 879 00d6 0125     		movs	r5, #1
+ 880 00d8 CEE7     		b	.L42
+ 881              	.LVL72:
+ 882              	.L52:
+ 119:../Src/main.c ****                    (status == LAN8670_OK) ? "OK" : "FAILED");
+ 883              		.loc 1 119 5 view .LVU221
+ 884 00da 2749     		ldr	r1, .L58+56
+ 885 00dc DDE7     		b	.L43
+ 886              	.L44:
+ 132:../Src/main.c ****     }
+ 887              		.loc 1 132 7 is_stmt 1 view .LVU222
+ 888 00de 2748     		ldr	r0, .L58+60
+ 889              	.LVL73:
+ 132:../Src/main.c ****     }
+ 890              		.loc 1 132 7 is_stmt 0 view .LVU223
+ 891 00e0 FFF7FEFF 		bl	Console_Write
+ 892              	.LVL74:
+ 893 00e4 E8E7     		b	.L45
+ 894              	.L46:
+ 143:../Src/main.c ****     }
+ 895              		.loc 1 143 7 is_stmt 1 view .LVU224
+ 896 00e6 2648     		ldr	r0, .L58+64
+ 897 00e8 FFF7FEFF 		bl	Console_Write
+ 898              	.LVL75:
+ 147:../Src/main.c ****     {
+ 899              		.loc 1 147 5 view .LVU225
+  73:../Src/main.c ****   uint32_t lastTx = 0U;
+ 900              		.loc 1 73 11 is_stmt 0 view .LVU226
+ 901 00ec 2546     		mov	r5, r4
+ 902 00ee C3E7     		b	.L42
+ 903              	.LVL76:
+ 904              	.L53:
+ 150:../Src/main.c ****                      (status == LAN8670_OK) ? "UP" : "DOWN (no partner?)");
+ 905              		.loc 1 150 7 view .LVU227
+ 906 00f0 2449     		ldr	r1, .L58+68
+ 907 00f2 EDE7     		b	.L47
+ 908              	.LVL77:
+ 909              	.L49:
+ 910              	.LBB3:
+ 166:../Src/main.c ****       APP_PrintReceivedFrame(frame, length);
+ 911              		.loc 1 166 7 is_stmt 1 view .LVU228
+ 912 00f4 1021     		movs	r1, #16
+ 913 00f6 4FF09040 		mov	r0, #1207959552
+ 914 00fa FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 915              	.LVL78:
+ 167:../Src/main.c ****     }
+ 916              		.loc 1 167 7 view .LVU229
+ 917 00fe 0199     		ldr	r1, [sp, #4]
+ 918 0100 02A8     		add	r0, sp, #8
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 28
+
+
+ 919 0102 FFF7FEFF 		bl	APP_PrintReceivedFrame
+ 920              	.LVL79:
+ 921              	.L48:
+ 164:../Src/main.c ****     {
+ 922              		.loc 1 164 11 view .LVU230
+ 164:../Src/main.c ****     {
+ 923              		.loc 1 164 12 is_stmt 0 view .LVU231
+ 924 0106 01AA     		add	r2, sp, #4
+ 925 0108 40F2F451 		movw	r1, #1524
+ 926 010c 02A8     		add	r0, sp, #8
+ 927 010e FFF7FEFF 		bl	LAN8670_GetFrame
+ 928              	.LVL80:
+ 164:../Src/main.c ****     {
+ 929              		.loc 1 164 11 view .LVU232
+ 930 0112 0028     		cmp	r0, #0
+ 931 0114 EED0     		beq	.L49
+ 171:../Src/main.c ****     {
+ 932              		.loc 1 171 5 is_stmt 1 view .LVU233
+ 171:../Src/main.c ****     {
+ 933              		.loc 1 171 10 is_stmt 0 view .LVU234
+ 934 0116 FFF7FEFF 		bl	HAL_GetTick
+ 935              	.LVL81:
+ 171:../Src/main.c ****     {
+ 936              		.loc 1 171 24 view .LVU235
+ 937 011a 031B     		subs	r3, r0, r4
+ 171:../Src/main.c ****     {
+ 938              		.loc 1 171 8 view .LVU236
+ 939 011c B3F57A7F 		cmp	r3, #1000
+ 940 0120 0AD3     		bcc	.L51
+ 173:../Src/main.c ****       HAL_GPIO_TogglePin(LED_PORT, LED_D4_PIN);
+ 941              		.loc 1 173 7 is_stmt 1 view .LVU237
+ 173:../Src/main.c ****       HAL_GPIO_TogglePin(LED_PORT, LED_D4_PIN);
+ 942              		.loc 1 173 16 is_stmt 0 view .LVU238
+ 943 0122 FFF7FEFF 		bl	HAL_GetTick
+ 944              	.LVL82:
+ 945 0126 0446     		mov	r4, r0
+ 946              	.LVL83:
+ 174:../Src/main.c **** 
+ 947              		.loc 1 174 7 is_stmt 1 view .LVU239
+ 948 0128 4021     		movs	r1, #64
+ 949 012a 4FF09040 		mov	r0, #1207959552
+ 950              	.LVL84:
+ 174:../Src/main.c **** 
+ 951              		.loc 1 174 7 is_stmt 0 view .LVU240
+ 952 012e FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 953              	.LVL85:
+ 176:../Src/main.c ****       {
+ 954              		.loc 1 176 7 is_stmt 1 view .LVU241
+ 176:../Src/main.c ****       {
+ 955              		.loc 1 176 10 is_stmt 0 view .LVU242
+ 956 0132 0DB1     		cbz	r5, .L51
+ 178:../Src/main.c ****       }
+ 957              		.loc 1 178 9 is_stmt 1 view .LVU243
+ 958 0134 FFF7FEFF 		bl	APP_SendDemoFrame
+ 959              	.LVL86:
+ 178:../Src/main.c ****       }
+ 960              		.loc 1 178 9 is_stmt 0 view .LVU244
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 29
+
+
+ 961              	.LBE3:
+ 158:../Src/main.c ****   {
+ 962              		.loc 1 158 9 is_stmt 1 view .LVU245
+ 963              	.L51:
+ 158:../Src/main.c ****   {
+ 964              		.loc 1 158 3 view .LVU246
+ 965              	.LBB4:
+ 160:../Src/main.c ****     uint32_t length = 0U;
+ 966              		.loc 1 160 5 view .LVU247
+ 161:../Src/main.c **** 
+ 967              		.loc 1 161 5 view .LVU248
+ 161:../Src/main.c **** 
+ 968              		.loc 1 161 14 is_stmt 0 view .LVU249
+ 969 0138 0023     		movs	r3, #0
+ 970 013a 0193     		str	r3, [sp, #4]
+ 164:../Src/main.c ****     {
+ 971              		.loc 1 164 5 is_stmt 1 view .LVU250
+ 164:../Src/main.c ****     {
+ 972              		.loc 1 164 11 is_stmt 0 view .LVU251
+ 973 013c E3E7     		b	.L48
+ 974              	.L59:
+ 975 013e 00BF     		.align	2
+ 976              	.L58:
+ 977 0140 24000000 		.word	.LC15
+ 978 0144 58000000 		.word	.LC16
+ 979 0148 8C000000 		.word	.LC17
+ 980 014c C4000000 		.word	.LC18
+ 981 0150 60010000 		.word	.LC21
+ 982 0154 3C020000 		.word	.LC28
+ 983 0158 F0000000 		.word	.LC19
+ 984 015c 2C010000 		.word	.LC20
+ 985 0160 08000000 		.word	.LC12
+ 986 0164 78010000 		.word	.LC22
+ 987 0168 90010000 		.word	.LC23
+ 988 016c E8010000 		.word	.LC25
+ 989 0170 20000000 		.word	.LC14
+ 990 0174 2C020000 		.word	.LC27
+ 991 0178 00000000 		.word	.LC11
+ 992 017c C4010000 		.word	.LC24
+ 993 0180 18020000 		.word	.LC26
+ 994 0184 0C000000 		.word	.LC13
+ 995              	.LBE4:
+ 996              		.cfi_endproc
+ 997              	.LFE136:
+ 999              		.global	heth
+ 1000              		.section	.bss.DemoTxCounter,"aw",%nobits
+ 1001              		.align	2
+ 1002              		.set	.LANCHOR2,. + 0
+ 1005              	DemoTxCounter:
+ 1006 0000 00000000 		.space	4
+ 1007              		.section	.bss.heth,"aw",%nobits
+ 1008              		.align	2
+ 1011              	heth:
+ 1012 0000 00000000 		.space	72
+ 1012      00000000 
+ 1012      00000000 
+ 1012      00000000 
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 30
+
+
+ 1012      00000000 
+ 1013              		.section	.rodata.dst.1,"a"
+ 1014              		.align	2
+ 1015              		.set	.LANCHOR0,. + 0
+ 1018              	dst.1:
+ 1019 0000 FFFFFFFF 		.ascii	"\377\377\377\377\377\377"
+ 1019      FFFF
+ 1020              		.section	.rodata.src.0,"a"
+ 1021              		.align	2
+ 1022              		.set	.LANCHOR1,. + 0
+ 1025              	src.0:
+ 1026 0000 02000000 		.ascii	"\002\000\000\000\000\001"
+ 1026      0001
+ 1027              		.text
+ 1028              	.Letext0:
+ 1029              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 1030              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1031              		.file 4 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 1032              		.file 5 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 1033              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_rcc.h"
+ 1034              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_gpio.h"
+ 1035              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_eth.h"
+ 1036              		.file 9 "../Inc/lan8670.h"
+ 1037              		.file 10 "../Inc/main.h"
+ 1038              		.file 11 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e4xx_hal.h"
+ 1039              		.file 12 "<built-in>"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s 			page 31
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:20     .rodata.APP_PrintPhyInfo.str1.4:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:34     .text.APP_PrintPhyInfo:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:39     .text.APP_PrintPhyInfo:00000000 APP_PrintPhyInfo
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:113    .text.APP_PrintPhyInfo:00000048 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:121    .rodata.APP_PrintReceivedFrame.str1.4:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:137    .text.APP_PrintReceivedFrame:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:142    .text.APP_PrintReceivedFrame:00000000 APP_PrintReceivedFrame
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:238    .text.APP_PrintReceivedFrame:0000004c $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:247    .text.APP_GpioInit:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:252    .text.APP_GpioInit:00000000 APP_GpioInit
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:324    .text.APP_GpioInit:0000004c $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:329    .rodata.APP_SendDemoFrame.str1.4:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:336    .text.APP_SendDemoFrame:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:341    .text.APP_SendDemoFrame:00000000 APP_SendDemoFrame
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:479    .text.APP_SendDemoFrame:0000009c $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:488    .text.APP_ErrorHandler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:494    .text.APP_ErrorHandler:00000000 APP_ErrorHandler
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:511    .text.APP_SystemClockConfig:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:516    .text.APP_SystemClockConfig:00000000 APP_SystemClockConfig
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:623    .rodata.main.str1.4:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:686    .text.main:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:692    .text.main:00000000 main
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:977    .text.main:00000140 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:1011   .bss.heth:00000000 heth
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:1001   .bss.DemoTxCounter:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:1005   .bss.DemoTxCounter:00000000 DemoTxCounter
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:1008   .bss.heth:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:1014   .rodata.dst.1:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:1018   .rodata.dst.1:00000000 dst.1
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:1021   .rodata.src.0:00000000 $d
+C:\Users\n11ak\AppData\Local\Temp\cckQ49Ty.s:1025   .rodata.src.0:00000000 src.0
+
+UNDEFINED SYMBOLS
+Console_Printf
+Console_Write
+HAL_GPIO_WritePin
+HAL_GPIO_Init
+HAL_GetTick
+LAN8670_SendFrame
+HAL_GPIO_TogglePin
+memset
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_Init
+Console_Init
+LAN8670_EthInit
+HAL_Delay
+LAN8670_Probe
+LAN8670_SoftReset
+LAN8670_ConfigurePLCA
+LAN8670_EthStart
+LAN8670_WaitForLink
+LAN8670_GetFrame

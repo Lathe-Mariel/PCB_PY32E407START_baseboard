@@ -1,0 +1,345 @@
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"console.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Console_Init,"ax",%progbits
+  20              		.align	1
+  21              		.global	Console_Init
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	Console_Init:
+  27              	.LFB136:
+  28              		.file 1 "../Src/console.c"
+   1:../Src/console.c **** /**
+   2:../Src/console.c ****   ******************************************************************************
+   3:../Src/console.c ****   * @file    console.c
+   4:../Src/console.c ****   * @brief   Polled USART1 console used for the LAN8670 bring-up diagnostics.
+   5:../Src/console.c ****   ******************************************************************************
+   6:../Src/console.c ****   */
+   7:../Src/console.c **** 
+   8:../Src/console.c **** /* Includes ------------------------------------------------------------------*/
+   9:../Src/console.c **** #include <stdarg.h>
+  10:../Src/console.c **** #include <stdio.h>
+  11:../Src/console.c **** #include <string.h>
+  12:../Src/console.c **** 
+  13:../Src/console.c **** #include "main.h"
+  14:../Src/console.c **** 
+  15:../Src/console.c **** /* Private define ------------------------------------------------------------*/
+  16:../Src/console.c **** #define CONSOLE_TX_TIMEOUT_MS        100U
+  17:../Src/console.c **** 
+  18:../Src/console.c **** /* Private variables ---------------------------------------------------------*/
+  19:../Src/console.c **** SCI_HandleTypeDef hConsoleUart;
+  20:../Src/console.c **** 
+  21:../Src/console.c **** /* Exported functions --------------------------------------------------------*/
+  22:../Src/console.c **** 
+  23:../Src/console.c **** /**
+  24:../Src/console.c ****   * @brief  Initialise USART1 at 921600 8N1 for the diagnostic output.
+  25:../Src/console.c ****   */
+  26:../Src/console.c **** void Console_Init(void)
+  27:../Src/console.c **** {
+  29              		.loc 1 27 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s 			page 2
+
+
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  28:../Src/console.c ****   hConsoleUart.Instance          = CONSOLE_UART;
+  38              		.loc 1 28 3 view .LVU1
+  39              		.loc 1 28 34 is_stmt 0 view .LVU2
+  40 0002 0B48     		ldr	r0, .L5
+  41 0004 0B4B     		ldr	r3, .L5+4
+  42 0006 0360     		str	r3, [r0]
+  29:../Src/console.c ****   hConsoleUart.Init.BaudRate     = CONSOLE_UART_BAUDRATE;
+  43              		.loc 1 29 3 is_stmt 1 view .LVU3
+  44              		.loc 1 29 34 is_stmt 0 view .LVU4
+  45 0008 4FF46123 		mov	r3, #921600
+  46 000c 4360     		str	r3, [r0, #4]
+  30:../Src/console.c ****   hConsoleUart.Init.WordLength   = SCI_WORDLENGTH_8B;
+  47              		.loc 1 30 3 is_stmt 1 view .LVU5
+  48              		.loc 1 30 34 is_stmt 0 view .LVU6
+  49 000e 0023     		movs	r3, #0
+  50 0010 8360     		str	r3, [r0, #8]
+  31:../Src/console.c ****   hConsoleUart.Init.StopBits     = SCI_STOPBITS_1;
+  51              		.loc 1 31 3 is_stmt 1 view .LVU7
+  52              		.loc 1 31 34 is_stmt 0 view .LVU8
+  53 0012 C360     		str	r3, [r0, #12]
+  32:../Src/console.c ****   hConsoleUart.Init.Parity       = SCI_PARITY_NONE;
+  54              		.loc 1 32 3 is_stmt 1 view .LVU9
+  55              		.loc 1 32 34 is_stmt 0 view .LVU10
+  56 0014 0361     		str	r3, [r0, #16]
+  33:../Src/console.c ****   hConsoleUart.Init.Mode         = SCI_MODE_TX_RX;
+  57              		.loc 1 33 3 is_stmt 1 view .LVU11
+  58              		.loc 1 33 34 is_stmt 0 view .LVU12
+  59 0016 0C22     		movs	r2, #12
+  60 0018 4261     		str	r2, [r0, #20]
+  34:../Src/console.c ****   hConsoleUart.Init.HwFlowCtl    = SCI_HWCONTROL_NONE;
+  61              		.loc 1 34 3 is_stmt 1 view .LVU13
+  62              		.loc 1 34 34 is_stmt 0 view .LVU14
+  63 001a 8361     		str	r3, [r0, #24]
+  35:../Src/console.c ****   hConsoleUart.Init.OverSampling = SCI_OVERSAMPLING_16;
+  64              		.loc 1 35 3 is_stmt 1 view .LVU15
+  65              		.loc 1 35 34 is_stmt 0 view .LVU16
+  66 001c C361     		str	r3, [r0, #28]
+  36:../Src/console.c ****   hConsoleUart.AdvancedInit.AdvFeatureInit = SCI_ADVFEATURE_NO_INIT;
+  67              		.loc 1 36 3 is_stmt 1 view .LVU17
+  68              		.loc 1 36 44 is_stmt 0 view .LVU18
+  69 001e 0362     		str	r3, [r0, #32]
+  37:../Src/console.c ****   hConsoleUart.FifoMode          = SCI_FIFOMODE_DISABLE;
+  70              		.loc 1 37 3 is_stmt 1 view .LVU19
+  71              		.loc 1 37 34 is_stmt 0 view .LVU20
+  72 0020 C365     		str	r3, [r0, #92]
+  38:../Src/console.c **** 
+  39:../Src/console.c ****   if (HAL_SCI_Init(&hConsoleUart) != HAL_OK)
+  73              		.loc 1 39 3 is_stmt 1 view .LVU21
+  74              		.loc 1 39 7 is_stmt 0 view .LVU22
+  75 0022 FFF7FEFF 		bl	HAL_SCI_Init
+  76              	.LVL0:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s 			page 3
+
+
+  77              		.loc 1 39 6 view .LVU23
+  78 0026 00B9     		cbnz	r0, .L4
+  79              	.L1:
+  40:../Src/console.c ****   {
+  41:../Src/console.c ****     APP_ErrorHandler();
+  42:../Src/console.c ****   }
+  43:../Src/console.c **** }
+  80              		.loc 1 43 1 view .LVU24
+  81 0028 08BD     		pop	{r3, pc}
+  82              	.L4:
+  41:../Src/console.c ****   }
+  83              		.loc 1 41 5 is_stmt 1 view .LVU25
+  84 002a FFF7FEFF 		bl	APP_ErrorHandler
+  85              	.LVL1:
+  86              		.loc 1 43 1 is_stmt 0 view .LVU26
+  87 002e FBE7     		b	.L1
+  88              	.L6:
+  89              		.align	2
+  90              	.L5:
+  91 0030 00000000 		.word	.LANCHOR0
+  92 0034 00380140 		.word	1073821696
+  93              		.cfi_endproc
+  94              	.LFE136:
+  96              		.section	.text.Console_Write,"ax",%progbits
+  97              		.align	1
+  98              		.global	Console_Write
+  99              		.syntax unified
+ 100              		.thumb
+ 101              		.thumb_func
+ 103              	Console_Write:
+ 104              	.LVL2:
+ 105              	.LFB137:
+  44:../Src/console.c **** 
+  45:../Src/console.c **** /**
+  46:../Src/console.c ****   * @brief  Write a null terminated string to the console.
+  47:../Src/console.c ****   */
+  48:../Src/console.c **** void Console_Write(const char *Str)
+  49:../Src/console.c **** {
+ 106              		.loc 1 49 1 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+  50:../Src/console.c ****   if (Str == NULL)
+ 110              		.loc 1 50 3 view .LVU28
+ 111              		.loc 1 50 6 is_stmt 0 view .LVU29
+ 112 0000 50B1     		cbz	r0, .L10
+  49:../Src/console.c ****   if (Str == NULL)
+ 113              		.loc 1 49 1 view .LVU30
+ 114 0002 10B5     		push	{r4, lr}
+ 115              	.LCFI1:
+ 116              		.cfi_def_cfa_offset 8
+ 117              		.cfi_offset 4, -8
+ 118              		.cfi_offset 14, -4
+ 119 0004 0446     		mov	r4, r0
+  51:../Src/console.c ****   {
+  52:../Src/console.c ****     return;
+  53:../Src/console.c ****   }
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s 			page 4
+
+
+  54:../Src/console.c **** 
+  55:../Src/console.c ****   (void)HAL_SCI_Transmit(&hConsoleUart, (uint8_t *)Str, (uint32_t)strlen(Str),
+ 120              		.loc 1 55 3 is_stmt 1 view .LVU31
+ 121              		.loc 1 55 67 is_stmt 0 view .LVU32
+ 122 0006 FFF7FEFF 		bl	strlen
+ 123              	.LVL3:
+ 124              		.loc 1 55 67 view .LVU33
+ 125 000a 0246     		mov	r2, r0
+ 126              		.loc 1 55 9 view .LVU34
+ 127 000c 6423     		movs	r3, #100
+ 128 000e 2146     		mov	r1, r4
+ 129 0010 0248     		ldr	r0, .L13
+ 130 0012 FFF7FEFF 		bl	HAL_SCI_Transmit
+ 131              	.LVL4:
+  56:../Src/console.c ****                          CONSOLE_TX_TIMEOUT_MS);
+  57:../Src/console.c **** }
+ 132              		.loc 1 57 1 view .LVU35
+ 133 0016 10BD     		pop	{r4, pc}
+ 134              	.LVL5:
+ 135              	.L10:
+ 136              	.LCFI2:
+ 137              		.cfi_def_cfa_offset 0
+ 138              		.cfi_restore 4
+ 139              		.cfi_restore 14
+ 140              		.loc 1 57 1 view .LVU36
+ 141 0018 7047     		bx	lr
+ 142              	.L14:
+ 143 001a 00BF     		.align	2
+ 144              	.L13:
+ 145 001c 00000000 		.word	.LANCHOR0
+ 146              		.cfi_endproc
+ 147              	.LFE137:
+ 149              		.section	.text.Console_Printf,"ax",%progbits
+ 150              		.align	1
+ 151              		.global	Console_Printf
+ 152              		.syntax unified
+ 153              		.thumb
+ 154              		.thumb_func
+ 156              	Console_Printf:
+ 157              	.LVL6:
+ 158              	.LFB138:
+  58:../Src/console.c **** 
+  59:../Src/console.c **** /**
+  60:../Src/console.c ****   * @brief  printf style helper built on top of Console_Write().
+  61:../Src/console.c ****   */
+  62:../Src/console.c **** void Console_Printf(const char *Fmt, ...)
+  63:../Src/console.c **** {
+ 159              		.loc 1 63 1 is_stmt 1 view -0
+ 160              		.cfi_startproc
+ 161              		@ args = 4, pretend = 16, frame = 168
+ 162              		@ frame_needed = 0, uses_anonymous_args = 1
+ 163              		.loc 1 63 1 is_stmt 0 view .LVU38
+ 164 0000 0FB4     		push	{r0, r1, r2, r3}
+ 165              	.LCFI3:
+ 166              		.cfi_def_cfa_offset 16
+ 167              		.cfi_offset 0, -16
+ 168              		.cfi_offset 1, -12
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s 			page 5
+
+
+ 169              		.cfi_offset 2, -8
+ 170              		.cfi_offset 3, -4
+ 171 0002 00B5     		push	{lr}
+ 172              	.LCFI4:
+ 173              		.cfi_def_cfa_offset 20
+ 174              		.cfi_offset 14, -20
+ 175 0004 ABB0     		sub	sp, sp, #172
+ 176              	.LCFI5:
+ 177              		.cfi_def_cfa_offset 192
+ 178 0006 2CAB     		add	r3, sp, #176
+ 179 0008 53F8042B 		ldr	r2, [r3], #4
+  64:../Src/console.c ****   char buffer[160];
+ 180              		.loc 1 64 3 is_stmt 1 view .LVU39
+  65:../Src/console.c ****   va_list args;
+ 181              		.loc 1 65 3 view .LVU40
+  66:../Src/console.c **** 
+  67:../Src/console.c ****   va_start(args, Fmt);
+ 182              		.loc 1 67 3 view .LVU41
+ 183 000c 0193     		str	r3, [sp, #4]
+  68:../Src/console.c ****   (void)vsnprintf(buffer, sizeof(buffer), Fmt, args);
+ 184              		.loc 1 68 3 view .LVU42
+ 185              		.loc 1 68 9 is_stmt 0 view .LVU43
+ 186 000e A021     		movs	r1, #160
+ 187 0010 02A8     		add	r0, sp, #8
+ 188 0012 FFF7FEFF 		bl	vsnprintf
+ 189              	.LVL7:
+  69:../Src/console.c ****   va_end(args);
+ 190              		.loc 1 69 3 is_stmt 1 view .LVU44
+  70:../Src/console.c **** 
+  71:../Src/console.c ****   Console_Write(buffer);
+ 191              		.loc 1 71 3 view .LVU45
+ 192 0016 02A8     		add	r0, sp, #8
+ 193 0018 FFF7FEFF 		bl	Console_Write
+ 194              	.LVL8:
+  72:../Src/console.c **** }
+ 195              		.loc 1 72 1 is_stmt 0 view .LVU46
+ 196 001c 2BB0     		add	sp, sp, #172
+ 197              	.LCFI6:
+ 198              		.cfi_def_cfa_offset 20
+ 199              		@ sp needed
+ 200 001e 5DF804EB 		ldr	lr, [sp], #4
+ 201              	.LCFI7:
+ 202              		.cfi_restore 14
+ 203              		.cfi_def_cfa_offset 16
+ 204 0022 04B0     		add	sp, sp, #16
+ 205              	.LCFI8:
+ 206              		.cfi_restore 3
+ 207              		.cfi_restore 2
+ 208              		.cfi_restore 1
+ 209              		.cfi_restore 0
+ 210              		.cfi_def_cfa_offset 0
+ 211 0024 7047     		bx	lr
+ 212              		.cfi_endproc
+ 213              	.LFE138:
+ 215              		.global	hConsoleUart
+ 216              		.section	.bss.hConsoleUart,"aw",%nobits
+ 217              		.align	2
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s 			page 6
+
+
+ 218              		.set	.LANCHOR0,. + 0
+ 221              	hConsoleUart:
+ 222 0000 00000000 		.space	136
+ 222      00000000 
+ 222      00000000 
+ 222      00000000 
+ 222      00000000 
+ 223              		.text
+ 224              	.Letext0:
+ 225              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\lib\\gcc\\arm-none-eabi\\10.3.1\\include\\stdarg.
+ 226              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 227              		.file 4 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 228              		.file 5 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 229              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 230              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_dma.h"
+ 231              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_sci.h"
+ 232              		.file 9 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\stdio.h"
+ 233              		.file 10 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\string.h"
+ 234              		.file 11 "../Inc/main.h"
+ 235              		.file 12 "<built-in>"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 console.c
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:20     .text.Console_Init:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:26     .text.Console_Init:00000000 Console_Init
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:91     .text.Console_Init:00000030 $d
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:97     .text.Console_Write:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:103    .text.Console_Write:00000000 Console_Write
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:145    .text.Console_Write:0000001c $d
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:150    .text.Console_Printf:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:156    .text.Console_Printf:00000000 Console_Printf
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:221    .bss.hConsoleUart:00000000 hConsoleUart
+C:\Users\n11ak\AppData\Local\Temp\ccEGGGty.s:217    .bss.hConsoleUart:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_SCI_Init
+APP_ErrorHandler
+strlen
+HAL_SCI_Transmit
+vsnprintf

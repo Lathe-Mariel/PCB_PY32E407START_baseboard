@@ -1,0 +1,459 @@
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"py32e407_it.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.NMI_Handler,"ax",%progbits
+  20              		.align	1
+  21              		.global	NMI_Handler
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	NMI_Handler:
+  27              	.LFB136:
+  28              		.file 1 "../Src/py32e407_it.c"
+   1:../Src/py32e407_it.c **** /**
+   2:../Src/py32e407_it.c ****   ******************************************************************************
+   3:../Src/py32e407_it.c ****   * @file    py32e407_it.c
+   4:../Src/py32e407_it.c ****   * @author  MCU Application Team
+   5:../Src/py32e407_it.c ****   * @brief   Interrupt Service Routines.
+   6:../Src/py32e407_it.c ****   ******************************************************************************
+   7:../Src/py32e407_it.c ****   * @attention
+   8:../Src/py32e407_it.c ****   *
+   9:../Src/py32e407_it.c ****   * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  10:../Src/py32e407_it.c ****   * All rights reserved.</center></h2>
+  11:../Src/py32e407_it.c ****   *
+  12:../Src/py32e407_it.c ****   * This software component is licensed by Puya under BSD 3-Clause license,
+  13:../Src/py32e407_it.c ****   * the "License"; You may not use this file except in compliance with the
+  14:../Src/py32e407_it.c ****   * License. You may obtain a copy of the License at:
+  15:../Src/py32e407_it.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  16:../Src/py32e407_it.c ****   *
+  17:../Src/py32e407_it.c ****   ******************************************************************************
+  18:../Src/py32e407_it.c ****   */
+  19:../Src/py32e407_it.c **** 
+  20:../Src/py32e407_it.c **** /* Includes ------------------------------------------------------------------*/
+  21:../Src/py32e407_it.c **** #include "main.h"
+  22:../Src/py32e407_it.c **** #include "py32e407_it.h"
+  23:../Src/py32e407_it.c **** 
+  24:../Src/py32e407_it.c **** /* Private includes ----------------------------------------------------------*/
+  25:../Src/py32e407_it.c **** /* Private typedef -----------------------------------------------------------*/
+  26:../Src/py32e407_it.c **** /* Private define ------------------------------------------------------------*/
+  27:../Src/py32e407_it.c **** /* Private macro -------------------------------------------------------------*/
+  28:../Src/py32e407_it.c **** /* Private variables ---------------------------------------------------------*/
+  29:../Src/py32e407_it.c **** /* Private function prototypes -----------------------------------------------*/
+  30:../Src/py32e407_it.c **** /* Private user code ---------------------------------------------------------*/
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s 			page 2
+
+
+  31:../Src/py32e407_it.c **** /* External variables --------------------------------------------------------*/
+  32:../Src/py32e407_it.c **** extern SCI_HandleTypeDef hConsoleUart;
+  33:../Src/py32e407_it.c **** 
+  34:../Src/py32e407_it.c **** /******************************************************************************/
+  35:../Src/py32e407_it.c **** /*          Cortex-M4 Processor Interruption and Exception Handlers           */
+  36:../Src/py32e407_it.c **** /******************************************************************************/
+  37:../Src/py32e407_it.c **** /**
+  38:../Src/py32e407_it.c ****   * @brief   This function handles NMI exception.
+  39:../Src/py32e407_it.c ****   */
+  40:../Src/py32e407_it.c **** void NMI_Handler(void)
+  41:../Src/py32e407_it.c **** {
+  29              		.loc 1 41 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  42:../Src/py32e407_it.c **** }
+  34              		.loc 1 42 1 view .LVU1
+  35 0000 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE136:
+  39              		.section	.text.HardFault_Handler,"ax",%progbits
+  40              		.align	1
+  41              		.global	HardFault_Handler
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  46              	HardFault_Handler:
+  47              	.LFB137:
+  43:../Src/py32e407_it.c **** 
+  44:../Src/py32e407_it.c **** /**
+  45:../Src/py32e407_it.c ****   * @brief  This function handles Hard Fault exception.
+  46:../Src/py32e407_it.c ****   */
+  47:../Src/py32e407_it.c **** void HardFault_Handler(void)
+  48:../Src/py32e407_it.c **** {
+  48              		.loc 1 48 1 view -0
+  49              		.cfi_startproc
+  50              		@ Volatile: function does not return.
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53              		@ link register save eliminated.
+  54              	.L3:
+  49:../Src/py32e407_it.c ****   while (1)
+  55              		.loc 1 49 3 discriminator 1 view .LVU3
+  50:../Src/py32e407_it.c ****   {
+  51:../Src/py32e407_it.c ****   }
+  56              		.loc 1 51 3 discriminator 1 view .LVU4
+  49:../Src/py32e407_it.c ****   while (1)
+  57              		.loc 1 49 9 discriminator 1 view .LVU5
+  58 0000 FEE7     		b	.L3
+  59              		.cfi_endproc
+  60              	.LFE137:
+  62              		.section	.text.MemManage_Handler,"ax",%progbits
+  63              		.align	1
+  64              		.global	MemManage_Handler
+  65              		.syntax unified
+  66              		.thumb
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s 			page 3
+
+
+  67              		.thumb_func
+  69              	MemManage_Handler:
+  70              	.LFB138:
+  52:../Src/py32e407_it.c **** }
+  53:../Src/py32e407_it.c **** 
+  54:../Src/py32e407_it.c **** /**
+  55:../Src/py32e407_it.c ****   * @brief  This function handles Memory Manage exception.
+  56:../Src/py32e407_it.c ****   */
+  57:../Src/py32e407_it.c **** void MemManage_Handler(void)
+  58:../Src/py32e407_it.c **** {
+  71              		.loc 1 58 1 view -0
+  72              		.cfi_startproc
+  73              		@ Volatile: function does not return.
+  74              		@ args = 0, pretend = 0, frame = 0
+  75              		@ frame_needed = 0, uses_anonymous_args = 0
+  76              		@ link register save eliminated.
+  77              	.L5:
+  59:../Src/py32e407_it.c ****   while (1)
+  78              		.loc 1 59 3 discriminator 1 view .LVU7
+  60:../Src/py32e407_it.c ****   {
+  61:../Src/py32e407_it.c ****   }
+  79              		.loc 1 61 3 discriminator 1 view .LVU8
+  59:../Src/py32e407_it.c ****   while (1)
+  80              		.loc 1 59 9 discriminator 1 view .LVU9
+  81 0000 FEE7     		b	.L5
+  82              		.cfi_endproc
+  83              	.LFE138:
+  85              		.section	.text.BusFault_Handler,"ax",%progbits
+  86              		.align	1
+  87              		.global	BusFault_Handler
+  88              		.syntax unified
+  89              		.thumb
+  90              		.thumb_func
+  92              	BusFault_Handler:
+  93              	.LFB139:
+  62:../Src/py32e407_it.c **** }
+  63:../Src/py32e407_it.c **** 
+  64:../Src/py32e407_it.c **** /**
+  65:../Src/py32e407_it.c ****   * @brief  This function handles Bus Fault exception.
+  66:../Src/py32e407_it.c ****   */
+  67:../Src/py32e407_it.c **** void BusFault_Handler(void)
+  68:../Src/py32e407_it.c **** {
+  94              		.loc 1 68 1 view -0
+  95              		.cfi_startproc
+  96              		@ Volatile: function does not return.
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99              		@ link register save eliminated.
+ 100              	.L7:
+  69:../Src/py32e407_it.c ****   while (1)
+ 101              		.loc 1 69 3 discriminator 1 view .LVU11
+  70:../Src/py32e407_it.c ****   {
+  71:../Src/py32e407_it.c ****   }
+ 102              		.loc 1 71 3 discriminator 1 view .LVU12
+  69:../Src/py32e407_it.c ****   while (1)
+ 103              		.loc 1 69 9 discriminator 1 view .LVU13
+ 104 0000 FEE7     		b	.L7
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s 			page 4
+
+
+ 105              		.cfi_endproc
+ 106              	.LFE139:
+ 108              		.section	.text.UsageFault_Handler,"ax",%progbits
+ 109              		.align	1
+ 110              		.global	UsageFault_Handler
+ 111              		.syntax unified
+ 112              		.thumb
+ 113              		.thumb_func
+ 115              	UsageFault_Handler:
+ 116              	.LFB140:
+  72:../Src/py32e407_it.c **** }
+  73:../Src/py32e407_it.c **** 
+  74:../Src/py32e407_it.c **** /**
+  75:../Src/py32e407_it.c ****   * @brief  This function handles Usage Fault exception.
+  76:../Src/py32e407_it.c ****   */
+  77:../Src/py32e407_it.c **** void UsageFault_Handler(void)
+  78:../Src/py32e407_it.c **** {
+ 117              		.loc 1 78 1 view -0
+ 118              		.cfi_startproc
+ 119              		@ Volatile: function does not return.
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123              	.L9:
+  79:../Src/py32e407_it.c ****   while (1)
+ 124              		.loc 1 79 3 discriminator 1 view .LVU15
+  80:../Src/py32e407_it.c ****   {
+  81:../Src/py32e407_it.c ****   }
+ 125              		.loc 1 81 3 discriminator 1 view .LVU16
+  79:../Src/py32e407_it.c ****   while (1)
+ 126              		.loc 1 79 9 discriminator 1 view .LVU17
+ 127 0000 FEE7     		b	.L9
+ 128              		.cfi_endproc
+ 129              	.LFE140:
+ 131              		.section	.text.SVC_Handler,"ax",%progbits
+ 132              		.align	1
+ 133              		.global	SVC_Handler
+ 134              		.syntax unified
+ 135              		.thumb
+ 136              		.thumb_func
+ 138              	SVC_Handler:
+ 139              	.LFB141:
+  82:../Src/py32e407_it.c **** }
+  83:../Src/py32e407_it.c **** 
+  84:../Src/py32e407_it.c **** /**
+  85:../Src/py32e407_it.c ****   * @brief  This function handles SVCall exception.
+  86:../Src/py32e407_it.c ****   */
+  87:../Src/py32e407_it.c **** void SVC_Handler(void)
+  88:../Src/py32e407_it.c **** {
+ 140              		.loc 1 88 1 view -0
+ 141              		.cfi_startproc
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144              		@ link register save eliminated.
+  89:../Src/py32e407_it.c **** }
+ 145              		.loc 1 89 1 view .LVU19
+ 146 0000 7047     		bx	lr
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s 			page 5
+
+
+ 147              		.cfi_endproc
+ 148              	.LFE141:
+ 150              		.section	.text.DebugMon_Handler,"ax",%progbits
+ 151              		.align	1
+ 152              		.global	DebugMon_Handler
+ 153              		.syntax unified
+ 154              		.thumb
+ 155              		.thumb_func
+ 157              	DebugMon_Handler:
+ 158              	.LFB142:
+  90:../Src/py32e407_it.c **** 
+  91:../Src/py32e407_it.c **** /**
+  92:../Src/py32e407_it.c ****   * @brief  This function handles Debug Monitor exception.
+  93:../Src/py32e407_it.c ****   */
+  94:../Src/py32e407_it.c **** void DebugMon_Handler(void)
+  95:../Src/py32e407_it.c **** {
+ 159              		.loc 1 95 1 view -0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163              		@ link register save eliminated.
+  96:../Src/py32e407_it.c **** }
+ 164              		.loc 1 96 1 view .LVU21
+ 165 0000 7047     		bx	lr
+ 166              		.cfi_endproc
+ 167              	.LFE142:
+ 169              		.section	.text.PendSV_Handler,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	PendSV_Handler
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	PendSV_Handler:
+ 177              	.LFB143:
+  97:../Src/py32e407_it.c **** 
+  98:../Src/py32e407_it.c **** /**
+  99:../Src/py32e407_it.c ****   * @brief  This function handles PendSVC exception.
+ 100:../Src/py32e407_it.c ****   */
+ 101:../Src/py32e407_it.c **** void PendSV_Handler(void)
+ 102:../Src/py32e407_it.c **** {
+ 178              		.loc 1 102 1 view -0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182              		@ link register save eliminated.
+ 103:../Src/py32e407_it.c **** }
+ 183              		.loc 1 103 1 view .LVU23
+ 184 0000 7047     		bx	lr
+ 185              		.cfi_endproc
+ 186              	.LFE143:
+ 188              		.section	.text.SysTick_Handler,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	SysTick_Handler
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	SysTick_Handler:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s 			page 6
+
+
+ 196              	.LFB144:
+ 104:../Src/py32e407_it.c **** 
+ 105:../Src/py32e407_it.c **** /**
+ 106:../Src/py32e407_it.c ****   * @brief  This function handles SysTick Handler.
+ 107:../Src/py32e407_it.c ****   */
+ 108:../Src/py32e407_it.c **** void SysTick_Handler(void)
+ 109:../Src/py32e407_it.c **** {
+ 197              		.loc 1 109 1 view -0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 0
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201 0000 08B5     		push	{r3, lr}
+ 202              	.LCFI0:
+ 203              		.cfi_def_cfa_offset 8
+ 204              		.cfi_offset 3, -8
+ 205              		.cfi_offset 14, -4
+ 110:../Src/py32e407_it.c ****   HAL_IncTick();
+ 206              		.loc 1 110 3 view .LVU25
+ 207 0002 FFF7FEFF 		bl	HAL_IncTick
+ 208              	.LVL0:
+ 111:../Src/py32e407_it.c **** }
+ 209              		.loc 1 111 1 is_stmt 0 view .LVU26
+ 210 0006 08BD     		pop	{r3, pc}
+ 211              		.cfi_endproc
+ 212              	.LFE144:
+ 214              		.section	.text.ETH_IRQHandler,"ax",%progbits
+ 215              		.align	1
+ 216              		.global	ETH_IRQHandler
+ 217              		.syntax unified
+ 218              		.thumb
+ 219              		.thumb_func
+ 221              	ETH_IRQHandler:
+ 222              	.LFB145:
+ 112:../Src/py32e407_it.c **** 
+ 113:../Src/py32e407_it.c **** /******************************************************************************/
+ 114:../Src/py32e407_it.c **** /* PY32E407 Peripheral Interrupt Handlers                                     */
+ 115:../Src/py32e407_it.c **** /******************************************************************************/
+ 116:../Src/py32e407_it.c **** 
+ 117:../Src/py32e407_it.c **** /**
+ 118:../Src/py32e407_it.c ****   * @brief This function handles the Ethernet global interrupt.
+ 119:../Src/py32e407_it.c ****   */
+ 120:../Src/py32e407_it.c **** void ETH_IRQHandler(void)
+ 121:../Src/py32e407_it.c **** {
+ 223              		.loc 1 121 1 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227 0000 08B5     		push	{r3, lr}
+ 228              	.LCFI1:
+ 229              		.cfi_def_cfa_offset 8
+ 230              		.cfi_offset 3, -8
+ 231              		.cfi_offset 14, -4
+ 122:../Src/py32e407_it.c ****   HAL_ETH_IRQHandler(&heth);
+ 232              		.loc 1 122 3 view .LVU28
+ 233 0002 0248     		ldr	r0, .L17
+ 234 0004 FFF7FEFF 		bl	HAL_ETH_IRQHandler
+ 235              	.LVL1:
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s 			page 7
+
+
+ 123:../Src/py32e407_it.c **** }
+ 236              		.loc 1 123 1 is_stmt 0 view .LVU29
+ 237 0008 08BD     		pop	{r3, pc}
+ 238              	.L18:
+ 239 000a 00BF     		.align	2
+ 240              	.L17:
+ 241 000c 00000000 		.word	heth
+ 242              		.cfi_endproc
+ 243              	.LFE145:
+ 245              		.section	.text.USART1_IRQHandler,"ax",%progbits
+ 246              		.align	1
+ 247              		.global	USART1_IRQHandler
+ 248              		.syntax unified
+ 249              		.thumb
+ 250              		.thumb_func
+ 252              	USART1_IRQHandler:
+ 253              	.LFB146:
+ 124:../Src/py32e407_it.c **** 
+ 125:../Src/py32e407_it.c **** /**
+ 126:../Src/py32e407_it.c ****   * @brief This function handles USART1 global interrupt, the diagnostic link.
+ 127:../Src/py32e407_it.c ****   */
+ 128:../Src/py32e407_it.c **** void USART1_IRQHandler(void)
+ 129:../Src/py32e407_it.c **** {
+ 254              		.loc 1 129 1 is_stmt 1 view -0
+ 255              		.cfi_startproc
+ 256              		@ args = 0, pretend = 0, frame = 0
+ 257              		@ frame_needed = 0, uses_anonymous_args = 0
+ 258 0000 08B5     		push	{r3, lr}
+ 259              	.LCFI2:
+ 260              		.cfi_def_cfa_offset 8
+ 261              		.cfi_offset 3, -8
+ 262              		.cfi_offset 14, -4
+ 130:../Src/py32e407_it.c ****   HAL_SCI_IRQHandler(&hConsoleUart);
+ 263              		.loc 1 130 3 view .LVU31
+ 264 0002 0248     		ldr	r0, .L21
+ 265 0004 FFF7FEFF 		bl	HAL_SCI_IRQHandler
+ 266              	.LVL2:
+ 131:../Src/py32e407_it.c **** }
+ 267              		.loc 1 131 1 is_stmt 0 view .LVU32
+ 268 0008 08BD     		pop	{r3, pc}
+ 269              	.L22:
+ 270 000a 00BF     		.align	2
+ 271              	.L21:
+ 272 000c 00000000 		.word	hConsoleUart
+ 273              		.cfi_endproc
+ 274              	.LFE146:
+ 276              		.text
+ 277              	.Letext0:
+ 278              		.file 2 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\machine\\_default_types.h
+ 279              		.file 3 "h:\\program files (x86)\\puyasde\\tool\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 280              		.file 4 "h:\\drivers\\cmsis\\device\\puya\\py32e407\\include\\py32e407xE.h"
+ 281              		.file 5 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_def.h"
+ 282              		.file 6 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_dma.h"
+ 283              		.file 7 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_eth.h"
+ 284              		.file 8 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e407_hal_sci.h"
+ 285              		.file 9 "../Inc/main.h"
+ 286              		.file 10 "h:\\drivers\\py32e407_hal_driver\\inc\\py32e4xx_hal.h"
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s 			page 8
+
+
+ARM GAS  C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 py32e407_it.c
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:20     .text.NMI_Handler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:26     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:40     .text.HardFault_Handler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:46     .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:63     .text.MemManage_Handler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:69     .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:86     .text.BusFault_Handler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:92     .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:109    .text.UsageFault_Handler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:115    .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:132    .text.SVC_Handler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:138    .text.SVC_Handler:00000000 SVC_Handler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:151    .text.DebugMon_Handler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:157    .text.DebugMon_Handler:00000000 DebugMon_Handler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:170    .text.PendSV_Handler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:176    .text.PendSV_Handler:00000000 PendSV_Handler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:189    .text.SysTick_Handler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:195    .text.SysTick_Handler:00000000 SysTick_Handler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:215    .text.ETH_IRQHandler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:221    .text.ETH_IRQHandler:00000000 ETH_IRQHandler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:241    .text.ETH_IRQHandler:0000000c $d
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:246    .text.USART1_IRQHandler:00000000 $t
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:252    .text.USART1_IRQHandler:00000000 USART1_IRQHandler
+C:\Users\n11ak\AppData\Local\Temp\ccIKZQuT.s:272    .text.USART1_IRQHandler:0000000c $d
+
+UNDEFINED SYMBOLS
+HAL_IncTick
+HAL_ETH_IRQHandler
+heth
+HAL_SCI_IRQHandler
+hConsoleUart
