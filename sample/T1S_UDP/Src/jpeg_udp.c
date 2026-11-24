@@ -12,6 +12,7 @@
 #define UDP_HEADER_LEN             8U
 #define JPEG_PACKET_HEADER_LEN     16U
 #define JPEG_CHUNK_DATA_LEN        1200U
+#define JPEG_ROTATE_TILE_MAX       32U
 #define JPEG_MAX_CHUNKS            ((JPEG_RX_MAX_BYTES + JPEG_CHUNK_DATA_LEN - 1U) / JPEG_CHUNK_DATA_LEN)
 #define JPEG_CHUNK_BITMAP_SIZE     ((JPEG_MAX_CHUNKS + 7U) / 8U)
 #define JPEG_TRANSFER_TIMEOUT_MS  5000U
@@ -22,6 +23,15 @@ typedef struct
   uint32_t inputOffset;
   uint16_t offsetX;
   uint16_t offsetY;
+  uint16_t sourceWidth;
+  uint16_t sourceHeight;
+  uint16_t rotatedWidth;
+  uint16_t rotatedHeight;
+  uint16_t displayWidth;
+  uint16_t displayHeight;
+  uint16_t scaleNumerator;
+  uint16_t scaleDenominator;
+  JpegOrientation orientation;
 } JpegContext;
 
 static uint8_t JpegBuffer[JPEG_RX_MAX_BYTES];
@@ -33,8 +43,103 @@ static uint32_t LastPacketTick;
 static uint16_t ActiveChunkCount;
 static uint16_t ReceivedChunkCount;
 static uint8_t TransferActive;
+static JpegOrientation DisplayOrientation = JPEG_ORIENTATION_90_CW;
 static JDEC Decoder;
 static uint32_t DecoderWork[1024U];
+static uint8_t RotatedTile[JPEG_ROTATE_TILE_MAX * JPEG_ROTATE_TILE_MAX * 3U];
+
+static const char *JpegOrientationName(JpegOrientation orientation)
+{
+  switch (orientation)
+  {
+    case JPEG_ORIENTATION_0:
+      return "0 degrees";
+    case JPEG_ORIENTATION_90_CW:
+      return "90 degrees CW";
+    case JPEG_ORIENTATION_180:
+      return "180 degrees";
+    case JPEG_ORIENTATION_270_CW:
+      return "270 degrees CW";
+    default:
+      return "unknown";
+  }
+}
+
+static uint32_t ScaleCeil(const JpegContext *context, uint32_t coordinate)
+{
+  return (coordinate * context->scaleNumerator +
+          context->scaleDenominator - 1U) / context->scaleDenominator;
+}
+
+static uint8_t JpegGetRotatedRect(const JpegContext *context, const JRECT *rect,
+                                  uint32_t *left, uint32_t *top,
+                                  uint32_t *right, uint32_t *bottom)
+{
+  switch (context->orientation)
+  {
+    case JPEG_ORIENTATION_0:
+      *left = rect->left;
+      *top = rect->top;
+      *right = (uint32_t)rect->right + 1U;
+      *bottom = (uint32_t)rect->bottom + 1U;
+      break;
+    case JPEG_ORIENTATION_90_CW:
+      *left = context->sourceHeight - ((uint32_t)rect->bottom + 1U);
+      *top = rect->left;
+      *right = context->sourceHeight - rect->top;
+      *bottom = (uint32_t)rect->right + 1U;
+      break;
+    case JPEG_ORIENTATION_180:
+      *left = context->sourceWidth - ((uint32_t)rect->right + 1U);
+      *top = context->sourceHeight - ((uint32_t)rect->bottom + 1U);
+      *right = context->sourceWidth - rect->left;
+      *bottom = context->sourceHeight - rect->top;
+      break;
+    case JPEG_ORIENTATION_270_CW:
+      *left = rect->top;
+      *top = context->sourceWidth - ((uint32_t)rect->right + 1U);
+      *right = (uint32_t)rect->bottom + 1U;
+      *bottom = context->sourceWidth - rect->left;
+      break;
+    default:
+      return 0U;
+  }
+  return 1U;
+}
+
+static uint8_t JpegMapRotatedPixel(const JpegContext *context,
+                                  uint32_t rotatedX, uint32_t rotatedY,
+                                  uint32_t *sourceX, uint32_t *sourceY)
+{
+  if ((rotatedX >= context->rotatedWidth) ||
+      (rotatedY >= context->rotatedHeight))
+  {
+    return 0U;
+  }
+
+  switch (context->orientation)
+  {
+    case JPEG_ORIENTATION_0:
+      *sourceX = rotatedX;
+      *sourceY = rotatedY;
+      break;
+    case JPEG_ORIENTATION_90_CW:
+      *sourceX = rotatedY;
+      *sourceY = context->sourceHeight - 1U - rotatedX;
+      break;
+    case JPEG_ORIENTATION_180:
+      *sourceX = context->sourceWidth - 1U - rotatedX;
+      *sourceY = context->sourceHeight - 1U - rotatedY;
+      break;
+    case JPEG_ORIENTATION_270_CW:
+      *sourceX = context->sourceWidth - 1U - rotatedY;
+      *sourceY = rotatedX;
+      break;
+    default:
+      return 0U;
+  }
+  return 1U;
+}
 
 static uint16_t Read16(const uint8_t *p)
 {
@@ -120,7 +225,7 @@ static size_t JpegInputFunction(JDEC *decoder, uint8_t *buffer, size_t length)
   remaining = ActiveLength - context->inputOffset;
   if (length > remaining)
   {
-    return 0U;
+    length = remaining;
   }
 
   if (buffer != NULL)
@@ -133,19 +238,89 @@ static size_t JpegInputFunction(JDEC *decoder, uint8_t *buffer, size_t length)
 
 static int JpegOutputFunction(JDEC *decoder, void *bitmap, JRECT *rect)
 {
-  const uint16_t width = (uint16_t)(rect->right - rect->left + 1U);
-  const uint16_t height = (uint16_t)(rect->bottom - rect->top + 1U);
-  const JpegContext *output = (const JpegContext *)decoder->device;
+  const JpegContext *context = (const JpegContext *)decoder->device;
+  const uint8_t *sourcePixels = (const uint8_t *)bitmap;
+  const uint16_t sourceTileWidth =
+      (uint16_t)(rect->right - rect->left + 1U);
+  const uint16_t sourceTileHeight =
+      (uint16_t)(rect->bottom - rect->top + 1U);
+  uint32_t rotatedLeft;
+  uint32_t rotatedTop;
+  uint32_t rotatedRight;
+  uint32_t rotatedBottom;
+  uint32_t destX;
+  uint32_t destY;
+  uint32_t destXEnd;
+  uint32_t destYEnd;
+  uint16_t destWidth;
+  uint16_t destHeight;
+  uint16_t row;
+  uint16_t column;
 
-  LCD_SPI_DrawRgb888((uint16_t)(rect->left + output->offsetX),
-                     (uint16_t)(rect->top + output->offsetY),
-                     width, height, (const uint8_t *)bitmap);
+  if (JpegGetRotatedRect(context, rect, &rotatedLeft, &rotatedTop,
+                         &rotatedRight, &rotatedBottom) == 0U)
+  {
+    return 0;
+  }
+  destX = context->offsetX + ScaleCeil(context, rotatedLeft);
+  destY = context->offsetY + ScaleCeil(context, rotatedTop);
+  destXEnd = context->offsetX + ScaleCeil(context, rotatedRight);
+  destYEnd = context->offsetY + ScaleCeil(context, rotatedBottom);
+  if ((destXEnd <= destX) || (destYEnd <= destY))
+  {
+    return 0;
+  }
+  destWidth = (uint16_t)(destXEnd - destX);
+  destHeight = (uint16_t)(destYEnd - destY);
+
+  if ((sourceTileWidth > JPEG_ROTATE_TILE_MAX) ||
+      (sourceTileHeight > JPEG_ROTATE_TILE_MAX) ||
+      (destWidth > JPEG_ROTATE_TILE_MAX) ||
+      (destHeight > JPEG_ROTATE_TILE_MAX) ||
+      (destWidth == 0U) || (destHeight == 0U))
+  {
+    return 0;
+  }
+
+  for (row = 0U; row < destHeight; row++)
+  {
+    const uint32_t rotatedY =
+        ((destY + row - context->offsetY) * context->scaleDenominator) /
+        context->scaleNumerator;
+    for (column = 0U; column < destWidth; column++)
+    {
+      const uint32_t rotatedX =
+          ((destX + column - context->offsetX) * context->scaleDenominator) /
+          context->scaleNumerator;
+      uint32_t sourceX;
+      uint32_t sourceY;
+      uint32_t sourceOffset;
+      const uint32_t destOffset = ((uint32_t)row * destWidth + column) * 3U;
+
+      if (JpegMapRotatedPixel(context, rotatedX, rotatedY,
+                              &sourceX, &sourceY) == 0U)
+      {
+        return 0;
+      }
+      if ((sourceX < rect->left) || (sourceX > rect->right) ||
+          (sourceY < rect->top) || (sourceY > rect->bottom))
+      {
+        return 0;
+      }
+      sourceOffset = ((sourceY - rect->top) * sourceTileWidth +
+                      (sourceX - rect->left)) * 3U;
+      memcpy(&RotatedTile[destOffset], &sourcePixels[sourceOffset], 3U);
+    }
+  }
+
+  LCD_SPI_DrawRgb888((uint16_t)destX, (uint16_t)destY,
+                     destWidth, destHeight, RotatedTile);
   return 1;
 }
 
 static void DecodeAndDisplay(uint32_t frameId, uint32_t imageLength)
 {
-  JpegContext context = {0U, 0U, 0U};
+  JpegContext context = {0};
   JRESULT result;
   uint8_t scale;
   uint16_t outputWidth = 0U;
@@ -164,7 +339,7 @@ static void DecodeAndDisplay(uint32_t frameId, uint32_t imageLength)
   {
     outputWidth = (uint16_t)(Decoder.width >> scale);
     outputHeight = (uint16_t)(Decoder.height >> scale);
-    if ((outputWidth <= 160U) && (outputHeight <= 80U) &&
+    if ((outputWidth <= LCD_SPI_WIDTH) && (outputHeight <= LCD_SPI_HEIGHT) &&
         (outputWidth != 0U) && (outputHeight != 0U))
     {
       break;
@@ -177,8 +352,43 @@ static void DecodeAndDisplay(uint32_t frameId, uint32_t imageLength)
     return;
   }
 
-  context.offsetX = (uint16_t)((160U - outputWidth) / 2U);
-  context.offsetY = (uint16_t)((80U - outputHeight) / 2U);
+  context.orientation = DisplayOrientation;
+  context.sourceWidth = outputWidth;
+  context.sourceHeight = outputHeight;
+  if ((context.orientation == JPEG_ORIENTATION_90_CW) ||
+      (context.orientation == JPEG_ORIENTATION_270_CW))
+  {
+    context.rotatedWidth = outputHeight;
+    context.rotatedHeight = outputWidth;
+  }
+  else
+  {
+    context.rotatedWidth = outputWidth;
+    context.rotatedHeight = outputHeight;
+  }
+  context.scaleNumerator = 1U;
+  context.scaleDenominator = 1U;
+  if ((context.rotatedWidth > LCD_SPI_WIDTH) ||
+      (context.rotatedHeight > LCD_SPI_HEIGHT))
+  {
+    if (((uint32_t)LCD_SPI_WIDTH * context.rotatedHeight) <=
+        ((uint32_t)LCD_SPI_HEIGHT * context.rotatedWidth))
+    {
+      context.scaleNumerator = LCD_SPI_WIDTH;
+      context.scaleDenominator = context.rotatedWidth;
+    }
+    else
+    {
+      context.scaleNumerator = LCD_SPI_HEIGHT;
+      context.scaleDenominator = context.rotatedHeight;
+    }
+  }
+  context.displayWidth =
+      (uint16_t)ScaleCeil(&context, context.rotatedWidth);
+  context.displayHeight =
+      (uint16_t)ScaleCeil(&context, context.rotatedHeight);
+  context.offsetX = (uint16_t)((LCD_SPI_WIDTH - context.displayWidth) / 2U);
+  context.offsetY = (uint16_t)((LCD_SPI_HEIGHT - context.displayHeight) / 2U);
   LCD_SPI_Clear();
   result = jd_decomp(&Decoder, JpegOutputFunction, scale);
   if (result != JDR_OK)
@@ -186,9 +396,11 @@ static void DecodeAndDisplay(uint32_t frameId, uint32_t imageLength)
     Console_Printf("JPEG: decode failed (rc=%u)\r\n", (unsigned)result);
     return;
   }
-  Console_Printf("JPEG: displayed frame %lu (%lu bytes, %u x %u)\r\n",
+  Console_Printf("JPEG: displayed frame %lu (%lu bytes, %u x %u, %s)\r\n",
                  (unsigned long)frameId, (unsigned long)imageLength,
-                 (unsigned)outputWidth, (unsigned)outputHeight);
+                 (unsigned)context.displayWidth,
+                 (unsigned)context.displayHeight,
+                 JpegOrientationName(context.orientation));
 }
 
 static void HandleUdpPayload(const uint8_t *payload, uint16_t payloadLength)
@@ -268,7 +480,24 @@ static void HandleUdpPayload(const uint8_t *payload, uint16_t payloadLength)
 void JpegReceiver_Init(uint32_t localIp)
 {
   LocalIp = localIp;
+  DisplayOrientation = JPEG_ORIENTATION_90_CW;
   ResetTransfer();
+  Console_Printf("LCD: image orientation %s (USER button cycles)\r\n",
+                 JpegOrientationName(DisplayOrientation));
+}
+
+void JpegReceiver_CycleOrientation(void)
+{
+  if (DisplayOrientation == JPEG_ORIENTATION_270_CW)
+  {
+    DisplayOrientation = JPEG_ORIENTATION_0;
+  }
+  else
+  {
+    DisplayOrientation = (JpegOrientation)(DisplayOrientation + 1);
+  }
+  Console_Printf("LCD: image orientation %s (applies to next frame)\r\n",
+                 JpegOrientationName(DisplayOrientation));
 }
 
 void JpegReceiver_HandleFrame(const uint8_t *frame, uint32_t length)

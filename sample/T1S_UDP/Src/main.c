@@ -72,12 +72,15 @@
    transmitted frames.  Set back to 0 for normal operation. */
 #define ETH_PCS_LOOPBACK_TEST         0
 
+#define ORIENTATION_BUTTON_DEBOUNCE_MS 30U
+
 /* Private variables ---------------------------------------------------------*/
 ETH_HandleTypeDef heth;
 
 /* Private function prototypes -----------------------------------------------*/
 static void APP_SystemClockConfig(void);
 static void APP_GpioInit(void);
+static void APP_PollOrientationButton(void);
 static void APP_PrintPhyInfo(const LAN8670_Info *Info);
 static void APP_PrintIp(uint32_t Ip);
 #if ETH_RX_DEBUG
@@ -279,9 +282,12 @@ int main(void)
   /* -------------------------------------------------------------- loop ---*/
   while (1)
   {
+    APP_PollOrientationButton();
+
     /* Frames coming from the segment */
     while (LAN8670_GetFrame(frameBuffer, sizeof(frameBuffer), &frameLength) == HAL_OK)
     {
+      APP_PollOrientationButton();
       HAL_GPIO_TogglePin(LED_PORT, LED_D2_PIN);
 #if ETH_RX_DEBUG
       APP_PrintRxFrame(frameBuffer, frameLength);
@@ -538,6 +544,47 @@ static void APP_GpioInit(void)
   GPIO_InitStruct.Pull  = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LAN8720_NRST_PORT, &GPIO_InitStruct);
+
+  USER_BUTTON_GPIO_CLK_ENABLE();
+  GPIO_InitStruct.Pin = USER_BUTTON_PIN;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(USER_BUTTON_GPIO_PORT, &GPIO_InitStruct);
+}
+
+static void APP_PollOrientationButton(void)
+{
+  static GPIO_PinState previousRawState = GPIO_PIN_RESET;
+  static GPIO_PinState stableState = GPIO_PIN_RESET;
+  static uint32_t rawStateChangedAt;
+  static uint8_t initialized;
+  const uint32_t now = HAL_GetTick();
+  const GPIO_PinState rawState =
+      HAL_GPIO_ReadPin(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN);
+
+  if (initialized == 0U)
+  {
+    previousRawState = rawState;
+    stableState = rawState;
+    rawStateChangedAt = now;
+    initialized = 1U;
+    return;
+  }
+
+  if (rawState != previousRawState)
+  {
+    previousRawState = rawState;
+    rawStateChangedAt = now;
+  }
+  else if ((rawState != stableState) &&
+           ((now - rawStateChangedAt) >= ORIENTATION_BUTTON_DEBOUNCE_MS))
+  {
+    stableState = rawState;
+    if (stableState == GPIO_PIN_SET)
+    {
+      JpegReceiver_CycleOrientation();
+    }
+  }
 }
 
 /**

@@ -2,7 +2,7 @@ PY32E407 + LAN8670 10BASE-T1S UDP JPEG display
 ================================================
 
 This sample receives baseline JPEG images from a PC over IPv4/UDP and displays
-them on the 160 x 80 ST7735S Pmod LCD. It uses the on-chip ETH MAC through the
+them on the 320 x 240 ILI9341 Pmod LCD. It uses the on-chip ETH MAC through the
 LAN8670 and a small raw Ethernet/IPv4 receiver; lwIP is not required.
 
 Network defaults
@@ -23,7 +23,7 @@ PC sender
 ---------
 
 The GUI is in pc_sender/sender.py. It converts the selected image to a centered
-160 x 80 baseline JPEG, compresses it to at most 64 KiB, then sends ordered UDP
+320 x 240 baseline JPEG, compresses it to at most 64 KiB, and sends ordered UDP
 datagrams with a 16-byte JPG1 header. Install and run it with Python 3:
 
   cd sample/T1S_UDP/pc_sender
@@ -50,23 +50,24 @@ IP packets, reassembles chunks in any order, ignores duplicates, and discards
 incomplete transfers after five seconds. A missing UDP datagram therefore
 prevents that frame from being displayed; resend the image from the PC.
 TJpgDec supports baseline sequential JPEG (including grayscale and common
-subsampling modes), not progressive JPEG. Images larger than the LCD are
-reduced by 1/2, 1/4, or 1/8; smaller images are centered on a black background.
+subsampling modes), not progressive JPEG. The receiver applies the selected
+orientation, scales the image down if needed, and centers it on black.
+Press the on-board USER button (PB6) to cycle orientation: 0, 90 degrees
+clockwise, 180, and 270 degrees clockwise. The default is 90 degrees clockwise;
+a selection applies to the next received image.
 
 LCD wiring
 ----------
 
-Use the board's PMOD4 socket, not PMOD3/J3. The T1S sample holds PC8 low to keep
-the on-board LAN8720 PHY in reset; PMOD3/J3 shares PC8 with the LCD module.
-With the LCD signal row aligned to PMOD4 pins 1-6, the signals are:
+Connect the LCD to the board using the following GPIO assignments:
 
-  LCD CS    -> PE12 (PMOD4 pin 1)
-  LCD MOSI  -> PE10 (PMOD4 pin 2)
-  LCD D/C   -> PE8  (PMOD4 pin 3)
-  LCD SCK   -> PE9  (PMOD4 pin 4)
-  LCD RESET -> PB2  (PMOD4 pin 9)
+  LCD CS    -> PE13
+  LCD MOSI  -> PE11
+  LCD D/C   -> PE8
+  LCD SCK   -> PE7
+  LCD RESET -> PB2
 
-The LCD uses 4-wire, mode-0 serial SPI implemented by GPIO bit-banging. Power
+The LCD uses 4-wire, mode-3 serial SPI implemented by GPIO bit-banging. Power
 the module from the PMOD 3.3 V/GND pins.
 
 Build and diagnostics

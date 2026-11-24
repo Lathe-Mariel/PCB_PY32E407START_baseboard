@@ -10,7 +10,7 @@ from tkinter import filedialog, messagebox, ttk
 from PIL import Image, ImageOps
 
 
-DISPLAY_SIZE = (160, 80)
+DISPLAY_SIZE = (320, 240)
 MAX_IMAGE_BYTES = 64 * 1024
 CHUNK_DATA_SIZE = 1200
 PACKET_HEADER = struct.Struct("!4sIIHH")
@@ -22,7 +22,9 @@ DEFAULT_PORT = 5005
 def encode_image(path: Path) -> bytes:
     with Image.open(path) as source:
         image = ImageOps.contain(
-            source.convert("RGB"), DISPLAY_SIZE, Image.Resampling.LANCZOS
+            ImageOps.exif_transpose(source).convert("RGB"),
+            DISPLAY_SIZE,
+            Image.Resampling.LANCZOS,
         )
 
     frame = Image.new("RGB", DISPLAY_SIZE, "black")
