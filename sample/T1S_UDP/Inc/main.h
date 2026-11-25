@@ -107,14 +107,6 @@ extern "C" {
 #define LED_ALL_PINS                  (LED_D1_PIN | LED_D2_PIN | LED_D3_PIN | LED_D4_PIN)
 #define LED_GPIO_CLK_ENABLE()         __HAL_RCC_GPIOA_CLK_ENABLE()
 
-/* LAN8720 100BASE-TX PHY (reference START_ETH board).
-   PC8 is wired to the active-low nRST of the LAN8720.  Holding it low keeps
-   that PHY in reset (disabled) so it does not drive the shared RMII bus while
-   this sample talks to the LAN8670. */
-#define LAN8720_NRST_PORT             GPIOC
-#define LAN8720_NRST_PIN              GPIO_PIN_8
-#define LAN8720_NRST_GPIO_CLK_ENABLE() __HAL_RCC_GPIOC_CLK_ENABLE()
-
 /* ------------------------------------------------------------------------- */
 /* Ping / IPv4 configuration                                                 */
 /*                                                                           */

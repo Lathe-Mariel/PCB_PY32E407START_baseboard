@@ -92,14 +92,18 @@ PA1   <--- ETH_REF_CLK  <--- 27 (REFCLKIN, 50 MHz)
 
   === PY32E407 + LAN8670 10BASE-T1S ping ===
   MAC: ETH clock, RMII pins and MDIO ready
-  PHY: ID1=0x0000 ID2=0x016x (OUI 0x000000, model 22, rev 6)
-  PHY: BMSR=0x786D BMCR=0x3100 link=0
+  PHY: ID1=0x0007 ID2=0xC165 (OUI 0x0001F0, model 22, rev 5=C2)
+  PHY: BMSR=0x0805 BMCR=0x0000 link=1
   PHY: PLCA status register = 0x0000
   PHY: LAN8670 detected
   PHY: soft reset OK
+  PHY: AN1699 configuration for rev 5: OK
   PHY: PLCA enabled, ID=1, node count=2, TOTMR=32
   MAC: RMII 10 Mbit/s half duplex, DMA started
   PHY: link UP
+  PHY: PLCA active (BEACON seen) (PLCA_STS=0x8000)
+  PHY: SQI measurement started (CTL=0x4000 CFG0=0x1FFF CFG2=0x1F00 STS=0x0000)
+  MDIO: 1000 x3 reads, errors=0 mismatches=0
   IPv4: local 192.168.11.10 mask 255.255.255.0 gateway 192.168.11.3
   Ping target 192.168.11.3 every 1000ms (timeout 3000ms)
 
@@ -150,6 +154,23 @@ PA1   <--- ETH_REF_CLK  <--- 27 (REFCLKIN, 50 MHz)
 取り出したフレーム数です。PHY 行の link と PLCA はその時点の状態です。
 RX フレームの個別表示が必要な短時間だけ Src/main.c の ETH_RX_DEBUG を 1 に
 してください。同期 UART 出力は受信サービスを遅らせるため、通常は無効です。
+
+以下は 5 秒ごとの診断行の例です。
+  MAC: DMASR=0x00660444 TXok=25 RXuni=25 RXcrc=0 RXall=25 STS1=0x0080 MAXID=2 EMPCYC
+  PHY: link=UP BMSR=0x0805 PLCA=BEACON PLCA_STS=0x8000 BEACON=621933 TO=621933 (ok)
+  PHY: SQI pending (STS=0x0000 err=0)
+
+STS1 は MMD 31 (0x1F) の 0x0018 から読みます (Clause 22 の 0x18 は予約領域で常に 0 を返すため、旧版の STS1=0x0000 は無効な値でした)。PSTC (PLCA 状態変化) / TXCOL / TXJAB / EMPCYC / ESDERR / DEC5B が付加表示されます。
+BEACON= は前回の読み出し以降に受信した BEACON 数 (コーディネータの生存確認)、TO= は同期間の自ノード送信機会数です。5 秒間で BEACON が 0 のままならコーディネータが停止しており、TO だけ増えるなら自ノードは送信機会を得られているのに相手がデータを送っていないことが確定します。
+MAXID はコーディネータが前サイクルで許可した送信機会数 (NCNT) です。
+
+シリコンリビジョンによって SQI の読み方が変わります。
+  rev C1/C2 : 従来の SQI (SQICTL/SQISTS0, TOID=0xFF, 完了までポーリング)
+  rev D0+   : DCQ SQI (DCQ_TOID=0xCC02, DCQ_SQI=0xCC03, DCQ_SQIP=0xCC04)
+              旧 SQI レジスタは D0 では廃止されており、完了しないのが正常動作です。
+SQI は受信データ量に依存して統計を取るため、本サンプルのような秒間 1 – 2 フレーム程度の軽いトラフィックでは統計蓄積が完了せず "SQI pending" が続くことがあります。
+
+PHY の初期化では AN1699 (DS60001699) のリビジョン別設定レジスタ書き込みをソフトリセット後に行います。この設定なしでは PHY は EMI とノイズ耐性が劣化した状態で「一応動作」するだけです。リセットのたびに再適用が必要です。
 
 これらのログで障害段階を絞り込めますが、実機のログなしに物理的な原因を
 断定することはできません。

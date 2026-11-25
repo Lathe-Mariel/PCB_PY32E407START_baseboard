@@ -27,6 +27,12 @@
 #define LAN8670_RESET_POLL_MS         100U
 #define LAN8670_LINK_POLL_MS         1000U
 
+/* AN1699 indirect trim read (MMD 31 CFGPARAM block, pre-D0 revisions) */
+#define LAN8670_CFGPARAM_ADDR         0x00D8U
+#define LAN8670_CFGPARAM_DATA         0x00D9U
+#define LAN8670_CFGPARAM_CTRL         0x00DAU
+#define LAN8670_CFGPARAM_READ_ENABLE  0x0002U
+
 /* Private variables ---------------------------------------------------------*/
 ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT];
 ETH_DMADescTypeDef DMARxDscrTab[ETH_RX_DESC_CNT];
@@ -37,6 +43,9 @@ static uint8_t Tx_Buff[ETH_TX_DESC_CNT][ETH_TX_BUF_SIZE];
 /* Local MAC address programmed into the MAC and used by the ARP/IP layer.
    The 02:00:.. prefix marks it as a locally administered unicast address. */
 static uint8_t Lan8670MacAddr[6] = {0x02U, 0x00U, 0x00U, 0x00U, 0x00U, 0x01U};
+
+/* Silicon revision detected by LAN8670_Probe(), 0 when unknown */
+static uint8_t Lan8670SiliconRev;
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -152,6 +161,7 @@ LAN8670_Status LAN8670_Probe(LAN8670_Info *Info)
   local.LinkUp        = 0U;
   local.PlcaSupported = 0U;
   local.PlcaStatus    = 0U;
+  local.SiliconRev    = 0U;
 
   /* Always hand back a fully initialised block, the caller prints it even
      when the probe fails. */
@@ -189,6 +199,9 @@ LAN8670_Status LAN8670_Probe(LAN8670_Info *Info)
   local.Bmsr    = bmsr;
   local.Bmcr    = bmcr;
   local.LinkUp  = ((bmsr & LAN8670_BMSR_LINK) != 0U) ? 1U : 0U;
+  local.SiliconRev = (uint8_t)(phyid2 & LAN8670_PHYID2_REV_MASK);
+
+  /* The OPEN Alliance map tells us the PLCA registers exist */
 
   /* The OPEN Alliance map tells us the PLCA registers exist */
   if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_PLCA_STS, &plca) == HAL_OK)
@@ -201,6 +214,8 @@ LAN8670_Status LAN8670_Probe(LAN8670_Info *Info)
   {
     *Info = local;
   }
+
+  Lan8670SiliconRev = local.SiliconRev;
 
   /* Verify the manufacturer model number, not the OUI: the OUI depends on the
      exact ordering code while MODEL[5:0] is fixed for the LAN8670/1/2 family. */
@@ -265,6 +280,168 @@ LAN8670_Status LAN8670_SoftReset(void)
   return LAN8670_OK;
 }
 
+/*
+ * AN1699 (DS60001699) "Write Configuration into Registers" tables.
+ * These writes must be re-applied after every power cycle or reset and
+ * improve EMI performance, robustness and OPEN Alliance compliance.  The
+ * C1/C2 variant derives part of the values from two trim values stored in
+ * the CFGPARAM block; D0 takes fixed values only.
+ */
+static HAL_StatusTypeDef Lan8670_IndirectRead(uint8_t Addr, int8_t *Offset)
+{
+  uint16_t v = 0U;
+
+  if (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_CFGPARAM_ADDR,
+                       (uint16_t)Addr) != HAL_OK)
+  {
+    return HAL_ERROR;
+  }
+  if (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_CFGPARAM_CTRL,
+                       LAN8670_CFGPARAM_READ_ENABLE) != HAL_OK)
+  {
+    return HAL_ERROR;
+  }
+  if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_CFGPARAM_DATA,
+                      &v) != HAL_OK)
+  {
+    return HAL_ERROR;
+  }
+
+  v &= 0x001FU;
+  *Offset = ((v & 0x0010U) != 0U) ? (int8_t)((uint8_t)v - 0x20U)
+                                  : (int8_t)v;
+  return HAL_OK;
+}
+
+static HAL_StatusTypeDef Lan8670_WriteCfg(uint16_t Addr, uint16_t Value)
+{
+  return (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, Addr, Value) == HAL_OK)
+             ? HAL_OK : HAL_ERROR;
+}
+
+/**
+  * @brief  Apply the AN1699 per-revision configuration register writes.
+  *         Mandatory after every reset; without them the PHY only
+  *         "communicates rudimentarily" with degraded noise margins.
+  * @param  SiliconRev LAN8670_PHYID2_REV_x taken from LAN8670_Probe()
+  */
+LAN8670_Status LAN8670_ApplyConfig(uint8_t SiliconRev)
+{
+  int8_t offset1 = 0;
+  int8_t offset2 = 0;
+  uint16_t cfgparam1;
+  uint16_t cfgparam2;
+  uint16_t cfgparam3;
+  uint16_t cfgparam4;
+  uint16_t cfgparam5;
+
+  if (SiliconRev == LAN8670_PHYID2_REV_D0)
+  {
+    /* AN1699 Table 2-1, fixed values */
+    static const uint16_t addr[8] =
+        {0x0037U, 0x008AU, 0x0118U, 0x00D6U, 0x0082U, 0x00FDU, 0x00FDU, 0x0091U};
+    static const uint16_t value[8] =
+        {0x0800U, 0xBFC0U, 0x029CU, 0x1001U, 0x001CU, 0x0C0BU, 0x8C07U, 0x9660U};
+    uint32_t i;
+
+    for (i = 0U; i < 8U; i++)
+    {
+      if (Lan8670_WriteCfg(addr[i], value[i]) != HAL_OK)
+      {
+        return LAN8670_ERR_MDIO;
+      }
+    }
+    return LAN8670_OK;
+  }
+
+  if ((SiliconRev == LAN8670_PHYID2_REV_C1) ||
+      (SiliconRev == LAN8670_PHYID2_REV_C2))
+  {
+    /* AN1699 Table 3-1; the LAN865x Rev.B SQI calibration writes are shared
+       with LAN867x Rev.C1/C2 (same silicon fixups, see Linux microchip_t1s.c) */
+    if ((Lan8670_IndirectRead(0x04U, &offset1) != HAL_OK) ||
+        (Lan8670_IndirectRead(0x08U, &offset2) != HAL_OK))
+    {
+      return LAN8670_ERR_MDIO;
+    }
+
+    cfgparam1 = (uint16_t)((((uint16_t)(9 + offset1)  & 0x3FU) << 10) |
+                           (((uint16_t)(14 + offset1) & 0x3FU) << 4) | 0x03U);
+    cfgparam2 = (uint16_t)(((uint16_t)(40 + offset2) & 0x3FU) << 10);
+
+    /* Table 3-1 */
+    if (Lan8670_WriteCfg(0x00D0U, 0x3F31U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00E0U, 0xC000U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x0084U, cfgparam1) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x008AU, cfgparam2) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00E9U, 0x9E50U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00F5U, 0x1CF8U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00F4U, 0xC020U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00F8U, 0xB900U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00F9U, 0x4E53U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x0081U, 0x0080U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x0091U, 0x9660U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+
+    /* Table 3-2, SQI calibration derived from offset1 */
+    cfgparam3 = (uint16_t)((((uint16_t)(5 + offset1)  & 0x3FU) << 8) |
+                            ((uint16_t)(9 + offset1)  & 0x3FU));
+    cfgparam4 = (uint16_t)((((uint16_t)(9 + offset1)  & 0x3FU) << 8) |
+                            ((uint16_t)(14 + offset1) & 0x3FU));
+    cfgparam5 = (uint16_t)((((uint16_t)(17 + offset1) & 0x3FU) << 8) |
+                            ((uint16_t)(22 + offset1) & 0x3FU));
+
+    if (Lan8670_WriteCfg(0x00ADU, cfgparam3) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00AEU, cfgparam4) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00AFU, cfgparam5) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B0U, 0x0103U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B1U, 0x0910U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B2U, 0x1D26U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B3U, 0x002AU) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B4U, 0x0103U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B5U, 0x070DU) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B6U, 0x1720U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B7U, 0x0027U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B8U, 0x0509U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00B9U, 0x0E13U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00BAU, 0x1C25U) != HAL_OK) { return LAN8670_ERR_MDIO; }
+    if (Lan8670_WriteCfg(0x00BBU, 0x002BU) != HAL_OK) { return LAN8670_ERR_MDIO; }
+
+    return LAN8670_OK;
+  }
+
+  if (SiliconRev == LAN8670_PHYID2_REV_B1)
+  {
+    /* AN1699 Rev.B1 sequence: read-modify-write of the listed fields */
+    static const uint16_t addr[12] =
+        {0x00D0U, 0x00D1U, 0x0084U, 0x0085U, 0x008AU, 0x0087U,
+         0x0088U, 0x008BU, 0x0080U, 0x00F1U, 0x0096U, 0x0099U};
+    static const uint16_t value[12] =
+        {0x0002U, 0x0000U, 0x3380U, 0x0006U, 0xC000U, 0x801CU,
+         0x033FU, 0x0404U, 0x0600U, 0x2400U, 0x2000U, 0x7F80U};
+    static const uint16_t mask[12] =
+        {0x0E03U, 0x0300U, 0xFFC0U, 0x000FU, 0xF800U, 0x801CU,
+         0x1FFFU, 0xFFFFU, 0x0600U, 0x7F00U, 0x2000U, 0xFFFFU};
+    uint32_t i;
+    uint16_t v;
+
+    for (i = 0U; i < 12U; i++)
+    {
+      if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, addr[i], &v) != HAL_OK)
+      {
+        return LAN8670_ERR_MDIO;
+      }
+      v = (uint16_t)((v & (uint16_t)~mask[i]) | value[i]);
+      if (Lan8670_WriteCfg(addr[i], v) != HAL_OK)
+      {
+        return LAN8670_ERR_MDIO;
+      }
+    }
+    return LAN8670_OK;
+  }
+
+  return LAN8670_ERR_ID;   /* unknown revision, nothing applied */
+}
+
 /**
   * @brief  Configure the PLCA reconciliation sublayer.
   * @param  NodeId 0 = coordinator (sends the BEACON), 1..254 = follower ID,
@@ -276,6 +453,25 @@ LAN8670_Status LAN8670_ConfigurePLCA(uint8_t NodeId, uint8_t NodeCount,
                                      uint8_t TransmitOpportunityTimer)
 {
   uint16_t ctrl1;
+
+  /* Revision D0 and later: select how BMSR.LNKSTS is derived.  A follower
+     with PLCA enabled gets link = "BEACONs regularly received" (LSCFG=01),
+     which is the closest 10BASE-T1S equivalent of a real link.  With PLCA
+     disabled the semaphore mode forces the link up (no autonegotiation
+     exists on a mixing segment).  The reset default (Fixed) would report
+     link down forever. */
+  if (Lan8670SiliconRev == LAN8670_PHYID2_REV_D0)
+  {
+    uint16_t lsctl = (NodeId != LAN8670_PLCA_ID_DISABLED)
+                         ? (uint16_t)(1U << 11)            /* LSCFG = PLCA   */
+                         : (uint16_t)((2U << 11) | 1U);    /* LSCFG = sema,  */
+                                                          /* LSSEM = 1      */
+    if (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_REG_LSCTL,
+                         lsctl) != HAL_OK)
+    {
+      return LAN8670_ERR_MDIO;
+    }
+  }
 
   if (TransmitOpportunityTimer != 0U)
   {
@@ -316,6 +512,28 @@ LAN8670_Status LAN8670_ConfigurePLCA(uint8_t NodeId, uint8_t NodeCount,
                          LAN8670_PLCA_EN) != HAL_OK)
     {
       return LAN8670_ERR_MDIO;
+    }
+  }
+
+  /* AN1699: with PLCA active, disable the collision detector to improve
+     noise tolerance (logical PLCA collisions are asserted to the MAC as
+     part of normal operation and would be miscounted otherwise).  In the
+     CSMA/CD fallback the detector must stay enabled.  Read-modify-write to
+     keep the reserved fields untouched. */
+  {
+    uint16_t cdctl0 = 0U;
+
+    if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_CDCTL0, &cdctl0) == HAL_OK)
+    {
+      if (NodeId != LAN8670_PLCA_ID_DISABLED)
+      {
+        cdctl0 &= (uint16_t)~LAN8670_CDCTL0_CDEN;
+      }
+      else
+      {
+        cdctl0 |= LAN8670_CDCTL0_CDEN;
+      }
+      (void)LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_CDCTL0, cdctl0);
     }
   }
 
@@ -427,6 +645,121 @@ LAN8670_Status LAN8670_SqiRead(uint8_t *Valid, uint8_t *Value, uint8_t *ErrorCod
   *Valid     = ((v & LAN8670_SQISTS0_VLD) != 0U) ? 1U : 0U;
   *Value     = LAN8670_SQISTS0_VAL(v);
   *ErrorCode = (uint8_t)(v & 0x07U);
+
+  return LAN8670_OK;
+}
+
+/**
+  * @brief  Enable the PLCA BEACON / transmit-opportunity counters (MMD 31).
+  *         They count since the previous read; BEACON count is the health
+  *         indicator of the coordinator, TO count proves the follower keeps
+  *         receiving transmit opportunities even when no data is sent.
+  */
+LAN8670_Status LAN8670_EnablePlcaCounters(void)
+{
+  uint16_t v = 0U;
+
+  if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_CTRCTRL, &v) != HAL_OK)
+  {
+    return LAN8670_ERR_MDIO;
+  }
+  v |= (LAN8670_CTRCTRL_TOCTRE | LAN8670_CTRCTRL_BCNCTRE);
+  if (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_CTRCTRL, v) != HAL_OK)
+  {
+    return LAN8670_ERR_MDIO;
+  }
+
+  return LAN8670_OK;
+}
+
+/**
+  * @brief  Read and clear the PLCA event counters.
+  * @param  BeaconCount              BEACONs received since the last read
+  * @param  TransmitOpportunityCount local transmit opportunities since last read
+  */
+LAN8670_Status LAN8670_ReadPlcaCounters(uint32_t *BeaconCount,
+                                        uint32_t *TransmitOpportunityCount)
+{
+  uint16_t toHi = 0U;
+  uint16_t toLo = 0U;
+  uint16_t bcnHi = 0U;
+  uint16_t bcnLo = 0U;
+
+  if ((BeaconCount == NULL) || (TransmitOpportunityCount == NULL))
+  {
+    return LAN8670_ERR_MDIO;
+  }
+
+  /* Read the high word first: it latches the low word */
+  if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_TOCNTH, &toHi) != HAL_OK)
+  {
+    return LAN8670_ERR_MDIO;
+  }
+  if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_TOCNTL, &toLo) != HAL_OK)
+  {
+    return LAN8670_ERR_MDIO;
+  }
+  if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_BCNCNTH, &bcnHi) != HAL_OK)
+  {
+    return LAN8670_ERR_MDIO;
+  }
+  if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_BCNCNTL, &bcnLo) != HAL_OK)
+  {
+    return LAN8670_ERR_MDIO;
+  }
+
+  *TransmitOpportunityCount = ((uint32_t)toHi << 16) | toLo;
+  *BeaconCount               = ((uint32_t)bcnHi << 16) | bcnLo;
+
+  return LAN8670_OK;
+}
+
+/**
+  * @brief  Start a Dynamic Channel Quality SQI measurement (revision D0+).
+  *         Writing DCQ_TOID (0xFF = all transmit opportunities) starts the
+  *         measurement; results appear with SQI_UPD / SQIP_UPD set.
+  */
+LAN8670_Status LAN8670_DcqSqiStart(void)
+{
+  if (LAN8670_WriteMMD(LAN8670_DEVAD_VENDOR2, LAN8670_DCQ_TOID,
+                       0x00FFU) != HAL_OK)
+  {
+    return LAN8670_ERR_MDIO;
+  }
+
+  return LAN8670_OK;
+}
+
+/**
+  * @brief  Poll the DCQ SQI result (revision D0+).
+  * @param  Updated    1 when Value holds a fresh measurement
+  * @param  Value      0 (worst) .. 7 (best), 8-level SQI
+  * @param  ValuePlus  0..31, 32-level SQI+ (same measurement)
+  */
+LAN8670_Status LAN8670_DcqSqiRead(uint8_t *Updated, uint8_t *Value,
+                                  uint8_t *ValuePlus)
+{
+  uint16_t sqip = 0U;
+  uint16_t sqi = 0U;
+
+  if ((Updated == NULL) || (Value == NULL) || (ValuePlus == NULL))
+  {
+    return LAN8670_ERR_MDIO;
+  }
+
+  /* SQIP first: reading DCQ_SQI clears SQI_UPD and restarts the measurement */
+  if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_DCQ_SQIP, &sqip) != HAL_OK)
+  {
+    return LAN8670_ERR_MDIO;
+  }
+  if (LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_DCQ_SQI, &sqi) != HAL_OK)
+  {
+    return LAN8670_ERR_MDIO;
+  }
+
+  *Updated   = ((sqip & LAN8670_DCQ_SQI_UPD) != 0U) ? 1U : 0U;
+  *ValuePlus = LAN8670_DCQ_SQIP_VAL(sqip);
+  *Value     = (uint8_t)(sqi & 0x07U);
 
   return LAN8670_OK;
 }
