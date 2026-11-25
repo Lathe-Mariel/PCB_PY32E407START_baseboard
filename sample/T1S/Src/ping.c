@@ -154,11 +154,12 @@ static void PrintMac(const uint8_t *Mac)
   * @param  TargetHw hardware address field in the ARP payload (zeros on request)
   * @param  TargetIp target protocol address
   */
-static void SendArp(uint16_t Oper, const uint8_t *DstMac,
-                    const uint8_t *TargetHw, uint32_t TargetIp)
+static HAL_StatusTypeDef SendArp(uint16_t Oper, const uint8_t *DstMac,
+                                 const uint8_t *TargetHw, uint32_t TargetIp)
 {
   uint8_t  frame[ETH_MIN_FRAME_LEN];
   uint8_t *arp = &frame[ETH_HEADER_LEN];
+  HAL_StatusTypeDef status;
 
   memset(frame, 0, sizeof(frame));
 
@@ -176,30 +177,39 @@ static void SendArp(uint16_t Oper, const uint8_t *DstMac,
   memcpy(&arp[18], TargetHw, 6U);       /* target hardware address        */
   Put32(&arp[24], TargetIp);            /* target protocol address        */
 
-  if (LAN8670_SendFrame(frame, sizeof(frame)) == HAL_OK)
+  status = LAN8670_SendFrame(frame, sizeof(frame));
+  if (status == HAL_OK)
   {
     HAL_GPIO_TogglePin(LED_PORT, LED_D3_PIN);
   }
+
+  return status;
 }
 
-static void SendArpRequest(uint32_t TargetIp)
+static HAL_StatusTypeDef SendArpRequest(uint32_t TargetIp)
 {
   static const uint8_t broadcast[6] = {0xFFU, 0xFFU, 0xFFU, 0xFFU, 0xFFU, 0xFFU};
   static const uint8_t zeroMac[6]   = {0U, 0U, 0U, 0U, 0U, 0U};
 
-  SendArp(0x0001U, broadcast, zeroMac, TargetIp);
+  return SendArp(0x0001U, broadcast, zeroMac, TargetIp);
 }
 
-static void SendArpReply(const uint8_t *ToMac, uint32_t ToIp)
+static HAL_StatusTypeDef SendArpReply(const uint8_t *ToMac, uint32_t ToIp)
 {
-  SendArp(0x0002U, ToMac, ToMac, ToIp);
+  return SendArp(0x0002U, ToMac, ToMac, ToIp);
+}
+
+static void PrintTxFailure(const char *FrameType, HAL_StatusTypeDef Status)
+{
+  Console_Printf("MAC: %s not queued (%s)\r\n", FrameType,
+                 (Status == HAL_BUSY) ? "TX descriptor busy" : "TX error");
 }
 
 /**
   * @brief  Build and transmit an ICMP echo request to the configured target.
-  * @retval 1 when the frame was queued, 0 when the TX descriptor was busy
+  * @retval HAL_OK when the frame was queued, otherwise the transmit status
   */
-static uint8_t SendEchoRequest(void)
+static HAL_StatusTypeDef SendEchoRequest(void)
 {
   uint8_t  frame[ETH_HEADER_LEN + IP_HEADER_LEN + ICMP_HEADER_LEN + PING_PAYLOAD_LEN];
   uint8_t *ip   = &frame[ETH_HEADER_LEN];
@@ -208,6 +218,7 @@ static uint8_t SendEchoRequest(void)
   const uint32_t IpLen   = IP_HEADER_LEN + IcmpLen;
   uint16_t seq = (uint16_t)(PingSeq + 1U);
   uint32_t i;
+  HAL_StatusTypeDef status;
 
   /* Ethernet header */
   memcpy(&frame[0], TargetMac, 6U);
@@ -240,9 +251,10 @@ static uint8_t SendEchoRequest(void)
   }
   Put16(&icmp[2], Checksum(icmp, IcmpLen));
 
-  if (LAN8670_SendFrame(frame, sizeof(frame)) != HAL_OK)
+  status = LAN8670_SendFrame(frame, sizeof(frame));
+  if (status != HAL_OK)
   {
-    return 0U;
+    return status;
   }
 
   PingSeq       = seq;
@@ -250,7 +262,7 @@ static uint8_t SendEchoRequest(void)
   PingState     = PING_STATE_WAITING;
 
   HAL_GPIO_TogglePin(LED_PORT, LED_D3_PIN);
-  return 1U;
+  return HAL_OK;
 }
 
 /**
@@ -265,6 +277,7 @@ static void SendEchoReply(const uint8_t *ReqFrame, uint32_t ReqLength, uint32_t 
   uint32_t total;
   uint32_t icmpLen;
   uint32_t txLen;
+  HAL_StatusTypeDef status;
 
   if (ReqLength < (ETH_HEADER_LEN + Ihl + ICMP_HEADER_LEN))
   {
@@ -317,9 +330,14 @@ static void SendEchoReply(const uint8_t *ReqFrame, uint32_t ReqLength, uint32_t 
     txLen++;
   }
 
-  if (LAN8670_SendFrame(frame, txLen) == HAL_OK)
+  status = LAN8670_SendFrame(frame, txLen);
+  if (status == HAL_OK)
   {
     HAL_GPIO_TogglePin(LED_PORT, LED_D3_PIN);
+  }
+  else
+  {
+    PrintTxFailure("ICMP echo reply", status);
   }
 }
 
@@ -333,6 +351,7 @@ static void HandleArp(const uint8_t *Frame, uint32_t Length)
   uint32_t senderIp = Get32(&arp[14]);
   uint32_t targetIp = Get32(&arp[24]);
   uint16_t oper     = Get16(&arp[6]);
+  HAL_StatusTypeDef status;
 
   (void)Length;
 
@@ -341,7 +360,11 @@ static void HandleArp(const uint8_t *Frame, uint32_t Length)
     /* Someone asks for our address: answer and let the caller learn us. */
     if (targetIp == PingCfg.LocalIp)
     {
-      SendArpReply(senderHw, senderIp);
+      status = SendArpReply(senderHw, senderIp);
+      if (status != HAL_OK)
+      {
+        PrintTxFailure("ARP reply", status);
+      }
     }
   }
   else if (oper == 0x0002U)
@@ -358,9 +381,10 @@ static void HandleArp(const uint8_t *Frame, uint32_t Length)
       PrintMac(senderHw);
       Console_Write("\r\n");
 
-      if (SendEchoRequest() == 0U)
+      status = SendEchoRequest();
+      if (status != HAL_OK)
       {
-        /* TX busy: retry at the next interval */
+        PrintTxFailure("ICMP echo request", status);
         PingState    = PING_STATE_IDLE;
         NextSendTick = HAL_GetTick() + PingCfg.IntervalMs;
       }
@@ -507,6 +531,7 @@ void Ping_Poll(void)
 {
   uint32_t now = HAL_GetTick();
   uint32_t nextHop;
+  HAL_StatusTypeDef status;
 
   if (PingState == PING_STATE_WAITING)
   {
@@ -527,7 +552,11 @@ void Ping_Poll(void)
       {
         ArpAttempts++;
         ArpStartTick = now;
-        SendArpRequest(NextHopIp);
+        status = SendArpRequest(NextHopIp);
+        if (status != HAL_OK)
+        {
+          PrintTxFailure("ARP request", status);
+        }
       }
       else
       {
@@ -559,8 +588,10 @@ void Ping_Poll(void)
 
   if ((TargetMacValid != 0U) && (NextHopIp == nextHop))
   {
-    if (SendEchoRequest() == 0U)
+    status = SendEchoRequest();
+    if (status != HAL_OK)
     {
+      PrintTxFailure("ICMP echo request", status);
       NextSendTick = now + PingCfg.IntervalMs;
     }
   }
@@ -575,7 +606,11 @@ void Ping_Poll(void)
     Console_Write("ARP: resolving ");
     PrintIp(nextHop);
     Console_Write(" ...\r\n");
-    SendArpRequest(nextHop);
+    status = SendArpRequest(nextHop);
+    if (status != HAL_OK)
+    {
+      PrintTxFailure("ARP request", status);
+    }
   }
 }
 

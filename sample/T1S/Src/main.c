@@ -63,9 +63,9 @@
    50 MHz ETH_REF_CLK on PA1). */
 #define ETH_DIAG_PRINT                1
 
-/* Set to 0 to remove the per-frame receive trace (length, EtherType, source
-   MAC and, for ICMP, the type and sequence number). */
-#define ETH_RX_DEBUG                  1
+/* Enable only for short packet captures; synchronous UART output can delay
+   receive servicing during bursts. */
+#define ETH_RX_DEBUG                  0
 
 /* Diagnostic: enable the PHY PCS loopback so the MAC receives its own
    transmitted frames.  Set back to 0 for normal operation. */
@@ -312,9 +312,20 @@ int main(void)
         uint32_t rxCrc  = heth.Instance->MMCRFCECR;
         uint16_t sts1   = 0U;
         uint16_t prssts = 0U;
+        uint16_t bmsr   = 0U;
+        uint16_t plcaSts = 0U;
+        HAL_StatusTypeDef linkReadStatus;
+        HAL_StatusTypeDef plcaReadStatus;
 
         (void)LAN8670_ReadReg(LAN8670_REG_STS1, &sts1);
         (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_PRSSTS, &prssts);
+        linkReadStatus = LAN8670_ReadReg(LAN8670_REG_BMSR, &bmsr);
+        if (linkReadStatus == HAL_OK)
+        {
+          linkReadStatus = LAN8670_ReadReg(LAN8670_REG_BMSR, &bmsr);
+        }
+        plcaReadStatus = LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2,
+                                         LAN8670_PLCA_STS, &plcaSts);
 
         lastDiag = HAL_GetTick();
         Console_Printf("MAC: DMASR=0x%08lX TXok=%lu RXuni=%lu RXcrc=%lu RXall=%lu "
@@ -327,6 +338,15 @@ int main(void)
                        ((sts1 & LAN8670_STS1_TXCOL)   != 0U) ? " TXCOL"   : "",
                        ((sts1 & LAN8670_STS1_ESDERR)  != 0U) ? " ESDERR"  : "",
                        ((sts1 & LAN8670_STS1_DEC5B)   != 0U) ? " DEC5B"   : "");
+        Console_Printf("PHY: link=%s BMSR=0x%04X PLCA=%s PLCA_STS=0x%04X\r\n",
+                       (linkReadStatus != HAL_OK) ? "MDIO_ERR" :
+                       (((bmsr & LAN8670_BMSR_LINK) != 0U) ? "UP" : "DOWN"),
+                       (unsigned)bmsr,
+                       (PLCA_NODE_ID == LAN8670_PLCA_ID_DISABLED) ? "disabled" :
+                       ((plcaReadStatus != HAL_OK) ? "MDIO_ERR" :
+                        (((plcaSts & LAN8670_PLCA_STS_PST) != 0U) ?
+                         "BEACON" : "no-BEACON")),
+                       (unsigned)plcaSts);
 
         {
           uint16_t sqiRaw = 0U;

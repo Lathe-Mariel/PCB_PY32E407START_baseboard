@@ -34,10 +34,10 @@ lwIP は使用していません。ARP + IPv4 + ICMP だけを実装した小さ
 ネットワーク設定：
 Inc/main.h の以下のマクロを、接続する PC / ノードに合わせて変更してください。
 
-    PING_LOCAL_IP      本機の IPv4 アドレス        (既定 192.168.1.10)
+    PING_LOCAL_IP      本機の IPv4 アドレス        (既定 192.168.11.10)
     PING_NETMASK       サブネットマスク            (既定 255.255.255.0)
-    PING_GATEWAY_IP    デフォルトゲートウェイ      (既定 192.168.1.1)
-    PING_TARGET_IP     Ping を送る相手             (既定 192.168.1.1)
+    PING_GATEWAY_IP    デフォルトゲートウェイ      (既定 192.168.11.3)
+    PING_TARGET_IP     Ping を送る相手             (既定 192.168.11.3)
 
     PING_INTERVAL_MS   送信間隔                    (既定 1000 ms)
     PING_TIMEOUT_MS    echo reply のタイムアウト   (既定 1000 ms)
@@ -97,21 +97,62 @@ PA1   <--- ETH_REF_CLK  <--- 27 (REFCLKIN, 50 MHz)
   PHY: PLCA status register = 0x0000
   PHY: LAN8670 detected
   PHY: soft reset OK
-  PHY: PLCA enabled, ID=0, node count=8, TOTMR=32
-  MAC: RMII 10 Mbit/s full duplex, DMA started
+  PHY: PLCA enabled, ID=1, node count=2, TOTMR=32
+  MAC: RMII 10 Mbit/s half duplex, DMA started
   PHY: link UP
-  IPv4: local 192.168.1.10 mask 255.255.255.0 gateway 192.168.1.1
-  Ping target 192.168.1.1 every 1000ms (timeout 1000ms)
+  IPv4: local 192.168.11.10 mask 255.255.255.0 gateway 192.168.11.3
+  Ping target 192.168.11.3 every 1000ms (timeout 3000ms)
 
-  ARP: resolving 192.168.1.1 ...
-  ARP: 192.168.1.1 is at AA:BB:CC:DD:EE:FF
-  Reply from 192.168.1.1: bytes=32 time=1ms ttl=64 seq=1
-  Reply from 192.168.1.1: bytes=32 time=0ms ttl=64 seq=2
+  ARP: resolving 192.168.11.3 ...
+  ARP: 192.168.11.3 is at AA:BB:CC:DD:EE:FF
+  Reply from 192.168.11.3: bytes=32 time=1ms ttl=64 seq=1
+  Reply from 192.168.11.3: bytes=32 time=0ms ttl=64 seq=2
 
 応答がない場合は次のように表示されます。
 
   Request timeout: seq=3
-  ARP timeout: no reply from 192.168.1.1
+  ARP timeout: no reply from 192.168.11.3
+
+================================================================================
+通信段階ごとの診断：
+通常は USART のログを次の順で確認します。
+
+  1. "PHY: link=DOWN" または "MDIO_ERR"
+     PHY/物理層または MDIO の問題です。ケーブル、相手ノードの電源、
+     10BASE-T1S の配線・終端、PHY の応答を確認してください。
+
+  2. link=UP だが "PLCA=no-BEACON"
+     PLCA のコーディネータから BEACON を受信できていません。
+     PLCA を使う構成では、バス上に ID=0 のコーディネータが 1 台だけあり、
+     follower ID がコーディネータの NCNT 未満であることを確認します。
+     このサンプルの既定値は ID=1 / NCNT=2 なので、別ノードが ID=0 で
+     動作している必要があります。PLCA を使わない構成では両端の設定を
+     確認したうえで PLCA_NODE_ID を 0xFF にします。
+
+  3. "MAC: ... not queued" または ARP/ICMP の TXok が増えない
+     MAC/DMA/RMII 送信段階です。TX descriptor busy は直前の送信が完了
+     していない状態、TX error はフレームを DMA に渡せなかった状態です。
+     TXok が増えない場合は 50 MHz ETH_REF_CLK、RMII 配線、DMA 状態を確認します。
+
+  4. "ARP: resolving ..." の後に "ARP timeout"
+     Ethernet / ARP 段階で相手から応答がありません。ARP の送信が MAC に
+     渡ったか (TXok)、受信があるか (RXuni / RXall)、相手 IP・サブネット、
+     PLCA 設定を確認します。ARP 解決前なので ICMP には到達していません。
+
+  5. "ARP: ... is at ..." の後に "Request timeout"
+     ARP 解決は成功し、ICMP echo request は MAC の TX キューに入りました。
+     MAC 行の TXok が増えているかで実際の送信も確認し、相手の IP 設定、
+     ICMP 応答設定・フィルタ、および応答フレームの受信 (RXuni / RXall) を
+     確認します。
+     "IPv4: bad header checksum" が出た場合は受信フレーム破損も疑います。
+
+5 秒ごとの MAC 行では、TXok/RXuni/RXcrc は MAC カウンタ、RXall は MCU が
+取り出したフレーム数です。PHY 行の link と PLCA はその時点の状態です。
+RX フレームの個別表示が必要な短時間だけ Src/main.c の ETH_RX_DEBUG を 1 に
+してください。同期 UART 出力は受信サービスを遅らせるため、通常は無効です。
+
+これらのログで障害段階を絞り込めますが、実機のログなしに物理的な原因を
+断定することはできません。
 
 ================================================================================
 LED 表示：
