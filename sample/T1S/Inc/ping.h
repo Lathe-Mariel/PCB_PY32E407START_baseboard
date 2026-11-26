@@ -43,12 +43,35 @@ typedef struct
   uint8_t  ArpRetries;          /*!< ARP attempts before giving up         */
 } Ping_Config;
 
+typedef struct
+{
+  uint32_t RxIpv4;
+  uint32_t RxMalformed;
+  uint32_t RxNotForUs;
+  uint32_t RxOtherProtocol;
+  uint32_t RxEchoReply;
+  uint32_t RxEchoRequest;
+  uint32_t RxOtherIcmp;
+  uint32_t RxBadIpChecksum;
+  uint32_t RxBadIcmpChecksum;
+  uint32_t ReplyNotWaiting;
+  uint32_t ReplyBadId;
+  uint32_t ReplyBadSequence;
+  uint32_t ReplyBadSource;
+  uint32_t ReplyAccepted;
+} Ping_Diagnostics;
+
 /* Exported functions prototypes ---------------------------------------------*/
 
 /**
   * @brief  Initialise the ping client.  The configuration structure is copied.
   */
 void Ping_Init(const Ping_Config *Config);
+
+/**
+  * @brief  Copy and clear receive diagnostics collected since the last call.
+  */
+void Ping_GetAndClearDiagnostics(Ping_Diagnostics *Diagnostics);
 
 /**
   * @brief  Feed one received Ethernet frame (14-byte header included).

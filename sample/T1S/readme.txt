@@ -147,11 +147,19 @@ PA1   <--- ETH_REF_CLK  <--- 27 (REFCLKIN, 50 MHz)
      ARP 解決は成功し、ICMP echo request は MAC の TX キューに入りました。
      MAC 行の TXok が増えているかで実際の送信も確認し、相手の IP 設定、
      ICMP 応答設定・フィルタ、および応答フレームの受信 (RXuni / RXall) を
-     確認します。
-     "IPv4: bad header checksum" が出た場合は受信フレーム破損も疑います。
+     確認します。5秒ごとの IP / ICMP 行では echo-reply が応答受信数、
+     accepted が Ping と一致した応答数です。差がある場合は state / id /
+     seq / src の各カウンタで照合失敗の条件を確認します。
 
 5 秒ごとの MAC 行では、TXok/RXuni/RXcrc は MAC カウンタ、RXall は MCU が
-取り出したフレーム数です。PHY 行の link と PLCA はその時点の状態です。
+取り出した全フレーム数です。RX 行の MAC-unicast / MCU-unicast はそれぞれ
+MAC の受信カウンタと MCU が取り出したユニキャスト数です (いずれも直前の
+診断からの差分)。この2つの差が継続する場合は、MAC/DMA の取得からアプリまで
+の間で受信を失っていないか確認してください。
+IP 行は同じ期間のIPv4処理結果です。echo-reply が増えてacceptedが増えない場合、
+state/id/seq/src の各値でPingとの照合が失敗した条件を特定できます。
+bad-ip-csum / bad-icmp-csum は受信データのチェックサム異常数です。
+PHY 行の link と PLCA はその時点の状態です。
 RX フレームの個別表示が必要な短時間だけ Src/main.c の ETH_RX_DEBUG を 1 に
 してください。同期 UART 出力は受信サービスを遅らせるため、通常は無効です。
 

@@ -48,6 +48,7 @@ typedef enum
 
 /* Private variables ---------------------------------------------------------*/
 static Ping_Config PingCfg;
+static Ping_Diagnostics PingDiag;
 
 static Ping_State PingState = PING_STATE_IDLE;
 
@@ -404,56 +405,79 @@ static void HandleIpv4(const uint8_t *Frame, uint32_t Length)
   uint32_t total;
   uint32_t icmpLen;
 
+  PingDiag.RxIpv4++;
+
   if (ipLength < IP_HEADER_LEN)
   {
+    PingDiag.RxMalformed++;
     return;
   }
 
   ihl = (uint32_t)(ip[0] & 0x0FU) * 4U;
   if ((ihl < IP_HEADER_LEN) || (ipLength < (ihl + ICMP_HEADER_LEN)))
   {
+    PingDiag.RxMalformed++;
     return;
   }
 
   /* Only frames addressed to us */
   if (Get32(&ip[16]) != PingCfg.LocalIp)
   {
+    PingDiag.RxNotForUs++;
     return;
   }
   if (ip[9] != IP_PROTO_ICMP)
   {
+    PingDiag.RxOtherProtocol++;
     return;
   }
 
-  /* The MAC/DMA no longer drops frames on a checksum error, so verify the
-     IPv4 header here and flag anything that really is corrupt. */
+  /* Record checksum errors without printing in the receive path: synchronous
+     UART output here could delay servicing the next DMA frame. */
   if (Checksum(ip, ihl) != 0U)
   {
-    Console_Printf("IPv4: bad header checksum (type=%u seq=%u)\r\n",
-                   (unsigned)ip[ihl], (unsigned)Get16(&ip[ihl + 6U]));
+    PingDiag.RxBadIpChecksum++;
   }
 
   total = Get16(&ip[2]);
   if ((total < (ihl + ICMP_HEADER_LEN)) || (total > ipLength))
   {
+    PingDiag.RxMalformed++;
     total = ipLength;
   }
   icmpLen = total - ihl;
   icmp = &ip[ihl];
 
+  if (Checksum(icmp, icmpLen) != 0U)
+  {
+    PingDiag.RxBadIcmpChecksum++;
+  }
+
   if (icmp[0] == ICMP_TYPE_ECHO_REPLY)
   {
-    if ((PingState != PING_STATE_WAITING) ||
-        (Get16(&icmp[4]) != PING_ID) ||
-        (Get16(&icmp[6]) != PingSeq))
+    PingDiag.RxEchoReply++;
+    if (PingState != PING_STATE_WAITING)
     {
+      PingDiag.ReplyNotWaiting++;
+      return;
+    }
+    if (Get16(&icmp[4]) != PING_ID)
+    {
+      PingDiag.ReplyBadId++;
+      return;
+    }
+    if (Get16(&icmp[6]) != PingSeq)
+    {
+      PingDiag.ReplyBadSequence++;
       return;
     }
     if (Get32(&ip[12]) != PingCfg.TargetIp)
     {
+      PingDiag.ReplyBadSource++;
       return;
     }
 
+    PingDiag.ReplyAccepted++;
     Console_Write("Reply from ");
     PrintIp(Get32(&ip[12]));
     Console_Printf(": bytes=%u time=%lums ttl=%u seq=%u\r\n",
@@ -467,7 +491,12 @@ static void HandleIpv4(const uint8_t *Frame, uint32_t Length)
   }
   else if (icmp[0] == ICMP_TYPE_ECHO_REQUEST)
   {
+    PingDiag.RxEchoRequest++;
     SendEchoReply(Frame, Length, ihl);
+  }
+  else
+  {
+    PingDiag.RxOtherIcmp++;
   }
 }
 
@@ -484,6 +513,7 @@ void Ping_Init(const Ping_Config *Config)
   }
 
   PingCfg = *Config;
+  memset(&PingDiag, 0, sizeof(PingDiag));
 
   PingState      = PING_STATE_IDLE;
   TargetMacValid = 0U;
@@ -492,6 +522,17 @@ void Ping_Init(const Ping_Config *Config)
   IpId           = 0U;
   ArpAttempts    = 0U;
   NextSendTick   = HAL_GetTick();       /* first request immediately */
+}
+
+void Ping_GetAndClearDiagnostics(Ping_Diagnostics *Diagnostics)
+{
+  if (Diagnostics == NULL)
+  {
+    return;
+  }
+
+  *Diagnostics = PingDiag;
+  memset(&PingDiag, 0, sizeof(PingDiag));
 }
 
 /**

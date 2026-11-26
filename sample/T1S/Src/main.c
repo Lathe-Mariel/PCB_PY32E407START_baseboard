@@ -97,6 +97,7 @@ int main(void)
   uint32_t       lastHeartbeat;
   uint32_t       lastDiag = 0U;
   uint32_t       rxFrames = 0U;
+  uint32_t       rxUnicastFrames = 0U;
   uint8_t        frameBuffer[ETH_MAX_PACKET_SIZE];
   uint32_t       frameLength = 0U;
 
@@ -320,6 +321,10 @@ int main(void)
     while (LAN8670_GetFrame(frameBuffer, sizeof(frameBuffer), &frameLength) == HAL_OK)
     {
       HAL_GPIO_TogglePin(LED_PORT, LED_D2_PIN);
+      if ((frameBuffer[0] & 0x01U) == 0U)
+      {
+        rxUnicastFrames++;
+      }
 #if ETH_RX_DEBUG
       APP_PrintRxFrame(frameBuffer, frameLength);
 #endif
@@ -353,6 +358,7 @@ int main(void)
         uint16_t plcaSts = 0U;
         uint32_t beaconCount = 0U;
         uint32_t toCount = 0U;
+        Ping_Diagnostics pingDiag;
         HAL_StatusTypeDef linkReadStatus;
         HAL_StatusTypeDef plcaReadStatus;
         LAN8670_Status counterStatus;
@@ -369,6 +375,7 @@ int main(void)
         plcaReadStatus = LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2,
                                         LAN8670_PLCA_STS, &plcaSts);
         counterStatus = LAN8670_ReadPlcaCounters(&beaconCount, &toCount);
+        Ping_GetAndClearDiagnostics(&pingDiag);
 
         lastDiag = HAL_GetTick();
         Console_Printf("MAC: DMASR=0x%08lX TXok=%lu RXuni=%lu RXcrc=%lu RXall=%lu "
@@ -383,6 +390,29 @@ int main(void)
                        ((sts1 & LAN8670_STS1_EMPCYC) != 0U) ? " EMPCYC" : "",
                        ((sts1 & LAN8670_STS1_ESDERR)  != 0U) ? " ESDERR" : "",
                        ((sts1 & LAN8670_STS1_DEC5B)   != 0U) ? " DEC5B"  : "");
+        Console_Printf("RX: MAC-unicast=%lu MCU-unicast=%lu\r\n",
+                       (unsigned long)rxGood,
+                       (unsigned long)rxUnicastFrames);
+        Console_Printf("IP: rx=%lu malformed=%lu not-us=%lu non-ICMP=%lu\r\n",
+                       (unsigned long)pingDiag.RxIpv4,
+                       (unsigned long)pingDiag.RxMalformed,
+                       (unsigned long)pingDiag.RxNotForUs,
+                       (unsigned long)pingDiag.RxOtherProtocol);
+        Console_Printf("ICMP: reply=%lu accepted=%lu state=%lu id=%lu seq=%lu src=%lu\r\n",
+                       (unsigned long)pingDiag.RxEchoReply,
+                       (unsigned long)pingDiag.ReplyAccepted,
+                       (unsigned long)pingDiag.ReplyNotWaiting,
+                       (unsigned long)pingDiag.ReplyBadId,
+                       (unsigned long)pingDiag.ReplyBadSequence,
+                       (unsigned long)pingDiag.ReplyBadSource);
+        Console_Printf("ICMP: echo-request=%lu other=%lu bad-ip-csum=%lu "
+                       "bad-icmp-csum=%lu\r\n",
+                       (unsigned long)pingDiag.RxEchoRequest,
+                       (unsigned long)pingDiag.RxOtherIcmp,
+                       (unsigned long)pingDiag.RxBadIpChecksum,
+                       (unsigned long)pingDiag.RxBadIcmpChecksum);
+        rxFrames = 0U;
+        rxUnicastFrames = 0U;
         Console_Printf("PHY: link=%s BMSR=0x%04X PLCA=%s PLCA_STS=0x%04X "
                        "BEACON=%lu TO=%lu (%s)\r\n",
                        (linkReadStatus != HAL_OK) ? "MDIO_ERR" :
