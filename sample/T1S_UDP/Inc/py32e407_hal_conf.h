@@ -66,6 +66,7 @@
 /* #define HAL_USB_MODULE_ENABLED */
 #define HAL_ETH_MODULE_ENABLED
 #define HAL_FDCAN_MODULE_ENABLED
+/* #define HAL_SPI_MODULE_ENABLED */
 /* #define HAL_I2S_MODULE_ENABLED */
 /* #define HAL_I2C_MODULE_ENABLED */
 #define HAL_SCI_MODULE_ENABLED
@@ -105,6 +106,7 @@
 #define  USE_HAL_USB_REGISTER_CALLBACKS         0U /* USB register callback disabled       */
 #define  USE_HAL_ETH_REGISTER_CALLBACKS         0U /* ETH register callback disabled       */
 #define  USE_HAL_FDCAN_REGISTER_CALLBACKS       0U /* FDCAN register callback disabled       */
+#define  USE_HAL_SPI_REGISTER_CALLBACKS         0U /* SPI register callback disabled       */
 #define  USE_HAL_I2S_REGISTER_CALLBACKS         0U /* I2S register callback disabled       */
 #define  USE_HAL_I2C_REGISTER_CALLBACKS         0U /* I2C register callback disabled       */
 #define  USE_HAL_SCI_REGISTER_CALLBACKS         0U /* SCI register callback disabled       */
@@ -341,6 +343,10 @@
 #ifdef HAL_FDCAN_MODULE_ENABLED
  #include "py32e407_hal_fdcan.h"
 #endif /* HAL_FDCAN_MODULE_ENABLED */
+
+#ifdef HAL_SPI_MODULE_ENABLED
+ #include "py32e407_hal_spi.h"
+#endif /* HAL_SPI_MODULE_ENABLED */
 
 #ifdef HAL_I2S_MODULE_ENABLED
  #include "py32e407_hal_i2s.h"

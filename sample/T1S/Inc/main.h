@@ -86,7 +86,7 @@ extern "C" {
 
 /* USART1 (PY-LINK virtual COM port) used for the diagnostic console */
 #define CONSOLE_UART                  USART1
-#define CONSOLE_UART_BAUDRATE         921600U
+#define CONSOLE_UART_BAUDRATE         115200U
 #define CONSOLE_UART_TX_PIN           GPIO_PIN_9
 #define CONSOLE_UART_RX_PIN           GPIO_PIN_10
 #define CONSOLE_UART_GPIO_PORT        GPIOA
@@ -129,7 +129,7 @@ extern "C" {
 #define PING_TARGET_IP                PING_IP4(192, 168, 11, 3)
 
 #define PING_INTERVAL_MS              1000U  /* time between echo requests      */
-#define PING_TIMEOUT_MS               3000U  /* reply timeout per request       */
+#define PING_TIMEOUT_MS               300U   /* reply timeout per request       */
 #define PING_ARP_TIMEOUT_MS           500U   /* wait for one ARP reply          */
 #define PING_ARP_RETRIES              3U     /* ARP attempts before giving up   */
 

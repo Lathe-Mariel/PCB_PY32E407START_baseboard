@@ -61,26 +61,25 @@ LCD wiring
 
 Connect the LCD to the board using the following GPIO assignments:
 
-  LCD CS    -> PD3
-  LCD MOSI  -> PD4
-  LCD D/C   -> PC8
-  LCD SCK   -> PD6
+  LCD CS    -> PE13
+  LCD MOSI  -> PE11
+  LCD D/C   -> PE8
+  LCD SCK   -> PE7
   LCD RESET -> PB2
 
-The LCD uses 4-wire, mode-3 serial SPI implemented by GPIO bit-banging.
-Power the module from the PMOD 3.3 V/GND pins.
+The LCD uses 4-wire, mode-3 serial SPI implemented by GPIO bit-banging. Power
+the module from the PMOD 3.3 V/GND pins.
 
 Build and diagnostics
-----------------------
+---------------------
 
 Open sample/T1S_UDP/EIDE/Project.code-workspace and build the EIDE project, or
 run make from sample/T1S_UDP/EIDE with the GNU Arm Embedded toolchain available.
 The receiver uses TJpgDec R0.03 (source and license header in
 Middlewares/TJpgDec). The small ping module is retained only for ARP and
 incoming ICMP echo replies; periodic ping traffic is disabled.
-The MCU runs at 80 MHz HCLK. APB1 and APB2 run at 80 MHz.
 
-USART1 diagnostics use the PY-LINK virtual COM port at 921600 baud, 8-N-1.
+USART1 diagnostics use the PY-LINK virtual COM port at 115200 baud, 8-N-1.
 The startup log prints the UDP endpoint. A successful image transfer prints
 "JPEG: displayed frame ..."; incomplete chunks and JPEG decode errors are
 reported on the same console.

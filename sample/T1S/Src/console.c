@@ -21,7 +21,7 @@ SCI_HandleTypeDef hConsoleUart;
 /* Exported functions --------------------------------------------------------*/
 
 /**
-  * @brief  Initialise USART1 at 921600 8N1 for the diagnostic output.
+  * @brief  Initialise USART1 at 115200 8N1 for the diagnostic output.
   */
 void Console_Init(void)
 {

@@ -15,7 +15,7 @@ echo request (Ping) を周期的に送信するサンプルです。
     7. echo reply を受信すると RTT を UART に表示
     8. ボード宛ての ARP / ICMP echo request にも応答 (逆方向 Ping 可)
 
-        PC <-- UART 921600 --> USART1 (PA9/PA10)
+        PC <-- UART 115200 --> USART1 (PA9/PA10)
                                       |
                               PY32E407 ETH (RMII)
                                       |
@@ -40,7 +40,7 @@ Inc/main.h の以下のマクロを、接続する PC / ノードに合わせて
     PING_TARGET_IP     Ping を送る相手             (既定 192.168.11.3)
 
     PING_INTERVAL_MS   送信間隔                    (既定 1000 ms)
-    PING_TIMEOUT_MS    echo reply のタイムアウト   (既定 1000 ms)
+    PING_TIMEOUT_MS    echo reply のタイムアウト   (既定 300 ms)
     PING_ARP_TIMEOUT_MS  ARP 1 回の待ち時間        (既定 500 ms)
     PING_ARP_RETRIES     ARP の再送回数            (既定 3 回)
 
@@ -86,7 +86,7 @@ PA1   <--- ETH_REF_CLK  <--- 27 (REFCLKIN, 50 MHz)
 
 ================================================================================
 シリアル設定：
-ボーレート 921600、データ8ビット、パリティなし、ストップ1ビット、フロー制御なし。
+ボーレート 115200、データ8ビット、パリティなし、ストップ1ビット、フロー制御なし。
 
 起動すると次のような診断情報が出力されます。
 
@@ -98,14 +98,13 @@ PA1   <--- ETH_REF_CLK  <--- 27 (REFCLKIN, 50 MHz)
   PHY: LAN8670 detected
   PHY: soft reset OK
   PHY: AN1699 configuration for rev 5: OK
-  PHY: PLCA enabled, ID=1, node count=2, TOTMR=32
+  PHY: PLCA disabled, CSMA/CD
   MAC: RMII 10 Mbit/s half duplex, DMA started
   PHY: link UP
-  PHY: PLCA active (BEACON seen) (PLCA_STS=0x8000)
   PHY: SQI measurement started (CTL=0x4000 CFG0=0x1FFF CFG2=0x1F00 STS=0x0000)
   MDIO: 1000 x3 reads, errors=0 mismatches=0
   IPv4: local 192.168.11.10 mask 255.255.255.0 gateway 192.168.11.3
-  Ping target 192.168.11.3 every 1000ms (timeout 3000ms)
+  Ping target 192.168.11.3 every 1000ms (timeout 300ms)
 
   ARP: resolving 192.168.11.3 ...
   ARP: 192.168.11.3 is at AA:BB:CC:DD:EE:FF
@@ -129,9 +128,10 @@ PA1   <--- ETH_REF_CLK  <--- 27 (REFCLKIN, 50 MHz)
      PLCA のコーディネータから BEACON を受信できていません。
      PLCA を使う構成では、バス上に ID=0 のコーディネータが 1 台だけあり、
      follower ID がコーディネータの NCNT 未満であることを確認します。
-     このサンプルの既定値は ID=1 / NCNT=2 なので、別ノードが ID=0 で
-     動作している必要があります。PLCA を使わない構成では両端の設定を
-     確認したうえで PLCA_NODE_ID を 0xFF にします。
+     PLCA を使用する構成では、Src/main.c の PLCA_NODE_ID を設定し、
+     バス上のコーディネータ・フォロワ設定を一致させてください。
+     現在のサンプル設定 (PLCA_NODE_ID=0xFF) は PLCA を無効にし、
+     CSMA/CD で動作します。
 
   3. "MAC: ... not queued" または ARP/ICMP の TXok が増えない
      MAC/DMA/RMII 送信段階です。TX descriptor busy は直前の送信が完了
@@ -243,7 +243,7 @@ PHY：Microchip LAN8670 (10BASE-T1S)
 1. Inc/main.h の IP アドレス設定を、接続する PC / ノードに合わせる；
 2. プログラムをビルドして MCU に書き込む；
 3. PY-LINK の USB ポートを PC に接続し、"USART&USB_Selection" ジャンパが
-   USART 側になっていることを確認して、仮想 COM ポートを開く (921600 8N1)；
+   USART 側になっていることを確認して、仮想 COM ポートを開く (115200 8N1)；
 4. 起動メッセージを確認する；
    - "PHY: LAN8670 detected" が出れば MDIO と PHY は正常です
    - "PHY: no answer on MDIO" の場合は PHYAD ストラップ、MDIO プルアップ

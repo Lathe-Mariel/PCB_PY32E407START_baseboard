@@ -12,7 +12,7 @@
   *            5. MAC/DMA configuration and start, link poll
   *            6. Periodic ICMP echo requests to PING_TARGET_IP
   *
-  *          Console: USART1 (PY-LINK VCP) at 921600 8N1
+  *          Console: USART1 (PY-LINK VCP) at 115200 8N1
   *            PA9  -> PC RXD
   *            PA10 <- PC TXD
   *
@@ -53,7 +53,7 @@
  * followers ignore it and take the cycle length from the BEACON.
  * Set PLCA_NODE_ID to 0xFF to disable PLCA and use plain CSMA/CD.
  */
-#define PLCA_NODE_ID                  1U     /* 0 = coordinator, 1..254 = follower, 0xFF = CSMA/CD */
+#define PLCA_NODE_ID                  0x1U  /* 0 = coordinator, 1..254 = follower, 0xFF = CSMA/CD */
 #define PLCA_NODE_COUNT               2U     /* coordinator only: NCNT (IDs 0..7) */
 #define PLCA_TOTMR                   32U    /* transmit opportunity timer, 0 = default */
 

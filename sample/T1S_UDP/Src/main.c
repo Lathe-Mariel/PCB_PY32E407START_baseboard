@@ -12,7 +12,7 @@
   *            5. MAC/DMA configuration and start, link poll
   *            6. Receive JPG1 UDP datagrams and show JPEG images on the LCD
   *
-  *          Console: USART1 (PY-LINK VCP) at 921600 8N1
+  *          Console: USART1 (PY-LINK VCP) at 115200 8N1
   *            PA9  -> PC RXD
   *            PA10 <- PC TXD
   *
@@ -54,7 +54,7 @@
  * followers ignore it and take the cycle length from the BEACON.
  * Set PLCA_NODE_ID to 0xFF to disable PLCA and use plain CSMA/CD.
  */
-#define PLCA_NODE_ID                  1U     /* 0 = coordinator, 1..254 = follower, 0xFF = CSMA/CD */
+#define PLCA_NODE_ID                  0x1U  /* 0 = coordinator, 1..254 = follower, 0xFF = CSMA/CD */
 #define PLCA_NODE_COUNT               2U     /* coordinator only: NCNT (IDs 0..7) */
 #define PLCA_TOTMR                   32U    /* transmit opportunity timer, 0 = default */
 
@@ -110,8 +110,6 @@ int main(void)
   Console_Init();
 
   Console_Write("\r\n=== PY32E407 + LAN8670 UDP JPEG display ===\r\n");
-  Console_Printf("CPU: %lu MHz HCLK\r\n",
-                 (unsigned long)(HAL_RCC_GetHCLKFreq() / 1000000U));
   LCD_SPI_Init();
   LCD_SPI_Clear();
 
@@ -152,12 +150,6 @@ int main(void)
     /* ------------------------------------------------------ PHY reset ---*/
     status = LAN8670_SoftReset();
     Console_Printf("PHY: soft reset %s\r\n",
-                   (status == LAN8670_OK) ? "OK" : "FAILED");
-
-    /* AN1699 configuration is mandatory and must be re-applied after reset. */
-    status = LAN8670_ApplyConfig(info.SiliconRev);
-    Console_Printf("PHY: AN1699 configuration for rev %u: %s\r\n",
-                   (unsigned)info.SiliconRev,
                    (status == LAN8670_OK) ? "OK" : "FAILED");
 
     /* ----------------------------------------------------------- PLCA ---*/
@@ -236,41 +228,23 @@ int main(void)
                      (unsigned)plcaSts);
     }
 
-    if (LAN8670_EnablePlcaCounters() != LAN8670_OK)
+    /* Link quality (revision C2 SQI): 0 = ~5 dB SNR, 7 = ~18 dB SNR */
+    if (LAN8670_SqiStart() == LAN8670_OK)
     {
-      Console_Write("PHY: PLCA counter enable FAILED\r\n");
-    }
+      uint16_t sqiCtl = 0U;
+      uint16_t sqiCfg0 = 0U;
+      uint16_t sqiCfg2 = 0U;
+      uint16_t sqiSts = 0U;
 
-    if (info.SiliconRev >= LAN8670_PHYID2_REV_D0)
-    {
-      status = LAN8670_DcqSqiStart();
-      Console_Printf("PHY: DCQ SQI measurement %s\r\n",
-                     (status == LAN8670_OK) ? "started" : "FAILED");
-    }
-    else if ((info.SiliconRev == LAN8670_PHYID2_REV_C1) ||
-             (info.SiliconRev == LAN8670_PHYID2_REV_C2))
-    {
-      if (LAN8670_SqiStart() == LAN8670_OK)
-      {
-        uint16_t sqiCtl = 0U;
-        uint16_t sqiCfg0 = 0U;
-        uint16_t sqiCfg2 = 0U;
-        uint16_t sqiSts = 0U;
+      (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_SQICTL, &sqiCtl);
+      (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_SQICFG0, &sqiCfg0);
+      (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_SQICFG2, &sqiCfg2);
+      (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_SQISTS0, &sqiSts);
 
-        (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_SQICTL, &sqiCtl);
-        (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_SQICFG0, &sqiCfg0);
-        (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_SQICFG2, &sqiCfg2);
-        (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_SQISTS0, &sqiSts);
-
-        Console_Printf("PHY: SQI measurement started (CTL=0x%04X CFG0=0x%04X "
-                       "CFG2=0x%04X STS=0x%04X)\r\n",
-                       (unsigned)sqiCtl, (unsigned)sqiCfg0,
-                       (unsigned)sqiCfg2, (unsigned)sqiSts);
-      }
-    }
-    else
-    {
-      Console_Write("PHY: SQI not available on this silicon revision\r\n");
+      Console_Printf("PHY: SQI measurement started (CTL=0x%04X CFG0=0x%04X "
+                     "CFG2=0x%04X STS=0x%04X)\r\n",
+                     (unsigned)sqiCtl, (unsigned)sqiCfg0,
+                     (unsigned)sqiCfg2, (unsigned)sqiSts);
     }
   }
 
@@ -341,52 +315,22 @@ int main(void)
         uint32_t rxCrc  = heth.Instance->MMCRFCECR;
         uint16_t sts1   = 0U;
         uint16_t prssts = 0U;
-        uint32_t beaconCount = 0U;
-        uint32_t toCount = 0U;
-        LAN8670_Status counterStatus;
 
         (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_MMD_STS1, &sts1);
         (void)LAN8670_ReadMMD(LAN8670_DEVAD_VENDOR2, LAN8670_PRSSTS, &prssts);
-        counterStatus = LAN8670_ReadPlcaCounters(&beaconCount, &toCount);
 
         lastDiag = HAL_GetTick();
         Console_Printf("MAC: DMASR=0x%08lX TXok=%lu RXuni=%lu RXcrc=%lu RXall=%lu "
-                       "STS1=0x%04X MAXID=%u%s%s%s%s%s%s\r\n",
+                       "STS1=0x%04X MAXID=%u%s%s%s%s\r\n",
                        (unsigned long)dmasr, (unsigned long)txGood,
                        (unsigned long)rxGood, (unsigned long)rxCrc,
                        (unsigned long)rxFrames, (unsigned)sts1,
                        (unsigned)LAN8670_PRSSTS_MAXID(prssts),
-                       ((sts1 & LAN8670_STS1_PSTC)   != 0U) ? " PSTC"   : "",
-                       ((sts1 & LAN8670_STS1_TXCOL)  != 0U) ? " TXCOL"  : "",
-                       ((sts1 & LAN8670_STS1_TXJAB)  != 0U) ? " TXJAB"  : "",
-                       ((sts1 & LAN8670_STS1_EMPCYC) != 0U) ? " EMPCYC" : "",
-                       ((sts1 & LAN8670_STS1_ESDERR) != 0U) ? " ESDERR" : "",
-                       ((sts1 & LAN8670_STS1_DEC5B)  != 0U) ? " DEC5B"  : "");
-        Console_Printf("PHY: BEACON=%lu TO=%lu (%s)\r\n",
-                       (unsigned long)beaconCount, (unsigned long)toCount,
-                       (counterStatus == LAN8670_OK) ? "ok" : "MDIO_ERR");
+                       ((sts1 & LAN8670_STS1_PLCASYM) != 0U) ? " PLCASYM" : "",
+                       ((sts1 & LAN8670_STS1_TXCOL)   != 0U) ? " TXCOL"   : "",
+                       ((sts1 & LAN8670_STS1_ESDERR)  != 0U) ? " ESDERR"  : "",
+                       ((sts1 & LAN8670_STS1_DEC5B)   != 0U) ? " DEC5B"   : "");
 
-        if (info.SiliconRev >= LAN8670_PHYID2_REV_D0)
-        {
-          uint8_t updated = 0U;
-          uint8_t sqiVal = 0U;
-          uint8_t sqiPlus = 0U;
-
-          if (LAN8670_DcqSqiRead(&updated, &sqiVal, &sqiPlus) == LAN8670_OK)
-          {
-            if (updated != 0U)
-            {
-              Console_Printf("PHY: DCQ SQI=%u/7 SQI+=%u/31\r\n",
-                             (unsigned)sqiVal, (unsigned)sqiPlus);
-            }
-            else
-            {
-              Console_Write("PHY: DCQ SQI pending\r\n");
-            }
-          }
-        }
-        else if ((info.SiliconRev == LAN8670_PHYID2_REV_C1) ||
-                 (info.SiliconRev == LAN8670_PHYID2_REV_C2))
         {
           uint16_t sqiRaw = 0U;
 
@@ -427,23 +371,12 @@ int main(void)
   */
 static void APP_PrintPhyInfo(const LAN8670_Info *Info)
 {
-  const char *revName;
-
-  switch (Info->SiliconRev)
-  {
-    case LAN8670_PHYID2_REV_B1: revName = "B1"; break;
-    case LAN8670_PHYID2_REV_C1: revName = "C1"; break;
-    case LAN8670_PHYID2_REV_C2: revName = "C2"; break;
-    case LAN8670_PHYID2_REV_D0: revName = "D0"; break;
-    default:                    revName = "?";  break;
-  }
-
-  Console_Printf("PHY: ID1=0x%04X ID2=0x%04X (OUI 0x%06lX, model %u, rev %u=%s)\r\n",
+  Console_Printf("PHY: ID1=0x%04X ID2=0x%04X (OUI 0x%06lX, model %u, rev %u)\r\n",
                  (unsigned)Info->PhyId1, (unsigned)Info->PhyId2,
                  (unsigned long)(((uint32_t)(Info->PhyId1 & 0xFFFFU) << 6U) |
                                  ((uint32_t)(Info->PhyId2 & 0xFC00U) >> 10U)),
                  (unsigned)((Info->PhyId2 >> 4U) & 0x3FU),
-                 (unsigned)(Info->PhyId2 & 0x0FU), revName);
+                 (unsigned)(Info->PhyId2 & 0x0FU));
   Console_Printf("PHY: BMSR=0x%04X BMCR=0x%04X link=%u\r\n",
                  (unsigned)Info->Bmsr, (unsigned)Info->Bmcr,
                  (unsigned)Info->LinkUp);
@@ -600,6 +533,17 @@ static void APP_GpioInit(void)
   GPIO_InitStruct.Pull  = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
+
+  /* Disable the LAN8720: PC8 is its active-low nRST, so drive it low and keep
+     it there.  The output latch is cleared before the pin becomes an output so
+     the reset is asserted without a glitch. */
+  LAN8720_NRST_GPIO_CLK_ENABLE();
+  HAL_GPIO_WritePin(LAN8720_NRST_PORT, LAN8720_NRST_PIN, GPIO_PIN_RESET);
+  GPIO_InitStruct.Pin   = LAN8720_NRST_PIN;
+  GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull  = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(LAN8720_NRST_PORT, &GPIO_InitStruct);
 
   USER_BUTTON_GPIO_CLK_ENABLE();
   GPIO_InitStruct.Pin = USER_BUTTON_PIN;
